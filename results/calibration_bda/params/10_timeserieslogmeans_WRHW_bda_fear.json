@@ -1,0 +1,37 @@
+{
+  "model": "bda_fear",
+  "series": "timeserieslogmeans_WRHW",
+  "params": {
+    "r": 0.40394366402381654,
+    "d": 0.06496489854951414,
+    "a": 0.0008800767244554028,
+    "p": 4.145012943837253,
+    "q": 0.8610795450901362,
+    "c": 2.689728639755261,
+    "m": 0.16826714485205774,
+    "k": 0.014807844327325792,
+    "u0": 0.0006165950018614822,
+    "v0": 0.011481536214968828,
+    "u_scale": 467735.1412871981,
+    "v_scale": 147.91083881682073
+  },
+  "rmse_prey": 0.14215727898844807,
+  "rmse_predator": 0.20095983790090144,
+  "rmse_total": 0.17405968576691738,
+  "success": false,
+  "message": "Maximum number of iterations has been exceeded.",
+  "meta": {
+    "nfev": 3720,
+    "normalized_fit": true,
+    "signature": "killifish",
+    "detection_method": "killifish_by_site",
+    "confidence": 0.9,
+    "time_col": "DATESEQ",
+    "prey_col": "ME2LOGHETADS",
+    "predator_col": "ME4LOGGAMBO",
+    "group_key": "WRHW",
+    "notes": "site=WRHW, log->linear",
+    "n_points": 62,
+    "source_file": "/home/scc/pb23151824/project/data/raw/02_killifish_mosquitofish/TimeSeriesLogMeans.csv"
+  }
+}

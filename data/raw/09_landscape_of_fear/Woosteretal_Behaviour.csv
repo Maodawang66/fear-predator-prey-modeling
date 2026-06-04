@@ -1,0 +1,635 @@
+treatment,Site,camera_placement,Cover,Camera,eventID,Cautious,Confident
+Absent,2,Resource,High,MP01,Bathurst-Fox_event_382,3.00,0.00
+Absent,2,Resource,High,MP02,Bathurst-Fox_event_375,0.00,1.00
+Absent,2,Resource,High,MP02,Bathurst-Fox_event_464,2.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_1,1.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_2,2.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_260,1.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_268,1.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_278,3.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_295,1.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_299,0.00,2.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_3,0.00,1.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_303,0.00,1.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_307,1.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_309,2.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_332,0.00,1.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_339,0.00,3.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_342,0.00,1.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_369,0.00,2.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_4,1.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_409,1.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_5,1.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_507,0.00,2.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_509,1.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_511,1.00,1.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_518,2.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_524,1.00,0.00
+Absent,2,Hotspot,High,MP03,Bathurst-Fox_event_534,1.00,0.00
+Absent,2,Hotspot,High,MP04,Bathurst-Fox_event_343,1.00,0.00
+Absent,2,Hotspot,High,MP04,Bathurst-Fox_event_413,1.00,0.00
+Absent,2,Hotspot,High,MP04,Bathurst-Fox_event_421,2.00,0.00
+Absent,2,Hotspot,High,MP04,Bathurst-Fox_event_425,1.00,0.00
+Absent,2,Hotspot,High,MP04,Bathurst-Fox_event_437,1.00,0.00
+Absent,2,Hotspot,High,MP04,Bathurst-Fox_event_465,1.00,0.00
+Absent,2,Hotspot,High,MP04,Bathurst-Fox_event_530,2.00,0.00
+Absent,2,Hotspot,High,MP05,Bathurst-Fox_event_219,1.00,0.00
+Absent,2,Hotspot,High,MP05,Bathurst-Fox_event_231,3.00,0.00
+Absent,2,Hotspot,High,MP05,Bathurst-Fox_event_256,1.00,0.00
+Absent,2,Hotspot,High,MP06,Bathurst-Fox_event_348,0.00,1.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_326,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_350,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_351,3.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_355,2.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_368,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_371,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_418,2.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_424,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_433,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_435,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_438,1.00,1.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_440,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_442,3.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_443,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_444,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_445,2.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_450,3.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_454,3.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_456,3.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_462,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_479,11.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_485,1.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_489,0.00,3.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_500,5.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_512,3.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_519,3.00,0.00
+Absent,2,Resource,High,MP07,Bathurst-Fox_event_532,2.00,0.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_237,1.00,0.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_280,0.00,1.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_283,0.00,3.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_286,1.00,0.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_296,1.00,0.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_308,1.00,0.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_378,3.00,0.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_403,1.00,0.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_428,3.00,0.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_463,0.00,1.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_486,1.00,0.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_497,0.00,4.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_514,6.00,0.00
+Absent,2,Resource,High,MP08,Bathurst-Fox_event_536,3.00,0.00
+Absent,2,Hotspot,High,MP09,Bathurst-Fox_event_303,1.00,0.00
+Absent,2,Hotspot,High,MP09,Bathurst-Fox_event_306,3.00,0.00
+Absent,2,Hotspot,High,MP09,Bathurst-Fox_event_319,1.00,0.00
+Absent,2,Hotspot,High,MP10,Bathurst-Fox_event_289,1.00,0.00
+Absent,2,Hotspot,High,MP10,Bathurst-Fox_event_526,2.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_229,3.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_234,1.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_240,1.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_273,0.00,1.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_333,2.00,1.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_334,1.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_341,1.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_405,2.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_459,2.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_469,1.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_470,3.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_471,3.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_473,1.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_481,3.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_484,0.00,2.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_495,0.00,1.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_513,1.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_516,6.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_517,3.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_520,3.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_522,6.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_525,3.00,0.00
+Absent,2,Hotspot,High,MP11,Bathurst-Fox_event_528,1.00,0.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_225,0.00,1.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_243,0.00,1.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_248,0.00,1.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_253,0.00,3.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_271,0.00,1.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_279,0.00,1.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_290,3.00,0.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_305,1.00,0.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_346,1.00,0.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_349,1.00,0.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_352,0.00,3.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_362,0.00,2.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_374,5.00,0.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_388,0.00,1.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_389,1.00,0.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_390,1.00,2.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_397,1.00,0.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_400,0.00,1.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_412,2.00,0.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_414,0.00,1.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_419,2.00,0.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_420,0.00,1.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_458,0.00,1.00
+Absent,2,Hotspot,High,MP12,Bathurst-Fox_event_461,2.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_218,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_226,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_227,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_228,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_232,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_239,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_244,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_246,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_247,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_249,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_250,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_252,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_257,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_262,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_263,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_264,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_265,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_285,1.00,2.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_312,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_322,2.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_337,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_338,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_344,4.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_353,2.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_354,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_357,2.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_358,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_360,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_366,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_376,3.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_379,3.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_380,1.00,2.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_386,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_394,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_395,7.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_401,2.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_417,3.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_496,3.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_499,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_506,1.00,0.00
+Absent,2,Hotspot,High,MP13,Bathurst-Fox_event_527,1.00,0.00
+Absent,2,Hotspot,High,MP14,Bathurst-Fox_event_329,1.00,0.00
+Absent,2,Hotspot,High,MP14,Bathurst-Fox_event_404,0.00,1.00
+Absent,2,Hotspot,High,MP14,Bathurst-Fox_event_503,0.00,3.00
+Absent,2,Hotspot,High,MP15,Bathurst-Fox_event_410,1.00,0.00
+Absent,2,Resource,High,MP15,Bathurst-Fox_event_446,1.00,0.00
+Absent,2,Resource,High,MP15,Bathurst-Fox_event_475,1.00,0.00
+Absent,2,Resource,High,MP15,Bathurst-Fox_event_482,3.00,0.00
+Absent,2,Resource,High,MP15,Bathurst-Fox_event_488,1.00,0.00
+Absent,2,Resource,High,MP15,Bathurst-Fox_event_492,1.00,0.00
+Absent,2,Resource,High,MP15,Bathurst-Fox_event_498,1.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_220,1.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_241,0.00,2.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_276,0.00,2.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_294,1.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_300,0.00,1.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_302,0.00,1.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_336,3.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_372,1.00,1.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_396,3.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_398,2.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_399,3.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_415,1.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_422,1.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_423,1.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_436,1.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_439,1.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_457,3.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_466,2.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_468,1.00,0.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_476,0.00,1.00
+Absent,2,Hotspot,High,MP16,Bathurst-Fox_event_480,0.00,2.00
+Absent,2,Hotspot,High,MP17,Bathurst-Fox_event_274,1.00,0.00
+Absent,2,Hotspot,High,MP17,Bathurst-Fox_event_327,1.00,0.00
+Absent,2,Hotspot,High,MP17,Bathurst-Fox_event_505,2.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_224,2.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_238,0.00,1.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_251,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_266,0.00,1.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_275,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_281,0.00,2.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_282,2.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_288,2.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_317,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_318,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_320,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_321,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_323,3.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_324,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_340,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_359,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_364,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_367,2.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_373,0.00,2.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_384,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_387,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_391,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_402,2.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_427,2.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_453,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_460,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_467,0.00,1.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_472,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_477,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_490,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_501,3.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_502,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_510,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_521,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_523,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_531,1.00,0.00
+Absent,2,Resource,High,MP18,Bathurst-Fox_event_538,1.00,0.00
+Absent,2,Hotspot,High,MP19,Bathurst-Fox_event_291,3.00,0.00
+Absent,2,Hotspot,High,MP19,Bathurst-Fox_event_292,2.00,0.00
+Absent,2,Hotspot,High,MP19,Bathurst-Fox_event_298,3.00,0.00
+Absent,2,Hotspot,High,MP19,Bathurst-Fox_event_493,2.00,0.00
+Absent,2,Hotspot,High,MP20,Bathurst-Fox_event_242,1.00,0.00
+Absent,2,Hotspot,High,MP20,Bathurst-Fox_event_455,0.00,1.00
+Absent,4,Resource,Low,Station1,Cobar-Fox_event_547,0.00,1.00
+Absent,4,Resource,Low,Station2,Cobar-Fox_event_542,3.00,0.00
+Absent,4,Resource,Low,Station3,Cobar-Fox_event_539,6.00,0.00
+Absent,4,Resource,Low,Station3,Cobar-Fox_event_540,6.00,3.00
+Absent,4,Resource,Low,Station3,Cobar-Fox_event_541,3.00,3.00
+Absent,4,Resource,Low,Station3,Cobar-Fox_event_543,1.00,0.00
+Absent,4,Resource,Low,Station3,Cobar-Fox_event_544,9.00,0.00
+Absent,4,Resource,Low,Station3,Cobar-Fox_event_545,0.00,2.00
+Absent,4,Resource,Low,Station3,Cobar-Fox_event_546,6.00,0.00
+Absent,4,Resource,Low,Station6,Cobar-Fox_event_550,3.00,0.00
+Absent,4,Resource,Low,Station6,Cobar-Fox_event_551,1.00,0.00
+Absent,4,Resource,Low,Station6,Cobar-Fox_event_552,3.00,0.00
+Absent,4,Resource,Low,Station6,Cobar-Fox_event_554,0.00,6.00
+Absent,4,Resource,Low,Station6,Cobar-Fox_event_555,3.00,0.00
+Absent,4,Resource,Low,Station6,Cobar-Fox_event_556,6.00,0.00
+Absent,4,Resource,Low,Station7,Cobar-Fox_event_548,3.00,0.00
+Absent,4,Resource,Low,Station7,Cobar-Fox_event_549,3.00,0.00
+Absent,4,Resource,Low,Station7,Cobar-Fox_event_553,3.00,0.00
+Persecuted,1,Resource,High,Cam 1,Capertee-Fox_event_48,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 10,Capertee-Fox_event_108,1.00,2.00
+Persecuted,1,Hotspot,High,Cam 10,Capertee-Fox_event_131,0.00,3.00
+Persecuted,1,Hotspot,High,Cam 10,Capertee-Fox_event_183,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 10,Capertee-Fox_event_189,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 10,Capertee-Fox_event_205,0.00,2.00
+Persecuted,1,Hotspot,High,Cam 10,Capertee-Fox_event_36,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 10,Capertee-Fox_event_37,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_104,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_136,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_144,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_148,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_33,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_44,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_53,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_59,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_68,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_82,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_86,3.00,0.00
+Persecuted,1,Resource,High,Cam 11,Capertee-Fox_event_91,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 12,Capertee-Fox_event_149,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 12,Capertee-Fox_event_157,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 12,Capertee-Fox_event_187,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 12,Capertee-Fox_event_191,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 12,Capertee-Fox_event_193,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 12,Capertee-Fox_event_195,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 12,Capertee-Fox_event_24,2.00,0.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_12,0.00,3.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_13,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_16,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_17,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_22,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_23,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_27,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_29,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_32,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_38,0.00,3.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_40,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_45,2.00,1.00
+Persecuted,1,Hotspot,High,Cam 14,Capertee-Fox_event_8,0.00,3.00
+Persecuted,1,Hotspot,High,Cam 15,Capertee-Fox_event_101,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 15,Capertee-Fox_event_158,0.00,2.00
+Persecuted,1,Hotspot,High,Cam 15,Capertee-Fox_event_159,0.00,3.00
+Persecuted,1,Hotspot,High,Cam 15,Capertee-Fox_event_162,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 15,Capertee-Fox_event_168,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 15,Capertee-Fox_event_176,2.00,0.00
+Persecuted,1,Hotspot,High,Cam 15,Capertee-Fox_event_55,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 15,Capertee-Fox_event_61,0.00,3.00
+Persecuted,1,Resource,High,Cam 16,Capertee-Fox_event_112,3.00,0.00
+Persecuted,1,Resource,High,Cam 16,Capertee-Fox_event_118,3.00,0.00
+Persecuted,1,Resource,High,Cam 16,Capertee-Fox_event_121,2.00,0.00
+Persecuted,1,Resource,High,Cam 16,Capertee-Fox_event_126,2.00,0.00
+Persecuted,1,Resource,High,Cam 16,Capertee-Fox_event_213,4.00,0.00
+Persecuted,1,Resource,High,Cam 16,Capertee-Fox_event_214,3.00,0.00
+Persecuted,1,Resource,High,Cam 16,Capertee-Fox_event_217,3.00,0.00
+Persecuted,1,Resource,High,Cam 16,Capertee-Fox_event_26,3.00,0.00
+Persecuted,1,Resource,High,Cam 16,Capertee-Fox_event_85,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 17,Capertee-Fox_event_137,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 17,Capertee-Fox_event_169,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 17,Capertee-Fox_event_19,6.00,0.00
+Persecuted,1,Hotspot,High,Cam 17,Capertee-Fox_event_209,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 17,Capertee-Fox_event_42,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 17,Capertee-Fox_event_47,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 18,Capertee-Fox_event_123,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 18,Capertee-Fox_event_201,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 18,Capertee-Fox_event_203,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 18,Capertee-Fox_event_90,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 19,Capertee-Fox_event_110,1.00,0.00
+Persecuted,1,Hotspot,High,Cam 19,Capertee-Fox_event_132,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 19,Capertee-Fox_event_150,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 19,Capertee-Fox_event_160,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 19,Capertee-Fox_event_173,0.00,3.00
+Persecuted,1,Resource,High,Cam 2,Capertee-Fox_event_182,3.00,0.00
+Persecuted,1,Resource,High,Cam 2,Capertee-Fox_event_186,6.00,0.00
+Persecuted,1,Hotspot,High,Cam 21,Capertee-Fox_event_174,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 21,Capertee-Fox_event_175,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 21,Capertee-Fox_event_188,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 21,Capertee-Fox_event_43,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 21,Capertee-Fox_event_49,2.00,0.00
+Persecuted,1,Hotspot,High,Cam 21,Capertee-Fox_event_75,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 21,Capertee-Fox_event_78,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_100,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_102,0.00,1.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_107,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_109,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_11,6.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_111,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_119,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_120,0.00,1.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_129,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_14,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_143,0.00,6.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_151,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_153,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_155,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_161,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_163,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_164,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_171,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_172,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_177,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_178,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_18,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_180,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_184,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_198,0.00,2.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_199,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_21,6.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_211,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_28,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_30,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_31,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_41,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_54,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_60,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_64,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_65,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_67,3.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_72,3.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_77,2.00,0.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_83,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_87,0.00,3.00
+Persecuted,1,Resource,High,Cam 24,Capertee-Fox_event_94,0.00,3.00
+Persecuted,1,Resource,High,Cam 25,Capertee-Fox_event_135,3.00,0.00
+Persecuted,1,Resource,High,Cam 25,Capertee-Fox_event_139,3.00,0.00
+Persecuted,1,Resource,High,Cam 25,Capertee-Fox_event_167,3.00,0.00
+Persecuted,1,Resource,High,Cam 25,Capertee-Fox_event_58,3.00,0.00
+Persecuted,1,Resource,High,Cam 25,Capertee-Fox_event_63,1.00,0.00
+Persecuted,1,Resource,High,Cam 25,Capertee-Fox_event_79,3.00,0.00
+Persecuted,1,Resource,High,Cam 25,Capertee-Fox_event_89,3.00,0.00
+Persecuted,1,Resource,High,Cam 25,Capertee-Fox_event_92,1.00,0.00
+Persecuted,1,Hotspot,High,Cam 26,Capertee-Fox_event_103,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 26,Capertee-Fox_event_147,0.00,3.00
+Persecuted,1,Hotspot,High,Cam 26,Capertee-Fox_event_34,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 26,Capertee-Fox_event_80,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 26,Capertee-Fox_event_81,1.00,0.00
+Persecuted,1,Hotspot,High,Cam 26,Capertee-Fox_event_88,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 26,Capertee-Fox_event_95,3.00,3.00
+Persecuted,1,Hotspot,High,Cam 26,Capertee-Fox_event_96,3.00,0.00
+Persecuted,1,Resource,High,Cam 27,Capertee-Fox_event_113,3.00,0.00
+Persecuted,1,Resource,High,Cam 27,Capertee-Fox_event_116,1.00,0.00
+Persecuted,1,Resource,High,Cam 27,Capertee-Fox_event_122,3.00,0.00
+Persecuted,1,Resource,High,Cam 27,Capertee-Fox_event_127,3.00,0.00
+Persecuted,1,Resource,High,Cam 27,Capertee-Fox_event_128,3.00,0.00
+Persecuted,1,Resource,High,Cam 27,Capertee-Fox_event_216,3.00,0.00
+Persecuted,1,Resource,High,Cam 3,Capertee-Fox_event_133,1.00,0.00
+Persecuted,1,Resource,High,Cam 3,Capertee-Fox_event_215,3.00,0.00
+Persecuted,1,Resource,High,Cam 3,Capertee-Fox_event_74,3.00,0.00
+Persecuted,1,Resource,High,Cam 3,Capertee-Fox_event_93,3.00,0.00
+Persecuted,1,Resource,High,Cam 30,Capertee-Fox_event_185,6.00,0.00
+Persecuted,1,Resource,High,Cam 30,Capertee-Fox_event_194,3.00,0.00
+Persecuted,1,Resource,High,Cam 30,Capertee-Fox_event_204,3.00,0.00
+Persecuted,1,Resource,High,Cam 30,Capertee-Fox_event_207,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 5,Capertee-Fox_event_125,0.00,2.00
+Persecuted,1,Hotspot,High,Cam 5,Capertee-Fox_event_190,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 5,Capertee-Fox_event_202,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 5,Capertee-Fox_event_62,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 5,Capertee-Fox_event_97,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 5,Capertee-Fox_event_98,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 6,Capertee-Fox_event_134,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 6,Capertee-Fox_event_138,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 6,Capertee-Fox_event_145,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 6,Capertee-Fox_event_165,0.00,2.00
+Persecuted,1,Hotspot,High,Cam 6,Capertee-Fox_event_84,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 7,Capertee-Fox_event_15,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 7,Capertee-Fox_event_20,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 7,Capertee-Fox_event_35,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 7,Capertee-Fox_event_39,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 7,Capertee-Fox_event_50,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 7,Capertee-Fox_event_51,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 7,Capertee-Fox_event_52,0.00,2.00
+Persecuted,1,Hotspot,High,Cam 7,Capertee-Fox_event_7,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 8,Capertee-Fox_event_192,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 8,Capertee-Fox_event_208,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 8,Capertee-Fox_event_69,3.00,0.00
+Persecuted,1,Hotspot,High,Cam 8,Capertee-Fox_event_73,1.00,0.00
+Protected,3,Resource,High,1000_Acre,Mourachan-Fox_event_108,0.00,1.00
+Protected,3,Resource,High,1000_Acre,Mourachan-Fox_event_6,2.00,2.00
+Protected,3,Resource,High,Black_swan,Mourachan-Fox_event_49,1.00,2.00
+Protected,3,Resource,High,Bobs_billy,Mourachan-Fox_event_1,9.00,0.00
+Protected,3,Resource,High,Bobs_billy,Mourachan-Fox_event_107,0.00,2.00
+Protected,3,Resource,High,Bobs_billy,Mourachan-Fox_event_4,2.00,0.00
+Protected,3,Resource,High,Bobs_billy,Mourachan-Fox_event_5,2.00,0.00
+Protected,3,Resource,High,Brigalow,Mourachan-Fox_event_106,0.00,1.00
+Protected,3,Resource,High,Brigalow,Mourachan-Fox_event_3,1.00,0.00
+Protected,3,Resource,High,Brigalow,Mourachan-Fox_event_33,0.00,1.00
+Protected,3,Resource,High,Brigalow,Mourachan-Fox_event_44,0.00,1.00
+Protected,3,Resource,High,Brigalow,Mourachan-Fox_event_48,2.00,0.00
+Protected,3,Resource,High,Brigalow,Mourachan-Fox_event_72,1.00,0.00
+Protected,3,Resource,High,Brigalow,Mourachan-Fox_event_8,0.00,1.00
+Protected,3,Resource,High,Brigalow,Mourachan-Fox_event_86,0.00,1.00
+Protected,3,Resource,High,Brigalow,Mourachan-Fox_event_91,0.00,1.00
+Protected,3,Resource,High,Brigalow,Mourachan-Fox_event_93,0.00,1.00
+Protected,3,Resource,High,Dead_cow,Mourachan-Fox_event_13,3.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_103,2.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_104,1.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_7,1.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_74,0.00,1.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_78,0.00,1.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_79,0.00,1.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_80,0.00,1.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_81,0.00,1.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_82,0.00,1.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_83,0.00,1.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_84,0.00,1.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_85,0.00,1.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_87,1.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_88,1.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_89,1.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_90,1.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_92,1.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_94,1.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_95,1.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_96,0.00,1.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_97,1.00,0.00
+Protected,3,Resource,High,Death_dam,Mourachan-Fox_event_98,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_10,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_11,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_12,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_14,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_15,1.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_17,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_18,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_20,1.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_21,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_22,0.00,3.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_23,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_24,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_25,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_26,1.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_27,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_29,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_31,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_32,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_34,3.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_35,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_37,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_38,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_39,2.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_40,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_42,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_43,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_45,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_46,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_47,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_50,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_51,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_52,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_54,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_55,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_56,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_57,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_59,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_60,2.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_61,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_62,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_63,1.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_64,0.00,4.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_65,2.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_66,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_67,2.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_68,1.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_69,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_70,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_71,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_73,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_75,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_76,2.00,0.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_77,0.00,1.00
+Protected,3,Resource,High,Far_east_dam,Mourachan-Fox_event_9,1.00,0.00
+Protected,3,Resource,High,Number_11,Mourachan-Fox_event_2,3.00,0.00
+Protected,3,Resource,High,Sucker_pig_dam,Mourachan-Fox_event_100,0.00,1.00
+Protected,3,Resource,High,Sucker_pig_dam,Mourachan-Fox_event_101,0.00,1.00
+Protected,3,Resource,High,Sucker_pig_dam,Mourachan-Fox_event_102,0.00,1.00
+Protected,5,Resource,Low,Muldoons,Muldoons-Fox_event_381,1.00,0.00
+Protected,5,Resource,Low,Muldoons,Muldoons-Fox_event_345,1.00,0.00
+Protected,5,Resource,Low,Muldoons,Muldoons-Fox_event_346,1.00,0.00
+Protected,5,Resource,Low,Muldoons,Muldoons-Fox_event_377,1.00,0.00
+Protected,5,Resource,Low,Muldoons,Muldoons-Fox_event_378,0.56,0.44
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_161,0.05,0.95
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_178,0.17,0.83
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_179,0.37,0.63
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_106,1.00,0.00
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_135,0.48,0.52
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_136,0.08,0.92
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_137,0.00,1.00
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_152,0.07,0.93
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_153,0.04,0.96
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_154,0.24,0.76
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_34,0.60,0.40
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_36,0.00,1.00
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_37,0.61,0.39
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_38,0.21,0.79
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_51,0.00,1.00
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_57,0.27,0.73
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_71,0.12,0.88
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_134,0.00,1.00
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_160,0.47,0.53
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_187,0.21,0.79
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_197,0.04,0.96
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_73,1.00,0.00
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_101,0.00,1.00
+Protected,5,Resource,Low,Canegrass,Canegrass-Fox_event_103,0.00,1.00
+Protected,5,Resource,Low,Lawrence_MW,Lawrence_MW-Fox_event_186,0.00,1.00
+Protected,5,Resource,Low,Lawrence_MW,Lawrence_MW-Fox_event_203,1.00,0.00
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_49,0.17,0.83
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_112,0.48,0.52
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_39,0.47,0.53
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_40,0.70,0.30
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_42,0.00,1.00
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_44,0.50,0.50
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_52,0.04,0.96
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_61,0.13,0.87
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_238,0.30,0.70
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_69,0.26,0.74
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_76,0.28,0.72
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_77,0.05,0.95
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_78,0.60,0.40
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_91,0.00,1.00
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_105,0.00,1.00
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_115,0.11,0.89
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_118,0.00,1.00
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_149,0.39,0.61
+Protected,5,Resource,Low,Boomerang,Boomerang-Fox_event_150,0.21,0.79
+Protected,5,Resource,Low,Bransons_Well,Bransons_Well-Fox_event_21,1.00,0.00
+Protected,5,Resource,Low,Bransons_Well,Bransons_Well-Fox_event_22,0.00,1.00
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_243,1.00,0.00
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_288,0.00,1.00
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_289,0.08,0.92
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_313,0.28,0.72
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_314,0.25,0.75
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_315,0.25,0.75
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_316,0.08,0.92
+Protected,5,Resource,Low,Timalees,Timalees-Fox_event_323,0.14,0.86
+Protected,5,Resource,Low,Copper_Hills,Copper_Hills-Fox_event_10,0.00,1.00
+Protected,5,Resource,Low,Copper_Hills,Copper_Hills-Fox_event_11,0.14,0.86
+Protected,5,Resource,Low,Copper_Hills,Copper_Hills-Fox_event_23,0.00,1.00
+Protected,5,Resource,Low,Liams,Liams-Fox_event_247,0.00,1.00
+Protected,5,Resource,Low,Camp,Camp-Fox_event_356,0.00,1.00
+Protected,5,Resource,Low,Camp,Camp-Fox_event_374,1.00,0.00
+Protected,5,Resource,Low,Michaels_waterhole,Michaels_waterhole-Fox_event_41,0.00,1.00
+Protected,5,Resource,Low,Michaels_waterhole,Michaels_waterhole-Fox_event_67,0.41,0.59
+Protected,5,Resource,Low,Michaels_waterhole,Michaels_waterhole-Fox_event_74,0.18,0.82
+Protected,5,Resource,Low,Michaels_waterhole,Michaels_waterhole-Fox_event_75,0.20,0.80
+Protected,5,Resource,Low,Michaels_waterhole,Michaels_waterhole-Fox_event_79,0.00,1.00
+Protected,5,Resource,Low,RGH,RGH-Fox_event_185,1.00,0.00
+Protected,5,Resource,Low,RGH,RGH-Fox_event_259,0.30,0.70
+Protected,5,Resource,Low,RGH,RGH-Fox_event_322,0.00,1.00
+Protected,5,Resource,Low,RGH,RGH-Fox_event_329,0.00,1.00
+Protected,5,Resource,Low,England_HIll,England_HIll-Fox_event_297,1.00,0.00
+Protected,5,Resource,Low,Kirilees,Kirilees-Fox_event_262,0.00,1.00
+Protected,5,Resource,Low,Kirilees,Kirilees-Fox_event_263,1.00,0.00
+Protected,5,Resource,Low,Kirilees,Kirilees-Fox_event_276,0.12,0.88
+Protected,5,Resource,Low,Kirilees,Kirilees-Fox_event_305,0.00,1.00
+Protected,5,Resource,Low,Kirilees,Kirilees-Fox_event_306,0.37,0.63
+Protected,5,Resource,Low,Kirilees,Kirilees-Fox_event_319,0.00,1.00
+Protected,5,Resource,Low,Kirilees,Kirilees-Fox_event_324,0.00,1.00
+Protected,5,Resource,Low,Lawrence,Lawrence-Fox_event_19,0.00,1.00
+Protected,5,Resource,Low,Lawrence,Lawrence-Fox_event_1,0.00,1.00
+Protected,5,Resource,Low,Lawrence,Lawrence-Fox_event_8,1.00,0.00
+Protected,5,Resource,Low,Lawrence,Lawrence-Fox_event_30,1.00,0.00
+Protected,5,Resource,Low,Lawrence,Lawrence-Fox_event_148,1.00,0.00
+Protected,5,Resource,Low,Michaels,Michaels-Fox_event_64,0.79,0.21
+Protected,5,Resource,Low,Michaels,Michaels-Fox_event_107,0.00,1.00
+Protected,5,Resource,Low,Panikin,Panikin-Fox_event_32,1.00,0.00
+Protected,5,Resource,Low,Panikin,Panikin-Fox_event_63,0.14,0.86
+Protected,5,Resource,Low,Panikin,Panikin-Fox_event_89,0.39,0.61

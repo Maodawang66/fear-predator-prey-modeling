@@ -1,0 +1,26 @@
+{
+  "model": "fear_memory",
+  "series": "lake_michigan_daphnia_bythotrephes",
+  "params": {
+    "r": 0.6869967782067665,
+    "K": 55.486889334115034,
+    "a": 0.021300443938595794,
+    "theta": 2.737497351458527,
+    "e": 0.3,
+    "mu": 0.5,
+    "phi": 0.0029921939167326488,
+    "delta": 1.0,
+    "x0": 0.0,
+    "y0": 0.0,
+    "m0": 0.0
+  },
+  "rmse_prey": 10.907836261540206,
+  "rmse_predator": 0.6644539885177474,
+  "rmse_total": 7.727301955127306,
+  "success": true,
+  "message": "Optimization terminated successfully.",
+  "meta": {
+    "nfev": 150,
+    "cost": 11.588235339865973
+  }
+}

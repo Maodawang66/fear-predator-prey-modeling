@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:systemMetadata xmlns:ns2="http://ns.dataone.org/service/types/v1" xmlns:ns3="http://ns.dataone.org/service/types/v2.0">
+    <serialVersion>13</serialVersion>
+    <identifier>df35b.238.1</identifier>
+    <formatId>text/csv</formatId>
+    <size>8302</size>
+    <checksum algorithm="MD5">b30d5d60a183103920478e5c9d95f24d</checksum>
+    <submitter>uid=couture,o=NCEAS,dc=ecoinformatics,dc=org</submitter>
+    <rightsHolder>uid=couture,o=NCEAS,dc=ecoinformatics,dc=org</rightsHolder>
+    <accessPolicy>
+        <allow>
+            <subject>uid=jones,o=NCEAS,dc=ecoinformatics,dc=org</subject>
+            <permission>read</permission>
+            <permission>write</permission>
+            <permission>changePermission</permission>
+        </allow>
+        <allow>
+            <subject>uid=cboettig,o=unaffiliated,dc=ecoinformatics,dc=org</subject>
+            <permission>read</permission>
+        </allow>
+        <allow>
+            <subject>public</subject>
+            <permission>read</permission>
+        </allow>
+    </accessPolicy>
+    <replicationPolicy replicationAllowed="true" numberReplicas="2"/>
+    <archived>false</archived>
+    <dateUploaded>2014-12-04T00:00:00.000+00:00</dateUploaded>
+    <dateSysMetadataModified>2015-04-24T19:47:19.252+00:00</dateSysMetadataModified>
+    <originMemberNode>urn:node:KNB</originMemberNode>
+    <authoritativeMemberNode>urn:node:KNB</authoritativeMemberNode>
+    <replica>
+        <replicaMemberNode>urn:node:mnUCSB1</replicaMemberNode>
+        <replicationStatus>completed</replicationStatus>
+        <replicaVerified>2019-11-16T23:35:39.447+00:00</replicaVerified>
+    </replica>
+    <replica>
+        <replicaMemberNode>urn:node:KNB</replicaMemberNode>
+        <replicationStatus>completed</replicationStatus>
+        <replicaVerified>2019-11-16T23:35:39.460+00:00</replicaVerified>
+    </replica>
+    <replica>
+        <replicaMemberNode>urn:node:mnORC1</replicaMemberNode>
+        <replicationStatus>completed</replicationStatus>
+        <replicaVerified>2019-11-16T23:35:40.390+00:00</replicaVerified>
+    </replica>
+</ns3:systemMetadata>

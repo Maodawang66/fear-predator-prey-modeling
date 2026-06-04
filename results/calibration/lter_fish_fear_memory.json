@@ -1,0 +1,26 @@
+{
+  "model": "fear_memory",
+  "series": "lter_fish_46000_Bluegill_vs_Largemouth_Bass",
+  "params": {
+    "r": 0.15650358606564585,
+    "K": 314.47512404685864,
+    "a": 0.2793290557945378,
+    "theta": 2.4745005664516233,
+    "e": 0.3,
+    "mu": 0.5,
+    "phi": 0.1999999996886005,
+    "delta": 1.0,
+    "x0": 75.33333333,
+    "y0": 25.333,
+    "m0": 25.333
+  },
+  "rmse_prey": 0.7375476741698282,
+  "rmse_predator": 66.86458311995696,
+  "rmse_total": 47.28327639016414,
+  "success": true,
+  "message": "`ftol` termination condition is satisfied.",
+  "meta": {
+    "nfev": 25,
+    "cost": 0.8511108932031214
+  }
+}

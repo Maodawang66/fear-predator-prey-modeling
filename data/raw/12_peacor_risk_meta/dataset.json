@@ -1,0 +1,25 @@
+{
+  "id": "12_peacor_risk_meta",
+  "title": "Peacor et al. predation-risk effects meta-analysis",
+  "doi": "10.5061/dryad.ffbg79cxt",
+  "role": "phi_prior",
+  "fit_ode": false,
+  "loader": "data.load_peacor.load_peacor_plp",
+  "primary_file": "PeacorEtAl_Data_ELE-00137-2022.xlsx",
+  "files": {
+    "PeacorEtAl_Data_ELE-00137-2022.xlsx": {
+      "format": "xlsx",
+      "purpose": "meta-analysis tables (PLP studies sheet for φ range)",
+      "sheets": {
+        "PLP studies": "predator-prey literature with NCE/TMIE outcomes",
+        "Fig. 2A": "publication trend counts",
+        "Fig. 3": "fitness component responses",
+        "Fig. 4": "taxa breakdown"
+      }
+    },
+    "README.csv": {
+      "format": "csv",
+      "purpose": "sheet index only (not effect-size data)"
+    }
+  }
+}

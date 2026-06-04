@@ -1,0 +1,65 @@
+{
+  "generated": "2026-05-28T14:45:46.739085+00:00",
+  "scanned_files": [
+    "data\\raw\\03_hudson_bay_lynx_hare\\lynxhare.csv",
+    "data\\raw\\07_lter_fish\\WIfishAbundance.csv"
+  ],
+  "candidates": [
+    {
+      "file": "data\\raw\\03_hudson_bay_lynx_hare\\lynxhare.csv",
+      "signature": "lynx_hare",
+      "confidence": 0.95,
+      "method": "lynx_hare_signature",
+      "time_col": "year",
+      "prey_col": "hare",
+      "predator_col": "lynx",
+      "group_key": null,
+      "notes": "classic hudson bay or lynx-roedeer style"
+    },
+    {
+      "file": "data\\raw\\07_lter_fish\\WIfishAbundance.csv",
+      "signature": "lter_fish",
+      "confidence": 0.88,
+      "method": "lter_fish_pair",
+      "time_col": "YEAR",
+      "prey_col": "Bluegill",
+      "predator_col": "Largemouth Bass",
+      "group_key": "WBIC=804600",
+      "notes": "Bluegill vs Largemouth Bass, lake=804600, n_years=9"
+    }
+  ],
+  "loaded_series": [
+    {
+      "name": "lynxhare",
+      "n_points": 60,
+      "source": "C:\\Users\\Lenovo\\Desktop\\mathematical modeling\\pro\\data\\raw\\03_hudson_bay_lynx_hare\\lynxhare.csv",
+      "meta": {
+        "signature": "lynx_hare",
+        "detection_method": "lynx_hare_signature",
+        "confidence": 0.95,
+        "time_col": "year",
+        "prey_col": "hare",
+        "predator_col": "lynx",
+        "group_key": null,
+        "notes": "classic hudson bay or lynx-roedeer style",
+        "n_points": 60
+      }
+    },
+    {
+      "name": "wifishabundance_WBIC804600",
+      "n_points": 9,
+      "source": "C:\\Users\\Lenovo\\Desktop\\mathematical modeling\\pro\\data\\raw\\07_lter_fish\\WIfishAbundance.csv",
+      "meta": {
+        "signature": "lter_fish",
+        "detection_method": "lter_fish_pair",
+        "confidence": 0.88,
+        "time_col": "YEAR",
+        "prey_col": "Bluegill",
+        "predator_col": "Largemouth Bass",
+        "group_key": "WBIC=804600",
+        "notes": "Bluegill vs Largemouth Bass, lake=804600, n_years=9",
+        "n_points": 9
+      }
+    }
+  ]
+}

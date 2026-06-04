@@ -1,0 +1,24 @@
+{
+  "id": "04_lake_michigan_zooplankton",
+  "title": "Lake Michigan zooplankton CE/NCE (Bythotrephes–Daphnia)",
+  "doi": "10.5061/dryad.bh688ft",
+  "role": "population_dynamics",
+  "fit_ode": true,
+  "secondary_role": "nce_analysis",
+  "loader": "data.load_zooplankton.load_zooplankton",
+  "primary_file": "GLERL_M110_Zoop_1994-2012.txt",
+  "files": {
+    "GLERL_M110_Zoop_1994-2012.txt": {
+      "format": "tsv",
+      "rows_approx": 175,
+      "columns": {
+        "time": "JulianDay",
+        "time_alt": "Date",
+        "prey": "D.mendotae",
+        "predator": "Bythotrephes",
+        "covariate": "Prior_to_1st_Daphnia_obs",
+        "notes": "NOT prey: Prior_to_1st_Daphnia_obs is invasion-era flag (0/1)"
+      }
+    }
+  }
+}

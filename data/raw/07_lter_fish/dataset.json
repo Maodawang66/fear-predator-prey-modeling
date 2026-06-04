@@ -1,0 +1,26 @@
+{
+  "id": "07_lter_fish",
+  "title": "NTL Wisconsin lake fish abundance",
+  "doi": "knb-lter-ntl.356",
+  "role": "population_dynamics",
+  "fit_ode": true,
+  "loader": "data.load_lter_fish.load_lter_fish_pair",
+  "primary_file": "WIfishAbundance.csv",
+  "files": {
+    "WIfishAbundance.csv": {
+      "format": "csv",
+      "rows_approx": 20045,
+      "columns": {
+        "time": "YEAR",
+        "site": "WBIC",
+        "species": "taxon_id",
+        "value": "CPUE",
+        "gear": "GEARNAME",
+        "default_pair": [
+          "Bluegill",
+          "Largemouth Bass"
+        ]
+      }
+    }
+  }
+}

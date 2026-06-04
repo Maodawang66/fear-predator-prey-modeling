@@ -1,0 +1,39 @@
+{
+  "id": "09_landscape_of_fear",
+  "title": "Fox–dingo landscape of fear (camera traps)",
+  "doi": "10.5061/dryad.1rn8pk0x6",
+  "role": "fear_proxy",
+  "fit_ode": false,
+  "loader": null,
+  "primary_file": "Woosteretal_Behaviour.csv",
+  "files": {
+    "Woosteretal_Behaviour.csv": {
+      "format": "csv",
+      "purpose": "behavior scores under predator treatment",
+      "columns": {
+        "treatment": "treatment",
+        "site": "Site",
+        "fear_score": "Cautious",
+        "confidence_score": "Confident"
+      }
+    },
+    "Woosteretal_Spatio_temp_data.csv": {
+      "format": "csv",
+      "purpose": "spatiotemporal activity (NOT predator-prey abundance)",
+      "columns": {
+        "time": "nTime",
+        "species": "Species",
+        "treatment": "treatment",
+        "activity": "sun_time_minutes"
+      }
+    },
+    "Cam_effort.csv": {
+      "format": "csv",
+      "purpose": "camera effort normalization",
+      "columns": {
+        "site": "Site",
+        "camera_days": "Cam_days"
+      }
+    }
+  }
+}

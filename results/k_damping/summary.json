@@ -1,0 +1,30 @@
+{
+  "literature": [
+    "Wang et al. (2016): fear factor 1/(1+kv) on reproduction",
+    "Wang et al. (2019): NCE can stabilize cyclic predator-prey dynamics",
+    "Myint et al. (2025): B-D + fear, k=0 limit cycle vs k>0 convergence"
+  ],
+  "methods": [
+    "Jacobian eigenvalue scan at (u*,v*) vs k",
+    "Numerical amplitude A=max-min in tail vs k",
+    "Peak decay ratio (last/first peak deviation from u*)"
+  ],
+  "hopf_k_estimate": null,
+  "k0": {
+    "k": 0.0,
+    "rel_amplitude_u": 2.5814987759864396e-09,
+    "re_max": -0.627988391909258,
+    "stability": "stable_node"
+  },
+  "k_max_scanned": {
+    "k": 0.18,
+    "rel_amplitude_u": 2.846161317022386e-08,
+    "re_max": -0.38857639221312,
+    "stability": "stable_focus"
+  },
+  "strongest_damping_at": {
+    "k": 0.0,
+    "rel_amplitude_u": 2.5814987759864396e-09
+  },
+  "conclusion_hint": "若随 k 增大 max Re(λ) 由正变负，则存在 Hopf 型阈值 k_H，恐惧使周期解失稳→稳定。默认 B-D 参数下平衡点对所有 k 已局部稳定，此时应解读为：k 改变 Re(λ) 与瞬态振幅，并与 φ 扫描（Wang 2019 主模型）、数据拟合得到的 k 值（calibrate_bda）交叉验证。"
+}

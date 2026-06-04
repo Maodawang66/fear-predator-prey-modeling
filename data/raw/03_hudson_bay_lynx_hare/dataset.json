@@ -1,0 +1,21 @@
+{
+  "id": "03_hudson_bay_lynx_hare",
+  "title": "Hudson Bay lynx–hare fur records",
+  "doi": null,
+  "citation": "https://www.math.duke.edu/education/ccp/materials/diffeq/predprey/pred1.html",
+  "role": "population_dynamics",
+  "fit_ode": true,
+  "loader": "data.load_lynx_hare.load_lynx_hare",
+  "primary_file": "lynxhare.csv",
+  "files": {
+    "lynxhare.csv": {
+      "format": "csv",
+      "rows_approx": 60,
+      "columns": {
+        "time": "year",
+        "prey": "hare",
+        "predator": "lynx"
+      }
+    }
+  }
+}

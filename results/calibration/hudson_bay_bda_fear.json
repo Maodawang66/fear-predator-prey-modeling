@@ -1,0 +1,27 @@
+{
+  "model": "bda_fear",
+  "series": "hudson_bay_lynx_hare",
+  "params": {
+    "r": 3.9507654417230604,
+    "d": 2.9993932188124606,
+    "a": 0.9163375565703363,
+    "p": 4.99994321126958,
+    "q": 1.9891870024249532,
+    "c": 0.6816608831382815,
+    "m": 0.4069845686963988,
+    "k": 0.49999999894197344,
+    "u0": 0.0002925944348538491,
+    "v0": 0.04,
+    "u_scale": 102531.0,
+    "v_scale": 100.0
+  },
+  "rmse_prey": 0.15377363548240996,
+  "rmse_predator": 0.2045496516916555,
+  "rmse_total": 0.180951500376005,
+  "success": true,
+  "message": "`ftol` termination condition is satisfied.",
+  "meta": {
+    "nfev": 50,
+    "normalized_fit": true
+  }
+}

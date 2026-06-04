@@ -1,0 +1,4 @@
+﻿series,prey,predator,lake_id,n_points,rmse_total,k,p,q
+lter_fish_804600_Bluegill_vs_Largemouth_Bass,Bluegill,Largemouth Bass,804600,9,0.2213024655945461,0.11229969530340311,0.28460103113905233,0.0942688520855415
+lter_fish_804600_Pumkinseed_vs_Largemouth_Bass,Pumkinseed,Largemouth Bass,804600,12,0.2236192046673731,0.008245100688364676,0.6642596855998403,0.691352004756507
+lter_fish_804600_Smallmouth_Bass_vs_Largemouth_Bass,Smallmouth Bass,Largemouth Bass,804600,14,0.19411666611170345,0.19079018189799965,2.3856546818581537,0.04764724758689905

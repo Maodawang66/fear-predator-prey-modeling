@@ -1,0 +1,27 @@
+{
+  "model": "bda_fear",
+  "series": "lter_fish_46000_Bluegill_vs_Largemouth_Bass",
+  "params": {
+    "r": 1.068159332469606,
+    "d": 1.0086216905265952,
+    "a": 0.003045305294352904,
+    "p": 0.09399895273520825,
+    "q": 0.15021334882841647,
+    "c": 2.9733870988332396,
+    "m": 0.05925199480199338,
+    "k": 0.0014017836240648284,
+    "u0": 0.3443809523657143,
+    "v0": 0.2471512195121951,
+    "u_scale": 218.75,
+    "v_scale": 102.5
+  },
+  "rmse_prey": 0.18135654398171078,
+  "rmse_predator": 0.14489086775441962,
+  "rmse_total": 0.16413951322521173,
+  "success": true,
+  "message": "Both `ftol` and `xtol` termination conditions are satisfied.",
+  "meta": {
+    "nfev": 40,
+    "normalized_fit": true
+  }
+}

@@ -1,0 +1,14 @@
+OK hudson_bay_baseline: RMSE=1.201e+05 (prey=1.698e+05, pred=23.03)
+OK hudson_bay_fear_memory: RMSE=1.419e+04 (prey=2.006e+04, pred=19.07)
+OK hudson_bay_bda_fear: RMSE=0.181 (prey=0.1538, pred=0.2045)
+SKIP lynx_roe_r3: 文件存在但不是有效 CSV（可能被 Dryad 反爬替换为 HTML）：
+  C:\Users\Lenovo\Desktop\mathematical modeling\pro\data\raw\01_lynx_roe_deer\Andren_lynx_roedeer_data.csv
+请浏览器手动下载后放到 data/bundled/ 同名路径，再重试。
+SKIP killifish_tp3: 文件存在但不是有效 CSV（可能被 Dryad 反爬替换为 HTML）：
+  C:\Users\Lenovo\Desktop\mathematical modeling\pro\data\raw\02_killifish_mosquitofish\TimeSeriesLogMeans.csv
+请浏览器手动下载后放到 data/bundled/ 同名路径，再重试。
+OK lter_fish_baseline: RMSE=48.43 (prey=13.66, pred=67.11)
+OK lter_fish_fear_memory: RMSE=47.28 (prey=0.7375, pred=66.86)
+OK lter_fish_bda_fear: RMSE=0.1641 (prey=0.1814, pred=0.1449)
+
+completed=2/4

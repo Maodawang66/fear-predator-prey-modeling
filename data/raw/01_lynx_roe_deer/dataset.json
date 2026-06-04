@@ -1,0 +1,23 @@
+{
+  "id": "01_lynx_roe_deer",
+  "title": "Eurasian lynx–roe deer (multi-region)",
+  "doi": "10.5061/dryad.9zw3r22mq",
+  "role": "population_dynamics",
+  "fit_ode": true,
+  "loader": "data.load_lynx_roe.load_lynx_roe",
+  "primary_file": "Andren_lynx_roedeer_data.csv",
+  "files": {
+    "Andren_lynx_roedeer_data.csv": {
+      "format": "csv",
+      "rows_approx": 196,
+      "columns": {
+        "time": "year",
+        "group": "region",
+        "prey": "roe_deer_harvest_mean",
+        "predator": "lynx_family_groups",
+        "area": "area",
+        "notes": "prey/predator density = harvest or groups / area"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "peacor": {
+    "n_studies": 64,
+    "effect_col": "Predation effect",
+    "effect_type": "categorical",
+    "TMIE_count": 37,
+    "NCE_count": 27,
+    "tmie_fraction": 0.578125,
+    "by_taxon": {
+      "Invertebrate": {
+        "TMIE": 11,
+        "NCE": 1
+      },
+      "Vertebrate": {
+        "TMIE": 26,
+        "NCE": 26
+      }
+    }
+  },
+  "coral_reef": {
+    "mean_rate_by_posi": {
+      "1": 15.39875,
+      "2": 39.4625,
+      "3": 69.70375,
+      "4": 76.13374999999999
+    },
+    "suppression_vs_pos1": {
+      "1": 0.0,
+      "2": -1.562708012013962,
+      "3": -3.5265849500771163,
+      "4": -3.9441513109830337
+    },
+    "max_suppression": 0.0,
+    "max_herbivory_suppression": 0.5619047618999999
+  },
+  "damselfly": {
+    "mean_activity": {
+      "free.fish": 277.9524940617577,
+      "cage": 295.54183266932273
+    },
+    "suppression_vs_free_fish": {
+      "free.fish": 0.0,
+      "cage": -0.06328181607773908
+    }
+  }
+}

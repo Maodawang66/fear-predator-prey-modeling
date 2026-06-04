@@ -1,0 +1,9 @@
+Peacor et al. (2022) Dryad: https://doi.org/10.5061/dryad.ffbg79cxt
+
+本项目主分析使用 PLP_studies.csv（64 篇 PLP 文献，含 Predation effect = TMIE/NCE）。
+该 CSV 由 Dryad 工作簿「PLP studies」表导出，与论文图 peacor_effect_distribution 一致。
+
+可选：浏览器下载 PeacorEtAl_Data_ELE-00137-2022.xlsx 放到本目录；
+load_peacor.load_peacor_plp() 会优先读取有效 xlsx，否则回退 PLP_studies.csv。
+
+注意：命令行直链下载 xlsx 可能得到 HTML 占位页，务必用浏览器或 Dryad「Download full dataset」。

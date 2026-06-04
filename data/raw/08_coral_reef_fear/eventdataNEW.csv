@@ -1,0 +1,1997 @@
+site,fullrep,species,uevent,totbit,totmsbit,grpsiz,posi,indfeeding
+ks,ks_2_2,Kyphosus vaigiensis ,"ks_2_2_3,8_3",9,5.511753108,1,3,1
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_4,11_2",5,2.483241406,1,4,1
+rl,rl_1_2,Kyphosus vaigiensis ,"rl_1_2_3,11_2",11,8.195268087,1,3,3
+rl,rl_1_2,Kyphosus vaigiensis ,"rl_1_2_3,7_1",11,8.195268087,1,3,1
+rl,rl_1_2,Kyphosus vaigiensis ,"rl_1_2_3,7_2",9,6.705219344,1,3,1
+rl,rl_1_2,Kyphosus vaigiensis ,"rl_1_2_3,7_3",4,2.980097486,1,3,1
+rl,rl_1_2,Scarus ghobban ,"rl_1_2_1,2_2",1,0.749395931,1,1,1
+rl,rl_1_2,Scarus ghobban ,"rl_1_2_2,10_1",4,2.49290093,1,2,1
+rl,rl_1_2,Scarus ghobban ,"rl_1_2_3,7_4",1,0.623225232,1,3,1
+rl,rl_3_1,Scarus ghobban ,"rl_3_1_3,9_1",3,1.869675697,1,3,1
+rl,rl_7_2,Scarus ghobban ,"rl_7_2_1,9_1",2,1.246450465,1,1,1
+rl,rl_7_2,Scarus ghobban ,"rl_7_2_1,9_2",4,2.49290093,1,1,1
+rl,rl_7_2,Scarus ghobban ,"rl_7_2_3,3_6",1,0.818455115,1,3,1
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_1,13_3",4,2.114194409,1,1,1
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_2,12_2",1,0.470357004,1,2,1
+ks,ks_6_1,Scarus rivulatus,"ks_6_1_2,12_1",5,1.403355469,1,2,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_1,11_1",3,0.966016938,1,1,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_3,9_1",5,1.403355469,1,3,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_4,7_1",4,2.365700355,1,4,1
+ks,ks_8_2,Siganus  punctatus,"ks_8_2_3,12_1",2,0.507244671,1,3,1
+ks,ks_2_1,Siganus canaliculatus,"ks_2_1_2,4_1",3,0.843941124,1,2,1
+ks,ks_2_1,Siganus canaliculatus,"ks_2_1_3,3_1",2,0.562627416,1,3,1
+ks,ks_2_2,Siganus canaliculatus,"ks_2_2_4,3_1",4,1.125254832,1,4,1
+ks,ks_6_1,Siganus canaliculatus,"ks_6_1_2,3_4",2,0.562627416,1,2,1
+ks,ks_6_1,Siganus corallinus,"ks_6_1_3,5_1",3,0.762623267,1,3,1
+ks,ks_2_1,Siganus javus,"ks_2_1_1,9_1",1,0.214336207,1,1,1
+ks,ks_2_1,Siganus javus,"ks_2_1_3,4_1",4,0.857344827,1,3,1
+ks,ks_4_1,Siganus javus,"ks_4_1_3,1_3",1,0.214336207,1,3,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,10_1",2,0.540426967,1,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,10_2",1,0.270213483,1,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,10_4",1,0.270213483,1,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,3_1",4,0.827981523,1,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,5_1",2,0.540426967,1,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,5_3",1,0.270213483,1,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,5_5",2,0.540426967,1,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,6_1",1,0.206995381,1,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,6_2",5,1.034976904,1,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,8_1",1,0.206995381,1,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,10_1",3,0.81064045,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,10_3",3,0.81064045,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,12_1",3,0.711563396,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,12_2",2,0.474375597,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,12_3",3,0.711563396,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,13_2",2,0.540426967,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,13_3",1,0.270213483,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,3_2",2,0.474375597,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,3_3",1,0.237187799,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,5_1",4,1.080853933,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,6_2",2,0.540426967,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,6_4",3,0.81064045,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,6_6",3,0.81064045,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,9_1",1,0.237187799,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,9_2",2,0.474375597,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,9_3",1,0.237187799,1,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_3,1_1",3,0.620986142,1,3,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_3,11_1",2,0.540426967,1,3,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_3,9_1",1,0.237187799,1,3,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_3,9_2",1,0.237187799,1,3,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_3,9_3",3,0.711563396,1,3,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_3,9_4",5,1.185938993,1,3,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,10_1",1,0.270213483,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,10_2",3,0.81064045,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,10_3",1,0.270213483,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,10_4",1,0.270213483,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,11_1",2,0.540426967,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,11_2",1,0.270213483,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,11_4",2,0.540426967,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,13_1",1,0.270213483,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,13_3",3,0.81064045,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,5_1",3,0.620986142,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,7_1",1,0.237187799,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,7_2",3,0.711563396,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,7_3",5,1.351067417,1,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,9_2",2,0.540426967,1,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,11_1",1,0.270213483,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,11_3",1,0.270213483,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,3_1",2,0.413990762,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,3_2",1,0.206995381,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,3_4",2,0.413990762,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,4_2",3,0.81064045,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,4_3",4,1.080853933,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,4_6",1,0.270213483,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,5_1",3,0.81064045,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,5_2",2,0.540426967,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,5_3",7,1.891494383,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,5_5",3,0.81064045,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,8_2",3,0.81064045,1,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,10_3",9,2.43192135,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,11_2",8,2.161707867,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,11_3",3,0.81064045,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,13_1",3,0.81064045,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,13_3",7,1.891494383,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,3_4",1,0.270213483,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,3_5",1,0.270213483,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,6_4",2,0.540426967,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,6_5",1,0.270213483,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,7_1",1,0.270213483,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,7_2",4,1.080853933,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,8_1",3,0.81064045,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,8_2",2,0.540426967,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,8_5",3,0.81064045,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,9_1",1,0.270213483,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,9_2",2,0.540426967,1,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,13_1",1,0.270213483,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,13_2",6,1.6212809,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,3_1",3,0.81064045,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,5_1",3,0.81064045,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,5_2",5,1.351067417,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,5_4",3,0.81064045,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,5_5",1,0.270213483,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,5_7",6,1.6212809,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,5_8",2,0.540426967,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,7_3",6,1.6212809,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,9_2",5,1.351067417,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,9_5",1,0.270213483,1,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,10_1",3,0.81064045,1,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,11_1",4,1.080853933,1,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,11_2",3,0.81064045,1,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,11_4",12,3.2425618,1,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,11_5",6,1.6212809,1,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,5_1",3,0.81064045,1,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_1,4_1",3,0.81064045,1,1,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_1,8_1",4,1.080853933,1,1,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,10_1",6,1.6212809,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,12_1",2,0.540426967,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,12_2",4,1.080853933,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,12_3",1,0.270213483,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,12_4",6,1.6212809,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,12_5",5,1.351067417,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,13_2",2,0.540426967,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,2_1",9,2.43192135,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,2_2",3,0.81064045,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,2_3",6,1.6212809,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,4_3",1,0.270213483,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,6_1",4,1.080853933,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,6_2",3,0.81064045,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,6_3",2,0.540426967,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,6_5",4,1.080853933,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,6_6",7,1.891494383,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,8_2",4,1.080853933,1,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,1_1",4,1.080853933,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,1_2",8,2.161707867,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,10_1",5,1.351067417,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,10_4",3,0.81064045,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,11_3",4,1.080853933,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,3_3",9,2.43192135,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,4_2",3,0.81064045,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,5_1",2,0.540426967,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,5_2",5,1.351067417,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,5_4",2,0.540426967,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,7_2",2,0.540426967,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,8_1",1,0.270213483,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,8_2",6,1.6212809,1,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,1_1",5,1.351067417,1,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,10_1",7,1.891494383,1,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,11_1",3,0.81064045,1,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,11_2",2,0.540426967,1,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,5_2",4,1.080853933,1,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,6_3",4,1.080853933,1,4,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_1,10_1",4,1.080853933,1,1,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_2,11_2",4,1.080853933,1,2,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_2,2_1",2,0.540426967,1,2,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_2,2_2",5,1.351067417,1,2,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_2,3_1",1,0.270213483,1,2,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_2,3_3",3,0.81064045,1,2,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,10_3",7,1.891494383,1,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,12_1",6,1.6212809,1,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,3_1",3,0.81064045,1,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,3_3",2,0.540426967,1,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,4_2",9,2.43192135,1,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,5_1",10,2.702134833,1,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,7_1",3,0.81064045,1,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,8_1",3,0.81064045,1,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,8_2",7,1.891494383,1,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,8_3",2,0.540426967,1,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_4,5_2",3,0.81064045,1,4,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_4,9_1",2,0.540426967,1,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,10_2",3,0.81064045,1,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,5_5",2,0.540426967,1,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,11_1",6,1.6212809,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,11_3",4,1.080853933,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,13_1",7,1.891494383,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,13_2",4,1.080853933,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,13_4",3,0.81064045,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,13_7",5,1.351067417,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,13_8",3,0.81064045,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,4_1",2,0.540426967,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,4_2",7,1.891494383,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,4_3",2,0.540426967,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,4_4",3,0.81064045,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,4_5",9,2.43192135,1,2,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,4_6",8,2.161707867,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,5_1",3,0.81064045,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,5_2",7,1.891494383,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,5_4",2,0.540426967,1,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,11_2",2,0.540426967,1,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,4_1",2,0.540426967,1,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,4_2",3,0.81064045,1,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,4_4",1,0.270213483,1,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,7_1",6,1.6212809,1,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,7_2",3,0.81064045,1,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,7_3",4,1.080853933,1,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,1_1",5,1.351067417,1,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,7_3",1,0.270213483,1,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,7_4",2,0.540426967,1,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_1,6_1",2,0.540426967,1,1,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,10_3",7,1.891494383,1,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,2_1",2,0.540426967,1,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,1_1",3,0.81064045,1,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,1_3",5,1.351067417,1,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,2_3",3,0.81064045,1,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,2_6",2,0.540426967,1,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,7_1",1,0.270213483,1,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,5_2",3,0.81064045,1,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,8_2",6,1.6212809,1,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,8_6",5,1.351067417,1,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,12_2",2,0.540426967,1,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,12_4",5,1.351067417,1,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,7_1",2,0.540426967,1,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,8_3",1,0.270213483,1,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,3_2",1,0.270213483,1,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,3_3",3,0.81064045,1,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,3_5",3,0.81064045,1,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,4_3",3,0.81064045,1,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,9_2",3,0.81064045,1,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,3_2",3,0.81064045,1,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,5_1",2,0.540426967,1,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,5_2",1,0.270213483,1,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,5_5",3,0.81064045,1,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,9_1",3,0.81064045,1,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,9_5",4,1.080853933,1,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,10_1",7,1.891494383,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,10_2",4,1.080853933,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,10_3",6,1.6212809,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,10_6",2,0.540426967,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,11_2",2,0.540426967,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,11_5",3,0.81064045,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,2_3",4,1.080853933,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,2_5",7,1.891494383,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,2_6",5,1.351067417,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,2_9",7,1.891494383,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,4_1",3,0.81064045,1,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,1_3",4,1.080853933,1,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,4_1",3,0.81064045,1,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,4_3",2,0.540426967,1,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,5_2",2,0.540426967,1,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,6_2",3,0.81064045,1,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,6_4",6,1.6212809,1,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,9_1",5,1.351067417,1,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,9_2",3,0.81064045,1,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,9_3",2,0.540426967,1,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,9_7",2,0.540426967,1,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,1_2",1,0.270213483,1,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,1_7",6,1.6212809,1,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,6_2",3,0.81064045,1,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,8_1",2,0.540426967,1,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,8_2",1,0.270213483,1,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,8_3",4,1.080853933,1,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,8_7",3,0.81064045,1,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,10_3",2,0.540426967,1,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,12_3",7,1.891494383,1,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,3_1",6,1.6212809,1,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,3_3",5,1.351067417,1,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,3_5",1,0.270213483,1,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,4_2",6,1.6212809,1,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,5_2",10,2.702134833,1,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,5_3",3,0.81064045,1,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,5_4",4,1.080853933,1,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,1_2",1,0.270213483,1,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,12_3",22,5.944696633,1,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,13_1",4,1.080853933,1,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,4_2",7,1.891494383,1,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,4_3",1,0.270213483,1,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,5_1",3,0.81064045,1,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,7_1",1,0.270213483,1,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,8_1",9,1.862958427,1,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,8_3",1,0.270213483,1,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,9_3",10,2.702134833,1,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,1_4",2,0.474375597,1,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,10_3",9,2.755831999,1,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,3_4",6,1.6212809,1,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,4_8",2,0.540426967,1,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,5_4",2,0.540426967,1,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,5_6",14,3.782988767,1,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,6_1",5,1.351067417,1,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,9_2",7,2.143424888,1,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,10_2",23,6.214910117,1,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,6_5",15,4.05320225,1,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,8_3",17,4.593629217,1,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,8_7",16,4.323415733,1,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,9_1",8,2.161707867,1,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,11_1",1,0.270213483,1,1,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,11_2",1,0.270213483,1,1,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,2_1",2,0.540426967,1,1,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,11_1",5,1.351067417,1,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,11_5",3,0.81064045,1,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,2_1",4,1.080853933,1,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,6_2",5,1.351067417,1,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,6_3",8,2.161707867,1,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,6_4",3,0.81064045,1,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,6_6",3,0.81064045,1,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,11_4",1,0.270213483,1,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,12_1",3,0.81064045,1,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,12_2",8,2.449628444,1,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,13_1",1,0.306203555,1,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,13_2",1,0.306203555,1,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,13_4",7,1.891494383,1,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,5_7",1,0.270213483,1,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,6_5",5,1.351067417,1,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,7_10",5,1.351067417,1,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,2_9",4,1.080853933,1,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,6_2",4,1.080853933,1,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,3_2",4,1.080853933,1,1,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,3_4",3,0.81064045,1,1,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,3_5",2,0.540426967,1,1,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,4_1",4,1.080853933,1,1,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,4_3",1,0.270213483,1,1,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_2,9_1",3,0.81064045,1,2,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_2,9_2",5,1.351067417,1,2,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_2,9_4",2,0.540426967,1,2,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,11_1",1,0.270213483,1,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,12_1",2,0.540426967,1,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,3_2",3,0.81064045,1,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,3_5",2,0.540426967,1,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,7_1",2,0.540426967,1,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,7_2",3,0.81064045,1,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,7_4",2,0.540426967,1,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,3_4",6,1.6212809,1,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,7_1",2,0.540426967,1,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,7_2",6,1.6212809,1,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,12_1",5,1.351067417,1,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,12_4",4,1.080853933,1,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,12_5",3,0.81064045,1,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,3_1",4,1.080853933,1,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,4_1",1,0.270213483,1,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,5_1",1,0.270213483,1,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,8_1",3,0.81064045,1,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,10_2",6,1.6212809,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,11_1",3,0.81064045,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,11_3",2,0.540426967,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,12_1",3,0.81064045,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,2_1",5,1.351067417,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,4_1",5,1.351067417,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,5_3",4,1.080853933,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,8_2",2,0.540426967,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,8_3",3,0.81064045,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,8_4",1,0.270213483,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,8_6",3,0.81064045,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,9_1",3,0.81064045,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,9_3",2,0.540426967,1,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,3_1",1,0.270213483,1,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,3_3",5,1.351067417,1,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,4_3",19,5.134056183,1,3,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,4_4",11,2.972348317,1,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,4_5",9,2.43192135,1,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,6_4",3,0.81064045,1,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,9_1",1,0.270213483,1,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,9_2",3,0.81064045,1,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,9_4",3,0.81064045,1,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,9_6",4,1.080853933,1,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,1_1",4,1.080853933,1,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,1_2",3,0.81064045,1,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,10_1",2,0.540426967,1,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,10_4",2,0.540426967,1,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,12_1",3,0.81064045,1,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,2_6",1,0.270213483,1,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,3_1",7,1.891494383,1,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,4_1",2,0.540426967,1,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,9_2",2,0.540426967,1,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,9_6",12,3.2425618,1,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,4_1",6,1.6212809,1,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,5_1",3,0.81064045,1,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,5_2",2,0.540426967,1,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,5_3",2,0.540426967,1,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,6_1",3,0.81064045,1,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,6_2",4,1.080853933,1,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,10_1",6,1.6212809,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,2_2",3,0.81064045,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,2_3",4,1.080853933,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,3_1",3,0.81064045,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,3_2",5,1.351067417,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,3_4",3,0.81064045,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,4_2",6,1.6212809,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,5_1",4,1.080853933,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,5_3",3,0.81064045,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,6_4",3,0.81064045,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,6_6",2,0.540426967,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,6_8",3,0.81064045,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,9_2",4,1.080853933,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,9_3",5,1.351067417,1,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,10_1",4,1.080853933,1,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,11_1",2,0.540426967,1,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,11_2",4,1.080853933,1,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,3_5",4,1.080853933,1,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,3_7",1,0.270213483,1,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,3_8",9,2.43192135,1,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,6_2",4,1.080853933,1,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,3_1",9,2.43192135,1,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,3_5",5,1.351067417,1,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,5_1",5,1.351067417,1,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,5_2",3,0.81064045,1,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,7_2",3,0.81064045,1,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,7_7",4,1.080853933,1,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,9_1",2,0.540426967,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_1,11_1",4,1.080853933,1,1,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,1_1",3,0.81064045,1,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,1_2",2,0.540426967,1,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,13_1",4,1.080853933,1,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,2_1",3,0.81064045,1,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,2_2",1,0.270213483,1,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,4_2",2,0.540426967,1,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,8_1",2,0.540426967,1,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,12_1",4,1.080853933,1,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,1_1",3,0.81064045,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,10_3",3,0.81064045,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,11_1",7,1.891494383,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,12_3",2,0.540426967,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,12_4",6,1.6212809,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,12_5",3,0.81064045,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,4_1",3,0.81064045,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,4_11",3,0.81064045,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,4_2",5,1.351067417,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,5_1",3,0.81064045,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,6_1",2,0.540426967,1,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,9_7",7,1.891494383,1,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,11_1",2,0.540426967,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,11_2",1,0.270213483,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,11_4",2,0.540426967,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,11_5",3,0.81064045,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,12_1",3,0.81064045,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,13_1",2,0.540426967,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,13_2",4,1.080853933,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,13_3",1,0.270213483,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,2_1",3,0.81064045,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,5_2",5,1.351067417,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,5_3",3,0.81064045,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,7_3",1,0.270213483,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,7_6",3,0.81064045,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,7_7",1,0.270213483,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,7_9",4,1.080853933,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,8_1",3,0.81064045,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,8_2",2,0.540426967,1,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,1_2",1,0.270213483,1,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,1_3",1,0.270213483,1,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,5_1",2,0.540426967,1,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,6_1",3,0.81064045,1,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,7_3",3,0.81064045,1,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,7_4",6,1.6212809,1,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,7_6",5,1.351067417,1,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,8_1",8,2.161707867,1,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,8_3",4,1.080853933,1,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,8_6",4,1.080853933,1,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,1_3",3,0.81064045,1,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,4_3",2,0.540426967,1,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,7_1",5,1.351067417,1,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,1_3",3,0.81064045,1,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,4_10",8,2.161707867,1,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,4_11",4,1.080853933,1,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,6_5",4,1.080853933,1,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,7_2",7,1.891494383,1,4,1
+ks,ks_2_2,Kyphosus vaigiensis ,"ks_2_2_3,8_2",18,11.02350622,2,3,2
+ks,ks_2_2,Kyphosus vaigiensis ,"ks_2_2_4,8_1",6,3.674502072,2,4,1
+ks,ks_2_2,Kyphosus vaigiensis ,"ks_2_2_4,8_2",12,7.349004144,2,4,2
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_3,7_3",14,6.953075938,2,3,2
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_4,11_1",9,4.469834531,2,4,2
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_4,11_3",12,5.959779375,2,4,2
+rl,rl_1_2,Kyphosus vaigiensis ,"rl_1_2_3,11_1",6,4.470146229,2,3,1
+rl,rl_3_1,Kyphosus vaigiensis ,"rl_3_1_3,5_1",4,2.980097486,2,3,1
+rl,rl_7_2,Kyphosus vaigiensis ,"rl_7_2_1,3_1",7,5.215170601,2,1,2
+rl,rl_7_2,Kyphosus vaigiensis ,"rl_7_2_1,3_2",5,3.725121858,2,1,1
+rl,rl_7_2,Kyphosus vaigiensis ,"rl_7_2_4,4_5",5,3.725121858,2,4,1
+rl,rl_7_2,Kyphosus vaigiensis ,"rl_7_2_4,4_6",2,1.490048743,2,4,1
+rl,rl_1_1,Scarus ghobban ,"rl_1_1_4,6_3",3,1.869675697,2,4,1
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_3,4_6",3,1.585645807,2,3,1
+ks,ks_6_1,Scarus rivulatus,"ks_6_1_1,8_2",1,0.280671094,2,1,1
+ks,ks_6_1,Scarus rivulatus,"ks_6_1_3,10_2",4,1.469093793,2,3,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_3,11_1",7,2.570914138,2,3,2
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_3,3_1",3,1.411071013,2,3,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_3,7_1",3,1.101820345,2,3,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_3,7_2",5,1.836367242,2,3,2
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_4,8_4",2,0.940714009,2,4,1
+ks,ks_2_1,Siganus canaliculatus,"ks_2_1_1,12_1",3,0.556890488,2,1,1
+ks,ks_2_1,Siganus canaliculatus,"ks_2_1_1,2_1",3,0.843941124,2,1,1
+ks,ks_2_1,Siganus canaliculatus,"ks_2_1_3,3_2",2,0.562627416,2,3,1
+ks,ks_2_1,Siganus canaliculatus,"ks_2_1_3,3_3",4,1.125254832,2,3,1
+ks,ks_2_2,Siganus canaliculatus,"ks_2_2_1,6_2",3,0.843941124,2,1,1
+ks,ks_2_2,Siganus canaliculatus,"ks_2_2_1,6_3",1,0.281313708,2,1,1
+ks,ks_4_1,Siganus canaliculatus,"ks_4_1_2,9_2",1,0.319582739,2,2,1
+ks,ks_4_1,Siganus canaliculatus,"ks_4_1_2,9_3",4,1.278330956,2,2,1
+ks,ks_6_1,Siganus canaliculatus,"ks_6_1_2,3_3",1,0.281313708,2,2,1
+ks,ks_8_1,Siganus canaliculatus,"ks_8_1_1,2_1",3,0.958748217,2,1,1
+ks,ks_2_1,Siganus javus,"ks_2_1_4,1_2",2,0.428672413,2,4,1
+ks,ks_4_1,Siganus javus,"ks_4_1_4,5_4",1,0.129301965,2,4,1
+ks,ks_4_2,Siganus javus,"ks_4_2_2,10_1",2,0.336802763,2,2,1
+ks,ks_4_2,Siganus javus,"ks_4_2_2,10_2",2,0.336802763,2,2,1
+ks,ks_6_1,Siganus javus,"ks_6_1_1,10_1",3,0.505204144,2,1,1
+ks,ks_6_1,Siganus javus,"ks_6_1_1,2_1",3,0.505204144,2,1,1
+ks,ks_6_1,Siganus javus,"ks_6_1_1,2_2",2,0.336802763,2,1,1
+ks,ks_6_1,Siganus javus,"ks_6_1_1,9_1",2,0.336802763,2,1,1
+ks,ks_6_1,Siganus javus,"ks_6_1_1,9_2",2,0.336802763,2,1,1
+ks,ks_6_1,Siganus javus,"ks_6_1_1,9_4",1,0.168401381,2,1,1
+ks,ks_6_1,Siganus javus,"ks_6_1_2,1_2",2,0.336802763,2,2,1
+ks,ks_6_1,Siganus javus,"ks_6_1_2,6_1",1,0.168401381,2,2,1
+ks,ks_6_1,Siganus javus,"ks_6_1_3,2_1",4,0.673605525,2,3,2
+ks,ks_6_1,Siganus javus,"ks_6_1_4,6_1",2,0.336802763,2,4,1
+ks,ks_6_1,Siganus javus,"ks_6_1_4,6_2",3,0.505204144,2,4,1
+ks,ks_8_2,Siganus javus,"ks_8_2_2,9_2",3,0.505204144,2,2,1
+rl,rl_1_1,Siganus javus,"rl_1_1_2,11_4",2,0.336802763,2,2,1
+rl,rl_1_1,Siganus javus,"rl_1_1_3,11_2",3,0.720047152,2,3,2
+rl,rl_7_1,Siganus javus,"rl_7_1_4,1_3",3,0.720047152,2,4,2
+rl,rl_7_2,Siganus javus,"rl_7_2_3,1_5",1,0.214336207,2,3,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,10_3",4,1.080853933,2,1,2
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_1,5_4",1,0.270213483,2,1,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,10_2",4,1.080853933,2,2,2
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,10_4",1,0.270213483,2,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,13_1",5,1.351067417,2,2,2
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,3_1",4,0.827981523,2,2,2
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,5_2",7,1.66031459,2,2,2
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,6_3",4,1.080853933,2,2,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,6_5",5,1.351067417,2,2,2
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_2,8_1",4,0.948751195,2,2,2
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_3,13_1",4,1.080853933,2,3,2
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_3,9_5",1,0.237187799,2,3,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,11_3",5,1.351067417,2,4,2
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,11_5",1,0.270213483,2,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,13_2",5,1.351067417,2,4,2
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,7_4",6,1.6212809,2,4,1
+ks,ks_2_1,Siganus virgatus ,"ks_2_1_4,9_1",12,3.2425618,2,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,12_1",5,1.351067417,2,1,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,3_3",1,0.206995381,2,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,4_1",6,1.6212809,2,1,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,4_4",2,0.540426967,2,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,4_5",8,2.161707867,2,1,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,5_4",2,0.540426967,2,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,8_3",8,2.161707867,2,1,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,10_1",11,2.972348317,2,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,10_2",6,1.6212809,2,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,13_2",7,1.891494383,2,2,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,3_2",1,0.270213483,2,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,3_8",6,1.6212809,2,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,6_1",2,0.540426967,2,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,6_2",10,2.702134833,2,2,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,6_3",1,0.270213483,2,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,8_6",7,1.891494383,2,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,1_1",4,1.080853933,2,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,4_3",6,1.6212809,2,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,4_5",4,1.080853933,2,3,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,4_6",4,1.080853933,2,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,5_3",2,0.540426967,2,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,6_1",13,3.512775283,2,3,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,7_1",9,2.43192135,2,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,7_2",3,0.81064045,2,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,7_4",2,0.540426967,2,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,8_1",7,1.891494383,2,3,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,8_4",2,0.540426967,2,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,9_1",2,0.540426967,2,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,9_3",15,4.05320225,2,3,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,10_2",1,0.270213483,2,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,10_3",10,2.702134833,2,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,11_3",2,0.540426967,2,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,12_1",7,1.891494383,2,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,2_1",19,5.134056183,2,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,2_2",6,1.6212809,2,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,5_3",6,1.6212809,2,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,6_1",3,0.81064045,2,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,6_2",3,0.81064045,2,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,6_3",7,1.891494383,2,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,6_4",8,2.161707867,2,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,6_5",14,3.782988767,2,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,9_2",8,2.161707867,2,4,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,1_1",10,2.702134833,2,2,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,1_2",2,0.540426967,2,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,1_3",1,0.270213483,2,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,10_2",8,2.161707867,2,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,10_3",9,2.43192135,2,2,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,10_4",3,0.81064045,2,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,13_1",11,2.972348317,2,2,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,13_3",7,1.891494383,2,2,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,4_1",12,3.2425618,2,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,5_2",11,2.972348317,2,2,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,5_3",3,0.81064045,2,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,6_4",15,4.05320225,2,2,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,6_7",3,0.81064045,2,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,8_1",19,5.134056183,2,2,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,10_2",11,2.972348317,2,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,11_1",7,1.891494383,2,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,11_2",1,0.270213483,2,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,3_1",3,0.81064045,2,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,3_2",3,0.81064045,2,3,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,4_1",2,0.540426967,2,3,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,5_3",1,0.270213483,2,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,6_1",21,5.67448315,2,3,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,7_1",9,2.43192135,2,3,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,10_2",6,1.6212809,2,4,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,11_4",7,1.891494383,2,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,3_2",4,1.080853933,2,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,3_3",7,1.891494383,2,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,3_5",3,0.81064045,2,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,5_1",13,3.512775283,2,4,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,5_4",5,1.351067417,2,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,6_1",2,0.540426967,2,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,6_2",7,1.891494383,2,4,2
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_2,11_1",3,0.81064045,2,2,2
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_2,3_2",7,1.891494383,2,2,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,10_1",8,2.161707867,2,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,10_2",3,0.81064045,2,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,3_2",6,1.6212809,2,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,4_1",6,1.6212809,2,3,2
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,5_2",3,0.81064045,2,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,5_4",2,0.540426967,2,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,8_4",4,1.080853933,2,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_4,10_1",11,2.972348317,2,4,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_4,3_1",4,1.080853933,2,4,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_4,5_1",2,0.540426967,2,4,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_4,5_3",2,0.540426967,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,10_1",9,2.43192135,2,1,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,10_3",3,0.81064045,2,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,12_2",7,1.891494383,2,1,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,12_3",2,0.540426967,2,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,4_1",4,1.080853933,2,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,5_1",3,0.81064045,2,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,5_2",2,0.540426967,2,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,5_3",12,3.2425618,2,1,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,5_4",11,2.972348317,2,1,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,5_6",4,1.080853933,2,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,6_1",2,0.540426967,2,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,6_2",9,2.43192135,2,1,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,6_3",7,1.891494383,2,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,11_4",3,0.81064045,2,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,13_3",6,1.6212809,2,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,3_2",5,1.351067417,2,2,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,5_3",4,1.080853933,2,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,5_5",3,0.81064045,2,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,8_1",6,1.6212809,2,2,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,9_1",7,1.891494383,2,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,9_3",3,0.81064045,2,2,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,1_1",9,2.43192135,2,3,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,1_2",4,1.080853933,2,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,1_3",16,4.323415733,2,3,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,11_1",8,2.161707867,2,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,3_1",7,1.891494383,2,3,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,3_3",7,1.891494383,2,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,4_3",1,0.270213483,2,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,4_5",4,1.080853933,2,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,7_4",1,0.270213483,2,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,8_2",8,2.161707867,2,3,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,8_3",2,0.540426967,2,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,1_2",2,0.540426967,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,1_3",7,1.891494383,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,1_4",11,2.972348317,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,11_2",2,0.540426967,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,11_3",2,0.540426967,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,12_1",4,1.080853933,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,12_2",3,0.81064045,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,13_1",5,1.351067417,2,4,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,13_2",13,3.512775283,2,4,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,13_3",4,1.080853933,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,3_1",10,2.702134833,2,4,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,3_3",3,0.81064045,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,4_2",4,1.080853933,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,4_3",5,1.351067417,2,4,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,4_4",1,0.270213483,2,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,7_1",11,2.972348317,2,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_1,10_1",5,1.351067417,2,1,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_1,10_2",1,0.270213483,2,1,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_1,5_1",1,0.270213483,2,1,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,1_2",6,1.6212809,2,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,10_1",6,1.6212809,2,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,10_2",9,2.43192135,2,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,11_1",4,1.080853933,2,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,12_1",5,1.351067417,2,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,12_2",4,1.080853933,2,2,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,13_1",6,1.6212809,2,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,3_1",7,1.891494383,2,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,3_2",5,1.351067417,2,2,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,3_3",9,2.43192135,2,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,3_4",2,0.540426967,2,2,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,7_1",6,1.6212809,2,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,7_2",3,0.81064045,2,2,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,7_3",6,1.6212809,2,2,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,7_4",4,1.080853933,2,2,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,8_1",9,2.43192135,2,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,1_1",5,1.351067417,2,3,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,1_5",3,0.81064045,2,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,1_6",2,0.540426967,2,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,10_1",1,0.270213483,2,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,10_4",8,2.161707867,2,3,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,12_2",1,0.270213483,2,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,2_3",2,0.540426967,2,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,2_4",3,0.81064045,2,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,3_2",1,0.270213483,2,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,3_3",9,2.43192135,2,3,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,3_4",8,2.161707867,2,3,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,3_5",2,0.540426967,2,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,9_1",6,1.6212809,2,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,9_2",2,0.540426967,2,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,9_3",12,3.2425618,2,3,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,1_2",1,0.270213483,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,1_5",1,0.270213483,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,11_1",2,0.540426967,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,11_2",13,3.512775283,2,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,13_1",7,1.891494383,2,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,2_2",2,0.540426967,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,2_5",4,1.080853933,2,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,3_2",3,0.81064045,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,3_3",1,0.270213483,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,3_5",3,0.81064045,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,4_1",13,3.512775283,2,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,4_2",6,1.6212809,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,5_1",19,5.134056183,2,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,5_3",2,0.540426967,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,5_4",3,0.81064045,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,7_2",1,0.270213483,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,7_3",3,0.81064045,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,7_5",6,1.6212809,2,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,8_10",4,1.080853933,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,8_3",7,1.891494383,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,8_4",3,0.81064045,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,8_5",2,0.540426967,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,8_7",3,0.81064045,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,8_8",2,0.540426967,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,8_9",1,0.270213483,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,9_1",3,0.81064045,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,9_2",8,2.161707867,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,9_3",2,0.540426967,2,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,9_4",3,0.81064045,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,12_1",1,0.270213483,2,1,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,12_2",3,0.81064045,2,1,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,12_3",14,3.782988767,2,1,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,12_4",2,0.540426967,2,1,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,3_1",3,0.711563396,2,1,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,3_2",6,1.423126792,2,1,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,6_1",2,0.540426967,2,1,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,6_2",1,0.270213483,2,1,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,6_3",2,0.540426967,2,1,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,11_1",3,0.81064045,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,11_2",2,0.540426967,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,11_3",5,1.351067417,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,11_4",2,0.540426967,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,11_5",2,0.540426967,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,3_2",3,0.81064045,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,5_3",2,0.540426967,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,5_4",1,0.270213483,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,5_6",9,2.43192135,2,2,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,6_1",4,1.080853933,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,6_4",10,2.702134833,2,2,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,7_1",7,1.891494383,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,7_2",2,0.540426967,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,7_3",5,1.351067417,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,8_1",3,0.81064045,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,8_5",4,1.080853933,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,8_7",3,0.81064045,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,9_2",10,2.702134833,2,2,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,9_3",5,1.351067417,2,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,1_1",10,2.702134833,2,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,1_3",7,1.891494383,2,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,10_1",4,1.080853933,2,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,10_2",4,1.080853933,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,10_3",2,0.540426967,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,11_2",1,0.270213483,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,11_4",3,0.81064045,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,11_6",7,1.891494383,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,12_3",6,1.6212809,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,3_1",5,1.351067417,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,3_4",13,3.512775283,2,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,4_2",12,3.2425618,2,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,4_4",1,0.270213483,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,4_5",2,0.540426967,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,5_1",1,0.270213483,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,5_2",3,0.81064045,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,5_3",2,0.540426967,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,6_3",1,0.270213483,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,7_2",3,0.81064045,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,7_4",6,1.6212809,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,8_1",2,0.540426967,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,8_4",7,1.891494383,2,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,8_6",2,0.540426967,2,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,1_3",3,0.81064045,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,1_4",11,2.972348317,2,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,11_1",3,0.81064045,2,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,12_2",7,1.891494383,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,12_3",2,0.540426967,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,12_4",9,2.43192135,2,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,13_1",3,0.81064045,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,2_1",3,0.81064045,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,2_2",6,1.6212809,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,2_3",8,2.161707867,2,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,2_4",6,1.6212809,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,3_1",2,0.540426967,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,3_6",2,0.540426967,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,4_1",5,1.351067417,2,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,4_2",3,0.81064045,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,4_4",5,1.351067417,2,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,6_1",15,4.05320225,2,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,8_2",1,0.270213483,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,8_6",3,0.81064045,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,8_7",5,1.351067417,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,9_1",8,2.161707867,2,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,9_3",5,1.351067417,2,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,3_1",6,1.6212809,2,1,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,4_1",1,0.270213483,2,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,4_2",9,2.43192135,2,1,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,4_3",1,0.270213483,2,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,5_3",4,1.080853933,2,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,5_4",5,1.351067417,2,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,6_2",7,1.891494383,2,1,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,7_1",3,0.81064045,2,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,7_2",12,3.2425618,2,1,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,8_1",5,1.351067417,2,1,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,9_2",2,0.540426967,2,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,9_3",1,0.270213483,2,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,9_4",3,0.81064045,2,1,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,1_1",1,0.270213483,2,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,1_2",6,1.6212809,2,2,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,10_4",3,0.81064045,2,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,10_5",2,0.540426967,2,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,11_1",7,1.891494383,2,2,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,11_3",6,1.6212809,2,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,11_6",12,3.2425618,2,2,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,12_1",2,0.540426967,2,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,2_4",3,0.81064045,2,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,2_7",2,0.540426967,2,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,2_8",6,1.6212809,2,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,4_2",2,0.540426967,2,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,4_3",11,2.972348317,2,2,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,6_3",4,1.080853933,2,2,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,9_3",6,1.6212809,2,2,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,1_2",24,6.4851236,2,3,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,10_1",7,1.891494383,2,3,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,3_1",2,0.540426967,2,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,3_2",3,0.81064045,2,3,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,4_2",9,2.43192135,2,3,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,4_4",5,1.351067417,2,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,4_7",1,0.270213483,2,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,5_1",13,3.512775283,2,3,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,5_3",3,0.81064045,2,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,6_3",3,0.81064045,2,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,6_5",4,1.080853933,2,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,9_6",3,0.81064045,2,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,1_3",3,0.81064045,2,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,1_5",6,1.6212809,2,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,1_6",3,0.81064045,2,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,11_1",8,2.161707867,2,4,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,11_2",17,4.593629217,2,4,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,11_3",3,0.81064045,2,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,11_4",3,0.81064045,2,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,2_1",5,1.351067417,2,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,2_2",10,2.702134833,2,4,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,4_4",6,1.6212809,2,4,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,6_1",6,1.6212809,2,4,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,7_1",7,1.891494383,2,4,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,7_2",1,0.270213483,2,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,7_3",3,0.81064045,2,4,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,8_4",3,0.81064045,2,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,8_6",2,0.540426967,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,10_1",4,0.914246014,2,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,10_2",1,0.228561504,2,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,12_1",2,0.540426967,2,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,12_2",6,1.6212809,2,1,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,3_2",4,1.080853933,2,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,3_4",6,1.6212809,2,1,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,5_1",5,1.351067417,2,1,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,7_1",12,3.2425618,2,1,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,9_1",11,2.514176539,2,1,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,10_1",16,4.323415733,2,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,10_2",21,5.67448315,2,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,10_3",52,14.05110113,2,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,10_4",19,5.134056183,2,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,10_5",12,3.2425618,2,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,11_1",50,13.51067417,2,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,11_2",13,3.512775283,2,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,11_3",5,1.351067417,2,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,11_5",17,3.518921473,2,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,11_6",9,2.43192135,2,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,11_7",15,4.05320225,2,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,12_1",22,5.944696633,2,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,12_2",6,1.6212809,2,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,12_4",12,3.2425618,2,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,13_2",22,5.944696633,2,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,4_1",3,0.81064045,2,2,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,5_2",6,1.6212809,2,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,9_1",61,16.48302248,2,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,9_4",28,7.565977534,2,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,1_1",30,8.1064045,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,10_1",8,2.161707867,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,10_2",8,2.161707867,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,10_4",6,1.6212809,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,2_1",4,1.080853933,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,3_2",31,8.376617984,2,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,3_3",39,10.53832585,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,3_5",22,5.944696633,2,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,4_2",7,1.891494383,2,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,4_3",7,1.891494383,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,4_5",6,1.6212809,2,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,4_6",20,5.404269667,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,4_7",8,2.161707867,2,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,5_2",8,2.161707867,2,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,5_3",16,4.323415733,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,5_7",8,2.161707867,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,6_2",9,2.43192135,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,7_1",5,1.531017777,2,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,7_2",32,8.646831467,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,7_3",10,2.846095122,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,8_1",5,1.351067417,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,8_2",6,1.6212809,2,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,8_3",11,3.36823911,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,9_1",17,4.593629217,2,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,9_3",5,1.351067417,2,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,9_4",3,0.918610666,2,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,1_1",18,4.8638427,2,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,1_2",16,4.323415733,2,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,10_1",13,3.512775283,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,10_5",16,4.323415733,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,10_6",5,1.351067417,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_11",4,1.080853933,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_2",22,5.944696633,2,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_3",11,2.972348317,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_5",7,1.891494383,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_6",1,0.270213483,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_7",10,2.702134833,2,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_9",3,0.81064045,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,12_2",5,1.351067417,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,13_1",10,2.702134833,2,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,13_3",13,3.512775283,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,3_1",11,2.972348317,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,3_2",13,3.512775283,2,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,3_4",7,1.891494383,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,3_5",13,3.512775283,2,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,5_1",7,1.891494383,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,5_2",20,5.404269667,2,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,5_4",12,3.2425618,2,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,6_1",4,1.080853933,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,6_2",2,0.540426967,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,6_3",6,1.6212809,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,6_6",1,0.270213483,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,7_1",13,3.512775283,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,7_3",14,3.782988767,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,8_1",12,3.2425618,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,8_2",31,8.376617984,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,8_8",4,1.080853933,2,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,9_2",5,1.351067417,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,11_3",5,1.351067417,2,1,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,11_4",1,0.270213483,2,1,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,12_1",2,0.540426967,2,1,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,12_2",4,1.080853933,2,1,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,2_4",3,0.81064045,2,1,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,6_1",1,0.270213483,2,1,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,6_2",3,0.81064045,2,1,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,6_3",2,0.540426967,2,1,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,9_2",2,0.540426967,2,1,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,10_2",30,8.1064045,2,2,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,11_2",8,2.161707867,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,11_6",4,1.080853933,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,12_1",2,0.540426967,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,12_3",2,0.540426967,2,2,4
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,12_4",5,1.531017777,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,2_2",3,0.81064045,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,2_4",7,1.891494383,2,2,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,6_1",10,2.702134833,2,2,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,6_5",2,0.540426967,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,7_1",9,2.43192135,2,2,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,7_2",5,1.387057489,2,2,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,7_3",5,1.531017777,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,7_4",4,1.080853933,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,7_5",7,1.891494383,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,7_6",7,1.891494383,2,2,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,7_7",1,0.270213483,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,9_1",4,1.080853933,2,2,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,1_2",2,0.474375597,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_4",8,2.161707867,2,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_8",1,0.270213483,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_9",3,0.81064045,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,11_1",1,0.270213483,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,11_2",2,0.540426967,2,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,13_3",7,1.891494383,2,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,3_3",3,0.81064045,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,3_4",6,1.6212809,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,5_2",3,0.81064045,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,5_5",2,0.540426967,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,5_6",2,0.540426967,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,6_1",7,1.891494383,2,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,7_5",2,0.540426967,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,7_6",4,1.080853933,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,7_7",3,0.81064045,2,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,7_9",13,3.512775283,2,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,1_1",1,0.270213483,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,10_1",4,1.080853933,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,12_1",14,3.782988767,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,12_2",3,0.81064045,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,12_3",2,0.540426967,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,12_5",1,0.270213483,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,13_1",8,2.161707867,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,13_2",1,0.270213483,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,2_1",34,9.187258434,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,2_10",8,2.161707867,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,2_2",26,7.025550567,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,2_3",7,1.891494383,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,2_4",4,1.080853933,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,2_6",5,1.351067417,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,2_8",5,1.351067417,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,3_2",32,8.646831467,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,3_3",5,1.351067417,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_1",4,1.080853933,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_10",3,0.81064045,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_11",4,1.080853933,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_2",12,3.2425618,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_3",25,6.755337083,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_6",15,4.05320225,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_9",4,1.080853933,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,5_1",5,1.351067417,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,5_2",7,1.891494383,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,5_3",6,1.6212809,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,6_3",3,0.81064045,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,6_4",18,4.8638427,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,6_5",16,4.323415733,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,7_1",9,2.43192135,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,7_2",3,0.81064045,2,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,8_1",3,0.81064045,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,8_2",2,0.540426967,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,9_1",1,0.270213483,2,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,9_2",4,1.080853933,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,11_1",7,1.891494383,2,1,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,3_1",10,2.702134833,2,1,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,3_3",8,2.161707867,2,1,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,4_2",2,0.540426967,2,1,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,6_1",8,2.161707867,2,1,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_1,6_2",5,1.351067417,2,1,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_2,10_1",4,1.080853933,2,2,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_2,3_1",5,1.351067417,2,2,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_2,3_2",6,1.6212809,2,2,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_2,9_3",3,0.81064045,2,2,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,1_1",3,0.81064045,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,11_3",8,2.161707867,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,11_4",6,1.6212809,2,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,12_2",1,0.270213483,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,12_5",1,0.270213483,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,2_1",1,0.270213483,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,2_3",1,0.270213483,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,3_1",12,3.2425618,2,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,3_4",7,1.891494383,2,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,4_2",8,2.161707867,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,4_5",12,3.2425618,2,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,5_1",2,0.540426967,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,6_1",2,0.540426967,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,6_4",8,2.161707867,2,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,7_3",7,1.891494383,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,7_6",1,0.270213483,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,8_4",5,1.351067417,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,9_2",4,1.080853933,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,9_3",5,1.351067417,2,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,11_1",5,1.351067417,2,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,12_1",2,0.540426967,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,12_2",5,1.351067417,2,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,3_1",7,1.891494383,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,3_5",2,0.540426967,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,4_1",10,2.702134833,2,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,4_2",2,0.540426967,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,5_3",2,0.540426967,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,6_1",7,1.891494383,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,6_2",6,1.6212809,2,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,7_5",2,0.540426967,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,8_1",5,1.351067417,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,9_1",10,2.702134833,2,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,9_3",4,1.080853933,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,9_4",2,0.540426967,2,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,9_6",3,0.81064045,2,4,1
+rl,rl_3_2,Siganus virgatus ,"rl_3_2_4,10_1",8,1.6212809,2,4,2
+rl,rl_3_2,Siganus virgatus ,"rl_3_2_4,10_2",1,1.080853933,2,4,1
+rl,rl_3_2,Siganus virgatus ,"rl_3_2_4,5_1",4,1.080853933,2,4,1
+rl,rl_3_2,Siganus virgatus ,"rl_3_2_4,5_2",2,0.540426967,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,1_1",4,1.080853933,2,1,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,10_1",2,0.540426967,2,1,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,10_2",3,0.81064045,2,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,10_3",2,0.540426967,2,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,10_4",1,0.270213483,2,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,12_2",1,0.270213483,2,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,12_3",5,1.351067417,2,1,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,3_2",11,2.972348317,2,1,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,5_2",3,0.81064045,2,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,5_3",6,1.6212809,2,1,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,7_1",9,2.43192135,2,1,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,7_2",9,2.43192135,2,1,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,8_2",7,1.891494383,2,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,8_3",8,2.161707867,2,1,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,1_1",3,0.81064045,2,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,1_2",5,1.351067417,2,2,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,1_3",3,0.81064045,2,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,10_1",2,0.540426967,2,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,10_3",4,1.080853933,2,2,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,11_2",6,1.6212809,2,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,2_2",8,2.161707867,2,2,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,2_4",3,0.81064045,2,2,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,4_3",15,4.05320225,2,2,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,5_1",11,2.972348317,2,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,5_2",9,2.43192135,2,2,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,7_1",3,0.81064045,2,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,7_2",6,1.6212809,2,2,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,8_1",11,2.972348317,2,2,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,8_5",2,0.540426967,2,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,9_2",8,2.161707867,2,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,1_1",3,0.81064045,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,1_2",2,0.540426967,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,10_1",9,2.43192135,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,10_2",9,2.43192135,2,3,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,10_5",6,1.6212809,2,3,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,12_1",1,0.270213483,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,12_2",6,1.6212809,2,3,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,2_2",8,2.161707867,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,2_3",2,0.540426967,2,3,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,2_4",2,0.540426967,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,3_2",6,1.6212809,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,4_7",7,1.891494383,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,6_1",2,0.540426967,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,6_2",4,1.080853933,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,6_5",2,0.540426967,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,9_3",4,1.080853933,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,9_7",5,1.351067417,2,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,1_5",1,0.270213483,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,10_3",5,1.351067417,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,11_2",1,0.270213483,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,2_1",3,0.81064045,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,2_2",12,3.2425618,2,4,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,2_3",3,0.81064045,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,2_5",5,1.351067417,2,4,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,3_2",8,2.161707867,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,3_5",5,1.351067417,2,4,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,4_2",1,0.270213483,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,4_3",5,1.351067417,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,6_1",4,1.080853933,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,6_4",4,1.080853933,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,6_5",1,0.270213483,2,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,9_1",3,0.81064045,2,4,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,9_7",9,2.43192135,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,12_1",6,1.6212809,2,1,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,12_2",3,0.81064045,2,1,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,4_2",6,1.6212809,2,1,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,4_3",6,1.6212809,2,1,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,5_4",1,0.270213483,2,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,6_3",3,0.81064045,2,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,6_4",2,0.540426967,2,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,6_5",2,0.540426967,2,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,7_1",5,1.351067417,2,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,7_2",2,0.540426967,2,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,7_3",2,0.540426967,2,1,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,8_1",6,1.6212809,2,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,10_2",8,2.161707867,2,2,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,11_1",5,1.351067417,2,2,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,11_2",7,1.891494383,2,2,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,11_3",3,0.81064045,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,11_4",4,1.080853933,2,2,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,2_1",2,0.540426967,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,2_4",1,0.270213483,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,2_5",5,1.351067417,2,2,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,4_1",10,2.702134833,2,2,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,4_4",3,0.81064045,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,4_6",4,1.080853933,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,6_1",5,1.351067417,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,6_2",14,3.782988767,2,2,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,6_3",2,0.540426967,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,6_5",5,1.351067417,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,6_9",6,1.6212809,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,8_1",4,1.080853933,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,8_2",6,1.6212809,2,2,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,9_4",3,0.81064045,2,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,10_2",3,0.81064045,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,10_3",8,2.161707867,2,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,12_1",1,0.270213483,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,12_2",8,2.161707867,2,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,2_1",17,4.593629217,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,2_2",4,1.080853933,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,2_3",9,2.43192135,2,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,2_6",4,1.080853933,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,3_1",3,0.81064045,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,3_2",6,1.6212809,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,3_4",7,1.891494383,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,3_6",6,1.6212809,2,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,3_9",5,1.351067417,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,4_1",9,2.43192135,2,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,5_1",3,0.81064045,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,5_2",6,1.6212809,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,5_3",2,0.540426967,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,6_1",3,0.81064045,2,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,7_1",10,2.702134833,2,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,7_2",8,2.161707867,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,7_4",1,0.270213483,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,9_1",8,2.161707867,2,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,9_3",7,1.891494383,2,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,10_2",4,1.080853933,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,11_1",4,1.080853933,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,12_1",3,0.81064045,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,12_3",1,0.270213483,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,2_1",12,3.2425618,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,2_2",15,4.05320225,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,2_3",14,3.782988767,2,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,2_6",10,2.702134833,2,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,2_7",7,1.891494383,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,3_2",5,1.351067417,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,3_3",19,5.134056183,2,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,3_6",13,3.512775283,2,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,4_1",19,5.134056183,2,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,4_2",2,0.540426967,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,5_3",2,0.540426967,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,5_4",7,1.891494383,2,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,7_1",4,1.080853933,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,7_4",14,3.782988767,2,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,7_5",5,1.351067417,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,9_3",3,0.81064045,2,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,9_4",16,4.323415733,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_1,12_1",2,0.540426967,2,1,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_1,12_2",3,0.81064045,2,1,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_1,7_1",3,0.81064045,2,1,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_1,7_2",2,0.540426967,2,1,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_1,7_3",4,1.080853933,2,1,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,1_3",8,2.161707867,2,2,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,10_1",3,0.81064045,2,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,11_1",7,1.891494383,2,2,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,4_1",5,1.351067417,2,2,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,4_3",13,3.512775283,2,2,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,4_4",2,0.540426967,2,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,7_1",5,1.351067417,2,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,8_3",2,0.540426967,2,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,1_2",3,0.81064045,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,1_3",7,1.891494383,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,10_1",31,8.376617984,2,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_1",4,1.080853933,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_12",4,1.080853933,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_13",2,0.540426967,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_5",46,12.42982023,2,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_6",19,5.134056183,2,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,12_2",9,2.43192135,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,12_3",6,1.6212809,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,13_1",7,1.891494383,2,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,2_1",8,2.161707867,2,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,4_1",8,2.161707867,2,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,4_2",4,1.080853933,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,6_2",3,0.81064045,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,6_4",33,8.91704495,2,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,6_7",6,1.6212809,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,7_1",13,3.512775283,2,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,7_2",3,0.81064045,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,7_5",4,1.080853933,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,7_6",2,0.540426967,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,8_1",3,0.81064045,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,8_2",1,0.270213483,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,8_3",2,0.540426967,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,9_1",2,0.540426967,2,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,9_2",10,2.702134833,2,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,1_2",7,1.891494383,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,1_3",4,1.080853933,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,10_1",25,6.755337083,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,10_2",7,1.891494383,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,11_2",6,1.6212809,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,11_3",14,3.782988767,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,12_1",3,0.81064045,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,12_2",5,1.351067417,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,13_1",11,2.972348317,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,13_2",5,1.351067417,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,13_3",5,1.351067417,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,2_1",3,0.81064045,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,2_3",28,7.565977534,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,2_5",12,3.2425618,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,2_6",8,2.161707867,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,2_8",4,1.080853933,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,4_10",2,0.540426967,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,4_3",8,2.161707867,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,4_4",3,0.81064045,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,4_5",17,4.593629217,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,4_6",8,2.161707867,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,5_2",5,1.351067417,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,5_3",5,1.351067417,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,6_2",9,2.43192135,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,6_3",1,0.270213483,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,7_1",12,3.2425618,2,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,7_2",6,1.6212809,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,8_1",1,0.270213483,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,8_2",3,0.81064045,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,8_3",2,0.540426967,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,9_2",9,2.43192135,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,9_3",4,1.080853933,2,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,9_5",12,3.2425618,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,1_1",6,1.6212809,2,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,10_1",8,2.161707867,2,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,11_3",3,0.81064045,2,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,2_2",2,0.540426967,2,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,2_3",8,2.161707867,2,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,2_4",5,1.351067417,2,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,4_1",2,0.540426967,2,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,5_1",4,1.080853933,2,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,5_4",6,1.6212809,2,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,5_5",3,0.81064045,2,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,7_2",5,1.351067417,2,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,7_8",8,2.161707867,2,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,8_3",11,2.972348317,2,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,8_4",5,1.351067417,2,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,1_1",9,2.43192135,2,2,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,11_1",10,2.702134833,2,2,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,11_2",2,0.540426967,2,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,7_1",5,1.351067417,2,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,7_2",2,0.540426967,2,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,8_2",8,2.161707867,2,2,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,9_1",2,0.540426967,2,2,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,9_2",5,1.351067417,2,2,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,1_2",2,0.540426967,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,1_4",17,4.593629217,2,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,1_7",3,0.81064045,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,10_1",4,1.080853933,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,11_2",4,1.080853933,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,12_3",3,0.81064045,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,2_1",12,3.2425618,2,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,2_11",21,5.67448315,2,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,2_2",12,3.2425618,2,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,2_5",5,1.531017777,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,2_7",6,1.6212809,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,3_1",40,10.80853933,2,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,4_2",12,3.674442666,2,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,4_7",25,6.755337083,2,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,6_1",5,1.351067417,2,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,6_2",2,0.540426967,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,6_3",1,0.270213483,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,7_3",3,0.81064045,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,9_2",4,1.080853933,2,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,9_3",3,0.81064045,2,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,1_1",12,3.2425618,2,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,10_1",16,4.323415733,2,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,10_2",6,1.6212809,2,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,12_1",5,1.351067417,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,12_2",3,0.81064045,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,12_5",9,2.43192135,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,13_1",17,4.593629217,2,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,2_1",21,5.67448315,2,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,2_5",3,0.81064045,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,2_7",6,1.6212809,2,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,3_1",4,1.080853933,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,4_12",3,0.81064045,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,4_2",4,1.080853933,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,4_3",2,0.540426967,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,4_7",6,1.6212809,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,5_4",14,3.782988767,2,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,6_1",7,1.891494383,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,6_2",30,8.1064045,2,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,6_4",18,4.8638427,2,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,7_3",1,0.270213483,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,7_4",2,0.540426967,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,8_1",16,4.323415733,2,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,8_2",3,0.81064045,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,9_1",11,2.972348317,2,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,9_2",7,1.891494383,2,4,1
+ks,ks_2_2,Kyphosus vaigiensis ,"ks_2_2_3,10_1",11,6.736587132,3,3,2
+ks,ks_6_1,Kyphosus vaigiensis ,"ks_6_1_4,9_1",17,8.443020781,3,4,3
+ks,ks_6_1,Kyphosus vaigiensis ,"ks_6_1_4,9_2",14,6.953075938,3,4,2
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_3,7_1",6,2.979889688,3,3,1
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_3,7_2",15,7.449724219,3,3,3
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_3,7_4",5,2.483241406,3,3,1
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_4,8_1",4,1.986593125,3,4,1
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_4,8_2",15,7.449724219,3,4,3
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_4,8_6",15,7.449724219,3,4,2
+rl,rl_1_2,Kyphosus vaigiensis ,"rl_1_2_3,8_2",4,1.986593125,3,3,1
+rl,rl_3_1,Kyphosus vaigiensis ,"rl_3_1_3,5_2",3,2.235073115,3,3,1
+rl,rl_3_1,Kyphosus vaigiensis ,"rl_3_1_3,8_5",6,4.470146229,3,3,1
+rl,rl_3_1,Kyphosus vaigiensis ,"rl_3_1_4,5_2",7,5.215170601,3,4,1
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_3,3_1",9,6.705219344,3,3,2
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_3,3_3",6,4.470146229,3,3,1
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_3,3_4",3,2.235073115,3,3,1
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_4,3_2",5,3.725121858,3,4,2
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_4,4_7",13,9.685316831,3,4,2
+rl,rl_7_2,Kyphosus vaigiensis ,"rl_7_2_3,2_4",3,2.235073115,3,3,1
+rl,rl_7_2,Kyphosus vaigiensis ,"rl_7_2_3,2_6",13,9.685316831,3,3,3
+rl,rl_7_2,Kyphosus vaigiensis ,"rl_7_2_4,2_3",10,7.450243716,3,4,3
+rl,rl_1_1,Scarus ghobban ,"rl_1_1_4,8_5",3,1.536494233,3,4,2
+rl,rl_1_2,Scarus ghobban ,"rl_1_2_1,2_3",1,0.891661159,3,1,1
+rl,rl_1_2,Scarus ghobban ,"rl_1_2_2,10_4",3,1.869675697,3,2,1
+rl,rl_1_2,Scarus ghobban ,"rl_1_2_4,3_5",2,1.024329489,3,4,3
+rl,rl_3_1,Scarus ghobban ,"rl_3_1_3,3_3",3,2.674983477,3,3,2
+rl,rl_3_1,Scarus ghobban ,"rl_3_1_4,3_3",3,2.674983477,3,4,2
+rl,rl_5_1,Scarus ghobban ,"rl_5_1_1,4_1",1,0.623225232,3,1,1
+rl,rl_5_1,Scarus ghobban ,"rl_5_1_2,4_1",2,1.246450465,3,2,1
+rl,rl_7_2,Scarus ghobban ,"rl_7_2_3,3_5",3,2.455365344,3,3,1
+rl,rl_7_2,Scarus ghobban ,"rl_7_2_4,4_1",1,0.891661159,3,4,1
+rl,rl_7_2,Scarus ghobban ,"rl_7_2_4,7_1",3,2.248187794,3,4,1
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_1,9_1",1,0.528548602,3,1,1
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_1,9_2",3,1.585645807,3,1,2
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_2,12_1",5,2.351785022,3,2,1
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_2,5_1",5,2.08330687,3,2,2
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_2,5_2",2,0.833322748,3,2,1
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_3,11_1",7,3.699840216,3,3,3
+ks,ks_4_1,Scarus rivulatus,"ks_4_1_4,12_1",2,0.561342188,3,4,1
+ks,ks_4_1,Scarus rivulatus,"ks_4_1_4,12_2",4,1.122684375,3,4,1
+ks,ks_4_2,Scarus rivulatus,"ks_4_2_3,9_1",7,1.964697656,3,3,3
+ks,ks_6_1,Scarus rivulatus,"ks_6_1_3,10_1",2,0.734546897,3,3,1
+ks,ks_6_1,Scarus rivulatus,"ks_6_1_3,8_1",4,1.122684375,3,3,1
+ks,ks_6_1,Scarus rivulatus,"ks_6_1_3,8_4",4,1.122684375,3,3,2
+ks,ks_6_1,Scarus rivulatus,"ks_6_1_4,10_1",2,0.561342188,3,4,1
+ks,ks_6_1,Scarus rivulatus,"ks_6_1_4,10_3",1,0.280671094,3,4,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_2,2_1",4,1.469093793,3,2,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_2,6_1",3,1.101820345,3,2,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_3,6_1",5,1.836367242,3,3,2
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_3,6_2",1,0.367273448,3,3,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_3,8_1",5,1.836367242,3,3,2
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_4,10_2",4,0.836231814,3,4,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_1,5_1",1,0.209057954,3,1,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_1,5_2",6,1.254347721,3,1,2
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_1,9_2",1,0.209057954,3,1,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_1,9_3",5,1.045289768,3,1,2
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_1,9_4",1,0.209057954,3,1,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_3,12_1",9,2.526039844,3,3,3
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_3,13_1",8,2.24536875,3,3,2
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_3,2_1",9,2.526039844,3,3,2
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_4,3_4",4,1.122684375,3,4,2
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_2,11_4",3,1.101820345,3,2,2
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_2,4_4",3,0.452862958,3,2,1
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_2,6_1",7,1.056680235,3,2,2
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_3,11_1",5,1.403355469,3,3,2
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_3,6_6",2,0.561342188,3,3,1
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_3,8_1",6,1.684026563,3,3,3
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_4,1_1",3,1.101820345,3,4,1
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_4,4_2",4,1.122684375,3,4,1
+rl,rl_1_2,Scarus rivulatus,"rl_1_2_3,2_1",1,0.73199157,3,3,1
+rl,rl_1_2,Scarus rivulatus,"rl_1_2_3,3_1",4,2.92796628,3,3,1
+rl,rl_1_2,Scarus rivulatus,"rl_1_2_3,5_1",4,3.574320669,3,3,1
+rl,rl_1_2,Scarus rivulatus,"rl_1_2_4,1_3",4,1.881428017,3,4,1
+rl,rl_5_2,Scarus rivulatus,"rl_5_2_2,3_3",4,1.881428017,3,2,1
+rl,rl_7_1,Scarus rivulatus,"rl_7_1_4,9_1",5,1.836367242,3,4,2
+ks,ks_8_1,Siganus  punctatus,"ks_8_1_1,8_1",3,0.760867007,3,1,1
+ks,ks_8_2,Siganus  punctatus,"ks_8_2_4,12_1",3,0.760867007,3,4,1
+ks,ks_2_1,Siganus canaliculatus,"ks_2_1_2,1_1",3,0.843941124,3,2,1
+ks,ks_2_2,Siganus canaliculatus,"ks_2_2_1,6_1",3,0.843941124,3,1,1
+ks,ks_2_2,Siganus canaliculatus,"ks_2_2_1,8_1",4,1.125254832,3,1,1
+ks,ks_2_2,Siganus canaliculatus,"ks_2_2_2,7_3",4,1.125254832,3,2,1
+ks,ks_2_2,Siganus canaliculatus,"ks_2_2_3,6_2",5,1.40656854,3,3,1
+ks,ks_4_1,Siganus canaliculatus,"ks_4_1_2,4_2",9,2.531823372,3,2,2
+ks,ks_4_1,Siganus canaliculatus,"ks_4_1_2,9_1",2,0.639165478,3,2,1
+ks,ks_6_1,Siganus canaliculatus,"ks_6_1_2,3_1",8,2.250509664,3,2,2
+ks,ks_6_2,Siganus canaliculatus,"ks_6_2_3,2_2",3,0.843941124,3,3,1
+ks,ks_8_1,Siganus canaliculatus,"ks_8_1_3,1_2",6,1.687882248,3,3,3
+ks,ks_8_2,Siganus canaliculatus,"ks_8_2_2,2_1",3,0.843941124,3,2,1
+ks,ks_8_2,Siganus canaliculatus,"ks_8_2_2,2_2",2,0.562627416,3,2,1
+ks,ks_2_1,Siganus javus,"ks_2_1_3,6_1",3,0.64300862,3,3,1
+ks,ks_2_1,Siganus javus,"ks_2_1_3,6_2",2,0.428672413,3,3,1
+ks,ks_2_1,Siganus javus,"ks_2_1_4,1_1",3,0.64300862,3,4,1
+ks,ks_2_1,Siganus javus,"ks_2_1_4,6_1",4,0.857344827,3,4,2
+ks,ks_2_2,Siganus javus,"ks_2_2_2,8_4",6,1.28601724,3,2,2
+ks,ks_4_1,Siganus javus,"ks_4_1_2,2_4",4,0.857344827,3,2,2
+ks,ks_4_1,Siganus javus,"ks_4_1_2,5_1",3,0.64300862,3,2,1
+ks,ks_4_1,Siganus javus,"ks_4_1_2,5_4",5,1.071681033,3,2,1
+ks,ks_4_1,Siganus javus,"ks_4_1_2,7_2",8,1.347211051,3,2,3
+ks,ks_4_1,Siganus javus,"ks_4_1_3,1_5",7,1.500353447,3,3,2
+ks,ks_4_1,Siganus javus,"ks_4_1_3,12_1",5,1.071681033,3,3,1
+ks,ks_4_1,Siganus javus,"ks_4_1_3,7_3",20,4.286724134,3,3,3
+ks,ks_4_1,Siganus javus,"ks_4_1_4,5_3",3,0.387905896,3,4,1
+ks,ks_4_2,Siganus javus,"ks_4_2_2,10_3",3,0.505204144,3,2,1
+ks,ks_4_2,Siganus javus,"ks_4_2_2,5_1",5,0.842006907,3,2,2
+ks,ks_4_2,Siganus javus,"ks_4_2_4,3_2",2,0.336802763,3,4,1
+ks,ks_6_1,Siganus javus,"ks_6_1_1,3_1",6,1.010408288,3,1,2
+ks,ks_6_1,Siganus javus,"ks_6_1_1,9_3",2,0.336802763,3,1,1
+ks,ks_6_1,Siganus javus,"ks_6_1_2,1_1",6,1.010408288,3,2,2
+ks,ks_6_1,Siganus javus,"ks_6_1_2,6_2",11,1.852415195,3,2,3
+ks,ks_6_1,Siganus javus,"ks_6_1_4,1_5",5,0.482764544,3,4,2
+ks,ks_6_2,Siganus javus,"ks_6_2_2,5_1",6,0.775811793,3,2,2
+ks,ks_6_2,Siganus javus,"ks_6_2_3,3_7",4,0.517207862,3,3,1
+ks,ks_6_2,Siganus javus,"ks_6_2_4,1_4",4,0.673605525,3,4,3
+ks,ks_8_1,Siganus javus,"ks_8_1_2,9_1",3,0.505204144,3,2,3
+ks,ks_8_1,Siganus javus,"ks_8_1_4,12_1",1,0.168401381,3,4,1
+ks,ks_8_1,Siganus javus,"ks_8_1_4,6_2",3,0.505204144,3,4,1
+ks,ks_8_2,Siganus javus,"ks_8_2_1,11_1",1,0.168401381,3,1,1
+rl,rl_1_2,Siganus javus,"rl_1_2_3,11_3",2,0.480031435,3,3,1
+rl,rl_1_2,Siganus javus,"rl_1_2_4,8_3",3,0.720047152,3,4,3
+rl,rl_5_1,Siganus javus,"rl_5_1_4,3_3",2,0.428672413,3,4,1
+rl,rl_5_2,Siganus javus,"rl_5_2_2,6_7",3,0.720047152,3,2,1
+rl,rl_7_1,Siganus javus,"rl_7_1_3,1_4",5,1.200078587,3,3,1
+rl,rl_7_1,Siganus javus,"rl_7_1_4,1_5",5,1.200078587,3,4,2
+rl,rl_7_1,Siganus javus,"rl_7_1_4,6_4",6,1.440094304,3,4,2
+rl,rl_7_2,Siganus javus,"rl_7_2_3,1_1",5,1.071681033,3,3,1
+rl,rl_7_2,Siganus javus,"rl_7_2_4,1_2",5,1.071681033,3,4,1
+rl,rl_7_2,Siganus javus,"rl_7_2_4,9_3",4,0.96006287,3,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,11_4",5,1.351067417,3,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,11_5",7,1.891494383,3,1,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,12_2",5,1.351067417,3,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,5_6",4,1.080853933,3,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_1,8_1",4,1.080853933,3,1,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,10_4",7,1.891494383,3,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,11_1",15,4.05320225,3,2,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,3_1",7,1.891494383,3,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,3_3",1,0.270213483,3,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,7_3",11,2.972348317,3,2,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,8_3",4,1.080853933,3,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,8_4",8,2.161707867,3,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,8_7",9,2.43192135,3,2,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,9_3",8,2.161707867,3,2,3
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,4_2",3,0.81064045,3,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,4_4",2,0.540426967,3,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,5_6",5,1.351067417,3,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,6_2",3,0.81064045,3,3,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,8_5",11,2.972348317,3,3,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_3,9_4",4,1.080853933,3,3,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,11_6",4,1.080853933,3,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,2_3",7,1.891494383,3,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,5_2",1,0.270213483,3,4,1
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,5_4",16,4.323415733,3,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_4,9_1",9,2.43192135,3,4,3
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,2_4",4,1.080853933,3,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,4_2",4,1.080853933,3,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,5_1",10,2.702134833,3,2,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_2,5_4",2,0.540426967,3,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,1_4",7,1.891494383,3,3,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,10_3",18,4.8638427,3,3,3
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_3,6_2",6,1.6212809,3,3,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,11_3",9,2.43192135,3,4,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,3_4",7,1.891494383,3,4,2
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,5_3",11,2.972348317,3,4,2
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,10_4",4,1.080853933,3,3,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_3,5_3",12,3.2425618,3,3,2
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_4,10_2",3,0.81064045,3,4,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_4,4_3",5,1.351067417,3,4,2
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_4,9_2",1,0.270213483,3,4,1
+ks,ks_4_2,Siganus virgatus ,"ks_4_2_4,9_3",8,2.161707867,3,4,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,13_5",4,1.080853933,3,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,13_6",2,0.540426967,3,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,3_1",2,0.540426967,3,2,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,9_2",9,2.43192135,3,2,3
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,1_4",4,1.080853933,3,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,11_3",3,0.81064045,3,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,11_4",2,0.540426967,3,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,3_2",22,5.944696633,3,3,3
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,3_4",7,1.891494383,3,3,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_3,8_1",5,1.351067417,3,3,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,1_6",2,0.540426967,3,4,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,11_1",10,2.702134833,3,4,3
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,12_3",16,4.323415733,3,4,3
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,3_2",5,1.351067417,3,4,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,4_1",16,4.323415733,3,4,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_4,7_2",6,1.6212809,3,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,10_3",6,1.6212809,3,2,3
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,8_2",6,1.6212809,3,2,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,1_2",1,0.270213483,3,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,1_3",9,2.43192135,3,3,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,1_4",10,2.702134833,3,3,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,10_2",11,2.972348317,3,3,3
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,10_5",4,1.080853933,3,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,12_1",6,1.6212809,3,3,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,2_2",4,1.080853933,3,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,3_6",7,1.891494383,3,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_3,3_7",10,2.702134833,3,3,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,1_4",3,0.81064045,3,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,12_1",8,2.161707867,3,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,12_2",9,2.43192135,3,4,3
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,2_1",12,3.2425618,3,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,2_4",8,2.161707867,3,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,3_4",10,2.702134833,3,4,2
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,5_2",9,2.43192135,3,4,3
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,6_1",7,1.891494383,3,4,3
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,7_4",2,0.540426967,3,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,8_1",5,1.351067417,3,4,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,8_6",8,2.161707867,3,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,5_1",3,0.81064045,3,1,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_1,5_2",2,0.540426967,3,1,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,2_1",7,1.891494383,3,2,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,2_2",8,2.161707867,3,2,3
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,3_1",8,2.161707867,3,2,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,5_1",1,0.270213483,3,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,5_5",10,2.702134833,3,2,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,6_2",1,0.270213483,3,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,6_3",2,0.540426967,3,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,8_3",2,0.540426967,3,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,8_4",8,2.161707867,3,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_2,9_1",3,0.81064045,3,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,1_2",2,0.540426967,3,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,10_4",7,1.891494383,3,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,10_5",3,0.81064045,3,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,11_3",5,1.351067417,3,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,11_5",20,5.404269667,3,3,3
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,11_7",8,2.161707867,3,3,3
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,3_2",1,0.270213483,3,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,4_3",19,5.134056183,3,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,6_2",10,2.702134833,3,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,7_3",7,1.891494383,3,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,8_2",4,1.080853933,3,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,8_5",3,0.81064045,3,3,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,10_1",3,0.81064045,3,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,11_2",5,1.351067417,3,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,12_5",5,1.351067417,3,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,12_6",4,1.080853933,3,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,2_5",11,2.972348317,3,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,3_4",4,1.080853933,3,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,6_3",2,0.540426967,3,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,6_4",3,0.81064045,3,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,8_1",5,1.351067417,3,4,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,8_5",16,4.323415733,3,4,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,8_9",3,0.81064045,3,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,11_7",5,1.351067417,3,2,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,4_5",12,3.2425618,3,2,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_2,6_2",13,3.512775283,3,2,3
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,3_3",11,2.972348317,3,3,3
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,4_5",19,5.134056183,3,3,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,4_6",2,0.540426967,3,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,5_4",1,0.270213483,3,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,5_5",5,1.351067417,3,3,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,6_6",5,1.351067417,3,3,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,9_4",5,1.351067417,3,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_3,9_5",2,0.540426967,3,3,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,1_4",4,1.080853933,3,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,1_8",3,0.81064045,3,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,4_1",10,2.702134833,3,4,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,6_3",6,1.6212809,3,4,1
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_4,8_5",5,1.351067417,3,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_1,4_1",10,2.702134833,3,1,3
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,7_2",7,1.891494383,3,2,3
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,9_2",32,8.646831467,3,2,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,1_2",31,8.376617984,3,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,1_3",10,2.371877986,3,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,12_1",9,2.43192135,3,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,3_1",13,3.512775283,3,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,3_6",15,4.05320225,3,3,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,4_1",25,6.755337083,3,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,4_4",21,5.67448315,3,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,5_1",35,9.457471917,3,3,3
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,8_4",15,4.05320225,3,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_10",44,11.88939327,3,4,3
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_8",7,1.891494383,3,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,12_1",8,2.161707867,3,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,12_3",11,2.972348317,3,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,12_5",7,1.891494383,3,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,13_2",4,1.080853933,3,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,3_3",29,7.836191017,3,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,5_3",10,2.702134833,3,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,5_5",10,2.702134833,3,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,7_2",11,2.972348317,3,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,8_4",19,5.134056183,3,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,8_5",48,12.9702472,3,4,3
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,8_9",13,3.512775283,3,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,9_3",30,8.1064045,3,4,3
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_1,9_1",5,1.351067417,3,1,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,11_3",11,2.972348317,3,2,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,11_4",21,5.67448315,3,2,3
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,12_2",13,3.6207455,3,2,3
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,2_3",10,2.702134833,3,2,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,9_2",18,4.8638427,3,2,3
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_1",16,4.323415733,3,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_11",6,1.6212809,3,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_7",5,1.351067417,3,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,11_3",1,0.270213483,3,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,12_3",13,3.512775283,3,3,3
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,13_5",3,0.81064045,3,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,3_5",9,2.43192135,3,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,5_1",2,0.540426967,3,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,5_3",2,0.540426967,3,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,5_4",9,2.43192135,3,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,6_2",12,3.2425618,3,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,6_3",14,3.782988767,3,3,3
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,7_8",5,1.351067417,3,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,8_2",5,1.351067417,3,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,8_3",11,2.972348317,3,3,3
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,9_1",7,1.891494383,3,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,9_2",9,2.43192135,3,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,10_5",5,1.351067417,3,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,10_6",2,0.540426967,3,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,12_4",5,1.351067417,3,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,2_7",15,4.05320225,3,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,3_1",13,3.512775283,3,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,3_4",8,2.161707867,3,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_4",8,2.161707867,3,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_5",6,1.6212809,3,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_8",13,3.512775283,3,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,6_1",7,1.891494383,3,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,8_3",10,2.702134833,3,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,8_4",6,1.6212809,3,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,12_3",7,1.891494383,3,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,12_4",2,0.540426967,3,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,2_2",12,3.2425618,3,3,3
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,3_3",1,0.270213483,3,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,4_1",17,4.593629217,3,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,4_3",4,1.080853933,3,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,5_2",5,1.351067417,3,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,6_2",3,0.81064045,3,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,6_3",4,1.080853933,3,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,7_5",2,0.540426967,3,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,8_1",12,3.2425618,3,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,8_3",5,1.351067417,3,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,8_5",3,0.81064045,3,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,9_4",2,0.540426967,3,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,1_1",2,0.540426967,3,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,2_1",2,0.540426967,3,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,3_2",8,2.161707867,3,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,3_3",3,0.81064045,3,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,4_3",1,0.270213483,3,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,4_8",29,7.836191017,3,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,4_9",27,7.29576405,3,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,5_1",5,1.351067417,3,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,7_3",3,0.81064045,3,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,7_4",4,1.080853933,3,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,8_2",5,1.351067417,3,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,8_5",8,2.161707867,3,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,9_2",5,1.351067417,3,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,9_5",3,0.81064045,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,4_2",6,1.6212809,3,1,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,4_3",3,0.81064045,3,1,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_1,7_3",5,1.351067417,3,1,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,2_3",2,0.540426967,3,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,4_2",4,1.080853933,3,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,4_4",12,3.2425618,3,2,3
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_2,5_4",1,0.270213483,3,2,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,1_4",7,1.891494383,3,3,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,10_3",24,6.4851236,3,3,3
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,10_4",7,1.891494383,3,3,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,2_1",11,2.972348317,3,3,3
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,3_4",2,0.540426967,3,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,3_5",2,0.540426967,3,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,4_6",14,3.782988767,3,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,5_1",4,1.080853933,3,3,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,6_3",22,5.944696633,3,3,3
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,8_2",25,6.755337083,3,3,3
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,8_3",8,2.161707867,3,3,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,9_5",1,0.270213483,3,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,1_3",8,2.161707867,3,4,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,10_2",4,1.080853933,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,10_5",3,0.81064045,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,11_1",3,0.81064045,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,11_3",5,1.351067417,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,11_4",2,0.540426967,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,12_2",2,0.540426967,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,2_4",9,2.43192135,3,4,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,2_7",1,0.270213483,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,3_3",7,1.891494383,3,4,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,3_4",5,1.351067417,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,4_4",1,0.270213483,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,6_3",12,3.2425618,3,4,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,6_6",10,2.702134833,3,4,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,6_7",15,4.05320225,3,4,3
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,6_8",8,2.161707867,3,4,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,9_3",3,0.81064045,3,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,9_5",8,2.161707867,3,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,10_1",19,5.134056183,3,1,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,10_2",3,0.81064045,3,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,6_6",1,0.270213483,3,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_1,8_2",2,0.540426967,3,1,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,3_3",2,0.540426967,3,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,4_3",4,1.080853933,3,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,4_5",2,0.540426967,3,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,5_2",3,0.81064045,3,2,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,6_7",9,2.43192135,3,2,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_2,9_1",15,4.05320225,3,2,3
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,2_4",5,1.351067417,3,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,2_5",20,5.404269667,3,3,3
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,3_3",5,1.351067417,3,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,4_2",5,1.351067417,3,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,5_4",7,1.891494383,3,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,6_3",2,0.540426967,3,3,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,7_3",11,2.972348317,3,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_3,9_2",7,1.891494383,3,3,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,10_1",3,0.81064045,3,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,10_3",8,2.161707867,3,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,12_2",7,1.891494383,3,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,2_4",10,2.702134833,3,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,2_5",38,10.26811237,3,4,3
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,2_8",8,2.161707867,3,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,3_4",19,5.134056183,3,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,3_7",10,2.702134833,3,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,4_3",5,1.351067417,3,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,4_4",3,0.81064045,3,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,7_3",10,2.702134833,3,4,2
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,7_6",2,0.540426967,3,4,1
+rl,rl_5_2,Siganus virgatus ,"rl_5_2_4,9_2",4,1.080853933,3,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,7_2",5,1.351067417,3,2,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,7_3",7,1.891494383,3,2,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,8_2",4,1.080853933,3,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_2,8_4",3,0.81064045,3,2,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,1_1",9,2.43192135,3,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,1_4",8,2.161707867,3,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,10_2",10,2.702134833,3,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,10_3",7,1.891494383,3,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_10",3,0.81064045,3,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_11",5,1.351067417,3,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_2",6,1.6212809,3,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_3",3,0.81064045,3,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_4",7,1.891494383,3,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_7",24,6.4851236,3,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,2_2",7,1.891494383,3,3,3
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,2_3",8,2.161707867,3,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,5_1",11,2.972348317,3,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,5_5",12,3.2425618,3,3,3
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,6_1",11,2.972348317,3,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,6_8",9,2.43192135,3,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,6_9",5,1.351067417,3,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,7_3",3,0.81064045,3,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,7_4",2,0.540426967,3,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,10_4",28,7.565977534,3,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,10_5",4,1.080853933,3,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,10_6",2,0.540426967,3,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,2_2",7,1.891494383,3,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,2_7",11,2.972348317,3,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,4_9",9,2.43192135,3,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,5_4",23,6.214910117,3,4,3
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,5_5",23,6.214910117,3,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,6_6",5,1.351067417,3,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,7_3",7,1.891494383,3,4,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,7_4",2,0.540426967,3,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,9_1",3,0.81064045,3,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,9_6",4,1.080853933,3,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,10_2",4,1.080853933,3,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,4_2",7,1.891494383,3,1,3
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,7_4",12,3.2425618,3,1,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_1,7_5",4,1.080853933,3,1,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,11_3",4,1.080853933,3,2,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,6_2",5,1.351067417,3,2,3
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,7_5",3,0.81064045,3,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,8_4",5,1.351067417,3,2,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,8_5",22,5.944696633,3,2,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,1_6",13,3.512775283,3,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,1_8",6,1.6212809,3,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,11_1",10,2.702134833,3,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,11_3",8,2.161707867,3,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,12_1",6,1.6212809,3,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,12_2",15,4.05320225,3,3,3
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,2_3",41,11.07875282,3,3,3
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,2_8",48,12.9702472,3,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,3_3",7,1.891494383,3,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,3_4",12,3.530482377,3,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,3_7",26,7.025550567,3,3,3
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,3_8",10,3.062035555,3,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,4_1",10,2.702134833,3,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,4_5",3,0.81064045,3,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,4_6",15,4.05320225,3,3,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,7_2",1,0.270213483,3,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,9_1",1,0.270213483,3,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,1_5",8,2.161707867,3,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,11_2",6,1.6212809,3,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,11_3",20,5.404269667,3,4,3
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,12_3",6,1.6212809,3,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,12_4",11,2.972348317,3,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,13_2",4,1.080853933,3,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,2_2",3,0.81064045,3,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,2_6",26,7.025550567,3,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,4_13",6,1.6212809,3,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,4_4",3,0.81064045,3,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,4_9",10,2.702134833,3,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,5_1",69,18.64473035,3,4,3
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,5_2",13,3.512775283,3,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,5_3",52,14.05110113,3,4,3
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,8_3",7,1.891494383,3,4,2
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,9_3",5,1.351067417,3,4,3
+ks,ks_6_1,Kyphosus vaigiensis ,"ks_6_1_4,5_1",20,11.05001102,4,4,4
+rl,rl_3_1,Kyphosus vaigiensis ,"rl_3_1_4,5_4",3,2.235073115,4,4,1
+rl,rl_3_1,Kyphosus vaigiensis ,"rl_3_1_4,5_5",2,1.490048743,4,4,1
+rl,rl_3_1,Kyphosus vaigiensis ,"rl_3_1_4,8_4",11,8.195268087,4,4,3
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_3,4_5",13,9.685316831,4,3,2
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_3,4_6",3,2.235073115,4,3,1
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_4,3_1",17,12.66541432,4,4,3
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_4,4_8",11,8.195268087,4,4,3
+rl,rl_1_1,Scarus ghobban ,"rl_1_1_4,6_4",2,1.246450465,4,4,1
+rl,rl_1_2,Scarus ghobban ,"rl_1_2_4,1_2",5,2.560823722,4,4,4
+rl,rl_3_2,Scarus ghobban ,"rl_3_2_1,9_1",3,1.869675697,4,1,1
+rl,rl_5_1,Scarus ghobban ,"rl_5_1_3,8_1",2,1.783322318,4,3,1
+rl,rl_7_2,Scarus ghobban ,"rl_7_2_1,4_3",2,1.246450465,4,1,1
+rl,rl_7_2,Scarus ghobban ,"rl_7_2_3,3_2",1,0.749395931,4,3,1
+ks,ks_2_1,Scarus rivulatus,"ks_2_1_1,5_2",4,0.836231814,4,1,2
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_1,11_2",5,2.351785022,4,1,3
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_2,4_1",9,4.233213039,4,2,3
+ks,ks_2_2,Scarus rivulatus,"ks_2_2_3,4_1",5,2.642743011,4,3,3
+ks,ks_6_1,Scarus rivulatus,"ks_6_1_1,8_1",5,1.403355469,4,1,2
+ks,ks_6_1,Scarus rivulatus,"ks_6_1_4,10_2",3,0.842013281,4,4,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_2,11_2",3,0.842013281,4,2,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_3,11_2",7,2.570914138,4,3,2
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_3,4_1",3,1.101820345,4,3,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_1,9_1",5,1.045289768,4,1,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_2,1_1",3,0.452862958,4,2,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_2,3_3",4,0.836231814,4,2,2
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_3,2_2",10,2.806710938,4,3,3
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_4,1_2",11,3.087382032,4,4,3
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_4,8_3",3,1.411071013,4,4,2
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_1,6_1",4,1.122684375,4,1,2
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_3,1_1",5,1.836367242,4,3,2
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_3,10_2",4,1.122684375,4,3,1
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_3,6_1",7,1.964697656,4,3,2
+ks,ks_8_2,Scarus rivulatus,"ks_8_2_4,4_3",3,0.842013281,4,4,1
+rl,rl_1_2,Scarus rivulatus,"rl_1_2_3,3_2",2,1.46398314,4,3,1
+rl,rl_7_1,Scarus rivulatus,"rl_7_1_4,9_4",7,2.570914138,4,4,3
+ks,ks_4_1,Siganus canaliculatus,"ks_4_1_4,8_1",3,0.958748217,4,4,1
+ks,ks_2_2,Siganus javus,"ks_2_2_2,3_6",5,0.646509827,4,2,2
+ks,ks_2_2,Siganus javus,"ks_2_2_2,3_7",6,0.775811793,4,2,3
+ks,ks_4_1,Siganus javus,"ks_4_1_2,7_1",3,0.505204144,4,2,2
+ks,ks_4_1,Siganus javus,"ks_4_1_3,7_4",17,3.643715514,4,3,2
+ks,ks_4_1,Siganus javus,"ks_4_1_4,3_1",5,1.071681033,4,4,2
+ks,ks_6_1,Siganus javus,"ks_6_1_1,12_1",7,0.905113758,4,1,3
+ks,ks_6_1,Siganus javus,"ks_6_1_2,11_2",5,0.842006907,4,2,1
+ks,ks_6_2,Siganus javus,"ks_6_2_1,3_1",4,0.22432876,4,1,2
+ks,ks_8_1,Siganus javus,"ks_8_1_4,8_8",5,0.842006907,4,4,2
+ks,ks_8_2,Siganus javus,"ks_8_2_2,9_1",2,0.336802763,4,2,2
+rl,rl_1_2,Siganus javus,"rl_1_2_1,8_1",4,0.96006287,4,1,2
+rl,rl_1_2,Siganus javus,"rl_1_2_4,11_1",7,1.680110022,4,4,3
+rl,rl_7_1,Siganus javus,"rl_7_1_3,6_3",6,1.440094304,4,3,3
+rl,rl_7_2,Siganus javus,"rl_7_2_4,1_4",2,0.428672413,4,4,1
+rl,rl_7_2,Siganus javus,"rl_7_2_4,6_3",4,0.857344827,4,4,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,3_6",9,2.43192135,4,2,2
+ks,ks_2_2,Siganus virgatus ,"ks_2_2_2,4_1",7,1.891494383,4,2,1
+ks,ks_4_1,Siganus virgatus ,"ks_4_1_4,3_1",14,3.782988767,4,4,2
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_1,12_1",6,1.6212809,4,1,1
+ks,ks_6_1,Siganus virgatus ,"ks_6_1_2,11_2",3,0.81064045,4,2,1
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,8_7",7,1.891494383,4,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_4,8_3",3,0.81064045,4,4,1
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,1_1",8,2.161707867,4,2,4
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_2,8_2",15,4.05320225,4,2,3
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,5_5",8,2.161707867,4,3,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_1",85,22.96814608,4,4,4
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,11_4",12,3.2425618,4,4,3
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,12_4",19,5.134056183,4,4,3
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,6_4",8,2.161707867,4,4,2
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,8_6",7,1.891494383,4,4,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_10",10,2.702134833,4,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_12",6,1.6212809,4,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_2",3,0.918610666,4,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_3",92,24.85964047,4,3,4
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,9_4",27,8.267495998,4,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,1_2",8,2.161707867,4,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,10_2",15,4.05320225,4,4,3
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,3_5",40,10.80853933,4,4,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,4_7",8,2.161707867,4,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,1_2",9,2.43192135,4,3,4
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,11_2",7,1.891494383,4,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,4_4",14,3.782988767,4,3,4
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,4_4",33,8.91704495,4,4,3
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,4_5",27,7.29576405,4,4,4
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,8_4",4,1.080853933,4,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,8_1",12,3.2425618,4,3,2
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,1_4",9,2.43192135,4,4,3
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,6_2",40,10.80853933,4,4,3
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_4,9_4",5,1.351067417,4,4,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,1_5",8,2.161707867,4,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_8",2,0.540426967,4,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,11_9",5,1.351067417,4,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,2_4",18,4.8638427,4,3,4
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,5_2",5,1.351067417,4,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,5_3",16,4.323415733,4,3,3
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,5_4",14,3.782988767,4,3,2
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,6_3",5,1.351067417,4,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,9_4",2,0.540426967,4,4,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,2_10",17,4.593629217,4,3,3
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,6_3",7,1.891494383,4,4,1
+ks,ks_6_2,Kyphosus vaigiensis ,"ks_6_2_4,5_5",18,8.939669063,5,4,3
+rl,rl_3_1,Kyphosus vaigiensis ,"rl_3_1_3,8_2",13,9.685316831,5,3,5
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_3,3_2",30,22.35073115,5,3,4
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_3,4_3",15,11.17536557,5,3,3
+rl,rl_1_2,Scarus ghobban ,"rl_1_2_3,8_1",4,2.49290093,5,3,1
+rl,rl_5_1,Scarus ghobban ,"rl_5_1_3,1_3",5,4.458305795,5,3,1
+rl,rl_5_1,Scarus ghobban ,"rl_5_1_3,4_1",3,2.674983477,5,3,1
+rl,rl_7_2,Scarus ghobban ,"rl_7_2_4,4_8",4,3.566644636,5,4,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_2,1_1",6,2.20364069,5,2,3
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_4,10_1",2,0.418115907,5,4,1
+ks,ks_6_2,Scarus rivulatus,"ks_6_2_4,3_1",3,0.842013281,5,4,1
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_4,1_1",24,6.736106251,5,4,5
+rl,rl_1_2,Scarus rivulatus,"rl_1_2_3,1_1",4,2.365700355,5,3,1
+ks,ks_8_1,Siganus javus,"ks_8_1_3,11_1",4,0.857344827,5,3,3
+ks,ks_8_1,Siganus javus,"ks_8_1_3,3_3",6,1.010408288,5,3,4
+ks,ks_8_2,Siganus javus,"ks_8_2_1,7_3",3,0.505204144,5,1,4
+rl,rl_7_2,Siganus javus,"rl_7_2_3,4_4",2,0.480031435,5,3,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_2,1_1",2,0.540426967,5,2,1
+ks,ks_6_2,Siganus virgatus ,"ks_6_2_4,3_1",16,4.323415733,5,4,3
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,11_1",5,1.351067417,5,3,2
+ks,ks_8_1,Siganus virgatus ,"ks_8_1_3,3_3",4,1.080853933,5,3,2
+ks,ks_8_2,Siganus virgatus ,"ks_8_2_1,7_3",3,0.81064045,5,1,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,8_1",31,8.376617984,5,3,4
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,10_4",19,5.134056183,5,4,3
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,8_2",13,3.512775283,5,3,3
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,4_10",9,2.43192135,5,4,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,4_6",3,0.81064045,5,4,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,4_7",12,3.2425618,5,4,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,1_3",26,7.025550567,5,3,4
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,4_1",4,1.080853933,5,3,1
+rl,rl_5_1,Siganus virgatus ,"rl_5_1_3,4_2",6,1.6212809,5,3,1
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,6_6",19,5.134056183,5,3,3
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,2_4",22,5.944696633,5,4,4
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_3,2_9",33,8.91704495,5,3,4
+rl,rl_3_1,Kyphosus vaigiensis ,"rl_3_1_4,8_3",20,14.90048743,6,4,6
+ks,ks_8_1,Scarus rivulatus,"ks_8_1_3,4_1",7,3.29249903,6,3,3
+ks,ks_8_1,Siganus javus,"ks_8_1_3,6_1",2,0.336802763,6,3,1
+rl,rl_1_1,Siganus javus,"rl_1_1_3,11_1",9,2.408233583,6,3,6
+rl,rl_1_2,Siganus javus,"rl_1_2_3,10_5",5,1.200078587,6,3,3
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_3,11_1",11,3.36823911,6,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_5",11,2.972348317,6,3,2
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,8_3",26,7.025550567,6,4,3
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_4,6_5",28,7.565977534,6,4,6
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,2_4",24,6.4851236,6,4,4
+rl,rl_7_2,Scarus ghobban ,"rl_7_2_3,5_1",3,2.248187794,7,3,1
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,9_3",33,8.91704495,7,3,5
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_4,1_2",17,4.593629217,7,4,6
+rl,rl_7_1,Kyphosus vaigiensis ,"rl_7_1_3,4_4",63,46.93653541,8,3,7
+rl,rl_7_2,Siganus javus,"rl_7_2_3,8_1",4,0.96006287,8,3,2
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,6_4",37,9.997898884,8,3,6
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_4,11_1",66,17.8340899,8,4,6
+rl,rl_7_1,Siganus virgatus ,"rl_7_1_3,6_5",26,7.025550567,9,3,6
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_4,10_3",59,15.94259552,15,4,12
+rl,rl_1_1,Siganus virgatus ,"rl_1_1_4,10_3",83,22.42771912,16,4,13
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_2,10_3",69,18.64473035,17,2,14
+rl,rl_1_2,Siganus virgatus ,"rl_1_2_3,10_6",87,23.50857305,18,3,15
+rl,rl_7_2,Kyphosus vaigiensis ,"rl_7_2_2,3_",3,2.235073115,1,2,1
+ks,ks_6_1,Siganus canaliculatus,"ks_6_1_3,12_",6,1.687882248,1,3,1
+rl,rl_3_1,Siganus virgatus ,"rl_3_1_3,13_",4,1.080853933,1,3,1
+rl,rl_7_2,Siganus virgatus ,"rl_7_2_2,3_",22,5.944696633,3,2,3

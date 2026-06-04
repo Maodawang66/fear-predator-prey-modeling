@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:systemMetadata xmlns:ns2="http://ns.dataone.org/service/types/v1" xmlns:ns3="http://ns.dataone.org/service/types/v2.0">
+    <serialVersion>7</serialVersion>
+    <identifier>urn:uuid:bced9df4-1398-4768-a0f3-6d5007446ad4</identifier>
+    <formatId>http://www.openarchives.org/ore/terms</formatId>
+    <size>7114</size>
+    <checksum algorithm="MD5">d991c252f159009708453b50f0773706</checksum>
+    <submitter>uid=jones,o=NCEAS,dc=ecoinformatics,dc=org</submitter>
+    <rightsHolder>uid=couture,o=NCEAS,dc=ecoinformatics,dc=org</rightsHolder>
+    <accessPolicy>
+        <allow>
+            <subject>uid=cboettig,o=unaffiliated,dc=ecoinformatics,dc=org</subject>
+            <permission>read</permission>
+        </allow>
+        <allow>
+            <subject>uid=jones,o=NCEAS,dc=ecoinformatics,dc=org</subject>
+            <permission>read</permission>
+            <permission>write</permission>
+            <permission>changePermission</permission>
+        </allow>
+        <allow>
+            <subject>public</subject>
+            <permission>read</permission>
+        </allow>
+    </accessPolicy>
+    <replicationPolicy replicationAllowed="true" numberReplicas="2"/>
+    <obsoletes>resourceMap_df35b.240.11</obsoletes>
+    <archived>false</archived>
+    <dateUploaded>2015-04-24T19:48:13.277+00:00</dateUploaded>
+    <dateSysMetadataModified>2015-04-24T20:53:32.237+00:00</dateSysMetadataModified>
+    <originMemberNode>urn:node:KNB</originMemberNode>
+    <authoritativeMemberNode>urn:node:KNB</authoritativeMemberNode>
+    <replica>
+        <replicaMemberNode>urn:node:KNB</replicaMemberNode>
+        <replicationStatus>completed</replicationStatus>
+        <replicaVerified>2015-04-24T19:51:13.050+00:00</replicaVerified>
+    </replica>
+    <replica>
+        <replicaMemberNode>urn:node:CN</replicaMemberNode>
+        <replicationStatus>completed</replicationStatus>
+        <replicaVerified>2015-04-24T19:51:13.130+00:00</replicaVerified>
+    </replica>
+    <replica>
+        <replicaMemberNode>urn:node:mnUNM1</replicaMemberNode>
+        <replicationStatus>completed</replicationStatus>
+        <replicaVerified>2015-04-24T19:53:12.819+00:00</replicaVerified>
+    </replica>
+    <replica>
+        <replicaMemberNode>urn:node:TFRI</replicaMemberNode>
+        <replicationStatus>completed</replicationStatus>
+        <replicaVerified>2015-04-24T19:53:21.127+00:00</replicaVerified>
+    </replica>
+</ns3:systemMetadata>

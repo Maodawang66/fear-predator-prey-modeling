@@ -1,0 +1,36 @@
+{
+  "model": "fear_memory",
+  "series": "wifishabundance_WBIC804600",
+  "params": {
+    "r": 3.9148232023882246,
+    "K": 158.45771454408035,
+    "a": 0.10043517813870474,
+    "theta": 0.10615150975337381,
+    "e": 0.3,
+    "mu": 0.5,
+    "phi": 0.002623032829779716,
+    "delta": 1.0,
+    "x0": 22.02036884,
+    "y0": 68.29833333,
+    "m0": 68.29833333
+  },
+  "rmse_prey": 91.13665039455773,
+  "rmse_predator": 38.372821676553315,
+  "rmse_total": 69.92268047121907,
+  "success": false,
+  "message": "Maximum number of iterations has been exceeded.",
+  "meta": {
+    "nfev": 1950,
+    "cost": 2.844606512071455,
+    "signature": "lter_fish",
+    "detection_method": "lter_fish_pair",
+    "confidence": 0.88,
+    "time_col": "YEAR",
+    "prey_col": "Bluegill",
+    "predator_col": "Largemouth Bass",
+    "group_key": "WBIC=804600",
+    "notes": "Bluegill vs Largemouth Bass, lake=804600, n_years=9",
+    "n_points": 9,
+    "source_file": "C:\\Users\\Lenovo\\Desktop\\mathematical modeling\\pro\\data\\raw\\07_lter_fish\\WIfishAbundance.csv"
+  }
+}

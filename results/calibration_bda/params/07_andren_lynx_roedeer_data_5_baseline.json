@@ -1,0 +1,33 @@
+{
+  "model": "baseline",
+  "series": "andren_lynx_roedeer_data_5",
+  "params": {
+    "r": 0.6568332361519799,
+    "K": 715.2793614595214,
+    "a": 0.04002288643154402,
+    "theta": 19.913617851147585,
+    "e": 0.3,
+    "mu": 0.5,
+    "x0": 1430.5587229190423,
+    "y0": 0.6271379703534778
+  },
+  "rmse_prey": 404.53902978203524,
+  "rmse_predator": 1.7394907555567471,
+  "rmse_total": 286.05493567239756,
+  "success": true,
+  "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+  "meta": {
+    "nfev": 85,
+    "cost": 7.409141631077375,
+    "signature": "lynx_roe",
+    "detection_method": "lynx_roe_by_region",
+    "confidence": 0.92,
+    "time_col": "year",
+    "prey_col": "roe_deer_harvest_mean",
+    "predator_col": "lynx_family_groups",
+    "group_key": "5",
+    "notes": "region=5, density via area",
+    "n_points": 23,
+    "source_file": "/home/scc/pb23151824/project/data/raw/01_lynx_roe_deer/Andren_lynx_roedeer_data.csv"
+  }
+}

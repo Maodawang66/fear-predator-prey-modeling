@@ -1,0 +1,42 @@
+{
+  "id": "08_coral_reef_fear",
+  "title": "Coral reef fear × group size × herbivory",
+  "doi": "10.5061/dryad.vdncjsxtf",
+  "role": "fear_calibration",
+  "fit_ode": false,
+  "loader": null,
+  "primary_file": "ratesperhour.csv",
+  "files": {
+    "eventdataNEW.csv": {
+      "format": "csv",
+      "purpose": "bite-level feeding events",
+      "columns": {
+        "site": "site",
+        "species": "species",
+        "group_size": "grpsiz",
+        "bite_rate": "totbit",
+        "fear_proxy": "posi"
+      }
+    },
+    "ratesperhour.csv": {
+      "format": "csv",
+      "purpose": "aggregated bite rates by site × position (fear treatment)",
+      "columns": {
+        "site": "site",
+        "position": "posi",
+        "herbivory_rate": "allbrate",
+        "fear_level": "posi"
+      }
+    },
+    "propremov.csv": {
+      "format": "csv",
+      "purpose": "algae removal assay (fear vs control)",
+      "columns": {
+        "date": "date",
+        "site": "site",
+        "fear_effect": "pro.diff",
+        "biomass_loss": "diff.con"
+      }
+    }
+  }
+}

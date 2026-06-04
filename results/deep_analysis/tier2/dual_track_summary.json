@@ -1,0 +1,37 @@
+{
+  "track_A_eta_by_group": {
+    "mammal": {
+      "n": 8,
+      "eta_v5_median": 0.08195201183514705,
+      "eta_v5_min": 0.0021755551296857,
+      "eta_v5_max": 0.4083647365911591
+    },
+    "zooplankton": {
+      "n": 1,
+      "eta_v5_median": 0.019670457049502356,
+      "eta_v5_min": 0.019670457049502356,
+      "eta_v5_max": 0.019670457049502356
+    },
+    "fish": {
+      "n": 3,
+      "eta_v5_median": 0.06893530528969644,
+      "eta_v5_min": 0.0005024509241015535,
+      "eta_v5_max": 0.11447779349417773
+    }
+  },
+  "track_B_priors": {
+    "peacor_tmie_fraction": 0.578125,
+    "peacor_by_taxon": {
+      "Invertebrate": {
+        "TMIE": 11,
+        "NCE": 1
+      },
+      "Vertebrate": {
+        "TMIE": 26,
+        "NCE": 26
+      }
+    },
+    "coral_herbivory_suppression": 0.5619047618999999,
+    "damselfly_activity_suppression": 0.06328181607773908
+  }
+}

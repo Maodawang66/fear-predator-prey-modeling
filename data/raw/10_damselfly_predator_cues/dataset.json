@@ -1,0 +1,54 @@
+{
+  "id": "10_damselfly_predator_cues",
+  "title": "Damselfly activity under predator cues",
+  "doi": "10.5061/dryad.bg79cnpj2",
+  "role": "fear_calibration",
+  "fit_ode": false,
+  "loader": null,
+  "primary_file": "actcage.csv",
+  "files": {
+    "actcage.csv": {
+      "format": "csv",
+      "purpose": "caged predator cue experiment — activity",
+      "columns": {
+        "species": "species",
+        "treatment": "treatment",
+        "activity": "act.mm"
+      }
+    },
+    "actcage2.csv": {
+      "format": "csv",
+      "purpose": "replicate cage activity assay",
+      "columns": {
+        "species": "species",
+        "treatment": "treatment",
+        "activity": "act.mm"
+      }
+    },
+    "fall2020_mesocosm_predselection_ms.csv": {
+      "format": "csv",
+      "purpose": "mesocosm predator-selection + activity",
+      "columns": {
+        "treatment": "treatment",
+        "activity_nf": "nf1.act.mm",
+        "activity_f": "f.act.mm"
+      }
+    },
+    "fieldbugs_behavioralassays_2021_may.csv": {
+      "format": "csv",
+      "purpose": "field behavioral assays",
+      "columns": {
+        "treatment": "treatment",
+        "activity": "act.mm"
+      }
+    },
+    "wild.act.csv": {
+      "format": "csv",
+      "purpose": "wild population activity",
+      "columns": {
+        "treatment": "treatment",
+        "activity": "act.mm"
+      }
+    }
+  }
+}

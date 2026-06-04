@@ -1,0 +1,21 @@
+% Pandoc → PDF（ctexart）表格与英文换行
+\usepackage{longtable,booktabs,array,tabularx}
+\usepackage{ragged2e}
+\usepackage{xurl}
+\usepackage{seqsplit}
+\urlstyle{same}
+
+\emergencystretch=2em
+\sloppy
+
+% 长表格略缩小、增加行距
+\AtBeginEnvironment{longtable}{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.25}}
+\AtBeginEnvironment{table}{\small}
+
+% 允许 \texttt 内断行（表格内代码/路径）
+\makeatletter
+\def\UrlBreaks{\do\/\do-\do_\do.\do=\do?\do&\do\#\do\%\do\~}
+\makeatother
+
+% 表格列：自动换行的 p 列（pandoc 部分版本会用到）
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}

@@ -1,0 +1,8 @@
+{
+  "n_studies": 64,
+  "effect_col": "Predation effect",
+  "effect_type": "categorical",
+  "TMIE_count": 37,
+  "NCE_count": 27,
+  "tmie_fraction": 0.578125
+}

@@ -1,0 +1,8 @@
+OK 01_lynxhare_baseline RMSE=1.201e+05
+OK 01_lynxhare_fear_memory RMSE=1.495e+04
+OK 01_lynxhare_bda_fear RMSE=0.191
+OK 02_wifishabundance_WBIC804600_baseline RMSE=58.68
+OK 02_wifishabundance_WBIC804600_fear_memory RMSE=69.92
+OK 02_wifishabundance_WBIC804600_bda_fear RMSE=0.2213
+
+series=2 fits=6

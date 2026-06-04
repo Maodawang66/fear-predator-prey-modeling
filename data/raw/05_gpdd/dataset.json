@@ -1,0 +1,116 @@
+{
+  "id": "05_gpdd",
+  "title": "Global Population Dynamics Database (GPDD)",
+  "doi": "10.5063/F1BZ63Z8",
+  "knb_uuid": "urn:uuid:bced9df4-1398-4768-a0f3-6d5007446ad4",
+  "role": "large_sample_extension",
+  "fit_ode": false,
+  "loader": null,
+  "primary_file": "data/gpdd_population_records.csv",
+  "notes": "Join population records with series_metadata + taxa + locations to build predator-prey pairs for batch φ scans.",
+  "files": {
+    "data/gpdd_population_records.csv": {
+      "format": "csv",
+      "rows_approx": 179859,
+      "knb_id": "df35b.233.1",
+      "purpose": "population time points (core fact table)",
+      "columns": {
+        "series_id": "MainID",
+        "record_id": "DataID",
+        "abundance": "Population",
+        "abundance_raw": "PopulationUntransformed",
+        "time": "SampleYear",
+        "time_decimal_begin": "DecimalYearBegin",
+        "time_decimal_end": "DecimalYearEnd",
+        "time_period_id": "TimePeriodID",
+        "generation": "Generation",
+        "series_step": "SeriesStep"
+      }
+    },
+    "data/gpdd_series_metadata.csv": {
+      "format": "csv",
+      "rows_approx": 5156,
+      "knb_id": "df35b.234.1",
+      "purpose": "one row per population time series (link to taxon, location, source)",
+      "columns": {
+        "series_id": "MainID",
+        "taxon_id": "TaxonID",
+        "source_id": "DataSourceID",
+        "biotope_id": "BiotopeID",
+        "location_id": "LocationID",
+        "sampling_units": "SamplingUnits",
+        "sampling_protocol": "SamplingProtocol"
+      }
+    },
+    "data/gpdd_time_periods.csv": {
+      "format": "csv",
+      "rows_approx": 408,
+      "knb_id": "df35b.235.1",
+      "purpose": "lookup for TimePeriodID (month/week/season labels)",
+      "columns": {
+        "time_period_id": "TimePeriodID",
+        "label": "TimePeriod",
+        "group": "TimePeriodGroup"
+      }
+    },
+    "data/gpdd_taxa.csv": {
+      "format": "csv",
+      "rows_approx": 1896,
+      "knb_id": "df35b.236.1",
+      "purpose": "species / taxon names and taxonomy",
+      "columns": {
+        "taxon_id": "TaxonID",
+        "scientific_name": "TaxonName",
+        "common_name": "CommonName",
+        "class": "TaxonomicClass",
+        "order": "TaxonomicOrder",
+        "family": "TaxonomicFamily",
+        "genus": "TaxonomicGenus"
+      }
+    },
+    "data/gpdd_sources.csv": {
+      "format": "csv",
+      "rows_approx": 362,
+      "knb_id": "df35b.237.1",
+      "purpose": "literature / data source for each series",
+      "columns": {
+        "source_id": "DatasourceID",
+        "author": "Author",
+        "year": "Year",
+        "title": "Title",
+        "reference": "Reference"
+      }
+    },
+    "data/gpdd_biotopes.csv": {
+      "format": "csv",
+      "rows_approx": 194,
+      "knb_id": "df35b.238.1",
+      "purpose": "habitat type lookup",
+      "columns": {
+        "biotope_id": "BiotopeID",
+        "habitat": "HabitatName",
+        "habitat_type": "BiotopeType"
+      }
+    },
+    "data/gpdd_locations.csv": {
+      "format": "csv",
+      "rows_approx": 1005,
+      "knb_id": "df35b.239.1",
+      "purpose": "geographic location lookup",
+      "columns": {
+        "location_id": "LocationID",
+        "name": "ExactName",
+        "country": "Country",
+        "continent": "Continent"
+      }
+    },
+    "data/df35b.241.1-DATA.data": {
+      "format": "binary",
+      "purpose": "KNB auxiliary object (not used in current pipeline)"
+    },
+    "metadata/science-metadata.xml": {
+      "format": "xml",
+      "purpose": "EML / KNB package metadata"
+    }
+  }
+}

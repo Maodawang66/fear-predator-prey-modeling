@@ -1,0 +1,27 @@
+{
+  "model": "bda_fear",
+  "series": "hudson_bay_lynx_hare",
+  "params": {
+    "r": 1.067004653954152,
+    "d": 0.021590871510908285,
+    "a": 0.8497580550855133,
+    "p": 4.965573987062407,
+    "q": 0.010795073784668823,
+    "c": 0.10276922611125215,
+    "m": 0.0629353599370571,
+    "k": 0.1283255570412057,
+    "u0": 0.0002925944348538491,
+    "v0": 0.04,
+    "u_scale": 102531.0,
+    "v_scale": 100.0
+  },
+  "rmse_prey": 0.19868869586588558,
+  "rmse_predator": 0.18297338283321257,
+  "rmse_total": 0.1909927442212344,
+  "success": false,
+  "message": "Maximum number of iterations has been exceeded.",
+  "meta": {
+    "nfev": 3720,
+    "normalized_fit": true
+  }
+}

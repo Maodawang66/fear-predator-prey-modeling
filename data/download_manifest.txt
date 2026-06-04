@@ -1,0 +1,12 @@
+OK  01_lynx_roe_deer: 2 files
+OK  02_killifish_mosquitofish: 2 files
+OK  04_lake_michigan_zooplankton: 2 files
+OK  08_coral_reef_fear: 10 files
+OK  09_landscape_of_fear: 4 files
+OK  10_damselfly_predator_cues: 6 files
+OK  12_peacor_risk_meta: 2 files
+FAIL 05_gpdd_readme: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+FAIL 06_biotime: Expecting value: line 2 column 11 (char 11)
+OK  07_lter_fish: WIfishAbundance.csv
+OK  03_hudson_bay_lynx_hare: lynxhare.csv
+OK  14_forage: MANUAL (见 DOWNLOAD_INSTRUCTIONS.txt)

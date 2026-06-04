@@ -1,0 +1,382 @@
+{
+  "01_lynx_roe_deer": {
+    "title": "Eurasian lynx–roe deer (multi-region)",
+    "doi": "10.5061/dryad.9zw3r22mq",
+    "role": "population_dynamics",
+    "fit_ode": true,
+    "loader": "data.load_lynx_roe.load_lynx_roe",
+    "primary_file": "Andren_lynx_roedeer_data.csv",
+    "files": {
+      "Andren_lynx_roedeer_data.csv": {
+        "format": "csv",
+        "rows_approx": 196,
+        "columns": {
+          "time": "year",
+          "group": "region",
+          "prey": "roe_deer_harvest_mean",
+          "predator": "lynx_family_groups",
+          "area": "area",
+          "notes": "prey/predator density = harvest or groups / area"
+        }
+      }
+    }
+  },
+  "02_killifish_mosquitofish": {
+    "title": "Least killifish–mosquitofish monthly densities",
+    "doi": "10.5061/dryad.qjq2bvqpw",
+    "role": "population_dynamics",
+    "fit_ode": true,
+    "loader": "data.load_killifish.load_killifish",
+    "primary_file": "TimeSeriesLogMeans.csv",
+    "files": {
+      "TimeSeriesLogMeans.csv": {
+        "format": "csv",
+        "rows_approx": 182,
+        "columns": {
+          "time": "DATESEQ",
+          "site": "LOCATION",
+          "prey": "ME2LOGHETADS",
+          "predator": "ME4LOGGAMBO",
+          "transform": "log10_to_linear",
+          "sites": ["TP", "WRGP", "WRHW"]
+        }
+      }
+    }
+  },
+  "03_hudson_bay_lynx_hare": {
+    "title": "Hudson Bay lynx–hare fur records",
+    "doi": null,
+    "citation": "https://www.math.duke.edu/education/ccp/materials/diffeq/predprey/pred1.html",
+    "role": "population_dynamics",
+    "fit_ode": true,
+    "loader": "data.load_lynx_hare.load_lynx_hare",
+    "primary_file": "lynxhare.csv",
+    "files": {
+      "lynxhare.csv": {
+        "format": "csv",
+        "rows_approx": 60,
+        "columns": {
+          "time": "year",
+          "prey": "hare",
+          "predator": "lynx"
+        }
+      }
+    }
+  },
+  "04_lake_michigan_zooplankton": {
+    "title": "Lake Michigan zooplankton CE/NCE (Bythotrephes–Daphnia)",
+    "doi": "10.5061/dryad.bh688ft",
+    "role": "population_dynamics",
+    "fit_ode": true,
+    "secondary_role": "nce_analysis",
+    "loader": "data.load_zooplankton.load_zooplankton",
+    "primary_file": "GLERL_M110_Zoop_1994-2012.txt",
+    "files": {
+      "GLERL_M110_Zoop_1994-2012.txt": {
+        "format": "tsv",
+        "rows_approx": 175,
+        "columns": {
+          "time": "JulianDay",
+          "time_alt": "Date",
+          "prey": "D.mendotae",
+          "predator": "Bythotrephes",
+          "covariate": "Prior_to_1st_Daphnia_obs",
+          "notes": "NOT prey: Prior_to_1st_Daphnia_obs is invasion-era flag (0/1)"
+        }
+      }
+    }
+  },
+  "07_lter_fish": {
+    "title": "NTL Wisconsin lake fish abundance",
+    "doi": "knb-lter-ntl.356",
+    "role": "population_dynamics",
+    "fit_ode": true,
+    "loader": "data.load_lter_fish.load_lter_fish_pair",
+    "primary_file": "WIfishAbundance.csv",
+    "files": {
+      "WIfishAbundance.csv": {
+        "format": "csv",
+        "rows_approx": 20045,
+        "columns": {
+          "time": "YEAR",
+          "site": "WBIC",
+          "species": "taxon_id",
+          "value": "CPUE",
+          "gear": "GEARNAME",
+          "default_pair": ["Bluegill", "Largemouth Bass"]
+        }
+      }
+    }
+  },
+  "08_coral_reef_fear": {
+    "title": "Coral reef fear × group size × herbivory",
+    "doi": "10.5061/dryad.vdncjsxtf",
+    "role": "fear_calibration",
+    "fit_ode": false,
+    "loader": null,
+    "primary_file": "ratesperhour.csv",
+    "files": {
+      "eventdataNEW.csv": {
+        "format": "csv",
+        "purpose": "bite-level feeding events",
+        "columns": {
+          "site": "site",
+          "species": "species",
+          "group_size": "grpsiz",
+          "bite_rate": "totbit",
+          "fear_proxy": "posi"
+        }
+      },
+      "ratesperhour.csv": {
+        "format": "csv",
+        "purpose": "aggregated bite rates by site × position (fear treatment)",
+        "columns": {
+          "site": "site",
+          "position": "posi",
+          "herbivory_rate": "allbrate",
+          "fear_level": "posi"
+        }
+      },
+      "propremov.csv": {
+        "format": "csv",
+        "purpose": "algae removal assay (fear vs control)",
+        "columns": {
+          "date": "date",
+          "site": "site",
+          "fear_effect": "pro.diff",
+          "biomass_loss": "diff.con"
+        }
+      }
+    }
+  },
+  "09_landscape_of_fear": {
+    "title": "Fox–dingo landscape of fear (camera traps)",
+    "doi": "10.5061/dryad.1rn8pk0x6",
+    "role": "fear_proxy",
+    "fit_ode": false,
+    "loader": null,
+    "primary_file": "Woosteretal_Behaviour.csv",
+    "files": {
+      "Woosteretal_Behaviour.csv": {
+        "format": "csv",
+        "purpose": "behavior scores under predator treatment",
+        "columns": {
+          "treatment": "treatment",
+          "site": "Site",
+          "fear_score": "Cautious",
+          "confidence_score": "Confident"
+        }
+      },
+      "Woosteretal_Spatio_temp_data.csv": {
+        "format": "csv",
+        "purpose": "spatiotemporal activity (NOT predator-prey abundance)",
+        "columns": {
+          "time": "nTime",
+          "species": "Species",
+          "treatment": "treatment",
+          "activity": "sun_time_minutes"
+        }
+      },
+      "Cam_effort.csv": {
+        "format": "csv",
+        "purpose": "camera effort normalization",
+        "columns": {
+          "site": "Site",
+          "camera_days": "Cam_days"
+        }
+      }
+    }
+  },
+  "10_damselfly_predator_cues": {
+    "title": "Damselfly activity under predator cues",
+    "doi": "10.5061/dryad.bg79cnpj2",
+    "role": "fear_calibration",
+    "fit_ode": false,
+    "loader": null,
+    "primary_file": "actcage.csv",
+    "files": {
+      "actcage.csv": {
+        "format": "csv",
+        "purpose": "caged predator cue experiment — activity",
+        "columns": {
+          "species": "species",
+          "treatment": "treatment",
+          "activity": "act.mm"
+        }
+      },
+      "actcage2.csv": {
+        "format": "csv",
+        "purpose": "replicate cage activity assay",
+        "columns": {
+          "species": "species",
+          "treatment": "treatment",
+          "activity": "act.mm"
+        }
+      },
+      "fall2020_mesocosm_predselection_ms.csv": {
+        "format": "csv",
+        "purpose": "mesocosm predator-selection + activity",
+        "columns": {
+          "treatment": "treatment",
+          "activity_nf": "nf1.act.mm",
+          "activity_f": "f.act.mm"
+        }
+      },
+      "fieldbugs_behavioralassays_2021_may.csv": {
+        "format": "csv",
+        "purpose": "field behavioral assays",
+        "columns": {
+          "treatment": "treatment",
+          "activity": "act.mm"
+        }
+      },
+      "wild.act.csv": {
+        "format": "csv",
+        "purpose": "wild population activity",
+        "columns": {
+          "treatment": "treatment",
+          "activity": "act.mm"
+        }
+      }
+    }
+  },
+  "12_peacor_risk_meta": {
+    "title": "Peacor et al. predation-risk effects meta-analysis",
+    "doi": "10.5061/dryad.ffbg79cxt",
+    "role": "phi_prior",
+    "fit_ode": false,
+    "loader": "data.load_peacor.load_peacor_plp",
+    "primary_file": "PeacorEtAl_Data_ELE-00137-2022.xlsx",
+    "files": {
+      "PeacorEtAl_Data_ELE-00137-2022.xlsx": {
+        "format": "xlsx",
+        "purpose": "meta-analysis tables (PLP studies sheet for φ range)",
+        "sheets": {
+          "PLP studies": "predator-prey literature with NCE/TMIE outcomes",
+          "Fig. 2A": "publication trend counts",
+          "Fig. 3": "fitness component responses",
+          "Fig. 4": "taxa breakdown"
+        }
+      },
+      "README.csv": {
+        "format": "csv",
+        "purpose": "sheet index only (not effect-size data)"
+      }
+    }
+  },
+  "05_gpdd": {
+    "title": "Global Population Dynamics Database (GPDD)",
+    "doi": "10.5063/F1BZ63Z8",
+    "knb_uuid": "urn:uuid:bced9df4-1398-4768-a0f3-6d5007446ad4",
+    "role": "large_sample_extension",
+    "fit_ode": false,
+    "loader": null,
+    "primary_file": "data/gpdd_population_records.csv",
+    "notes": "Join population records with series_metadata + taxa + locations to build predator-prey pairs for batch φ scans.",
+    "files": {
+      "data/gpdd_population_records.csv": {
+        "format": "csv",
+        "rows_approx": 179859,
+        "knb_id": "df35b.233.1",
+        "purpose": "population time points (core fact table)",
+        "columns": {
+          "series_id": "MainID",
+          "record_id": "DataID",
+          "abundance": "Population",
+          "abundance_raw": "PopulationUntransformed",
+          "time": "SampleYear",
+          "time_decimal_begin": "DecimalYearBegin",
+          "time_decimal_end": "DecimalYearEnd",
+          "time_period_id": "TimePeriodID",
+          "generation": "Generation",
+          "series_step": "SeriesStep"
+        }
+      },
+      "data/gpdd_series_metadata.csv": {
+        "format": "csv",
+        "rows_approx": 5156,
+        "knb_id": "df35b.234.1",
+        "purpose": "one row per population time series (link to taxon, location, source)",
+        "columns": {
+          "series_id": "MainID",
+          "taxon_id": "TaxonID",
+          "source_id": "DataSourceID",
+          "biotope_id": "BiotopeID",
+          "location_id": "LocationID",
+          "sampling_units": "SamplingUnits",
+          "sampling_protocol": "SamplingProtocol"
+        }
+      },
+      "data/gpdd_time_periods.csv": {
+        "format": "csv",
+        "rows_approx": 408,
+        "knb_id": "df35b.235.1",
+        "purpose": "lookup for TimePeriodID (month/week/season labels)",
+        "columns": {
+          "time_period_id": "TimePeriodID",
+          "label": "TimePeriod",
+          "group": "TimePeriodGroup"
+        }
+      },
+      "data/gpdd_taxa.csv": {
+        "format": "csv",
+        "rows_approx": 1896,
+        "knb_id": "df35b.236.1",
+        "purpose": "species / taxon names and taxonomy",
+        "columns": {
+          "taxon_id": "TaxonID",
+          "scientific_name": "TaxonName",
+          "common_name": "CommonName",
+          "class": "TaxonomicClass",
+          "order": "TaxonomicOrder",
+          "family": "TaxonomicFamily",
+          "genus": "TaxonomicGenus"
+        }
+      },
+      "data/gpdd_sources.csv": {
+        "format": "csv",
+        "rows_approx": 362,
+        "knb_id": "df35b.237.1",
+        "purpose": "literature / data source for each series",
+        "columns": {
+          "source_id": "DatasourceID",
+          "author": "Author",
+          "year": "Year",
+          "title": "Title",
+          "reference": "Reference"
+        }
+      },
+      "data/gpdd_biotopes.csv": {
+        "format": "csv",
+        "rows_approx": 194,
+        "knb_id": "df35b.238.1",
+        "purpose": "habitat type lookup",
+        "columns": {
+          "biotope_id": "BiotopeID",
+          "habitat": "HabitatName",
+          "habitat_type": "BiotopeType"
+        }
+      },
+      "data/gpdd_locations.csv": {
+        "format": "csv",
+        "rows_approx": 1005,
+        "knb_id": "df35b.239.1",
+        "purpose": "geographic location lookup",
+        "columns": {
+          "location_id": "LocationID",
+          "name": "ExactName",
+          "country": "Country",
+          "continent": "Continent"
+        }
+      },
+      "data/df35b.241.1-DATA.data": {
+        "format": "binary",
+        "purpose": "KNB auxiliary object (not used in current pipeline)"
+      },
+      "metadata/science-metadata.xml": {
+        "format": "xml",
+        "purpose": "EML / KNB package metadata"
+      }
+    }
+  }
+}

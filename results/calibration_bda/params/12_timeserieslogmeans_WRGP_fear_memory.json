@@ -1,0 +1,36 @@
+{
+  "model": "fear_memory",
+  "series": "timeserieslogmeans_WRGP",
+  "params": {
+    "r": 0.050824809331640866,
+    "K": 2995.324433793061,
+    "a": 0.3407525503675051,
+    "theta": 0.25313952722312516,
+    "e": 0.3,
+    "mu": 0.5,
+    "phi": 0.0046968898551267065,
+    "delta": 1.0,
+    "x0": 190.54607179632464,
+    "y0": 6.760829753919817,
+    "m0": 6.760829753919817
+  },
+  "rmse_prey": 1617.8392213165384,
+  "rmse_predator": 162.95210447302404,
+  "rmse_total": 1149.7732677320103,
+  "success": false,
+  "message": "Maximum number of iterations has been exceeded.",
+  "meta": {
+    "nfev": 1950,
+    "cost": 5.647322106138214,
+    "signature": "killifish",
+    "detection_method": "killifish_by_site",
+    "confidence": 0.9,
+    "time_col": "DATESEQ",
+    "prey_col": "ME2LOGHETADS",
+    "predator_col": "ME4LOGGAMBO",
+    "group_key": "WRGP",
+    "notes": "site=WRGP, log->linear",
+    "n_points": 56,
+    "source_file": "/home/scc/pb23151824/project/data/raw/02_killifish_mosquitofish/TimeSeriesLogMeans.csv"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "02_killifish_mosquitofish",
+  "title": "Least killifish–mosquitofish monthly densities",
+  "doi": "10.5061/dryad.qjq2bvqpw",
+  "role": "population_dynamics",
+  "fit_ode": true,
+  "loader": "data.load_killifish.load_killifish",
+  "primary_file": "TimeSeriesLogMeans.csv",
+  "files": {
+    "TimeSeriesLogMeans.csv": {
+      "format": "csv",
+      "rows_approx": 182,
+      "columns": {
+        "time": "DATESEQ",
+        "site": "LOCATION",
+        "prey": "ME2LOGHETADS",
+        "predator": "ME4LOGGAMBO",
+        "transform": "log10_to_linear",
+        "sites": [
+          "TP",
+          "WRGP",
+          "WRHW"
+        ]
+      }
+    }
+  }
+}
