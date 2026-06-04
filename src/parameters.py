@@ -12,10 +12,10 @@ class BaselineParams:
 
     r: float = 1.0
     K: float = 100.0
-    a: float = 0.04
-    theta: float = 20.0
-    e: float = 0.3
-    mu: float = 0.5
+    a: float = 0.04325
+    theta: float = 0.0052
+    e: float = 0.51
+    mu: float = 0.4
 
 
 @dataclass(frozen=True)
