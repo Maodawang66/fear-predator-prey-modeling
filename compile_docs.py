@@ -11,7 +11,6 @@ PANDOC_CANDIDATES = (
     Path(r"E:\Anaconda3\envs\ai25\Library\bin\pandoc.exe"),
     shutil.which("pandoc"),
 )
-HEADER = ROOT / "pandoc-pdf-header.tex"
 
 
 def find_pandoc() -> str:
@@ -28,19 +27,13 @@ def build(md: Path, pdf: Path, pandoc: str) -> None:
         "-o",
         str(pdf),
         "--pdf-engine=xelatex",
-        "-f",
-        "markdown+raw_html+tex_math_dollars",
         "-V",
         "CJKmainfont=SimSun",
         "-V",
-        "geometry:margin=2cm",
+        "geometry:margin=2.5cm",
         "-V",
         "documentclass=ctexart",
-        "-V",
-        "fontsize=11pt",
     ]
-    if HEADER.is_file():
-        cmd.extend(["--include-in-header", str(HEADER)])
     print(f"  -> {pdf.name}")
     subprocess.run(cmd, cwd=ROOT, check=True)
 
@@ -49,11 +42,11 @@ def main() -> int:
     pandoc = find_pandoc()
     print(f"Using pandoc: {pandoc}")
     for name in ("规划.md", "教程.md"):
-        md = ROOT / name
+        md = ROOT / "report" / name
         if not md.is_file():
             print(f"MISSING: {md}", file=sys.stderr)
             return 1
-        build(md, md.with_suffix(".pdf"), pandoc)
+        build(md, ROOT / "report" / (name.replace(".md", ".pdf")), pandoc)
     print("Done.")
     return 0
 

@@ -3,13 +3,13 @@ setlocal
 cd /d "%~dp0"
 
 echo [1/2] Compiling report.tex with XeLaTeX (latexmk)...
-latexmk -xelatex -f -interaction=nonstopmode -file-line-error -synctex=1 report.tex
+latexmk -xelatex -f -interaction=nonstopmode -file-line-error -synctex=1 report\report.tex
 set ERR=%ERRORLEVEL%
 
-if exist report.pdf (
+if exist report\report.pdf (
   echo.
-  echo [2/2] Done: report.pdf
-  for %%A in (report.pdf) do echo       Size: %%~zA bytes
+  echo [2/2] Done: report\report.pdf
+  for %%A in (report\report.pdf) do echo       Size: %%~zA bytes
   exit /b 0
 )
 
