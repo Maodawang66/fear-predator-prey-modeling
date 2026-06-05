@@ -7,6 +7,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
 
@@ -17,6 +18,8 @@ os.environ.setdefault("MPLBACKEND", "Agg")
 
 from src.analysis import (
     compare_mechanisms,
+    equivalent_fear_calibration_summary,
+    equivalent_fear_parameters,
     equilibrium_baseline,
     equilibrium_bda_fear,
     nce_vs_consumptive_summary,
@@ -99,17 +102,45 @@ def main() -> None:
 
     # --- 文献机制对照实验 ---
     print("\n--- 文献机制对照 ---")
-    all_sols = run_all_mechanisms(t_span=(0.0, 80.0))
+    equivalent_params = equivalent_fear_parameters(target_suppression=0.20)
+    calibration_summary = equivalent_fear_calibration_summary(target_suppression=0.20)
+    (out_dir / "equivalent_fear_calibration.json").write_text(
+        json.dumps(calibration_summary, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    all_sols = run_all_mechanisms(
+        t_span=(0.0, 80.0),
+        params_by_mechanism=equivalent_params,
+    )
     labels = mechanism_labels()
     plot_mechanism_comparison(
         all_sols, labels, out_dir / "08_literature_mechanisms_timeseries.png"
     )
     print("[8] 08_literature_mechanisms_timeseries.png")
 
-    cmp = compare_mechanisms(t_end=100.0)
+    cmp = compare_mechanisms(t_end=100.0, comparison_mode="equivalent")
     plot_mechanism_bars(cmp, out_dir / "09_literature_mechanisms_bars.png")
     plot_amplitude_comparison(cmp, out_dir / "10_literature_oscillation_amplitude.png")
     print("[9-10] 09_literature_mechanisms_bars.png, 10_literature_oscillation_amplitude.png")
+
+    supplementary_dir = out_dir / "supplementary"
+    supplementary_dir.mkdir(exist_ok=True)
+    default_sols = run_all_mechanisms(t_span=(0.0, 80.0))
+    default_cmp = compare_mechanisms(t_end=100.0, comparison_mode="default")
+    plot_mechanism_comparison(
+        default_sols,
+        labels,
+        supplementary_dir / "08_literature_mechanisms_timeseries_default_params.png",
+    )
+    plot_mechanism_bars(
+        default_cmp,
+        supplementary_dir / "09_literature_mechanisms_bars_default_params.png",
+    )
+    plot_amplitude_comparison(
+        default_cmp,
+        supplementary_dir / "10_literature_oscillation_amplitude_default_params.png",
+    )
+    print("    默认参数对照保留于 results/supplementary/")
 
     nce = nce_vs_consumptive_summary()
     print(

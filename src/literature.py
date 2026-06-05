@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Callable
+from typing import Callable, Mapping
 
 import numpy as np
 from .model import (
@@ -25,35 +25,35 @@ from .parameters import (
     fear_handling_default,
     fear_saturating_default,
 )
-from .simulate import integrate_baseline, integrate_fear_instant, integrate_fear_memory, integrate_rhs
+from .simulate import integrate_rhs
 
 
-def make_rhs(mid: MechanismId) -> tuple[Callable, np.ndarray]:
+def make_rhs(mid: MechanismId, params=None) -> tuple[Callable, np.ndarray]:
     """返回 (rhs, y0) 对。"""
     x0, y0 = 40.0, 8.0
     if mid == MechanismId.BASELINE:
-        p = baseline_default
+        p = params or baseline_default
         return lambda t, s: baseline_rhs(t, s, p), np.array([x0, y0])
     if mid == MechanismId.FEAR_MEMORY:
-        p = fear_default
+        p = params or fear_default
         return lambda t, s: fear_memory_rhs(t, s, p), np.array([x0, y0, y0])
     if mid == MechanismId.FEAR_INSTANT:
-        p = fear_default
+        p = params or fear_default
         return lambda t, s: fear_instant_rhs(t, s, p), np.array([x0, y0])
     if mid == MechanismId.FEAR_SATURATING:
-        p = fear_saturating_default
+        p = params or fear_saturating_default
         return lambda t, s: fear_saturating_rhs(t, s, p), np.array([x0, y0])
     if mid == MechanismId.FEAR_FORAGING:
-        p = fear_foraging_default
+        p = params or fear_foraging_default
         return lambda t, s: fear_foraging_rhs(t, s, p), np.array([x0, y0])
     if mid == MechanismId.FEAR_HANDLING:
-        p = fear_handling_default
+        p = params or fear_handling_default
         return lambda t, s: fear_handling_rhs(t, s, p), np.array([x0, y0])
     if mid == MechanismId.BDA_BASELINE:
-        p = bda_no_fear_default
+        p = params or bda_no_fear_default
         return lambda t, s: bd_fear_rhs(t, s, p), np.array([0.17, 3.9])
     if mid == MechanismId.BDA_FEAR:
-        p = bda_fear_default
+        p = params or bda_fear_default
         return lambda t, s: bd_fear_rhs(t, s, p), np.array([0.17, 3.9])
     raise ValueError(f"未知机制: {mid}")
 
@@ -62,21 +62,21 @@ def run_mechanism(
     mid: MechanismId,
     t_span: tuple[float, float] = (0.0, 80.0),
     n_points: int = 800,
+    params=None,
 ):
-    if mid == MechanismId.BASELINE:
-        return integrate_baseline(baseline_default, t_span=t_span, n_points=n_points)
-    if mid == MechanismId.FEAR_MEMORY:
-        return integrate_fear_memory(fear_default, t_span=t_span, n_points=n_points)
-    if mid == MechanismId.FEAR_INSTANT:
-        return integrate_fear_instant(fear_default, t_span=t_span, n_points=n_points)
-    rhs, y0 = make_rhs(mid)
+    rhs, y0 = make_rhs(mid, params=params)
     return integrate_rhs(rhs, y0, t_span=t_span, n_points=n_points)
 
 
 def run_all_mechanisms(
     t_span: tuple[float, float] = (0.0, 80.0),
+    params_by_mechanism: Mapping[MechanismId, object] | None = None,
 ):
-    return {mid: run_mechanism(mid, t_span=t_span) for mid in MechanismId}
+    params_by_mechanism = params_by_mechanism or {}
+    return {
+        mid: run_mechanism(mid, t_span=t_span, params=params_by_mechanism.get(mid))
+        for mid in MechanismId
+    }
 
 
 def mechanism_labels() -> dict[MechanismId, str]:

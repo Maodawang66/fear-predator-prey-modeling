@@ -2,12 +2,25 @@
 
 from __future__ import annotations
 
+from dataclasses import asdict, replace
+
 import numpy as np
 from scipy.optimize import brentq
 
 from .literature import run_mechanism
 from .model import bd_fear_rhs
-from .parameters import BDAFearParams, FearMemoryParams, MechanismId, baseline_default, bda_fear_default, fear_default
+from .parameters import (
+    BDAFearParams,
+    FearMemoryParams,
+    MechanismId,
+    baseline_default,
+    bda_fear_default,
+    bda_no_fear_default,
+    fear_default,
+    fear_foraging_default,
+    fear_handling_default,
+    fear_saturating_default,
+)
 from .simulate import integrate_baseline, integrate_fear_memory, is_extinct, long_term_mean
 
 
@@ -84,10 +97,17 @@ def scan_delta(
 def compare_mechanisms(
     t_end: float = 100.0,
     mechanisms: tuple[MechanismId, ...] | None = None,
+    comparison_mode: str = "equivalent",
 ) -> dict[str, list]:
     """按各模型体系自己的无恐惧基线比较长期均值与相对振幅。"""
     if mechanisms is None:
         mechanisms = tuple(MechanismId)
+    if comparison_mode == "equivalent":
+        params_by_mechanism = equivalent_fear_parameters()
+    elif comparison_mode == "default":
+        params_by_mechanism = {}
+    else:
+        raise ValueError("comparison_mode must be 'equivalent' or 'default'")
 
     rows: dict[str, list] = {
         "mechanism": [],
@@ -115,7 +135,11 @@ def compare_mechanisms(
         return "Holling II", MechanismId.BASELINE
 
     def metrics(mid: MechanismId) -> dict[str, float | str]:
-        sol = run_mechanism(mid, t_span=(0.0, t_end))
+        sol = run_mechanism(
+            mid,
+            t_span=(0.0, t_end),
+            params=params_by_mechanism.get(mid),
+        )
         xm, ym = long_term_mean(sol, burn_in_frac=0.35)
         tail = slice(int(sol.t.size * 0.5), None)
         amp_x = float(np.max(sol.y[0, tail]) - np.min(sol.y[0, tail]))
@@ -162,6 +186,109 @@ def compare_mechanisms(
             )
 
     return rows
+
+
+def equivalent_fear_calibration(target_suppression: float = 0.20) -> dict:
+    """
+    在各模型体系无恐惧正平衡点处，将机制参数校准到相同抑制比例。
+
+    繁殖抑制机制匹配猎物增长项降低比例；觅食/处理时间机制匹配
+    Holling II 捕食率降低比例；B-D 匹配繁殖因子 1/(1+kv)。
+    """
+    if not 0.0 < target_suppression < 1.0:
+        raise ValueError("target_suppression must be between 0 and 1")
+
+    holling_eq = equilibrium_baseline(baseline_default)
+    bda_eq = equilibrium_bda_fear(bda_no_fear_default)
+    x_ref = float(holling_eq["x_star"])
+    y_ref = float(holling_eq["y_star"])
+    u_ref = float(bda_eq["u_star"])
+    v_ref = float(bda_eq["v_star"])
+    remaining = 1.0 - target_suppression
+    memory_ref = y_ref / fear_default.delta
+
+    phi_memory = target_suppression * (1.0 - x_ref / baseline_default.K) / memory_ref
+    phi_instant = target_suppression * (1.0 - x_ref / baseline_default.K) / y_ref
+    h_saturating = y_ref
+    phi_saturating = target_suppression * (y_ref + h_saturating) / y_ref
+    psi_foraging = target_suppression / (remaining * y_ref)
+    psi_handling = (
+        (1.0 + baseline_default.theta * x_ref)
+        * target_suppression
+        / (remaining * baseline_default.theta * x_ref * y_ref)
+    )
+    k_bda = target_suppression / (remaining * v_ref)
+
+    params = {
+        MechanismId.BASELINE: baseline_default,
+        MechanismId.FEAR_MEMORY: replace(fear_default, phi=phi_memory),
+        MechanismId.FEAR_INSTANT: replace(fear_default, phi=phi_instant),
+        MechanismId.FEAR_SATURATING: replace(
+            fear_saturating_default,
+            phi=phi_saturating,
+            h=h_saturating,
+        ),
+        MechanismId.FEAR_FORAGING: replace(fear_foraging_default, psi=psi_foraging),
+        MechanismId.FEAR_HANDLING: replace(fear_handling_default, psi=psi_handling),
+        MechanismId.BDA_BASELINE: bda_no_fear_default,
+        MechanismId.BDA_FEAR: replace(bda_fear_default, k=k_bda),
+    }
+
+    attack_ratio_handling = (
+        1.0 + baseline_default.theta * x_ref
+    ) / (
+        1.0
+        + baseline_default.theta
+        * (1.0 + psi_handling * y_ref)
+        * x_ref
+    )
+    achieved = {
+        MechanismId.FEAR_MEMORY: phi_memory * memory_ref / (1.0 - x_ref / baseline_default.K),
+        MechanismId.FEAR_INSTANT: phi_instant * y_ref / (1.0 - x_ref / baseline_default.K),
+        MechanismId.FEAR_SATURATING: phi_saturating * y_ref / (y_ref + h_saturating),
+        MechanismId.FEAR_FORAGING: 1.0 - 1.0 / (1.0 + psi_foraging * y_ref),
+        MechanismId.FEAR_HANDLING: 1.0 - attack_ratio_handling,
+        MechanismId.BDA_FEAR: 1.0 - 1.0 / (1.0 + k_bda * v_ref),
+    }
+    return {
+        "target_suppression": target_suppression,
+        "reference_states": {
+            "holling_no_fear_equilibrium": {"prey": x_ref, "predator": y_ref},
+            "bda_k0_equilibrium": {"prey": u_ref, "predator": v_ref},
+            "memory_steady_state": memory_ref,
+        },
+        "calibration_rule": {
+            "fear_memory": "growth-term suppression at Holling equilibrium, M*=y*/delta",
+            "fear_instant": "growth-term suppression at Holling equilibrium",
+            "fear_saturating": "growth-term suppression at Holling equilibrium, h=y*",
+            "fear_foraging": "predation-rate suppression at Holling equilibrium",
+            "fear_handling": "predation-rate suppression at Holling equilibrium",
+            "bda_fear": "B-D reproduction-factor suppression at k=0 equilibrium",
+        },
+        "params": params,
+        "achieved_suppression": achieved,
+    }
+
+
+def equivalent_fear_parameters(target_suppression: float = 0.20) -> dict[MechanismId, object]:
+    """返回用于公平机制对照的等效恐惧参数。"""
+    return equivalent_fear_calibration(target_suppression)["params"]
+
+
+def equivalent_fear_calibration_summary(target_suppression: float = 0.20) -> dict:
+    """返回可 JSON 序列化的等效恐惧校准摘要。"""
+    calibration = equivalent_fear_calibration(target_suppression)
+    return {
+        **{k: v for k, v in calibration.items() if k not in ("params", "achieved_suppression")},
+        "params": {
+            mid.value: asdict(params)
+            for mid, params in calibration["params"].items()
+        },
+        "achieved_suppression": {
+            mid.value: value
+            for mid, value in calibration["achieved_suppression"].items()
+        },
+    }
 
 
 def nce_vs_consumptive_summary(

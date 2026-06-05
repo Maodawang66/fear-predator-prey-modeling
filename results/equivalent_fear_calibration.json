@@ -1,0 +1,108 @@
+{
+  "target_suppression": 0.2,
+  "reference_states": {
+    "holling_no_fear_equilibrium": {
+      "prey": 20.022525340989343,
+      "predator": 20.4172254166545
+    },
+    "bda_k0_equilibrium": {
+      "prey": 11.407464256004149,
+      "predator": 13.06920591573845
+    },
+    "memory_steady_state": 20.4172254166545
+  },
+  "calibration_rule": {
+    "fear_memory": "growth-term suppression at Holling equilibrium, M*=y*/delta",
+    "fear_instant": "growth-term suppression at Holling equilibrium",
+    "fear_saturating": "growth-term suppression at Holling equilibrium, h=y*",
+    "fear_foraging": "predation-rate suppression at Holling equilibrium",
+    "fear_handling": "predation-rate suppression at Holling equilibrium",
+    "bda_fear": "B-D reproduction-factor suppression at k=0 equilibrium"
+  },
+  "params": {
+    "baseline": {
+      "r": 1.0,
+      "K": 100.0,
+      "a": 0.04325,
+      "theta": 0.0052,
+      "e": 0.51,
+      "mu": 0.4
+    },
+    "fear_memory": {
+      "r": 1.0,
+      "K": 100.0,
+      "a": 0.04325,
+      "theta": 0.0052,
+      "e": 0.51,
+      "mu": 0.4,
+      "phi": 0.007834313725485187,
+      "delta": 1.0
+    },
+    "fear_instant": {
+      "r": 1.0,
+      "K": 100.0,
+      "a": 0.04325,
+      "theta": 0.0052,
+      "e": 0.51,
+      "mu": 0.4,
+      "phi": 0.007834313725485187,
+      "delta": 1.0
+    },
+    "fear_saturating": {
+      "r": 1.0,
+      "K": 100.0,
+      "a": 0.04325,
+      "theta": 0.0052,
+      "e": 0.51,
+      "mu": 0.4,
+      "phi": 0.39999999999999997,
+      "h": 20.4172254166545
+    },
+    "fear_foraging": {
+      "r": 1.0,
+      "K": 100.0,
+      "a": 0.04325,
+      "theta": 0.0052,
+      "e": 0.51,
+      "mu": 0.4,
+      "psi": 0.012244562857991123
+    },
+    "fear_handling": {
+      "r": 1.0,
+      "K": 100.0,
+      "a": 0.04325,
+      "theta": 0.0052,
+      "e": 0.51,
+      "mu": 0.4,
+      "psi": 0.12984829098094947
+    },
+    "bda_baseline": {
+      "r": 2.5,
+      "d": 0.5,
+      "a": 0.1,
+      "k": 0.0,
+      "p": 1.0,
+      "q": 0.1,
+      "c": 0.8,
+      "m": 0.6
+    },
+    "bda_fear": {
+      "r": 2.5,
+      "d": 0.5,
+      "a": 0.1,
+      "k": 0.019128935729671243,
+      "p": 1.0,
+      "q": 0.1,
+      "c": 0.8,
+      "m": 0.6
+    }
+  },
+  "achieved_suppression": {
+    "fear_memory": 0.20000000000000004,
+    "fear_instant": 0.20000000000000004,
+    "fear_saturating": 0.19999999999999998,
+    "fear_foraging": 0.19999999999999996,
+    "fear_handling": 0.20000000000000007,
+    "bda_fear": 0.19999999999999996
+  }
+}
