@@ -45,6 +45,8 @@ def _save_json(result: FitResult, path: Path) -> None:
         "rmse_raw_predator": result.rmse_raw_predator,
         "rmse_raw_total": result.rmse_raw_total,
         "success": result.success,
+        "optimization_status": result.optimization_status,
+        "usable_for_comparison": result.usable_for_comparison,
         "message": result.message,
         "meta": result.meta,
     }
@@ -80,7 +82,10 @@ def _fit_one_series(series, tag: str) -> list[FitResult]:
         stem = f"{tag}_{model_name}"
         plot_fit_result(res, OUT / "figures" / f"{stem}.png")
         _save_json(res, OUT / "params" / f"{stem}.json")
-        print(f"  [{model_name}] RMSE={res.rmse_total:.4g}  success={res.success}")
+        print(
+            f"  [{model_name}] normalized_RMSE={res.rmse_total:.4g}  "
+            f"status={res.optimization_status}"
+        )
         if model_name == "fear_memory":
             print(f"    phi={res.params.get('phi', 0):.5f}")
         if model_name == "bda_fear":
@@ -138,7 +143,9 @@ def _write_summary_table(all_results: list[FitResult]) -> None:
         [
             "series", "model",
             "rmse_normalized_total", "rmse_normalized_prey", "rmse_normalized_predator",
-            "rmse_raw_total", "rmse_raw_prey", "rmse_raw_predator", "success",
+            "rmse_raw_total", "rmse_raw_prey", "rmse_raw_predator",
+            "optimization_status", "usable_for_comparison", "success",
+            "termination_reason", "objective_value", "parameter_bound_hits",
         ]
         + meta_keys
         + param_keys
@@ -156,7 +163,12 @@ def _write_summary_table(all_results: list[FitResult]) -> None:
                 "rmse_raw_total": r.rmse_raw_total,
                 "rmse_raw_prey": r.rmse_raw_prey,
                 "rmse_raw_predator": r.rmse_raw_predator,
+                "optimization_status": r.optimization_status,
+                "usable_for_comparison": r.usable_for_comparison,
                 "success": r.success,
+                "termination_reason": r.meta.get("termination_reason", r.message),
+                "objective_value": r.meta.get("objective_value", ""),
+                "parameter_bound_hits": ";".join(r.meta.get("parameter_bound_hits", [])),
             }
             for mk in meta_keys:
                 row[mk] = r.meta.get(mk, "")
@@ -204,7 +216,10 @@ def main() -> None:
         results = _fit_one_series(series, tag)
         all_results.extend(results)
         for r in results:
-            log.append(f"OK {tag}_{r.model} RMSE={r.rmse_total:.4g}")
+            log.append(
+                f"{r.optimization_status.upper()} {tag}_{r.model} "
+                f"normalized_RMSE={r.rmse_total:.4g} reason={r.message}"
+            )
 
     _write_summary_table(all_results)
     (OUT / "calibration_log.txt").write_text(

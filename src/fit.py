@@ -17,9 +17,11 @@ from .parameters import BDAFearParams, BaselineParams, FearMemoryParams
 class _OptResult:
     x: np.ndarray
     success: bool
+    status: str
     message: str
     nfev: int
     cost: float
+    bound_hit_indices: list[int]
 
 
 def _bounded_minimize(
@@ -65,12 +67,31 @@ def _bounded_minimize(
         message = str(res.message)
 
     final_r = residual(x)
+    cost = float(np.dot(final_r, final_r))
+    message_lower = message.lower()
+    reached_limit = any(
+        token in message_lower
+        for token in ("maximum number", "exceeds limit", "maxfun", "maxiter", "iteration limit")
+    )
+    usable_objective = np.isfinite(cost) and np.all(np.isfinite(final_r)) and np.max(np.abs(final_r)) < 1e5
+    if success and usable_objective:
+        status = "success"
+    elif reached_limit and usable_objective:
+        status = "usable_limit"
+    else:
+        status = "failed"
+    bound_tol = np.maximum(1e-6, 1e-3 * (ub - lb))
+    bound_hit_indices = np.flatnonzero(
+        (np.abs(x - lb) <= bound_tol) | (np.abs(x - ub) <= bound_tol)
+    ).astype(int).tolist()
     return _OptResult(
         x=x,
         success=success,
+        status=status,
         message=message,
         nfev=nfev,
-        cost=float(np.dot(final_r, final_r)),
+        cost=cost,
+        bound_hit_indices=bound_hit_indices,
     )
 
 
@@ -86,6 +107,7 @@ class FitResult:
     rmse_raw_predator: float
     rmse_raw_total: float
     success: bool
+    optimization_status: str
     message: str
     t_obs: np.ndarray
     prey_obs: np.ndarray
@@ -108,6 +130,10 @@ class FitResult:
     def rmse_total(self) -> float:
         """兼容旧调用；跨模型比较统一返回归一化 RMSE。"""
         return self.rmse_normalized_total
+
+    @property
+    def usable_for_comparison(self) -> bool:
+        return self.optimization_status in ("success", "usable_limit")
 
 
 def _simulate_at_times(
@@ -154,6 +180,15 @@ def _fit_rmse_metrics(
             np.concatenate([prey_obs, predator_obs]),
             np.concatenate([prey_pred, predator_pred]),
         ),
+    }
+
+
+def _optimization_meta(res: _OptResult, param_names: list[str]) -> dict:
+    return {
+        "nfev": int(res.nfev),
+        "objective_value": float(res.cost),
+        "termination_reason": str(res.message),
+        "parameter_bound_hits": [param_names[i] for i in res.bound_hit_indices],
     }
 
 
@@ -249,13 +284,14 @@ def fit_baseline_to_series(
         },
         **rmse_metrics,
         success=bool(res.success),
+        optimization_status=res.status,
         message=str(res.message),
         t_obs=t_obs,
         prey_obs=series.prey,
         predator_obs=series.predator,
         prey_pred=y_pred[0],
         predator_pred=y_pred[1],
-        meta={"nfev": int(res.nfev), "cost": float(res.cost)},
+        meta=_optimization_meta(res, ["r", "K", "a", "theta"]),
     )
 
 
@@ -336,13 +372,14 @@ def fit_fear_memory_to_series(
         },
         **rmse_metrics,
         success=bool(res.success),
+        optimization_status=res.status,
         message=str(res.message),
         t_obs=t_obs,
         prey_obs=series.prey,
         predator_obs=series.predator,
         prey_pred=y_pred[0],
         predator_pred=y_pred[1],
-        meta={"nfev": int(res.nfev), "cost": float(res.cost)},
+        meta=_optimization_meta(res, ["r", "K", "a", "theta", "phi"]),
     )
 
 
@@ -438,13 +475,14 @@ def fit_bda_fear_to_series(
         params=params,
         **rmse_metrics,
         success=bool(res.success),
+        optimization_status=res.status,
         message=str(res.message),
         t_obs=t_obs,
         prey_obs=series.prey,
         predator_obs=series.predator,
         prey_pred=prey_pred_raw,
         predator_pred=predator_pred_raw,
-        meta={"nfev": int(res.nfev), "normalized_fit": True},
+        meta={**_optimization_meta(res, names), "normalized_fit": True},
     )
 
 

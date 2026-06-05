@@ -49,6 +49,8 @@ def _save_params(result: FitResult, path: Path) -> None:
         "rmse_raw_predator": result.rmse_raw_predator,
         "rmse_raw_total": result.rmse_raw_total,
         "success": result.success,
+        "optimization_status": result.optimization_status,
+        "usable_for_comparison": result.usable_for_comparison,
         "message": result.message,
         "meta": result.meta,
     }
@@ -66,10 +68,13 @@ def _run_one(series, tag: str, log: list[str]) -> None:
         plot_fit_result(res, OUT / f"{stem}.png")
         _save_params(res, OUT / f"{stem}.json")
         log.append(
-            f"OK {stem}: RMSE={res.rmse_total:.4g} "
+            f"{res.optimization_status.upper()} {stem}: normalized_RMSE={res.rmse_total:.4g} "
             f"(prey={res.rmse_prey:.4g}, pred={res.rmse_predator:.4g})"
         )
-        print(f"  [{res.model}] RMSE={res.rmse_total:.4g}  success={res.success}")
+        print(
+            f"  [{res.model}] normalized_RMSE={res.rmse_total:.4g}  "
+            f"status={res.optimization_status}"
+        )
         if res.model == "fear_memory":
             print(f"    phi={res.params.get('phi', 0):.5f}")
         if res.model == "bda_fear":

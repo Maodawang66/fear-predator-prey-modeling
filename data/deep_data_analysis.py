@@ -88,6 +88,13 @@ def _f(row: dict, key: str, default: float = float("nan")) -> float:
         return default
 
 
+def _is_usable_fit(row: dict) -> bool:
+    status = row.get("optimization_status", "")
+    if status:
+        return status in ("success", "usable_limit")
+    return str(row.get("success", "")).lower() == "true"
+
+
 def _classify_group(series: str) -> str:
     s = series.lower()
     if "glerl" in s or "zoop" in s:
@@ -120,7 +127,10 @@ def _write_csv(rows: list[dict], path: Path, fieldnames: list[str]) -> None:
 
 def build_cross_system_table(rows: list[dict]) -> list[dict]:
     """从 fit_summary 构建跨系统 k、η 汇总表。"""
-    bda = [r for r in rows if r.get("model") == "bda_fear"]
+    bda = [
+        r for r in rows
+        if r.get("model") == "bda_fear" and _is_usable_fit(r)
+    ]
     out: list[dict] = []
     for r in bda:
         name = r["series"]
@@ -150,6 +160,8 @@ def build_rmse_improvement(rows: list[dict]) -> list[dict]:
     """baseline / fear_memory / bda_fear RMSE 与改进倍数。"""
     by_series: dict[str, dict[str, float]] = {}
     for r in rows:
+        if not _is_usable_fit(r):
+            continue
         s = r["series"]
         by_series.setdefault(s, {})[r["model"]] = _f(r, "rmse_normalized_total")
 
@@ -183,6 +195,7 @@ def _short_series_name(series: str) -> str:
 
 
 def plot_rmse_improvement(data: list[dict], path: Path) -> None:
+    data = [d for d in data if np.isfinite(d.get("improvement_ratio", float("nan")))]
     data = sorted(data, key=lambda d: d.get("improvement_ratio", 0), reverse=True)
     names = [_short_series_name(d["series"]) for d in data]
     ratios = [d["improvement_ratio"] for d in data]
@@ -860,7 +873,10 @@ def main() -> None:
     series_list = discover_and_load(min_confidence=0.5)
     series_by_name = _series_index(series_list)
 
-    bda_rows = [r for r in fit_rows if r.get("model") == "bda_fear"]
+    bda_rows = [
+        r for r in fit_rows
+        if r.get("model") == "bda_fear" and _is_usable_fit(r)
+    ]
 
     if args.skip_profile_all:
         _, ident = run_k_profiles(bda_rows, series_by_name, tier1, representatives_only=True)
