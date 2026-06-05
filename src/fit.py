@@ -79,9 +79,12 @@ class FitResult:
     model: str
     series_name: str
     params: dict[str, float]
-    rmse_prey: float
-    rmse_predator: float
-    rmse_total: float
+    rmse_normalized_prey: float
+    rmse_normalized_predator: float
+    rmse_normalized_total: float
+    rmse_raw_prey: float
+    rmse_raw_predator: float
+    rmse_raw_total: float
     success: bool
     message: str
     t_obs: np.ndarray
@@ -90,6 +93,21 @@ class FitResult:
     prey_pred: np.ndarray
     predator_pred: np.ndarray
     meta: dict = field(default_factory=dict)
+
+    @property
+    def rmse_prey(self) -> float:
+        """兼容旧调用；跨模型比较统一返回归一化 RMSE。"""
+        return self.rmse_normalized_prey
+
+    @property
+    def rmse_predator(self) -> float:
+        """兼容旧调用；跨模型比较统一返回归一化 RMSE。"""
+        return self.rmse_normalized_predator
+
+    @property
+    def rmse_total(self) -> float:
+        """兼容旧调用；跨模型比较统一返回归一化 RMSE。"""
+        return self.rmse_normalized_total
 
 
 def _simulate_at_times(
@@ -109,6 +127,34 @@ def _simulate_at_times(
 
 def _rmse(obs: np.ndarray, pred: np.ndarray) -> float:
     return float(np.sqrt(np.mean((obs - pred) ** 2)))
+
+
+def _fit_rmse_metrics(
+    prey_obs: np.ndarray,
+    predator_obs: np.ndarray,
+    prey_pred: np.ndarray,
+    predator_pred: np.ndarray,
+    prey_scale: float,
+    predator_scale: float,
+) -> dict[str, float]:
+    prey_obs_norm = prey_obs / prey_scale
+    predator_obs_norm = predator_obs / predator_scale
+    prey_pred_norm = prey_pred / prey_scale
+    predator_pred_norm = predator_pred / predator_scale
+    return {
+        "rmse_normalized_prey": _rmse(prey_obs_norm, prey_pred_norm),
+        "rmse_normalized_predator": _rmse(predator_obs_norm, predator_pred_norm),
+        "rmse_normalized_total": _rmse(
+            np.concatenate([prey_obs_norm, predator_obs_norm]),
+            np.concatenate([prey_pred_norm, predator_pred_norm]),
+        ),
+        "rmse_raw_prey": _rmse(prey_obs, prey_pred),
+        "rmse_raw_predator": _rmse(predator_obs, predator_pred),
+        "rmse_raw_total": _rmse(
+            np.concatenate([prey_obs, predator_obs]),
+            np.concatenate([prey_pred, predator_pred]),
+        ),
+    }
 
 
 def _pack_baseline(log_params: np.ndarray, fixed: BaselineParams) -> BaselineParams:
@@ -184,6 +230,9 @@ def fit_baseline_to_series(
         np.array([x0, y0]),
         t_obs,
     )
+    rmse_metrics = _fit_rmse_metrics(
+        series.prey, series.predator, y_pred[0], y_pred[1], prey_max, pred_max,
+    )
 
     return FitResult(
         model="baseline",
@@ -198,12 +247,7 @@ def fit_baseline_to_series(
             "x0": x0,
             "y0": y0,
         },
-        rmse_prey=_rmse(series.prey, y_pred[0]),
-        rmse_predator=_rmse(series.predator, y_pred[1]),
-        rmse_total=_rmse(
-            np.concatenate([series.prey, series.predator]),
-            np.concatenate([y_pred[0], y_pred[1]]),
-        ),
+        **rmse_metrics,
         success=bool(res.success),
         message=str(res.message),
         t_obs=t_obs,
@@ -270,6 +314,9 @@ def fit_fear_memory_to_series(
         np.array([x0, y0, m0]),
         t_obs,
     )
+    rmse_metrics = _fit_rmse_metrics(
+        series.prey, series.predator, y_pred[0], y_pred[1], prey_max, pred_max,
+    )
 
     return FitResult(
         model="fear_memory",
@@ -287,12 +334,7 @@ def fit_fear_memory_to_series(
             "y0": y0,
             "m0": m0,
         },
-        rmse_prey=_rmse(series.prey, y_pred[0]),
-        rmse_predator=_rmse(series.predator, y_pred[1]),
-        rmse_total=_rmse(
-            np.concatenate([series.prey, series.predator]),
-            np.concatenate([y_pred[0], y_pred[1]]),
-        ),
+        **rmse_metrics,
         success=bool(res.success),
         message=str(res.message),
         t_obs=t_obs,
@@ -379,24 +421,29 @@ def fit_bda_fear_to_series(
 
     params = {n: getattr(p_fit, n) for n in names}
     params.update({"u0": u0, "v0": v0, "u_scale": u_scale, "v_scale": v_scale})
+    prey_pred_raw = y_pred[0] * u_scale
+    predator_pred_raw = y_pred[1] * v_scale
+    rmse_metrics = _fit_rmse_metrics(
+        series.prey,
+        series.predator,
+        prey_pred_raw,
+        predator_pred_raw,
+        u_scale,
+        v_scale,
+    )
 
     return FitResult(
         model="bda_fear",
         series_name=series.name,
         params=params,
-        rmse_prey=_rmse(prey, y_pred[0]),
-        rmse_predator=_rmse(predator, y_pred[1]),
-        rmse_total=_rmse(
-            np.concatenate([prey, predator]),
-            np.concatenate([y_pred[0], y_pred[1]]),
-        ),
+        **rmse_metrics,
         success=bool(res.success),
         message=str(res.message),
         t_obs=t_obs,
         prey_obs=series.prey,
         predator_obs=series.predator,
-        prey_pred=y_pred[0] * u_scale,
-        predator_pred=y_pred[1] * v_scale,
+        prey_pred=prey_pred_raw,
+        predator_pred=predator_pred_raw,
         meta={"nfev": int(res.nfev), "normalized_fit": True},
     )
 
@@ -483,8 +530,8 @@ def profile_bda_k(
         rmse_prey, rmse_pred, rmse_total = bda_fear_rmse_at_params(series, p)
         rows.append({
             "k": float(kv),
-            "rmse_prey": rmse_prey,
-            "rmse_predator": rmse_pred,
-            "rmse_total": rmse_total,
+            "rmse_normalized_prey": rmse_prey,
+            "rmse_normalized_predator": rmse_pred,
+            "rmse_normalized_total": rmse_total,
         })
     return rows

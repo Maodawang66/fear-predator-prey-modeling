@@ -136,9 +136,9 @@ def build_cross_system_table(rows: list[dict]) -> list[dict]:
             "v0": v0,
             "eta_v0": eta_v0,
             "eta_v5": eta_v5,
-            "rmse_total": _f(r, "rmse_total"),
-            "rmse_prey": _f(r, "rmse_prey"),
-            "rmse_predator": _f(r, "rmse_predator"),
+            "rmse_normalized_total": _f(r, "rmse_normalized_total"),
+            "rmse_normalized_prey": _f(r, "rmse_normalized_prey"),
+            "rmse_normalized_predator": _f(r, "rmse_normalized_predator"),
             "p": _f(r, "p"),
             "q": _f(r, "q"),
             "r_param": _f(r, "r"),
@@ -151,7 +151,7 @@ def build_rmse_improvement(rows: list[dict]) -> list[dict]:
     by_series: dict[str, dict[str, float]] = {}
     for r in rows:
         s = r["series"]
-        by_series.setdefault(s, {})[r["model"]] = _f(r, "rmse_total")
+        by_series.setdefault(s, {})[r["model"]] = _f(r, "rmse_normalized_total")
 
     out: list[dict] = []
     for s, models in sorted(by_series.items()):
@@ -162,9 +162,9 @@ def build_rmse_improvement(rows: list[dict]) -> list[dict]:
         out.append({
             "series": s,
             "group": _classify_group(s),
-            "rmse_baseline": base,
-            "rmse_fear_memory": mem,
-            "rmse_bda_fear": bda,
+            "rmse_normalized_baseline": base,
+            "rmse_normalized_fear_memory": mem,
+            "rmse_normalized_bda_fear": bda,
             "improvement_ratio": ratio,
         })
     return out
@@ -235,7 +235,7 @@ def plot_eta_by_group(cross: list[dict], path: Path) -> None:
     ax2 = axes[1]
     for g in groups:
         xs = [r["k"] for r in cross if r["group"] == g]
-        ys = [r["rmse_total"] for r in cross if r["group"] == g]
+        ys = [r["rmse_normalized_total"] for r in cross if r["group"] == g]
         ax2.scatter(xs, ys, label=f"{g} (n={len(xs)})", c=palette[g], s=60, alpha=0.85)
     ax2.set_xscale("log")
     ax2.set_xlabel("fitted k")
@@ -289,7 +289,7 @@ def plot_andren_regions(cross: list[dict], path: Path) -> None:
     reg.sort(key=lambda d: _region(d["series"]))
     regions = [_region(r["series"]) for r in reg]
     ks = [r["k"] for r in reg]
-    rmses = [r["rmse_total"] for r in reg]
+    rmses = [r["rmse_normalized_total"] for r in reg]
 
     fig, ax1 = plt.subplots(figsize=(7, 4))
     ax1.plot(regions, ks, "o-", color="#4C72B0", label="k")
@@ -305,12 +305,16 @@ def plot_andren_regions(cross: list[dict], path: Path) -> None:
 
 
 def _profile_identifiability(profile_rows: list[dict], fitted_k: float) -> dict:
-    rmses = [r["rmse_total"] for r in profile_rows if np.isfinite(r["rmse_total"])]
+    rmses = [
+        r["rmse_normalized_total"]
+        for r in profile_rows
+        if np.isfinite(r["rmse_normalized_total"])
+    ]
     if not rmses:
         return {"k_min_rmse": float("nan"), "rmse_min": float("nan"), "width_10pct": float("nan")}
     rmin = min(rmses)
     tol = 1.10 * rmin
-    ks_ok = [r["k"] for r in profile_rows if r["rmse_total"] <= tol]
+    ks_ok = [r["k"] for r in profile_rows if r["rmse_normalized_total"] <= tol]
     return {
         "k_min_rmse": min(ks_ok) if ks_ok else float("nan"),
         "k_max_rmse": max(ks_ok) if ks_ok else float("nan"),
@@ -327,7 +331,7 @@ def plot_k_profile(
     path: Path,
 ) -> None:
     ks = [r["k"] for r in profile_rows]
-    rmses = [r["rmse_total"] for r in profile_rows]
+    rmses = [r["rmse_normalized_total"] for r in profile_rows]
     fig, ax = plt.subplots(figsize=(6, 4))
     ax.plot(ks, rmses, "b.-", lw=1.2)
     ax.axvline(fitted_k, color="red", ls="--", label=f"fitted k={fitted_k:.4g}")
@@ -354,7 +358,7 @@ def plot_k_profile_grid(all_profiles: dict[str, list[dict]], fitted_ks: dict[str
         ax = axes[idx // ncols, idx % ncols]
         rows = all_profiles[name]
         ks = [r["k"] for r in rows]
-        rmses = [r["rmse_total"] for r in rows]
+        rmses = [r["rmse_normalized_total"] for r in rows]
         ax.plot(ks, rmses, "b.-", ms=3)
         fk = fitted_ks.get(name, float("nan"))
         if np.isfinite(fk):
@@ -409,7 +413,10 @@ def run_k_profiles(
     _write_csv(
         long_rows,
         out_dir / "k_profile_long.csv",
-        ["series", "k", "rmse_prey", "rmse_predator", "rmse_total"],
+        [
+            "series", "k",
+            "rmse_normalized_prey", "rmse_normalized_predator", "rmse_normalized_total",
+        ],
     )
     _write_csv(
         ident_rows,
@@ -744,7 +751,7 @@ def run_lter_extra(out_dir: Path, lake_id: int = LTER_DEFAULT_LAKE) -> list[dict
             "predator": pred,
             "lake_id": lake_id,
             "n_points": series.n_points,
-            "rmse_total": res.rmse_total,
+            "rmse_normalized_total": res.rmse_normalized_total,
             "k": res.params.get("k", float("nan")),
             "p": res.params.get("p", float("nan")),
             "q": res.params.get("q", float("nan")),
@@ -752,7 +759,8 @@ def run_lter_extra(out_dir: Path, lake_id: int = LTER_DEFAULT_LAKE) -> list[dict
         from src.visualize import plot_fit_result
         plot_fit_result(res, out_dir / f"lter_{series.name}_bda_fear.png")
     _write_csv(out_rows, out_dir / "lter_extra_fits.csv",
-               ["series", "prey", "predator", "lake_id", "n_points", "rmse_total", "k", "p", "q"])
+               ["series", "prey", "predator", "lake_id", "n_points",
+                "rmse_normalized_total", "k", "p", "q"])
     return out_rows
 
 
@@ -832,12 +840,14 @@ def main() -> None:
     cross = build_cross_system_table(fit_rows)
     _write_csv(cross, tier1 / "cross_system_k_eta.csv",
                ["series", "group", "group_key", "k", "v0", "eta_v0", "eta_v5",
-                "rmse_total", "rmse_prey", "rmse_predator", "p", "q", "r_param"])
+                "rmse_normalized_total", "rmse_normalized_prey",
+                "rmse_normalized_predator", "p", "q", "r_param"])
 
     improve = build_rmse_improvement(fit_rows)
     _write_csv(improve, tier1 / "rmse_improvement.csv",
-               ["series", "group", "rmse_baseline", "rmse_fear_memory",
-                "rmse_bda_fear", "improvement_ratio"])
+               ["series", "group", "rmse_normalized_baseline",
+                "rmse_normalized_fear_memory", "rmse_normalized_bda_fear",
+                "improvement_ratio"])
 
     plot_rmse_improvement(improve, tier1 / "rmse_improvement.png")
     plot_eta_by_group(cross, tier1 / "eta_by_group.png")

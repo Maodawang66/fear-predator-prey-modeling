@@ -38,9 +38,12 @@ def _save_json(result: FitResult, path: Path) -> None:
         "model": result.model,
         "series": result.series_name,
         "params": result.params,
-        "rmse_prey": result.rmse_prey,
-        "rmse_predator": result.rmse_predator,
-        "rmse_total": result.rmse_total,
+        "rmse_normalized_prey": result.rmse_normalized_prey,
+        "rmse_normalized_predator": result.rmse_normalized_predator,
+        "rmse_normalized_total": result.rmse_normalized_total,
+        "rmse_raw_prey": result.rmse_raw_prey,
+        "rmse_raw_predator": result.rmse_raw_predator,
+        "rmse_raw_total": result.rmse_raw_total,
         "success": result.success,
         "message": result.message,
         "meta": result.meta,
@@ -132,7 +135,11 @@ def _write_summary_table(all_results: list[FitResult]) -> None:
         "group_key",
     ]
     fieldnames = (
-        ["series", "model", "rmse_total", "rmse_prey", "rmse_predator", "success"]
+        [
+            "series", "model",
+            "rmse_normalized_total", "rmse_normalized_prey", "rmse_normalized_predator",
+            "rmse_raw_total", "rmse_raw_prey", "rmse_raw_predator", "success",
+        ]
         + meta_keys
         + param_keys
     )
@@ -143,9 +150,12 @@ def _write_summary_table(all_results: list[FitResult]) -> None:
             row = {
                 "series": r.series_name,
                 "model": r.model,
-                "rmse_total": r.rmse_total,
-                "rmse_prey": r.rmse_prey,
-                "rmse_predator": r.rmse_predator,
+                "rmse_normalized_total": r.rmse_normalized_total,
+                "rmse_normalized_prey": r.rmse_normalized_prey,
+                "rmse_normalized_predator": r.rmse_normalized_predator,
+                "rmse_raw_total": r.rmse_raw_total,
+                "rmse_raw_prey": r.rmse_raw_prey,
+                "rmse_raw_predator": r.rmse_raw_predator,
                 "success": r.success,
             }
             for mk in meta_keys:
