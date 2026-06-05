@@ -85,32 +85,81 @@ def compare_mechanisms(
     t_end: float = 100.0,
     mechanisms: tuple[MechanismId, ...] | None = None,
 ) -> dict[str, list]:
-    """比较各文献机制的长期平均密度与动力学类型。"""
+    """按各模型体系自己的无恐惧基线比较长期均值与相对振幅。"""
     if mechanisms is None:
         mechanisms = tuple(MechanismId)
 
     rows: dict[str, list] = {
         "mechanism": [],
         "label": [],
+        "model_family": [],
+        "baseline_mechanism": [],
         "x_mean": [],
         "y_mean": [],
         "status": [],
         "amplitude_x": [],
+        "amplitude_y": [],
+        "relative_amplitude_x": [],
+        "relative_amplitude_y": [],
+        "x_mean_change_pct": [],
+        "y_mean_change_pct": [],
+        "relative_amplitude_x_change_pct": [],
+        "relative_amplitude_y_change_pct": [],
     }
 
     from .parameters import MECHANISM_LABELS
 
-    for mid in mechanisms:
+    def family_and_baseline(mid: MechanismId) -> tuple[str, MechanismId]:
+        if mid in (MechanismId.BDA_BASELINE, MechanismId.BDA_FEAR):
+            return "B-D", MechanismId.BDA_BASELINE
+        return "Holling II", MechanismId.BASELINE
+
+    def metrics(mid: MechanismId) -> dict[str, float | str]:
         sol = run_mechanism(mid, t_span=(0.0, t_end))
         xm, ym = long_term_mean(sol, burn_in_frac=0.35)
         tail = slice(int(sol.t.size * 0.5), None)
         amp_x = float(np.max(sol.y[0, tail]) - np.min(sol.y[0, tail]))
+        amp_y = float(np.max(sol.y[1, tail]) - np.min(sol.y[1, tail]))
+        return {
+            "x_mean": xm,
+            "y_mean": ym,
+            "status": is_extinct(sol),
+            "amplitude_x": amp_x,
+            "amplitude_y": amp_y,
+            "relative_amplitude_x": amp_x / max(abs(xm), 1e-12),
+            "relative_amplitude_y": amp_y / max(abs(ym), 1e-12),
+        }
+
+    needed_baselines = {family_and_baseline(mid)[1] for mid in mechanisms}
+    baseline_metrics = {mid: metrics(mid) for mid in needed_baselines}
+
+    def pct_change(value: float, baseline: float) -> float:
+        if abs(baseline) < 1e-12:
+            return 0.0 if abs(value) < 1e-12 else float("nan")
+        return 100.0 * (value / baseline - 1.0)
+
+    for mid in mechanisms:
+        family, baseline_mid = family_and_baseline(mid)
+        current = metrics(mid)
+        baseline = baseline_metrics[baseline_mid]
         rows["mechanism"].append(mid.value)
         rows["label"].append(MECHANISM_LABELS[mid])
-        rows["x_mean"].append(xm)
-        rows["y_mean"].append(ym)
-        rows["status"].append(is_extinct(sol))
-        rows["amplitude_x"].append(amp_x)
+        rows["model_family"].append(family)
+        rows["baseline_mechanism"].append(baseline_mid.value)
+        for key in (
+            "x_mean",
+            "y_mean",
+            "status",
+            "amplitude_x",
+            "amplitude_y",
+            "relative_amplitude_x",
+            "relative_amplitude_y",
+        ):
+            rows[key].append(current[key])
+        for key in ("x_mean", "y_mean", "relative_amplitude_x", "relative_amplitude_y"):
+            rows[f"{key}_change_pct"].append(
+                pct_change(float(current[key]), float(baseline[key]))
+            )
 
     return rows
 

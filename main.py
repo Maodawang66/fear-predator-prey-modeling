@@ -119,10 +119,17 @@ def main() -> None:
     )
 
     print("\n机制对照摘要:")
-    for lab, xm, ym, st in zip(
-        cmp["label"], cmp["x_mean"], cmp["y_mean"], cmp["status"]
+    for lab, dx, dy, da, st in zip(
+        cmp["label"],
+        cmp["x_mean_change_pct"],
+        cmp["y_mean_change_pct"],
+        cmp["relative_amplitude_x_change_pct"],
+        cmp["status"],
     ):
-        print(f"  {lab}: x_mean={xm:.2f}, y_mean={ym:.2f}, {st}")
+        print(
+            f"  {lab}: prey mean={dx:+.1f}%, predator mean={dy:+.1f}%, "
+            f"prey A/mean={da:+.1f}%, {st}"
+        )
 
     # --- Myint et al. (2025) B-D + 恐惧模型 ---
     print("\n--- Myint et al. (2025) B-D + 恐惧 ---")

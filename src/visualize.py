@@ -144,42 +144,42 @@ def plot_mechanism_comparison(
     labels: dict[MechanismId, str],
     out: Path,
 ) -> None:
-    """Literature mechanisms: prey/predator time series."""
-    fig, axes = plt.subplots(2, 1, figsize=(10, 7), sharex=True)
+    """Absolute time series split by model scale; not a cross-family comparison."""
+    fig, axes = plt.subplots(2, 2, figsize=(13, 7), sharex="col")
     for mid, sol in solutions.items():
         lab = labels.get(mid, mid.value)
-        axes[0].plot(sol.t, sol.y[0], lw=1.2, label=lab)
-        axes[1].plot(sol.t, sol.y[1], lw=1.2, label=lab)
-    axes[0].set_ylabel("prey x")
-    axes[0].legend(fontsize=7, loc="upper right")
-    axes[0].grid(True, alpha=0.3)
-    axes[1].set_ylabel("predator y")
-    axes[1].set_xlabel("time t")
-    axes[1].legend(fontsize=7, loc="upper right")
-    axes[1].grid(True, alpha=0.3)
-    fig.suptitle("Literature mechanisms: alternative fear formulations")
+        col = 1 if mid in (MechanismId.BDA_BASELINE, MechanismId.BDA_FEAR) else 0
+        axes[0, col].plot(sol.t, sol.y[0], lw=1.2, label=lab)
+        axes[1, col].plot(sol.t, sol.y[1], lw=1.2, label=lab)
+    for col, family in enumerate(("Holling II (x, y scale)", "B-D (u, v scale)")):
+        axes[0, col].set_title(family)
+        axes[0, col].set_ylabel("prey density")
+        axes[1, col].set_ylabel("predator density")
+        axes[1, col].set_xlabel("time t")
+        for row in range(2):
+            axes[row, col].legend(fontsize=7, loc="best")
+            axes[row, col].grid(True, alpha=0.3)
+    fig.suptitle("Absolute mechanism trajectories (separate model scales)")
     fig.tight_layout()
     fig.savefig(out, dpi=150)
     plt.close(fig)
 
 
 def plot_mechanism_bars(compare_rows: dict[str, list], out: Path) -> None:
-    """Long-run mean density by mechanism."""
+    """Long-run mean changes relative to each model family's no-fear baseline."""
     labels = compare_rows["label"]
     x = np.arange(len(labels))
     w = 0.35
-    x_means = compare_rows["x_mean"]
-    y_means = compare_rows["y_mean"]
+    x_means = compare_rows["x_mean_change_pct"]
+    y_means = compare_rows["y_mean_change_pct"]
     fig, ax = plt.subplots(figsize=(10, 5))
-    ax.bar(x - w / 2, x_means, w, label="prey mean", color="#4C72B0")
-    ax.bar(x + w / 2, y_means, w, label="predator mean", color="#C44E52")
-    for i, ym in enumerate(y_means):
-        if ym < 1.0:
-            ax.text(i + w / 2, max(ym, 0.5), f"ȳ={ym:.2g}", ha="center", va="bottom", fontsize=7, color="#8B0000")
+    ax.bar(x - w / 2, x_means, w, label="prey mean change", color="#4C72B0")
+    ax.bar(x + w / 2, y_means, w, label="predator mean change", color="#C44E52")
+    ax.axhline(0.0, color="black", lw=0.8)
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=25, ha="right", fontsize=8)
-    ax.set_ylabel("time-averaged density (post burn-in)")
-    ax.set_title("Mechanism comparison: long-run population levels")
+    ax.set_ylabel("change from model-specific no-fear baseline (%)")
+    ax.set_title("Mechanism comparison: relative long-run population changes")
     ax.legend()
     ax.grid(True, axis="y", alpha=0.3)
     fig.tight_layout()
@@ -188,11 +188,12 @@ def plot_mechanism_bars(compare_rows: dict[str, list], out: Path) -> None:
 
 
 def plot_amplitude_comparison(compare_rows: dict[str, list], out: Path) -> None:
-    """Prey oscillation amplitude (Wang 2019: fear may damp cycles)."""
+    """Prey relative-amplitude change from each model family's no-fear baseline."""
     fig, ax = plt.subplots(figsize=(9, 4.5))
-    ax.bar(compare_rows["label"], compare_rows["amplitude_x"], color="#55A868")
-    ax.set_ylabel("prey oscillation amplitude (tail max-min)")
-    ax.set_title("Mechanism comparison: prey oscillation amplitude")
+    ax.bar(compare_rows["label"], compare_rows["relative_amplitude_x_change_pct"], color="#55A868")
+    ax.axhline(0.0, color="black", lw=0.8)
+    ax.set_ylabel("change in prey relative amplitude A/mean (%)")
+    ax.set_title("Mechanism comparison: relative oscillation change")
     plt.xticks(rotation=25, ha="right", fontsize=8)
     ax.grid(True, axis="y", alpha=0.3)
     fig.tight_layout()

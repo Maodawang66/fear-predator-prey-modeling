@@ -74,6 +74,7 @@ class MechanismId(str, Enum):
     FEAR_SATURATING = "fear_saturating"
     FEAR_FORAGING = "fear_foraging"
     FEAR_HANDLING = "fear_handling"
+    BDA_BASELINE = "bda_baseline"
     BDA_FEAR = "bda_fear"
 
 
@@ -84,6 +85,7 @@ MECHANISM_LABELS: dict[MechanismId, str] = {
     MechanismId.FEAR_SATURATING: "Saturating reproduction suppression (Zanette-type)",
     MechanismId.FEAR_FORAGING: "Foraging suppression (Lima/Preisser-type)",
     MechanismId.FEAR_HANDLING: "Alertness / handling-time extension",
+    MechanismId.BDA_BASELINE: "B-D baseline (k=0)",
     MechanismId.BDA_FEAR: "B-D + fear 1/(1+kv) (Myint 2025)",
 }
 

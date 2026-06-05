@@ -19,6 +19,7 @@ from .parameters import (
     MechanismId,
     baseline_default,
     bda_fear_default,
+    bda_no_fear_default,
     fear_default,
     fear_foraging_default,
     fear_handling_default,
@@ -48,6 +49,9 @@ def make_rhs(mid: MechanismId) -> tuple[Callable, np.ndarray]:
     if mid == MechanismId.FEAR_HANDLING:
         p = fear_handling_default
         return lambda t, s: fear_handling_rhs(t, s, p), np.array([x0, y0])
+    if mid == MechanismId.BDA_BASELINE:
+        p = bda_no_fear_default
+        return lambda t, s: bd_fear_rhs(t, s, p), np.array([0.17, 3.9])
     if mid == MechanismId.BDA_FEAR:
         p = bda_fear_default
         return lambda t, s: bd_fear_rhs(t, s, p), np.array([0.17, 3.9])
