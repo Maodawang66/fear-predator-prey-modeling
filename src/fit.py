@@ -639,7 +639,16 @@ def fit_bda_fear_to_series(
     )
 
     params = {n: getattr(p_fit, n) for n in names}
-    params.update({"u0": u0, "v0": v0, "u_scale": u_scale, "v_scale": v_scale})
+    params.update({
+        "u0": u0,
+        "v0": v0,
+        "u_scale": u_scale,
+        "v_scale": v_scale,
+        "v_observed_median": float(np.median(predator)),
+        "v_observed_min": float(np.min(predator)),
+        "v_observed_max": float(np.max(predator)),
+        "predator_observed_median_raw": float(np.median(series.predator)),
+    })
     prey_pred_raw = y_pred[0] * u_scale
     predator_pred_raw = y_pred[1] * v_scale
     fit_metrics = _fit_evaluation_metrics(

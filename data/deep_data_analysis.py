@@ -127,7 +127,7 @@ def _write_csv(rows: list[dict], path: Path, fieldnames: list[str]) -> None:
 
 
 def build_cross_system_table(rows: list[dict]) -> list[dict]:
-    """从 fit_summary 构建跨系统 k、η 汇总表。"""
+    """从 fit_summary 构建数据支持范围内的跨系统 k、η 汇总表。"""
     bda = [
         r for r in rows
         if r.get("model") == "bda_fear" and _is_usable_fit(r)
@@ -137,8 +137,12 @@ def build_cross_system_table(rows: list[dict]) -> list[dict]:
         name = r["series"]
         k = _f(r, "k")
         v0 = _f(r, "v0", 1.0)
+        v_observed_median = _f(r, "v_observed_median")
+        v_observed_min = _f(r, "v_observed_min")
+        v_observed_max = _f(r, "v_observed_max")
         eta_v0 = _eta(k, v0)
-        eta_v5 = _eta(k, 5.0)
+        eta_at_observed_median = _eta(k, v_observed_median)
+        eta_v5_theoretical_extrapolation = _eta(k, 5.0)
         out.append({
             "series": name,
             "group": _classify_group(name),
@@ -146,7 +150,14 @@ def build_cross_system_table(rows: list[dict]) -> list[dict]:
             "k": k,
             "v0": v0,
             "eta_v0": eta_v0,
-            "eta_v5": eta_v5,
+            "v_observed_median": v_observed_median,
+            "v_observed_min": v_observed_min,
+            "v_observed_max": v_observed_max,
+            "eta_at_observed_median": eta_at_observed_median,
+            "eta_v5_theoretical_extrapolation": eta_v5_theoretical_extrapolation,
+            "v5_outside_observed_range": not (
+                v_observed_min <= 5.0 <= v_observed_max
+            ),
             "train_rmse_normalized_total": _f(r, "rmse_normalized_total"),
             "validation_rmse_normalized_total": _f(r, "validation_rmse_normalized_total"),
             "aicc": _f(r, "aicc"),
@@ -266,7 +277,14 @@ def plot_rmse_improvement(data: list[dict], path: Path) -> None:
 def plot_eta_by_group(cross: list[dict], path: Path) -> None:
     groups = ["mammal", "fish", "zooplankton"]
     palette = {"mammal": "#4C72B0", "fish": "#55A868", "zooplankton": "#C44E52"}
-    data = {g: [_eta(r["k"], 5.0) for r in cross if r["group"] == g] for g in groups}
+    data = {
+        g: [
+            r["eta_at_observed_median"]
+            for r in cross
+            if r["group"] == g and np.isfinite(r["eta_at_observed_median"])
+        ]
+        for g in groups
+    }
     fig, axes = plt.subplots(1, 2, figsize=(10, 4))
     ax = axes[0]
     for i, g in enumerate(groups):
@@ -281,8 +299,8 @@ def plot_eta_by_group(cross: list[dict], path: Path) -> None:
             bp["boxes"][0].set_alpha(0.25)
     ax.set_xticks(range(1, len(groups) + 1))
     ax.set_xticklabels(groups)
-    ax.set_ylabel(r"$\eta(k,v=5)=5k/(1+5k)$")
-    ax.set_title("Cross-system equivalent fear strength (by group, n per point)")
+    ax.set_ylabel(r"$\eta(k,v_{\mathrm{obs,median}})$")
+    ax.set_title("Fear suppression at each series' observed median predator density")
     ax.legend(fontsize=8)
 
     ax2 = axes[1]
@@ -307,7 +325,7 @@ def plot_killifish_sites(cross: list[dict], path: Path) -> None:
     fish.sort(key=lambda d: d["series"])
     labels = [r.get("group_key") or r["series"].split("_")[-1] for r in fish]
     ks = [r["k"] for r in fish]
-    etas = [r["eta_v5"] for r in fish]
+    etas = [r["eta_at_observed_median"] for r in fish]
     fig, ax1 = plt.subplots(figsize=(6, 4))
     x = np.arange(len(labels))
     ax1.bar(x - 0.2, ks, width=0.4, label="k", color="#4C72B0")
@@ -316,9 +334,9 @@ def plot_killifish_sites(cross: list[dict], path: Path) -> None:
     ax1.set_ylabel("fitted k")
     ax1.set_yscale("symlog", linthresh=1e-4)
     ax2 = ax1.twinx()
-    ax2.bar(x + 0.2, etas, width=0.4, label=r"$\eta(v=5)$", color="#C44E52", alpha=0.7)
-    ax2.set_ylabel(r"$\eta(v=5)$")
-    ax1.set_title("Killifish 3 sites: k and eta comparison")
+    ax2.bar(x + 0.2, etas, width=0.4, label=r"$\eta(v_{\mathrm{obs,median}})$", color="#C44E52", alpha=0.7)
+    ax2.set_ylabel(r"$\eta(v_{\mathrm{obs,median}})$")
+    ax1.set_title("Killifish 3 sites: k and observed-range eta")
     for i, (kv, ev) in enumerate(zip(ks, etas)):
         ax1.text(i - 0.2, kv, f"{kv:.2e}", ha="center", va="bottom", fontsize=7, rotation=90)
         ax2.text(i + 0.2, ev, f"{ev:.3f}", ha="center", va="bottom", fontsize=7)
@@ -690,13 +708,15 @@ def build_dual_track_summary(
 
     by_group: dict[str, list[float]] = {}
     for r in cross:
-        by_group.setdefault(r["group"], []).append(_eta(r["k"], 5.0))
+        eta = r["eta_at_observed_median"]
+        if np.isfinite(eta):
+            by_group.setdefault(r["group"], []).append(eta)
     track_a = {
         g: {
             "n": len(v),
-            "eta_v5_median": float(median(v)) if v else float("nan"),
-            "eta_v5_min": float(min(v)) if v else float("nan"),
-            "eta_v5_max": float(max(v)) if v else float("nan"),
+            "eta_observed_median_group_median": float(median(v)) if v else float("nan"),
+            "eta_observed_median_group_min": float(min(v)) if v else float("nan"),
+            "eta_observed_median_group_max": float(max(v)) if v else float("nan"),
         }
         for g, v in by_group.items()
     }
@@ -841,9 +861,13 @@ def plot_mechanism_prior(
     path: Path,
 ) -> None:
     """将拟合 η 与实验/元分析抑制量级放在同一图。"""
-    etas = [_eta(r["k"], 5.0) for r in cross]
+    etas = [
+        r["eta_at_observed_median"]
+        for r in cross
+        if np.isfinite(r["eta_at_observed_median"])
+    ]
     fig, ax = plt.subplots(figsize=(7, 4))
-    ax.boxplot([etas], tick_labels=["fitted eta(v=5)\n12 ODE series"])
+    ax.boxplot([etas], tick_labels=["fitted eta at observed\nmedian predator density"])
     refs: list[tuple[str, float]] = []
     if coral:
         coral_val = coral.get("max_herbivory_suppression")
@@ -865,7 +889,7 @@ def plot_mechanism_prior(
         ax.axhline(frac, ls=":", color="gray",
                    label=f"Peacor TMIE share={frac:.2f}")
     ax.set_ylabel("relative suppression (0–1 scale)")
-    ax.set_title("Fitted η vs experimental/meta-analysis priors")
+    ax.set_title("Observed-range fitted η vs experimental/meta-analysis priors")
     ax.legend(fontsize=8, loc="upper right")
     fig.tight_layout()
     fig.savefig(path, dpi=150)
@@ -930,7 +954,10 @@ def _write_report(
         "### Top RMSE improvements",
     ]
     ratio_key = "validation_improvement_ratio_baseline_over_bda"
-    for r in sorted(improve, key=lambda x: x.get(ratio_key, 0), reverse=True)[:5]:
+    comparable = [
+        r for r in improve if np.isfinite(r.get(ratio_key, float("nan")))
+    ]
+    for r in sorted(comparable, key=lambda x: x.get(ratio_key, 0), reverse=True)[:5]:
         lines.append(
             f"- {r['series']}: holdout baseline/bda = {r.get(ratio_key, float('nan')):.2g}; "
             f"best validation={r.get('best_model_validation', '')}; "
@@ -938,8 +965,15 @@ def _write_report(
         )
     lines.extend(["", "## Tier 2"])
     lines.append(f"- Peacor: {peacor or 'skipped'}")
-    lines.append(f"- Coral reef max foraging suppression: "
-                 f"{coral.get('max_suppression') if coral else 'skipped'}")
+    coral_suppression = None
+    if coral:
+        coral_suppression = coral.get("max_herbivory_suppression")
+        if coral_suppression is None:
+            coral_suppression = coral.get("max_suppression")
+    lines.append(
+        f"- Coral reef herbivory suppression: "
+        f"{coral_suppression if coral_suppression is not None else 'skipped'}"
+    )
     if damsel and damsel.get("suppression_vs_free_fish"):
         lines.append(f"- Damselfly cage suppression: "
                      f"{damsel['suppression_vs_free_fish'].get('cage', 'n/a')}")
@@ -986,7 +1020,10 @@ def main() -> None:
     # --- Tier 1: tables & plots from fit_summary ---
     cross = build_cross_system_table(fit_rows)
     _write_csv(cross, tier1 / "cross_system_k_eta.csv",
-               ["series", "group", "group_key", "k", "v0", "eta_v0", "eta_v5",
+               ["series", "group", "group_key", "k", "v0", "eta_v0",
+                "v_observed_median", "v_observed_min", "v_observed_max",
+                "eta_at_observed_median", "eta_v5_theoretical_extrapolation",
+                "v5_outside_observed_range",
                 "train_rmse_normalized_total", "validation_rmse_normalized_total",
                 "aicc", "p", "q", "r_param"])
 

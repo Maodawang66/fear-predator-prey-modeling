@@ -13,7 +13,11 @@
     "u0": 1.0,
     "v0": 0.1774193548387097,
     "u_scale": 1430.5587229190423,
-    "v_scale": 3.5347776510832385
+    "v_scale": 3.5347776510832385,
+    "v_observed_median": 0.3387096774193548,
+    "v_observed_min": 0.16129032258064516,
+    "v_observed_max": 1.0,
+    "predator_observed_median_raw": 1.1972633979475484
   },
   "rmse_normalized_prey": 0.05269746234279617,
   "rmse_normalized_predator": 0.10624018730910575,

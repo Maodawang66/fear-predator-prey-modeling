@@ -1,23 +1,23 @@
 # Deep data analysis report
-generated: 2026-06-01T06:07:02.196163+00:00
+generated: 2026-06-05T16:52:19.112254+00:00
 
 ## Tier 1
 - cross_system rows: 12
 - RMSE improvement entries: 12
-- k identifiability entries: 12
+- k identifiability entries: 3
 
 ### Top RMSE improvements
-- timeserieslogmeans_WRHW: baseline/bda = 3.4e+06
-- lynxhare: baseline/bda = 6.3e+05
-- timeserieslogmeans_WRGP: baseline/bda = 3.5e+04
-- andren_lynx_roedeer_data_5: baseline/bda = 3.5e+03
-- timeserieslogmeans_TP: baseline/bda = 2.2e+03
+- andren_lynx_roedeer_data_2: holdout baseline/bda = 6.7; best validation=bda_fear; best AICc=bda_fear
+- andren_lynx_roedeer_data_4: holdout baseline/bda = 5; best validation=bda_fear; best AICc=bda_fear
+- andren_lynx_roedeer_data_6: holdout baseline/bda = 2.8; best validation=fear_memory; best AICc=bda_fear
+- andren_lynx_roedeer_data_1: holdout baseline/bda = 2.2; best validation=bda_fear; best AICc=bda_fear
+- andren_lynx_roedeer_data_3: holdout baseline/bda = 1.7; best validation=bda_fear; best AICc=bda_fear
 
 ## Tier 2
 - Peacor: {'n_studies': 64, 'effect_col': 'Predation effect', 'effect_type': 'categorical', 'TMIE_count': 37, 'NCE_count': 27, 'tmie_fraction': 0.578125, 'by_taxon': {'Invertebrate': {'TMIE': 11, 'NCE': 1}, 'Vertebrate': {'TMIE': 26, 'NCE': 26}}}
-- Coral reef max foraging suppression: 0.0
+- Coral reef herbivory suppression: 0.5619047618999999
 - Damselfly cage suppression: -0.06328181607773908
-- LTER extra fits: 0
+- LTER extra fits: 3
 
 ## Figures
 - tier1/rmse_improvement.png

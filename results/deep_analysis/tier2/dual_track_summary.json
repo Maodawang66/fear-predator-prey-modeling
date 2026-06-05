@@ -2,21 +2,21 @@
   "track_A_eta_by_group": {
     "mammal": {
       "n": 8,
-      "eta_v5_median": 0.08195201183514705,
-      "eta_v5_min": 0.0021755551296857,
-      "eta_v5_max": 0.4083647365911591
+      "eta_observed_median_group_median": 0.011922146998031864,
+      "eta_observed_median_group_min": 0.0002376343093949672,
+      "eta_observed_median_group_max": 0.06697520717478561
     },
     "zooplankton": {
       "n": 1,
-      "eta_v5_median": 0.019670457049502356,
-      "eta_v5_min": 0.019670457049502356,
-      "eta_v5_max": 0.019670457049502356
+      "eta_observed_median_group_median": 5.3176972217342114e-05,
+      "eta_observed_median_group_min": 5.3176972217342114e-05,
+      "eta_observed_median_group_max": 5.3176972217342114e-05
     },
     "fish": {
       "n": 3,
-      "eta_v5_median": 0.06893530528969644,
-      "eta_v5_min": 0.0005024509241015535,
-      "eta_v5_max": 0.11447779349417773
+      "eta_observed_median_group_median": 0.0005310347901129086,
+      "eta_observed_median_group_min": 0.00015967843097745106,
+      "eta_observed_median_group_max": 0.0013422283349533205
     }
   },
   "track_B_priors": {
