@@ -36,6 +36,7 @@ from data.common import RAW, read_csv_dicts
 from data.load_lter_fish import load_lter_fish_pair
 from data.load_peacor import load_peacor_plp
 from src.fit import (
+    conditional_bda_k_scan,
     fit_bda_fear_to_series,
     profile_bda_k,
 )
@@ -356,22 +357,59 @@ def plot_andren_regions(cross: list[dict], path: Path) -> None:
     plt.close(fig)
 
 
-def _profile_identifiability(profile_rows: list[dict], fitted_k: float) -> dict:
-    rmses = [
-        r["rmse_normalized_total"]
-        for r in profile_rows
-        if np.isfinite(r["rmse_normalized_total"])
+def _profile_ci_bounds(profile_rows: list[dict]) -> tuple[float, float, bool, bool, bool]:
+    usable = sorted(
+        (
+            r for r in profile_rows
+            if r.get("optimization_status") in ("success", "usable_limit")
+            and np.isfinite(r.get("profile_rss", float("nan")))
+        ),
+        key=lambda r: r["k"],
+    )
+    if not usable:
+        return float("nan"), float("nan"), False, False, False
+    accepted_indices = [
+        i for i, row in enumerate(usable) if row.get("inside_confidence_interval")
     ]
-    if not rmses:
-        return {"k_min_rmse": float("nan"), "rmse_min": float("nan"), "width_10pct": float("nan")}
-    rmin = min(rmses)
-    tol = 1.10 * rmin
-    ks_ok = [r["k"] for r in profile_rows if r["rmse_normalized_total"] <= tol]
+    if not accepted_indices:
+        return float("nan"), float("nan"), False, False, False
+    left = min(accepted_indices)
+    right = max(accepted_indices)
+    noncontiguous = accepted_indices != list(range(left, right + 1))
+    return (
+        usable[left]["k"],
+        usable[right]["k"],
+        left == 0,
+        right == len(usable) - 1,
+        noncontiguous,
+    )
+
+
+def _profile_identifiability(profile_rows: list[dict], fitted_k: float) -> dict:
+    usable = [
+        r for r in profile_rows
+        if r.get("optimization_status") in ("success", "usable_limit")
+        and np.isfinite(r.get("profile_rss", float("nan")))
+    ]
+    if not usable:
+        return {
+            "profile_k_best": float("nan"),
+            "profile_rmse_min": float("nan"),
+            "ci95_lower": float("nan"),
+            "ci95_upper": float("nan"),
+            "ci95_width": float("nan"),
+        }
+    best = min(usable, key=lambda r: r["profile_rss"])
+    ci_lower, ci_upper, lower_at_boundary, upper_at_boundary, noncontiguous = _profile_ci_bounds(profile_rows)
     return {
-        "k_min_rmse": min(ks_ok) if ks_ok else float("nan"),
-        "k_max_rmse": max(ks_ok) if ks_ok else float("nan"),
-        "width_10pct": (max(ks_ok) - min(ks_ok)) if len(ks_ok) >= 2 else 0.0,
-        "rmse_min": rmin,
+        "profile_k_best": best["k"],
+        "profile_rmse_min": best["rmse_normalized_total"],
+        "ci95_lower": ci_lower,
+        "ci95_upper": ci_upper,
+        "ci95_width": ci_upper - ci_lower,
+        "ci95_lower_at_grid_boundary": lower_at_boundary,
+        "ci95_upper_at_grid_boundary": upper_at_boundary,
+        "ci95_noncontiguous": noncontiguous,
         "fitted_k": fitted_k,
     }
 
@@ -387,19 +425,36 @@ def plot_k_profile(
     fig, ax = plt.subplots(figsize=(6, 4))
     ax.plot(ks, rmses, "b.-", lw=1.2)
     ax.axvline(fitted_k, color="red", ls="--", label=f"fitted k={fitted_k:.4g}")
-    rmin = min(r for r in rmses if np.isfinite(r))
-    ax.axhline(1.1 * rmin, color="gray", ls=":", label="110% min RMSE")
+    ci_lower, ci_upper, _, _, noncontiguous = _profile_ci_bounds(profile_rows)
+    if np.isfinite(ci_lower) and np.isfinite(ci_upper) and not noncontiguous:
+        ax.axvspan(ci_lower, ci_upper, color="gray", alpha=0.2, label="95% profile CI")
+    elif noncontiguous:
+        accepted = [r for r in profile_rows if r.get("inside_confidence_interval")]
+        ax.scatter(
+            [r["k"] for r in accepted],
+            [r["rmse_normalized_total"] for r in accepted],
+            color="gray",
+            marker="s",
+            s=24,
+            label="95% profile set (non-contiguous)",
+            zorder=3,
+        )
     ax.set_xscale("log")
-    ax.set_xlabel("k (fixed other B-D params)")
-    ax.set_ylabel("RMSE total")
-    ax.set_title(f"k profile: {series_name}")
+    ax.set_xlabel("fixed k (other B-D parameters reoptimized)")
+    ax.set_ylabel("training RMSE total")
+    ax.set_title(f"k profile likelihood: {series_name}")
     ax.legend(fontsize=8)
     fig.tight_layout()
     fig.savefig(path, dpi=150)
     plt.close(fig)
 
 
-def plot_k_profile_grid(all_profiles: dict[str, list[dict]], fitted_ks: dict[str, float], path: Path) -> None:
+def plot_k_profile_grid(
+    all_profiles: dict[str, list[dict]],
+    fitted_ks: dict[str, float],
+    path: Path,
+    title: str = "k profile likelihood curves (all series)",
+) -> None:
     names = sorted(all_profiles.keys())
     n = len(names)
     ncols = 4
@@ -420,7 +475,7 @@ def plot_k_profile_grid(all_profiles: dict[str, list[dict]], fitted_ks: dict[str
         ax.tick_params(labelsize=7)
     for j in range(n, nrows * ncols):
         axes[j // ncols, j % ncols].axis("off")
-    fig.suptitle("k profile RMSE curves (all series)", fontsize=11)
+    fig.suptitle(title, fontsize=11)
     fig.tight_layout()
     fig.savefig(path, dpi=150)
     plt.close(fig)
@@ -433,6 +488,7 @@ def run_k_profiles(
     representatives_only: bool = False,
 ) -> tuple[dict[str, list[dict]], list[dict]]:
     all_profiles: dict[str, list[dict]] = {}
+    all_conditional_scans: dict[str, list[dict]] = {}
     ident_rows: list[dict] = []
 
     for row in bda_rows:
@@ -444,7 +500,9 @@ def run_k_profiles(
             continue
         series = series_by_name[name]
         profile = profile_bda_k(series, row)
+        conditional = conditional_bda_k_scan(series, row)
         all_profiles[name] = profile
+        all_conditional_scans[name] = conditional
         fk = _f(row, "k")
         ident = _profile_identifiability(profile, fk)
         ident["series"] = name
@@ -457,6 +515,17 @@ def run_k_profiles(
     if not representatives_only and all_profiles:
         fitted_ks = {row["series"]: _f(row, "k") for row in bda_rows if row["series"] in all_profiles}
         plot_k_profile_grid(all_profiles, fitted_ks, out_dir / "k_profile_all_grid.png")
+        plot_k_profile_grid(
+            all_conditional_scans,
+            fitted_ks,
+            out_dir / "k_conditional_sensitivity_all_grid.png",
+            title="k conditional sensitivity curves (other parameters fixed)",
+        )
+    elif representatives_only:
+        for stale_name in ("k_profile_all_grid.png", "k_conditional_sensitivity_all_grid.png"):
+            stale = out_dir / stale_name
+            if stale.exists():
+                stale.unlink()
 
     long_rows = []
     for sname, rows in all_profiles.items():
@@ -468,12 +537,32 @@ def run_k_profiles(
         [
             "series", "k",
             "rmse_normalized_prey", "rmse_normalized_predator", "rmse_normalized_total",
+            "profile_rss", "profile_likelihood_ratio", "inside_confidence_interval",
+            "confidence_level", "likelihood_ratio_threshold", "optimization_status",
+            "r", "d", "a", "p", "q", "c", "m",
+        ],
+    )
+    conditional_rows = []
+    for sname, rows in all_conditional_scans.items():
+        for r in rows:
+            conditional_rows.append({"series": sname, **r})
+    _write_csv(
+        conditional_rows,
+        out_dir / "k_conditional_sensitivity_long.csv",
+        [
+            "series", "k",
+            "rmse_normalized_prey", "rmse_normalized_predator", "rmse_normalized_total",
         ],
     )
     _write_csv(
         ident_rows,
         out_dir / "k_identifiability.csv",
-        ["series", "group", "fitted_k", "k_min_rmse", "k_max_rmse", "width_10pct", "rmse_min"],
+        [
+            "series", "group", "fitted_k", "profile_k_best", "profile_rmse_min",
+            "ci95_lower", "ci95_upper", "ci95_width",
+            "ci95_lower_at_grid_boundary", "ci95_upper_at_grid_boundary",
+            "ci95_noncontiguous",
+        ],
     )
     return all_profiles, ident_rows
 

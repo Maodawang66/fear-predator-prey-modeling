@@ -8,6 +8,7 @@ from typing import Callable
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.optimize import differential_evolution, minimize
+from scipy.stats import chi2
 
 from .model import baseline_rhs, bd_fear_rhs, fear_memory_rhs
 from .parameters import BDAFearParams, BaselineParams, FearMemoryParams
@@ -30,6 +31,7 @@ def _bounded_minimize(
     lb: np.ndarray,
     ub: np.ndarray,
     max_nfev: int = 250,
+    method: str = "auto",
 ) -> _OptResult:
     """有界非线性最小二乘；参数较多时用差分进化，避免 Windows LAPACK 崩溃。"""
     nfev = 0
@@ -41,7 +43,10 @@ def _bounded_minimize(
         return float(np.dot(r, r))
 
     bounds = list(zip(lb.tolist(), ub.tolist()))
-    if len(p0) >= 5:
+    if method not in ("auto", "global", "local"):
+        raise ValueError("method must be 'auto', 'global', or 'local'")
+    use_global = method == "global" or (method == "auto" and len(p0) >= 5)
+    if use_global:
         res = differential_evolution(
             objective,
             bounds,
@@ -547,6 +552,9 @@ def fit_bda_fear_to_series(
     fixed: BDAFearParams | None = None,
     fit_k: bool = True,
     validation_fraction: float = 0.20,
+    initial: BDAFearParams | None = None,
+    optimizer: str = "auto",
+    max_nfev: int = 300,
 ) -> FitResult:
     """
     拟合 Myint B-D + 恐惧 ODE（无量纲 u,v）。
@@ -596,20 +604,32 @@ def fit_bda_fear_to_series(
             return np.full(t_train.size * 2, 1e6)
         return np.concatenate([y[0] - prey[:train_end], y[1] - predator[:train_end]])
 
-    p0_list = [2.5, 0.5, 0.1, 1.0, 0.1, 0.8, 0.6]
+    if initial is None:
+        initial = BDAFearParams()
+    p0_list = [
+        initial.r,
+        initial.d,
+        initial.a,
+        initial.p,
+        initial.q,
+        initial.c,
+        initial.m,
+    ]
     lb_list = [0.2, 0.01, 1e-4, 0.01, 1e-3, 0.1, 0.05]
     ub_list = [10.0, 3.0, 2.0, 5.0, 2.0, 3.0, 2.0]
     if fit_k:
-        p0_list.append(max(fixed.k, 0.01))
+        p0_list.append(initial.k)
         lb_list.append(1e-4)
         ub_list.append(0.5)
 
+    p0 = np.clip(np.array(p0_list), np.array(lb_list) * 1.0001, np.array(ub_list) / 1.0001)
     res = _bounded_minimize(
         residual,
-        np.log(np.array(p0_list)),
+        np.log(p0),
         np.log(lb_list),
         np.log(ub_list),
-        max_nfev=300,
+        max_nfev=max_nfev,
+        method=optimizer,
     )
     p_fit = pack(res.x)
     y_pred = _simulate_at_times(
@@ -660,15 +680,17 @@ def fit_bda_fear_to_series(
 def bda_fear_rmse_at_params(
     series,
     params: BDAFearParams,
+    validation_fraction: float = 0.20,
 ) -> tuple[float, float, float]:
-    """给定 B-D+恐惧 参数，在归一化尺度上计算 RMSE（与 fit_bda_fear_to_series 一致）。"""
-    u_scale = max(float(np.max(series.prey)), 1.0)
-    v_scale = max(float(np.max(series.predator)), 1.0)
+    """给定 B-D 参数，在训练段归一化尺度上计算 RMSE。"""
+    train_end = _train_end_index(series.n_points, validation_fraction)
+    u_scale = max(float(np.max(series.prey[:train_end])), 1.0)
+    v_scale = max(float(np.max(series.predator[:train_end])), 1.0)
     prey = series.prey / u_scale
     predator = series.predator / v_scale
     u0 = float(prey[0])
     v0 = float(predator[0])
-    t_obs = series.t
+    t_obs = series.t[:train_end]
 
     try:
         y_pred = _simulate_at_times(
@@ -682,10 +704,10 @@ def bda_fear_rmse_at_params(
     if np.any(y_pred < 0) or np.any(~np.isfinite(y_pred)):
         return float("inf"), float("inf"), float("inf")
 
-    rmse_prey = _rmse(prey, y_pred[0])
-    rmse_predator = _rmse(predator, y_pred[1])
+    rmse_prey = _rmse(prey[:train_end], y_pred[0])
+    rmse_predator = _rmse(predator[:train_end], y_pred[1])
     rmse_total = _rmse(
-        np.concatenate([prey, predator]),
+        np.concatenate([prey[:train_end], predator[:train_end]]),
         np.concatenate([y_pred[0], y_pred[1]]),
     )
     return rmse_prey, rmse_predator, rmse_total
@@ -708,13 +730,16 @@ def bda_params_from_dict(d: dict[str, float]) -> BDAFearParams:
     )
 
 
-def profile_bda_k(
+def conditional_bda_k_scan(
     series,
     base_params: dict[str, float],
     k_grid: np.ndarray | None = None,
+    validation_fraction: float = 0.20,
 ) -> list[dict[str, float]]:
     """
-    固定 r,d,a,p,q,c,m，扫描恐惧参数 k，返回每条 k 的 RMSE。
+    固定 r,d,a,p,q,c,m，扫描恐惧参数 k，返回每条 k 的训练 RMSE。
+
+    这是条件敏感性扫描，不是 profile likelihood。
     base_params 通常来自 bda_fear 拟合结果。
     """
     if k_grid is None:
@@ -736,11 +761,98 @@ def profile_bda_k(
             c=p_base.c,
             m=p_base.m,
         )
-        rmse_prey, rmse_pred, rmse_total = bda_fear_rmse_at_params(series, p)
+        rmse_prey, rmse_pred, rmse_total = bda_fear_rmse_at_params(
+            series,
+            p,
+            validation_fraction=validation_fraction,
+        )
         rows.append({
             "k": float(kv),
             "rmse_normalized_prey": rmse_prey,
             "rmse_normalized_predator": rmse_pred,
             "rmse_normalized_total": rmse_total,
         })
+    return rows
+
+
+def profile_bda_k(
+    series,
+    base_params: dict[str, float],
+    k_grid: np.ndarray | None = None,
+    validation_fraction: float = 0.20,
+    confidence_level: float = 0.95,
+    max_nfev: int = 500,
+) -> list[dict[str, float | str | bool]]:
+    """
+    对每个固定 k 重新优化其余 B-D 参数，并计算 profile likelihood。
+
+    使用完整拟合结果作为每个固定 k 的局部优化初值。似然比采用未知方差
+    Gaussian 残差近似：n*log(RSS(k)/RSS_min)，置信区间按 chi-square(1) 阈值。
+    """
+    if not 0.0 < confidence_level < 1.0:
+        raise ValueError("confidence_level must be between 0 and 1")
+    if k_grid is None:
+        k_grid = np.unique(np.concatenate([
+            np.logspace(-4, -1, 25),
+            np.linspace(0.12, 0.5, 13),
+        ]))
+
+    base = bda_params_from_dict(base_params)
+    train_end = _train_end_index(series.n_points, validation_fraction)
+    n_residuals = 2 * train_end
+    rows: list[dict[str, float | str | bool]] = []
+
+    for kv in k_grid:
+        fixed = BDAFearParams(
+            r=base.r,
+            d=base.d,
+            a=base.a,
+            k=float(kv),
+            p=base.p,
+            q=base.q,
+            c=base.c,
+            m=base.m,
+        )
+        result = fit_bda_fear_to_series(
+            series,
+            fixed=fixed,
+            fit_k=False,
+            validation_fraction=validation_fraction,
+            initial=base,
+            optimizer="local",
+            max_nfev=max_nfev,
+        )
+        rss = n_residuals * result.rmse_normalized_total**2
+        row: dict[str, float | str | bool] = {
+            "k": float(kv),
+            "rmse_normalized_prey": result.rmse_normalized_prey,
+            "rmse_normalized_predator": result.rmse_normalized_predator,
+            "rmse_normalized_total": result.rmse_normalized_total,
+            "profile_rss": float(rss),
+            "optimization_status": result.optimization_status,
+        }
+        for name in ("r", "d", "a", "p", "q", "c", "m"):
+            row[name] = float(result.params[name])
+        rows.append(row)
+
+    usable_rows = [
+        row for row in rows
+        if row["optimization_status"] in ("success", "usable_limit")
+        and np.isfinite(float(row["profile_rss"]))
+    ]
+    if not usable_rows:
+        return rows
+
+    rss_min = min(float(row["profile_rss"]) for row in usable_rows)
+    threshold = float(chi2.ppf(confidence_level, df=1))
+    for row in rows:
+        if row["optimization_status"] not in ("success", "usable_limit"):
+            row["profile_likelihood_ratio"] = float("nan")
+            row["inside_confidence_interval"] = False
+            continue
+        lr = n_residuals * np.log(float(row["profile_rss"]) / rss_min)
+        row["profile_likelihood_ratio"] = float(lr)
+        row["inside_confidence_interval"] = bool(lr <= threshold)
+        row["confidence_level"] = confidence_level
+        row["likelihood_ratio_threshold"] = threshold
     return rows
