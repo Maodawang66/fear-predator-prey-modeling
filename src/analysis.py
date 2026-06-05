@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import numpy as np
+from scipy.optimize import brentq
+
 from .literature import run_mechanism
+from .model import bd_fear_rhs
 from .parameters import BDAFearParams, FearMemoryParams, MechanismId, baseline_default, bda_fear_default, fear_default
 from .simulate import integrate_baseline, integrate_fear_memory, is_extinct, long_term_mean
 
@@ -169,7 +172,10 @@ def sensitivity_local(
 
 def equilibrium_bda_fear(p: BDAFearParams | None = None) -> dict[str, float | None]:
     """
-    Myint et al. (2025) 正平衡点：由 cp>mq 得 u=λv+λ，λ=m/(cp-mq)，再解 v 的三次方程。
+    Myint et al. (2025) 正平衡点。
+
+    由 dv/dt=0 和 cp>mq 得 u=λ(1+v)，λ=m/(cp-mq)；代入
+    du/(u dt)=0 后求唯一正根，并在返回前校验原始二维 RHS 残差。
     """
     if p is None:
         p = bda_fear_default
@@ -178,19 +184,48 @@ def equilibrium_bda_fear(p: BDAFearParams | None = None) -> dict[str, float | No
         return {"u_star": None, "v_star": None, "lambda": None, "note": "cp<=mq"}
 
     lam = p.m / cp_mq
-    alpha1 = p.a * lam * p.k
-    alpha2 = -(p.p * p.k / (1.0 + p.q * lam) + (p.a * lam * (1.0 + 2.0 * p.k) + p.k * p.d))
-    alpha3 = p.r - p.p / (1.0 + p.q * lam) - (p.a * lam + p.d) * (1.0 + p.k)
-    alpha4 = p.r - (p.d + p.a * lam)
 
-    coeffs = [alpha1, -alpha2, -alpha3, -alpha4]
-    roots = np.roots(coeffs)
-    pos_real = [float(r.real) for r in roots if abs(r.imag) < 1e-8 and r.real > 0]
-    if not pos_real:
-        return {"u_star": None, "v_star": None, "lambda": lam}
-    v_star = min(pos_real)
-    u_star = lam * v_star + lam
-    return {"u_star": u_star, "v_star": v_star, "lambda": lam}
+    def prey_per_capita(v: float) -> float:
+        u = lam * (1.0 + v)
+        return p.r / (1.0 + p.k * v) - p.d - p.a * u - p.m * v / (p.c * u)
+
+    if prey_per_capita(0.0) <= 0.0:
+        return {
+            "u_star": None,
+            "v_star": None,
+            "lambda": lam,
+            "note": "no positive coexistence root",
+        }
+
+    upper = 1.0
+    while prey_per_capita(upper) > 0.0 and upper < 1e12:
+        upper *= 2.0
+    if prey_per_capita(upper) > 0.0:
+        return {
+            "u_star": None,
+            "v_star": None,
+            "lambda": lam,
+            "note": "failed to bracket coexistence root",
+        }
+
+    v_star = float(brentq(prey_per_capita, 0.0, upper, xtol=1e-12, rtol=1e-12))
+    u_star = float(lam * (1.0 + v_star))
+    rhs_residual = float(np.linalg.norm(bd_fear_rhs(0.0, np.array([u_star, v_star]), p), ord=np.inf))
+    residual_tol = 1e-9 * max(1.0, u_star, v_star)
+    if u_star <= 0.0 or v_star <= 0.0 or rhs_residual > residual_tol:
+        return {
+            "u_star": None,
+            "v_star": None,
+            "lambda": lam,
+            "rhs_residual": rhs_residual,
+            "note": "invalid coexistence root",
+        }
+    return {
+        "u_star": u_star,
+        "v_star": v_star,
+        "lambda": lam,
+        "rhs_residual": rhs_residual,
+    }
 
 
 def scan_bda_fear_k(
