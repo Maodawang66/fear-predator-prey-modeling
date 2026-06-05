@@ -192,15 +192,20 @@ def _optimization_meta(res: _OptResult, param_names: list[str]) -> dict:
     }
 
 
-def _pack_baseline(log_params: np.ndarray, fixed: BaselineParams) -> BaselineParams:
+def _pack_baseline(
+    log_params: np.ndarray,
+    fixed: BaselineParams,
+    fit_e_mu: bool = False,
+) -> BaselineParams:
     r, K, a, theta = np.exp(log_params[:4])
+    e, mu = np.exp(log_params[4:6]) if fit_e_mu else (fixed.e, fixed.mu)
     return BaselineParams(
         r=float(r),
         K=float(K),
         a=float(a),
         theta=float(theta),
-        e=fixed.e,
-        mu=fixed.mu,
+        e=float(e),
+        mu=float(mu),
     )
 
 
@@ -217,6 +222,19 @@ def _pack_fear_memory(log_params: np.ndarray, fixed: FearMemoryParams) -> FearMe
         phi=phi,
         delta=fixed.delta,
     )
+
+
+def _holling_core_setup(
+    prey_max: float,
+    fixed: BaselineParams,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """按当前 Holling II 参数尺度生成 r,K,a,theta 的初值与边界。"""
+    theta_upper = max(1.0, 10.0 / max(prey_max, 1.0))
+    lower = np.array([0.01, prey_max * 0.5, 1e-5, 1e-10])
+    upper = np.array([5.0, prey_max * 50.0, 2.0, theta_upper])
+    initial = np.array([fixed.r, fixed.K, fixed.a, fixed.theta], dtype=float)
+    initial = np.clip(initial, lower * 1.01, upper / 1.01)
+    return np.log(initial), np.log(lower), np.log(upper)
 
 
 def fit_baseline_to_series(
@@ -238,7 +256,7 @@ def fit_baseline_to_series(
     t_obs = series.t
 
     def residual(log_p: np.ndarray) -> np.ndarray:
-        p = _pack_baseline(log_p, fixed)
+        p = _pack_baseline(log_p, fixed, fit_e_mu=fit_e_mu)
         try:
             y = _simulate_at_times(
                 lambda t, s: baseline_rhs(t, s, p),
@@ -254,12 +272,19 @@ def fit_baseline_to_series(
         rq = (y[1] - series.predator) / pred_max
         return np.concatenate([rp, rq])
 
-    p0 = np.log([1.0, prey_max * 2.0, 0.04, 20.0])
-    lb = np.log([0.05, prey_max * 0.5, 1e-5, 0.1])
-    ub = np.log([5.0, prey_max * 50.0, 1.0, prey_max * 10.0])
+    p0, lb, ub = _holling_core_setup(prey_max, fixed)
+    param_names = ["r", "K", "a", "theta"]
+    if fit_e_mu:
+        e_mu_lb = np.array([0.01, 0.01])
+        e_mu_ub = np.array([2.0, 3.0])
+        e_mu_p0 = np.clip(np.array([fixed.e, fixed.mu]), e_mu_lb * 1.01, e_mu_ub / 1.01)
+        p0 = np.concatenate([p0, np.log(e_mu_p0)])
+        lb = np.concatenate([lb, np.log(e_mu_lb)])
+        ub = np.concatenate([ub, np.log(e_mu_ub)])
+        param_names.extend(["e", "mu"])
 
     res = _bounded_minimize(residual, p0, lb, ub, max_nfev=200)
-    p_fit = _pack_baseline(res.x, fixed)
+    p_fit = _pack_baseline(res.x, fixed, fit_e_mu=fit_e_mu)
     y_pred = _simulate_at_times(
         lambda t, s: baseline_rhs(t, s, p_fit),
         np.array([x0, y0]),
@@ -291,7 +316,7 @@ def fit_baseline_to_series(
         predator_obs=series.predator,
         prey_pred=y_pred[0],
         predator_pred=y_pred[1],
-        meta=_optimization_meta(res, ["r", "K", "a", "theta"]),
+        meta=_optimization_meta(res, param_names),
     )
 
 
@@ -339,9 +364,11 @@ def fit_fear_memory_to_series(
         rq = (y[1] - series.predator) / pred_max
         return np.concatenate([rp, rq])
 
-    p0 = np.log([1.0, prey_max * 2.0, 0.04, min(20.0, prey_max), max(fixed.phi, 1e-4)])
-    lb = np.log([0.05, prey_max * 0.5, 1e-5, 0.1, 1e-5])
-    ub = np.log([5.0, prey_max * 50.0, 1.0, prey_max * 10.0, 0.2])
+    p0_core, lb_core, ub_core = _holling_core_setup(prey_max, fixed)
+    phi_initial = float(np.clip(fixed.phi, 1.01e-5, 0.2 / 1.01))
+    p0 = np.concatenate([p0_core, np.log([phi_initial])])
+    lb = np.concatenate([lb_core, np.log([1e-5])])
+    ub = np.concatenate([ub_core, np.log([0.2])])
 
     res = _bounded_minimize(residual, p0, lb, ub, max_nfev=250)
     p_fit = _pack_fear_memory(res.x, fixed)
