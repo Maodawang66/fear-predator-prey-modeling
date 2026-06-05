@@ -44,6 +44,18 @@ def _save_json(result: FitResult, path: Path) -> None:
         "rmse_raw_prey": result.rmse_raw_prey,
         "rmse_raw_predator": result.rmse_raw_predator,
         "rmse_raw_total": result.rmse_raw_total,
+        "validation_rmse_normalized_prey": result.validation_rmse_normalized_prey,
+        "validation_rmse_normalized_predator": result.validation_rmse_normalized_predator,
+        "validation_rmse_normalized_total": result.validation_rmse_normalized_total,
+        "validation_rmse_raw_prey": result.validation_rmse_raw_prey,
+        "validation_rmse_raw_predator": result.validation_rmse_raw_predator,
+        "validation_rmse_raw_total": result.validation_rmse_raw_total,
+        "aic": result.aic,
+        "aicc": result.aicc,
+        "bic": result.bic,
+        "n_parameters": result.n_parameters,
+        "n_train_points": result.n_train_points,
+        "n_validation_points": result.n_validation_points,
         "success": result.success,
         "optimization_status": result.optimization_status,
         "usable_for_comparison": result.usable_for_comparison,
@@ -83,7 +95,9 @@ def _fit_one_series(series, tag: str) -> list[FitResult]:
         plot_fit_result(res, OUT / "figures" / f"{stem}.png")
         _save_json(res, OUT / "params" / f"{stem}.json")
         print(
-            f"  [{model_name}] normalized_RMSE={res.rmse_total:.4g}  "
+            f"  [{model_name}] train_RMSE={res.rmse_total:.4g}  "
+            f"validation_RMSE={res.validation_rmse_normalized_total:.4g}  "
+            f"AICc={res.aicc:.4g}  "
             f"status={res.optimization_status}"
         )
         if model_name == "fear_memory":
@@ -144,6 +158,14 @@ def _write_summary_table(all_results: list[FitResult]) -> None:
             "series", "model",
             "rmse_normalized_total", "rmse_normalized_prey", "rmse_normalized_predator",
             "rmse_raw_total", "rmse_raw_prey", "rmse_raw_predator",
+            "validation_rmse_normalized_total",
+            "validation_rmse_normalized_prey",
+            "validation_rmse_normalized_predator",
+            "validation_rmse_raw_total",
+            "validation_rmse_raw_prey",
+            "validation_rmse_raw_predator",
+            "aic", "aicc", "bic",
+            "n_parameters", "n_train_points", "n_validation_points",
             "optimization_status", "usable_for_comparison", "success",
             "termination_reason", "objective_value", "parameter_bound_hits",
         ]
@@ -163,6 +185,18 @@ def _write_summary_table(all_results: list[FitResult]) -> None:
                 "rmse_raw_total": r.rmse_raw_total,
                 "rmse_raw_prey": r.rmse_raw_prey,
                 "rmse_raw_predator": r.rmse_raw_predator,
+                "validation_rmse_normalized_total": r.validation_rmse_normalized_total,
+                "validation_rmse_normalized_prey": r.validation_rmse_normalized_prey,
+                "validation_rmse_normalized_predator": r.validation_rmse_normalized_predator,
+                "validation_rmse_raw_total": r.validation_rmse_raw_total,
+                "validation_rmse_raw_prey": r.validation_rmse_raw_prey,
+                "validation_rmse_raw_predator": r.validation_rmse_raw_predator,
+                "aic": r.aic,
+                "aicc": r.aicc,
+                "bic": r.bic,
+                "n_parameters": r.n_parameters,
+                "n_train_points": r.n_train_points,
+                "n_validation_points": r.n_validation_points,
                 "optimization_status": r.optimization_status,
                 "usable_for_comparison": r.usable_for_comparison,
                 "success": r.success,
@@ -218,7 +252,9 @@ def main() -> None:
         for r in results:
             log.append(
                 f"{r.optimization_status.upper()} {tag}_{r.model} "
-                f"normalized_RMSE={r.rmse_total:.4g} reason={r.message}"
+                f"train_RMSE={r.rmse_total:.4g} "
+                f"validation_RMSE={r.validation_rmse_normalized_total:.4g} "
+                f"AICc={r.aicc:.4g} reason={r.message.strip()}"
             )
 
     _write_summary_table(all_results)

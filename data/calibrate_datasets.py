@@ -48,6 +48,18 @@ def _save_params(result: FitResult, path: Path) -> None:
         "rmse_raw_prey": result.rmse_raw_prey,
         "rmse_raw_predator": result.rmse_raw_predator,
         "rmse_raw_total": result.rmse_raw_total,
+        "validation_rmse_normalized_prey": result.validation_rmse_normalized_prey,
+        "validation_rmse_normalized_predator": result.validation_rmse_normalized_predator,
+        "validation_rmse_normalized_total": result.validation_rmse_normalized_total,
+        "validation_rmse_raw_prey": result.validation_rmse_raw_prey,
+        "validation_rmse_raw_predator": result.validation_rmse_raw_predator,
+        "validation_rmse_raw_total": result.validation_rmse_raw_total,
+        "aic": result.aic,
+        "aicc": result.aicc,
+        "bic": result.bic,
+        "n_parameters": result.n_parameters,
+        "n_train_points": result.n_train_points,
+        "n_validation_points": result.n_validation_points,
         "success": result.success,
         "optimization_status": result.optimization_status,
         "usable_for_comparison": result.usable_for_comparison,
@@ -68,11 +80,13 @@ def _run_one(series, tag: str, log: list[str]) -> None:
         plot_fit_result(res, OUT / f"{stem}.png")
         _save_params(res, OUT / f"{stem}.json")
         log.append(
-            f"{res.optimization_status.upper()} {stem}: normalized_RMSE={res.rmse_total:.4g} "
-            f"(prey={res.rmse_prey:.4g}, pred={res.rmse_predator:.4g})"
+            f"{res.optimization_status.upper()} {stem}: train_RMSE={res.rmse_total:.4g} "
+            f"validation_RMSE={res.validation_rmse_normalized_total:.4g} AICc={res.aicc:.4g}"
         )
         print(
-            f"  [{res.model}] normalized_RMSE={res.rmse_total:.4g}  "
+            f"  [{res.model}] train_RMSE={res.rmse_total:.4g}  "
+            f"validation_RMSE={res.validation_rmse_normalized_total:.4g}  "
+            f"AICc={res.aicc:.4g}  "
             f"status={res.optimization_status}"
         )
         if res.model == "fear_memory":

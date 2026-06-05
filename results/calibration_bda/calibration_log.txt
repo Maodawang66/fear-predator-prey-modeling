@@ -1,8 +1,38 @@
-OK 01_lynxhare_baseline RMSE=1.201e+05
-OK 01_lynxhare_fear_memory RMSE=1.495e+04
-OK 01_lynxhare_bda_fear RMSE=0.191
-OK 02_wifishabundance_WBIC804600_baseline RMSE=58.68
-OK 02_wifishabundance_WBIC804600_fear_memory RMSE=69.92
-OK 02_wifishabundance_WBIC804600_bda_fear RMSE=0.2213
+FAILED 01_lynxhare_baseline train_RMSE=0.5765 validation_RMSE=0.1113 AICc=-97.29 reason=CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL
+USABLE_LIMIT 01_lynxhare_fear_memory train_RMSE=0.2851 validation_RMSE=0.2919 AICc=-230.2 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 01_lynxhare_bda_fear train_RMSE=0.2051 validation_RMSE=0.1781 AICc=-286.6 reason=Maximum number of iterations has been exceeded.
+SUCCESS 02_glerl_m110_zoop_1994-201_baseline train_RMSE=0.1646 validation_RMSE=0.2684 AICc=-1002 reason=CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL
+SUCCESS 02_glerl_m110_zoop_1994-201_fear_memory train_RMSE=0.1646 validation_RMSE=0.2684 AICc=-1000 reason=Optimization terminated successfully.
+SUCCESS 02_glerl_m110_zoop_1994-201_bda_fear train_RMSE=0.1646 validation_RMSE=0.2684 AICc=-993.9 reason=Optimization terminated successfully.
+USABLE_LIMIT 03_andren_lynx_roedeer_data_1_baseline train_RMSE=0.14 validation_RMSE=0.1116 AICc=-140.2 reason=STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT
+USABLE_LIMIT 03_andren_lynx_roedeer_data_1_fear_memory train_RMSE=0.08471 validation_RMSE=0.1099 AICc=-175.7 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 03_andren_lynx_roedeer_data_1_bda_fear train_RMSE=0.07221 validation_RMSE=0.05011 AICc=-178.8 reason=Maximum number of iterations has been exceeded.
+SUCCESS 04_andren_lynx_roedeer_data_2_baseline train_RMSE=4.633 validation_RMSE=0.4904 AICc=125.7 reason=CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH
+USABLE_LIMIT 04_andren_lynx_roedeer_data_2_fear_memory train_RMSE=0.1343 validation_RMSE=0.08999 AICc=-140.7 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 04_andren_lynx_roedeer_data_2_bda_fear train_RMSE=0.1035 validation_RMSE=0.07364 AICc=-151.4 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 05_andren_lynx_roedeer_data_3_baseline train_RMSE=0.2072 validation_RMSE=0.0953 AICc=-110.4 reason=STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT
+USABLE_LIMIT 05_andren_lynx_roedeer_data_3_fear_memory train_RMSE=0.155 validation_RMSE=0.09403 AICc=-129.8 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 05_andren_lynx_roedeer_data_3_bda_fear train_RMSE=0.1256 validation_RMSE=0.055 AICc=-136.7 reason=Maximum number of iterations has been exceeded.
+SUCCESS 06_andren_lynx_roedeer_data_4_baseline train_RMSE=0.3401 validation_RMSE=0.207 AICc=-68.37 reason=CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH
+USABLE_LIMIT 06_andren_lynx_roedeer_data_4_fear_memory train_RMSE=0.09661 validation_RMSE=0.1192 AICc=-156.3 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 06_andren_lynx_roedeer_data_4_bda_fear train_RMSE=0.05633 validation_RMSE=0.0415 AICc=-185.8 reason=Maximum number of iterations has been exceeded.
+FAILED 07_andren_lynx_roedeer_data_5_baseline train_RMSE=0.4274 validation_RMSE=0.278 AICc=-51.91 reason=ABNORMAL:
+USABLE_LIMIT 07_andren_lynx_roedeer_data_5_fear_memory train_RMSE=0.134 validation_RMSE=0.176 AICc=-132.7 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 07_andren_lynx_roedeer_data_5_bda_fear train_RMSE=0.08386 validation_RMSE=0.06223 AICc=-157.1 reason=Maximum number of iterations has been exceeded.
+SUCCESS 08_andren_lynx_roedeer_data_6_baseline train_RMSE=0.4666 validation_RMSE=0.3199 AICc=-39.31 reason=CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH
+USABLE_LIMIT 08_andren_lynx_roedeer_data_6_fear_memory train_RMSE=0.1549 validation_RMSE=0.1071 AICc=-107.1 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 08_andren_lynx_roedeer_data_6_bda_fear train_RMSE=0.101 validation_RMSE=0.1127 AICc=-124.5 reason=Maximum number of iterations has been exceeded.
+FAILED 09_andren_lynx_roedeer_data_7_baseline train_RMSE=46.02 validation_RMSE=0.4323 AICc=224.2 reason=ABNORMAL:
+USABLE_LIMIT 09_andren_lynx_roedeer_data_7_fear_memory train_RMSE=0.15 validation_RMSE=0.1783 AICc=-93.53 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 09_andren_lynx_roedeer_data_7_bda_fear train_RMSE=0.09608 validation_RMSE=0.1152 AICc=-107.6 reason=Maximum number of iterations has been exceeded.
+FAILED 10_timeserieslogmeans_WRHW_baseline train_RMSE=0.5829 validation_RMSE=0.1654 AICc=-97.35 reason=CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL
+USABLE_LIMIT 10_timeserieslogmeans_WRHW_fear_memory train_RMSE=0.1885 validation_RMSE=0.1654 AICc=-316.4 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 10_timeserieslogmeans_WRHW_bda_fear train_RMSE=0.1871 validation_RMSE=0.1582 AICc=-310.9 reason=Maximum number of iterations has been exceeded.
+SUCCESS 11_timeserieslogmeans_TP_baseline train_RMSE=0.2275 validation_RMSE=0.05753 AICc=-275.8 reason=CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL
+USABLE_LIMIT 11_timeserieslogmeans_TP_fear_memory train_RMSE=0.1863 validation_RMSE=0.09761 AICc=-311.9 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 11_timeserieslogmeans_TP_bda_fear train_RMSE=0.1796 validation_RMSE=0.07693 AICc=-312 reason=Maximum number of iterations has been exceeded.
+FAILED 12_timeserieslogmeans_WRGP_baseline train_RMSE=0.2803 validation_RMSE=0.1 AICc=-215.3 reason=CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL
+USABLE_LIMIT 12_timeserieslogmeans_WRGP_fear_memory train_RMSE=0.2304 validation_RMSE=0.09589 AICc=-247.6 reason=Maximum number of iterations has been exceeded.
+USABLE_LIMIT 12_timeserieslogmeans_WRGP_bda_fear train_RMSE=0.2283 validation_RMSE=0.1231 AICc=-242.1 reason=Maximum number of iterations has been exceeded.
 
-series=2 fits=6
+series=12 fits=36

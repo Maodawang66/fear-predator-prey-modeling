@@ -408,7 +408,22 @@ def plot_fit_result(
     axes[1].legend(loc="best")
     axes[1].grid(True, alpha=0.3)
 
-    ttl = title or f"{fit_result.series_name} — {fit_result.model} (RMSE={fit_result.rmse_total:.4g})"
+    validation_start = fit_result.meta.get("validation_start_time")
+    if validation_start is not None:
+        for index, ax in enumerate(axes):
+            ax.axvline(
+                validation_start,
+                color="#9467BD",
+                ls="--",
+                lw=1.0,
+                label="validation start" if index == 0 else "_nolegend_",
+            )
+        axes[0].legend(loc="best")
+    ttl = title or (
+        f"{fit_result.series_name} — {fit_result.model} "
+        f"(train RMSE={fit_result.rmse_total:.4g}, "
+        f"validation RMSE={fit_result.validation_rmse_normalized_total:.4g})"
+    )
     fig.suptitle(ttl)
     fig.subplots_adjust(hspace=0.32, top=0.90)
     out.parent.mkdir(parents=True, exist_ok=True)

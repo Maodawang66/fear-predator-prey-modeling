@@ -1,14 +1,13 @@
-OK hudson_bay_baseline: RMSE=1.201e+05 (prey=1.698e+05, pred=23.03)
-OK hudson_bay_fear_memory: RMSE=1.419e+04 (prey=2.006e+04, pred=19.07)
-OK hudson_bay_bda_fear: RMSE=0.181 (prey=0.1538, pred=0.2045)
-SKIP lynx_roe_r3: 文件存在但不是有效 CSV（可能被 Dryad 反爬替换为 HTML）：
-  C:\Users\Lenovo\Desktop\mathematical modeling\pro\data\raw\01_lynx_roe_deer\Andren_lynx_roedeer_data.csv
-请浏览器手动下载后放到 data/bundled/ 同名路径，再重试。
-SKIP killifish_tp3: 文件存在但不是有效 CSV（可能被 Dryad 反爬替换为 HTML）：
-  C:\Users\Lenovo\Desktop\mathematical modeling\pro\data\raw\02_killifish_mosquitofish\TimeSeriesLogMeans.csv
-请浏览器手动下载后放到 data/bundled/ 同名路径，再重试。
-OK lter_fish_baseline: RMSE=48.43 (prey=13.66, pred=67.11)
-OK lter_fish_fear_memory: RMSE=47.28 (prey=0.7375, pred=66.86)
-OK lter_fish_bda_fear: RMSE=0.1641 (prey=0.1814, pred=0.1449)
+FAILED hudson_bay_baseline: train_RMSE=0.5765 validation_RMSE=0.1113 AICc=-97.29
+USABLE_LIMIT hudson_bay_fear_memory: train_RMSE=0.2851 validation_RMSE=0.2919 AICc=-230.2
+USABLE_LIMIT hudson_bay_bda_fear: train_RMSE=0.2051 validation_RMSE=0.1781 AICc=-286.6
+SKIP lynx_roe_r3: 列 roe_deer_harvest_mean 为空
+SKIP killifish_tp: could not convert string to float: ''
+SUCCESS zooplankton_baseline: train_RMSE=0.1646 validation_RMSE=0.2684 AICc=-1002
+SUCCESS zooplankton_fear_memory: train_RMSE=0.1646 validation_RMSE=0.2684 AICc=-1000
+SUCCESS zooplankton_bda_fear: train_RMSE=0.1646 validation_RMSE=0.2684 AICc=-993.9
+USABLE_LIMIT lter_fish_baseline: train_RMSE=0.2016 validation_RMSE=2.616 AICc=-32.39
+USABLE_LIMIT lter_fish_fear_memory: train_RMSE=0.2187 validation_RMSE=2.63 AICc=-25.06
+USABLE_LIMIT lter_fish_bda_fear: train_RMSE=0.2018 validation_RMSE=2.43 AICc=-0.01355
 
-completed=2/4
+completed=3/5

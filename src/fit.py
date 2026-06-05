@@ -106,6 +106,18 @@ class FitResult:
     rmse_raw_prey: float
     rmse_raw_predator: float
     rmse_raw_total: float
+    validation_rmse_normalized_prey: float
+    validation_rmse_normalized_predator: float
+    validation_rmse_normalized_total: float
+    validation_rmse_raw_prey: float
+    validation_rmse_raw_predator: float
+    validation_rmse_raw_total: float
+    aic: float
+    aicc: float
+    bic: float
+    n_parameters: int
+    n_train_points: int
+    n_validation_points: int
     success: bool
     optimization_status: str
     message: str
@@ -183,6 +195,92 @@ def _fit_rmse_metrics(
     }
 
 
+def _train_end_index(n_points: int, validation_fraction: float) -> int:
+    if not 0.0 <= validation_fraction < 1.0:
+        raise ValueError("validation_fraction must be in [0, 1)")
+    if validation_fraction == 0.0:
+        return n_points
+    n_validation = max(1, int(np.ceil(n_points * validation_fraction)))
+    n_train = n_points - n_validation
+    if n_train < 4:
+        raise ValueError(
+            f"holdout leaves only {n_train} training points; at least 4 are required"
+        )
+    return n_train
+
+
+def _information_criteria(
+    normalized_residuals: np.ndarray,
+    n_parameters: int,
+) -> dict[str, float]:
+    """Gaussian AIC/AICc/BIC using the shared normalized residual scale."""
+    n = int(normalized_residuals.size)
+    rss = max(float(np.dot(normalized_residuals, normalized_residuals)), np.finfo(float).tiny)
+    base = n * np.log(rss / n)
+    aic = float(base + 2.0 * n_parameters)
+    aicc = (
+        float(aic + 2.0 * n_parameters * (n_parameters + 1) / (n - n_parameters - 1))
+        if n > n_parameters + 1
+        else float("inf")
+    )
+    bic = float(base + n_parameters * np.log(n))
+    return {"aic": aic, "aicc": aicc, "bic": bic}
+
+
+def _fit_evaluation_metrics(
+    prey_obs: np.ndarray,
+    predator_obs: np.ndarray,
+    prey_pred: np.ndarray,
+    predator_pred: np.ndarray,
+    prey_scale: float,
+    predator_scale: float,
+    train_end: int,
+    n_parameters: int,
+) -> dict[str, float | int]:
+    train = slice(0, train_end)
+    metrics: dict[str, float | int] = _fit_rmse_metrics(
+        prey_obs[train],
+        predator_obs[train],
+        prey_pred[train],
+        predator_pred[train],
+        prey_scale,
+        predator_scale,
+    )
+    normalized_residuals = np.concatenate([
+        (prey_pred[train] - prey_obs[train]) / prey_scale,
+        (predator_pred[train] - predator_obs[train]) / predator_scale,
+    ])
+    metrics.update(_information_criteria(normalized_residuals, n_parameters))
+
+    n_validation = int(prey_obs.size - train_end)
+    if n_validation:
+        validation = _fit_rmse_metrics(
+            prey_obs[train_end:],
+            predator_obs[train_end:],
+            prey_pred[train_end:],
+            predator_pred[train_end:],
+            prey_scale,
+            predator_scale,
+        )
+        metrics.update({f"validation_{key}": value for key, value in validation.items()})
+    else:
+        for key in (
+            "rmse_normalized_prey",
+            "rmse_normalized_predator",
+            "rmse_normalized_total",
+            "rmse_raw_prey",
+            "rmse_raw_predator",
+            "rmse_raw_total",
+        ):
+            metrics[f"validation_{key}"] = float("nan")
+    metrics.update({
+        "n_parameters": int(n_parameters),
+        "n_train_points": int(train_end),
+        "n_validation_points": n_validation,
+    })
+    return metrics
+
+
 def _optimization_meta(res: _OptResult, param_names: list[str]) -> dict:
     return {
         "nfev": int(res.nfev),
@@ -241,6 +339,7 @@ def fit_baseline_to_series(
     series,
     fixed: BaselineParams | None = None,
     fit_e_mu: bool = False,
+    validation_fraction: float = 0.20,
 ) -> FitResult:
     """
     非线性最小二乘拟合基线 ODE 到 (t, prey, predator)。
@@ -249,11 +348,13 @@ def fit_baseline_to_series(
     if fixed is None:
         fixed = BaselineParams()
 
-    prey_max = max(float(np.max(series.prey)), 1.0)
-    pred_max = max(float(np.max(series.predator)), 1.0)
+    train_end = _train_end_index(series.n_points, validation_fraction)
+    prey_max = max(float(np.max(series.prey[:train_end])), 1.0)
+    pred_max = max(float(np.max(series.predator[:train_end])), 1.0)
     x0 = float(series.prey[0])
     y0 = float(series.predator[0])
     t_obs = series.t
+    t_train = t_obs[:train_end]
 
     def residual(log_p: np.ndarray) -> np.ndarray:
         p = _pack_baseline(log_p, fixed, fit_e_mu=fit_e_mu)
@@ -261,15 +362,15 @@ def fit_baseline_to_series(
             y = _simulate_at_times(
                 lambda t, s: baseline_rhs(t, s, p),
                 np.array([x0, y0]),
-                t_obs,
+                t_train,
             )
         except RuntimeError:
-            return np.full(t_obs.size * 2, 1e6)
+            return np.full(t_train.size * 2, 1e6)
         if np.any(y < 0) or np.any(~np.isfinite(y)):
-            return np.full(t_obs.size * 2, 1e6)
+            return np.full(t_train.size * 2, 1e6)
         # 相对误差，平衡猎物/捕食者量级
-        rp = (y[0] - series.prey) / prey_max
-        rq = (y[1] - series.predator) / pred_max
+        rp = (y[0] - series.prey[:train_end]) / prey_max
+        rq = (y[1] - series.predator[:train_end]) / pred_max
         return np.concatenate([rp, rq])
 
     p0, lb, ub = _holling_core_setup(prey_max, fixed)
@@ -290,8 +391,16 @@ def fit_baseline_to_series(
         np.array([x0, y0]),
         t_obs,
     )
-    rmse_metrics = _fit_rmse_metrics(
-        series.prey, series.predator, y_pred[0], y_pred[1], prey_max, pred_max,
+    n_parameters = len(param_names)
+    fit_metrics = _fit_evaluation_metrics(
+        series.prey,
+        series.predator,
+        y_pred[0],
+        y_pred[1],
+        prey_max,
+        pred_max,
+        train_end,
+        n_parameters,
     )
 
     return FitResult(
@@ -307,7 +416,7 @@ def fit_baseline_to_series(
             "x0": x0,
             "y0": y0,
         },
-        **rmse_metrics,
+        **fit_metrics,
         success=bool(res.success),
         optimization_status=res.status,
         message=str(res.message),
@@ -316,7 +425,13 @@ def fit_baseline_to_series(
         predator_obs=series.predator,
         prey_pred=y_pred[0],
         predator_pred=y_pred[1],
-        meta=_optimization_meta(res, param_names),
+        meta={
+            **_optimization_meta(res, param_names),
+            "validation_fraction": validation_fraction,
+            "validation_mode": "ordered_holdout_continuous_multistep",
+            "train_end_time": float(t_obs[train_end - 1]),
+            "validation_start_time": float(t_obs[train_end]) if train_end < t_obs.size else None,
+        },
     )
 
 
@@ -324,6 +439,7 @@ def fit_fear_memory_to_series(
     series,
     fixed: FearMemoryParams | None = None,
     baseline_params: BaselineParams | None = None,
+    validation_fraction: float = 0.20,
 ) -> FitResult:
     """在基线参数初值上额外拟合 phi（恐惧强度）。"""
     if fixed is None:
@@ -341,12 +457,14 @@ def fit_fear_memory_to_series(
             delta=fixed.delta,
         )
 
-    prey_max = max(float(np.max(series.prey)), 1.0)
-    pred_max = max(float(np.max(series.predator)), 1.0)
+    train_end = _train_end_index(series.n_points, validation_fraction)
+    prey_max = max(float(np.max(series.prey[:train_end])), 1.0)
+    pred_max = max(float(np.max(series.predator[:train_end])), 1.0)
     x0 = float(series.prey[0])
     y0 = float(series.predator[0])
     m0 = y0
     t_obs = series.t
+    t_train = t_obs[:train_end]
 
     def residual(log_p: np.ndarray) -> np.ndarray:
         p = _pack_fear_memory(log_p, fixed)
@@ -354,14 +472,14 @@ def fit_fear_memory_to_series(
             y = _simulate_at_times(
                 lambda t, s: fear_memory_rhs(t, s, p),
                 np.array([x0, y0, m0]),
-                t_obs,
+                t_train,
             )
         except RuntimeError:
-            return np.full(t_obs.size * 2, 1e6)
+            return np.full(t_train.size * 2, 1e6)
         if np.any(y[:2] < 0) or np.any(~np.isfinite(y[:2])):
-            return np.full(t_obs.size * 2, 1e6)
-        rp = (y[0] - series.prey) / prey_max
-        rq = (y[1] - series.predator) / pred_max
+            return np.full(t_train.size * 2, 1e6)
+        rp = (y[0] - series.prey[:train_end]) / prey_max
+        rq = (y[1] - series.predator[:train_end]) / pred_max
         return np.concatenate([rp, rq])
 
     p0_core, lb_core, ub_core = _holling_core_setup(prey_max, fixed)
@@ -377,8 +495,16 @@ def fit_fear_memory_to_series(
         np.array([x0, y0, m0]),
         t_obs,
     )
-    rmse_metrics = _fit_rmse_metrics(
-        series.prey, series.predator, y_pred[0], y_pred[1], prey_max, pred_max,
+    param_names = ["r", "K", "a", "theta", "phi"]
+    fit_metrics = _fit_evaluation_metrics(
+        series.prey,
+        series.predator,
+        y_pred[0],
+        y_pred[1],
+        prey_max,
+        pred_max,
+        train_end,
+        len(param_names),
     )
 
     return FitResult(
@@ -397,7 +523,7 @@ def fit_fear_memory_to_series(
             "y0": y0,
             "m0": m0,
         },
-        **rmse_metrics,
+        **fit_metrics,
         success=bool(res.success),
         optimization_status=res.status,
         message=str(res.message),
@@ -406,7 +532,13 @@ def fit_fear_memory_to_series(
         predator_obs=series.predator,
         prey_pred=y_pred[0],
         predator_pred=y_pred[1],
-        meta=_optimization_meta(res, ["r", "K", "a", "theta", "phi"]),
+        meta={
+            **_optimization_meta(res, param_names),
+            "validation_fraction": validation_fraction,
+            "validation_mode": "ordered_holdout_continuous_multistep",
+            "train_end_time": float(t_obs[train_end - 1]),
+            "validation_start_time": float(t_obs[train_end]) if train_end < t_obs.size else None,
+        },
     )
 
 
@@ -414,6 +546,7 @@ def fit_bda_fear_to_series(
     series,
     fixed: BDAFearParams | None = None,
     fit_k: bool = True,
+    validation_fraction: float = 0.20,
 ) -> FitResult:
     """
     拟合 Myint B-D + 恐惧 ODE（无量纲 u,v）。
@@ -422,13 +555,15 @@ def fit_bda_fear_to_series(
     if fixed is None:
         fixed = BDAFearParams()
 
-    u_scale = max(float(np.max(series.prey)), 1.0)
-    v_scale = max(float(np.max(series.predator)), 1.0)
+    train_end = _train_end_index(series.n_points, validation_fraction)
+    u_scale = max(float(np.max(series.prey[:train_end])), 1.0)
+    v_scale = max(float(np.max(series.predator[:train_end])), 1.0)
     prey = series.prey / u_scale
     predator = series.predator / v_scale
     u0 = float(prey[0])
     v0 = float(predator[0])
     t_obs = series.t
+    t_train = t_obs[:train_end]
 
     n_param = 8 if fit_k else 7
     names = ["r", "d", "a", "p", "q", "c", "m"] + (["k"] if fit_k else [])
@@ -453,13 +588,13 @@ def fit_bda_fear_to_series(
             y = _simulate_at_times(
                 lambda t, s: bd_fear_rhs(t, s, p),
                 np.array([u0, v0]),
-                t_obs,
+                t_train,
             )
         except RuntimeError:
-            return np.full(t_obs.size * 2, 1e6)
+            return np.full(t_train.size * 2, 1e6)
         if np.any(y < 0) or np.any(~np.isfinite(y)):
-            return np.full(t_obs.size * 2, 1e6)
-        return np.concatenate([y[0] - prey, y[1] - predator])
+            return np.full(t_train.size * 2, 1e6)
+        return np.concatenate([y[0] - prey[:train_end], y[1] - predator[:train_end]])
 
     p0_list = [2.5, 0.5, 0.1, 1.0, 0.1, 0.8, 0.6]
     lb_list = [0.2, 0.01, 1e-4, 0.01, 1e-3, 0.1, 0.05]
@@ -487,20 +622,22 @@ def fit_bda_fear_to_series(
     params.update({"u0": u0, "v0": v0, "u_scale": u_scale, "v_scale": v_scale})
     prey_pred_raw = y_pred[0] * u_scale
     predator_pred_raw = y_pred[1] * v_scale
-    rmse_metrics = _fit_rmse_metrics(
+    fit_metrics = _fit_evaluation_metrics(
         series.prey,
         series.predator,
         prey_pred_raw,
         predator_pred_raw,
         u_scale,
         v_scale,
+        train_end,
+        len(names),
     )
 
     return FitResult(
         model="bda_fear",
         series_name=series.name,
         params=params,
-        **rmse_metrics,
+        **fit_metrics,
         success=bool(res.success),
         optimization_status=res.status,
         message=str(res.message),
@@ -509,7 +646,14 @@ def fit_bda_fear_to_series(
         predator_obs=series.predator,
         prey_pred=prey_pred_raw,
         predator_pred=predator_pred_raw,
-        meta={**_optimization_meta(res, names), "normalized_fit": True},
+        meta={
+            **_optimization_meta(res, names),
+            "normalized_fit": True,
+            "validation_fraction": validation_fraction,
+            "validation_mode": "ordered_holdout_continuous_multistep",
+            "train_end_time": float(t_obs[train_end - 1]),
+            "validation_start_time": float(t_obs[train_end]) if train_end < t_obs.size else None,
+        },
     )
 
 

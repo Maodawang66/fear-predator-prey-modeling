@@ -146,9 +146,9 @@ def build_cross_system_table(rows: list[dict]) -> list[dict]:
             "v0": v0,
             "eta_v0": eta_v0,
             "eta_v5": eta_v5,
-            "rmse_normalized_total": _f(r, "rmse_normalized_total"),
-            "rmse_normalized_prey": _f(r, "rmse_normalized_prey"),
-            "rmse_normalized_predator": _f(r, "rmse_normalized_predator"),
+            "train_rmse_normalized_total": _f(r, "rmse_normalized_total"),
+            "validation_rmse_normalized_total": _f(r, "validation_rmse_normalized_total"),
+            "aicc": _f(r, "aicc"),
             "p": _f(r, "p"),
             "q": _f(r, "q"),
             "r_param": _f(r, "r"),
@@ -157,27 +157,65 @@ def build_cross_system_table(rows: list[dict]) -> list[dict]:
 
 
 def build_rmse_improvement(rows: list[dict]) -> list[dict]:
-    """baseline / fear_memory / bda_fear RMSE 与改进倍数。"""
-    by_series: dict[str, dict[str, float]] = {}
+    """按留后验证误差和 AICc 比较 baseline / fear_memory / bda_fear。"""
+    by_series: dict[str, dict[str, dict[str, float]]] = {}
     for r in rows:
         if not _is_usable_fit(r):
             continue
         s = r["series"]
-        by_series.setdefault(s, {})[r["model"]] = _f(r, "rmse_normalized_total")
+        by_series.setdefault(s, {})[r["model"]] = {
+            "train_rmse": _f(r, "rmse_normalized_total"),
+            "validation_rmse": _f(r, "validation_rmse_normalized_total"),
+            "aicc": _f(r, "aicc"),
+            "bic": _f(r, "bic"),
+        }
 
     out: list[dict] = []
     for s, models in sorted(by_series.items()):
-        base = models.get("baseline", float("nan"))
-        bda = models.get("bda_fear", float("nan"))
-        mem = models.get("fear_memory", float("nan"))
-        ratio = base / bda if bda > 0 and np.isfinite(bda) else float("nan")
+        def metric(model: str, key: str) -> float:
+            return models.get(model, {}).get(key, float("nan"))
+
+        base_validation = metric("baseline", "validation_rmse")
+        bda_validation = metric("bda_fear", "validation_rmse")
+        ratio = (
+            base_validation / bda_validation
+            if bda_validation > 0 and np.isfinite(bda_validation)
+            else float("nan")
+        )
+        validation_candidates = {
+            model: values["validation_rmse"]
+            for model, values in models.items()
+            if np.isfinite(values["validation_rmse"])
+        }
+        aicc_candidates = {
+            model: values["aicc"]
+            for model, values in models.items()
+            if np.isfinite(values["aicc"])
+        }
         out.append({
             "series": s,
             "group": _classify_group(s),
-            "rmse_normalized_baseline": base,
-            "rmse_normalized_fear_memory": mem,
-            "rmse_normalized_bda_fear": bda,
-            "improvement_ratio": ratio,
+            "train_rmse_normalized_baseline": metric("baseline", "train_rmse"),
+            "train_rmse_normalized_fear_memory": metric("fear_memory", "train_rmse"),
+            "train_rmse_normalized_bda_fear": metric("bda_fear", "train_rmse"),
+            "validation_rmse_normalized_baseline": base_validation,
+            "validation_rmse_normalized_fear_memory": metric("fear_memory", "validation_rmse"),
+            "validation_rmse_normalized_bda_fear": bda_validation,
+            "aicc_baseline": metric("baseline", "aicc"),
+            "aicc_fear_memory": metric("fear_memory", "aicc"),
+            "aicc_bda_fear": metric("bda_fear", "aicc"),
+            "bic_baseline": metric("baseline", "bic"),
+            "bic_fear_memory": metric("fear_memory", "bic"),
+            "bic_bda_fear": metric("bda_fear", "bic"),
+            "validation_improvement_ratio_baseline_over_bda": ratio,
+            "best_model_validation": (
+                min(validation_candidates, key=validation_candidates.get)
+                if validation_candidates else ""
+            ),
+            "best_model_aicc": (
+                min(aicc_candidates, key=aicc_candidates.get)
+                if aicc_candidates else ""
+            ),
         })
     return out
 
@@ -195,10 +233,11 @@ def _short_series_name(series: str) -> str:
 
 
 def plot_rmse_improvement(data: list[dict], path: Path) -> None:
-    data = [d for d in data if np.isfinite(d.get("improvement_ratio", float("nan")))]
-    data = sorted(data, key=lambda d: d.get("improvement_ratio", 0), reverse=True)
+    ratio_key = "validation_improvement_ratio_baseline_over_bda"
+    data = [d for d in data if np.isfinite(d.get(ratio_key, float("nan")))]
+    data = sorted(data, key=lambda d: d.get(ratio_key, 0), reverse=True)
     names = [_short_series_name(d["series"]) for d in data]
-    ratios = [d["improvement_ratio"] for d in data]
+    ratios = [d[ratio_key] for d in data]
     group_colors = {"mammal": "#4C72B0", "fish": "#55A868", "zooplankton": "#C44E52"}
     bar_colors = [group_colors.get(d["group"], "#888888") for d in data]
     fig, ax = plt.subplots(figsize=(10, max(5, 0.42 * len(names))))
@@ -207,8 +246,8 @@ def plot_rmse_improvement(data: list[dict], path: Path) -> None:
     ax.set_xscale("log")
     ax.set_yticks(y_pos)
     ax.set_yticklabels(names, fontsize=9)
-    ax.set_xlabel("RMSE improvement ratio (baseline / B-D+fear, log scale)")
-    ax.set_title("Three-model fit: baseline vs B-D+fear RMSE improvement (12 series)")
+    ax.set_xlabel("holdout RMSE ratio (baseline / B-D+fear, log scale)")
+    ax.set_title("Continuous multi-step holdout: baseline vs B-D+fear")
     ax.axvline(1.0, color="gray", ls="--", lw=0.8)
     for i, (r, d) in enumerate(zip(ratios, data)):
         ax.text(r * 1.08, i, f"{r:.1e}", va="center", fontsize=7)
@@ -248,12 +287,12 @@ def plot_eta_by_group(cross: list[dict], path: Path) -> None:
     ax2 = axes[1]
     for g in groups:
         xs = [r["k"] for r in cross if r["group"] == g]
-        ys = [r["rmse_normalized_total"] for r in cross if r["group"] == g]
+        ys = [r["validation_rmse_normalized_total"] for r in cross if r["group"] == g]
         ax2.scatter(xs, ys, label=f"{g} (n={len(xs)})", c=palette[g], s=60, alpha=0.85)
     ax2.set_xscale("log")
     ax2.set_xlabel("fitted k")
-    ax2.set_ylabel("RMSE total (B-D+fear)")
-    ax2.set_title("k vs fit quality (identifiability)")
+    ax2.set_ylabel("holdout RMSE total (B-D+fear)")
+    ax2.set_title("k vs holdout prediction quality")
     ax2.legend(fontsize=8)
     fig.tight_layout()
     fig.savefig(path, dpi=150)
@@ -302,7 +341,7 @@ def plot_andren_regions(cross: list[dict], path: Path) -> None:
     reg.sort(key=lambda d: _region(d["series"]))
     regions = [_region(r["series"]) for r in reg]
     ks = [r["k"] for r in reg]
-    rmses = [r["rmse_normalized_total"] for r in reg]
+    rmses = [r["validation_rmse_normalized_total"] for r in reg]
 
     fig, ax1 = plt.subplots(figsize=(7, 4))
     ax1.plot(regions, ks, "o-", color="#4C72B0", label="k")
@@ -764,7 +803,9 @@ def run_lter_extra(out_dir: Path, lake_id: int = LTER_DEFAULT_LAKE) -> list[dict
             "predator": pred,
             "lake_id": lake_id,
             "n_points": series.n_points,
-            "rmse_normalized_total": res.rmse_normalized_total,
+            "train_rmse_normalized_total": res.rmse_normalized_total,
+            "validation_rmse_normalized_total": res.validation_rmse_normalized_total,
+            "aicc": res.aicc,
             "k": res.params.get("k", float("nan")),
             "p": res.params.get("p", float("nan")),
             "q": res.params.get("q", float("nan")),
@@ -773,7 +814,8 @@ def run_lter_extra(out_dir: Path, lake_id: int = LTER_DEFAULT_LAKE) -> list[dict
         plot_fit_result(res, out_dir / f"lter_{series.name}_bda_fear.png")
     _write_csv(out_rows, out_dir / "lter_extra_fits.csv",
                ["series", "prey", "predator", "lake_id", "n_points",
-                "rmse_normalized_total", "k", "p", "q"])
+                "train_rmse_normalized_total", "validation_rmse_normalized_total",
+                "aicc", "k", "p", "q"])
     return out_rows
 
 
@@ -798,9 +840,12 @@ def _write_report(
         "",
         "### Top RMSE improvements",
     ]
-    for r in sorted(improve, key=lambda x: x.get("improvement_ratio", 0), reverse=True)[:5]:
+    ratio_key = "validation_improvement_ratio_baseline_over_bda"
+    for r in sorted(improve, key=lambda x: x.get(ratio_key, 0), reverse=True)[:5]:
         lines.append(
-            f"- {r['series']}: baseline/bda = {r.get('improvement_ratio', float('nan')):.2g}"
+            f"- {r['series']}: holdout baseline/bda = {r.get(ratio_key, float('nan')):.2g}; "
+            f"best validation={r.get('best_model_validation', '')}; "
+            f"best AICc={r.get('best_model_aicc', '')}"
         )
     lines.extend(["", "## Tier 2"])
     lines.append(f"- Peacor: {peacor or 'skipped'}")
@@ -853,14 +898,22 @@ def main() -> None:
     cross = build_cross_system_table(fit_rows)
     _write_csv(cross, tier1 / "cross_system_k_eta.csv",
                ["series", "group", "group_key", "k", "v0", "eta_v0", "eta_v5",
-                "rmse_normalized_total", "rmse_normalized_prey",
-                "rmse_normalized_predator", "p", "q", "r_param"])
+                "train_rmse_normalized_total", "validation_rmse_normalized_total",
+                "aicc", "p", "q", "r_param"])
 
     improve = build_rmse_improvement(fit_rows)
     _write_csv(improve, tier1 / "rmse_improvement.csv",
-               ["series", "group", "rmse_normalized_baseline",
-                "rmse_normalized_fear_memory", "rmse_normalized_bda_fear",
-                "improvement_ratio"])
+               ["series", "group",
+                "train_rmse_normalized_baseline",
+                "train_rmse_normalized_fear_memory",
+                "train_rmse_normalized_bda_fear",
+                "validation_rmse_normalized_baseline",
+                "validation_rmse_normalized_fear_memory",
+                "validation_rmse_normalized_bda_fear",
+                "aicc_baseline", "aicc_fear_memory", "aicc_bda_fear",
+                "bic_baseline", "bic_fear_memory", "bic_bda_fear",
+                "validation_improvement_ratio_baseline_over_bda",
+                "best_model_validation", "best_model_aicc"])
 
     plot_rmse_improvement(improve, tier1 / "rmse_improvement.png")
     plot_eta_by_group(cross, tier1 / "eta_by_group.png")

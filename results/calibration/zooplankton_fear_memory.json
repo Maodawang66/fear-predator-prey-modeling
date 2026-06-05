@@ -1,6 +1,6 @@
 {
   "model": "fear_memory",
-  "series": "glerl_m110_zoop_1994-201",
+  "series": "lake_michigan_daphnia_bythotrephes",
   "params": {
     "r": 0.3433153961268165,
     "K": 55.486889334115034,
@@ -44,16 +44,6 @@
     "validation_fraction": 0.2,
     "validation_mode": "ordered_holdout_continuous_multistep",
     "train_end_time": 225.0,
-    "validation_start_time": 226.0,
-    "signature": "zooplankton",
-    "detection_method": "zooplankton_glerl",
-    "confidence": 0.93,
-    "time_col": "JulianDay",
-    "prey_col": "D.mendotae",
-    "predator_col": "Bythotrephes",
-    "group_key": null,
-    "notes": "Marino et al. Lake Michigan CE/NCE monitoring",
-    "n_points": 175,
-    "source_file": "D:\\code\\USTC_MM_26_animalfear\\data\\raw\\04_lake_michigan_zooplankton\\GLERL_M110_Zoop_1994-2012.txt"
+    "validation_start_time": 226.0
   }
 }
