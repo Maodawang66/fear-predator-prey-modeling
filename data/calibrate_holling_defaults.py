@@ -9,6 +9,7 @@ locally stable, and numerically persistent.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
 from dataclasses import asdict
@@ -27,14 +28,85 @@ from data.series import PredatorPreySeries  # noqa: E402
 from src.parameters import BaselineParams  # noqa: E402
 from src.simulate import integrate_baseline, is_extinct, long_term_mean  # noqa: E402
 
+MANIFEST_PATH = ROOT / "data" / "holling_report_series_manifest.json"
+OUT = ROOT / "results" / "holling_defaults"
 
-def _load_report_series(max_series: int = 12) -> list[PredatorPreySeries]:
-    series_list = discover_and_load(min_confidence=0.5)
-    series_list.sort(
-        key=lambda s: (s.meta.get("confidence", 0), s.n_points),
-        reverse=True,
-    )
-    return series_list[:max_series]
+
+def _load_report_series() -> tuple[list[PredatorPreySeries], dict]:
+    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    report_entries = manifest["report_series"]
+    excluded_entries = manifest["excluded_series"]
+    entries = report_entries + excluded_entries
+    expected_ids = [entry["id"] for entry in entries]
+    if len(expected_ids) != len(set(expected_ids)):
+        raise RuntimeError("duplicate series id in Holling report manifest")
+
+    discovered = discover_and_load(min_confidence=float(manifest["min_confidence"]))
+    by_id = {series.name: series for series in discovered}
+    actual_ids = set(by_id)
+    expected_id_set = set(expected_ids)
+    missing = sorted(expected_id_set - actual_ids)
+    added = sorted(actual_ids - expected_id_set)
+    if missing or added:
+        raise RuntimeError(
+            "Holling report series manifest mismatch: "
+            f"missing={missing or 'none'}, unlisted={added or 'none'}"
+        )
+
+    mismatches: list[str] = []
+    for entry in entries:
+        series = by_id[entry["id"]]
+        for key, actual in (
+            ("signature", series.meta.get("signature")),
+            ("group_key", series.meta.get("group_key")),
+            ("n_points", series.n_points),
+        ):
+            if actual != entry[key]:
+                mismatches.append(
+                    f"{entry['id']}.{key}: expected {entry[key]!r}, found {actual!r}"
+                )
+    if mismatches:
+        raise RuntimeError(
+            "Holling report series metadata changed:\n  - " + "\n  - ".join(mismatches)
+        )
+
+    report_series = [by_id[entry["id"]] for entry in report_entries]
+    return report_series, manifest
+
+
+def _series_summary(series: PredatorPreySeries) -> dict[str, object]:
+    try:
+        source = Path(series.source_path).relative_to(ROOT).as_posix()
+    except ValueError:
+        source = series.source_path
+    return {
+        "id": series.name,
+        "source": source,
+        "signature": series.meta.get("signature"),
+        "group_key": series.meta.get("group_key"),
+        "n_points": series.n_points,
+        "duration": series.duration,
+        "prey_min": float(np.min(series.prey)),
+        "prey_max": float(np.max(series.prey)),
+        "predator_min": float(np.min(series.predator)),
+        "predator_max": float(np.max(series.predator)),
+    }
+
+
+def _write_series_validation(
+    series_list: list[PredatorPreySeries],
+    manifest: dict,
+) -> Path:
+    OUT.mkdir(parents=True, exist_ok=True)
+    output = {
+        "manifest": MANIFEST_PATH.relative_to(ROOT).as_posix(),
+        "report_series_count": len(series_list),
+        "excluded_series": manifest["excluded_series"],
+        "report_series": [_series_summary(series) for series in series_list],
+    }
+    path = OUT / "series_manifest_validation.json"
+    path.write_text(json.dumps(output, indent=2, ensure_ascii=False), encoding="utf-8")
+    return path
 
 
 def _tail_mean(values: np.ndarray, tail_frac: float = 0.5) -> float:
@@ -218,14 +290,12 @@ def verify_candidates(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Calibrate stable Holling II defaults")
-    parser.add_argument("--max-series", type=int, default=12)
     parser.add_argument("--top", type=int, default=10)
     args = parser.parse_args()
 
     base = BaselineParams()
-    series_list = _load_report_series(args.max_series)
-    if len(series_list) != args.max_series:
-        raise RuntimeError(f"expected {args.max_series} series, found {len(series_list)}")
+    series_list, manifest = _load_report_series()
+    validation_path = _write_series_validation(series_list, manifest)
 
     summary, _ = empirical_target(series_list, base.K)
     candidates = search_holling_defaults(
@@ -242,6 +312,7 @@ def main() -> None:
     print("Series:")
     for series in series_list:
         print(f"  - {series.name} ({series.n_points} points)")
+    print(f"  validation: {validation_path.relative_to(ROOT)}")
     print("\nEmpirical normalized tail means across series:")
     print(
         "  prey median={tail_prey_median:.3f} "
