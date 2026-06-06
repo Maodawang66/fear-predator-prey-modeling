@@ -2,8 +2,13 @@ import unittest
 
 import numpy as np
 
-from data.calibrate_holling_defaults import _series_diagnostics, empirical_target
+from data.calibrate_holling_defaults import (
+    _series_diagnostics,
+    _structural_identifiability_report,
+    empirical_target,
+)
 from data.series import PredatorPreySeries
+from src.parameters import BaselineParams
 
 
 def _series(name: str, t: np.ndarray, prey: np.ndarray, predator: np.ndarray):
@@ -41,6 +46,21 @@ class HollingDefaultCalibrationTests(unittest.TestCase):
         self.assertIsNone(summary["target_x"])
         self.assertIsNone(summary["target_y"])
         self.assertEqual(rows[0]["classification"], "nonstationary_trend")
+
+    def test_no_target_identifiability_report_skips_numerical_search(self):
+        summary = {
+            "status": "insufficient_eligible_series",
+            "target_x": None,
+            "target_y": None,
+        }
+        report = _structural_identifiability_report(summary, BaselineParams())
+        self.assertEqual(report["artificial_prior"]["status"], "removed")
+        self.assertEqual(report["hardcoded_equilibrium_bounds"]["status"], "removed")
+        self.assertEqual(report["numerical_search"]["status"], "skipped")
+        self.assertEqual(
+            report["status"],
+            "structurally_non_identifiable_from_equilibrium_target",
+        )
 
 
 if __name__ == "__main__":

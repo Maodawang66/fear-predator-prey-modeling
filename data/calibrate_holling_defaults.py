@@ -44,6 +44,22 @@ DIAGNOSTIC_CONFIG = {
     "minimum_cycles": 3.0,
     "period_compatibility_relative_tolerance": 0.25,
 }
+SEARCH_BOUND_SCENARIOS = {
+    "current": {
+        "a": (0.035, 0.05),
+        "theta": (0.0, 0.006),
+        "e": (0.1, 0.8),
+        "mu": (0.05, 0.8),
+    },
+    "expanded": {
+        "a": (0.015, 0.08),
+        "theta": (0.0, 0.012),
+        "e": (0.05, 1.0),
+        "mu": (0.02, 1.2),
+    },
+}
+
+
 def _load_report_series() -> tuple[list[PredatorPreySeries], dict]:
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     report_entries = manifest["report_series"]
@@ -405,6 +421,81 @@ def _write_target_diagnostics(summary: dict[str, object], rows: list[dict[str, o
     return path
 
 
+def _structural_identifiability_report(
+    summary: dict[str, object],
+    base: BaselineParams,
+) -> dict[str, object]:
+    target_available = summary["status"] == "ok"
+    skipped = {
+        "status": "skipped",
+        "reason": "No valid equilibrium target is available from the strict diagnostics.",
+    }
+    return {
+        "status": "structurally_non_identifiable_from_equilibrium_target",
+        "target_status": summary["status"],
+        "target": {"x_star": summary["target_x"], "y_star": summary["target_y"]},
+        "artificial_prior": {
+            "status": "removed",
+            "note": "The calibration objective contains no parameter-centering prior.",
+        },
+        "objective": "equilibrium RMSE in model-density units; parameter prior removed",
+        "hardcoded_equilibrium_bounds": {
+            "status": "removed",
+            "remaining_constraints": [
+                "positive finite coexistence equilibrium",
+                "x_star < K",
+                "positive predator invasion growth",
+                "local stability trace < 0",
+            ],
+        },
+        "derivation": {
+            "free_parameters": ["theta", "e"],
+            "dependent_parameters": {
+                "a": "r * (1 - x_star / K) * (1 + theta * x_star) / y_star",
+                "mu": "e * r * x_star * (1 - x_star / K) / y_star",
+            },
+            "conclusion": (
+                "A single coexistence equilibrium supplies only two independent "
+                "relations for a, theta, e, and mu, leaving a two-dimensional ridge."
+            ),
+            "fixed_parameters": {"r": base.r, "K": base.K},
+        },
+        "search_bound_scenarios": SEARCH_BOUND_SCENARIOS,
+        "numerical_search": (
+            {"status": "available", "note": "Run only when a valid target exists."}
+            if target_available
+            else skipped
+        ),
+        "near_optimal_parameter_distribution": (
+            {"status": "available_when_numerical_search_runs"}
+            if target_available
+            else skipped
+        ),
+        "objective_contours": (
+            {"status": "available_when_numerical_search_runs"}
+            if target_available
+            else skipped
+        ),
+        "search_bound_sensitivity": (
+            {"status": "available_when_numerical_search_runs"}
+            if target_available
+            else skipped
+        ),
+        "target_definition_sensitivity": (
+            {"status": "available_when_multiple_valid_target_definitions_exist"}
+            if target_available
+            else skipped
+        ),
+    }
+
+
+def _write_identifiability_report(report: dict[str, object]) -> Path:
+    OUT.mkdir(parents=True, exist_ok=True)
+    path = OUT / "identifiability_sensitivity.json"
+    path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
+    return path
+
+
 def _equilibrium_and_stability(
     r: float,
     K: float,
@@ -427,11 +518,13 @@ def search_holling_defaults(
     target_y: float,
     base: BaselineParams,
     top_n: int,
+    bounds: dict[str, tuple[float, float]] | None = None,
 ) -> list[dict[str, float]]:
-    a_grid = np.linspace(0.035, 0.05, 61)
-    theta_grid = np.linspace(0.0, 0.006, 61)
-    e_grid = np.linspace(0.1, 0.8, 71)
-    mu_grid = np.linspace(0.05, 0.8, 151)
+    bounds = bounds or SEARCH_BOUND_SCENARIOS["current"]
+    a_grid = np.linspace(*bounds["a"], 61)
+    theta_grid = np.linspace(*bounds["theta"], 61)
+    e_grid = np.linspace(*bounds["e"], 71)
+    mu_grid = np.linspace(*bounds["mu"], 151)
     e_mesh, mu_mesh = np.meshgrid(e_grid, mu_grid, indexing="ij")
 
     candidates: list[np.ndarray] = []
@@ -451,27 +544,14 @@ def search_holling_defaults(
                 & (x_star < base.K)
                 & (y_star > 0.0)
                 & (trace < 0.0)
-                & (x_star >= 20.0)
-                & (x_star <= 30.0)
-                & (y_star >= 20.0)
-                & (y_star <= 35.0)
             )
             if not np.any(ok):
                 continue
 
-            target_score = (
-                ((x_star[ok] - target_x) / 10.0) ** 2
-                + ((y_star[ok] - target_y) / 10.0) ** 2
+            score = np.sqrt(
+                ((x_star[ok] - target_x) ** 2 + (y_star[ok] - target_y) ** 2)
+                / 2.0
             )
-            # e, mu, a, and theta are weakly identifiable from an aggregate
-            # equilibrium target, so this prior only breaks near-ties.
-            prior_score = 0.05 * (
-                ((a - 0.044) / 0.02) ** 2
-                + ((theta - 0.005) / 0.005) ** 2
-                + ((e_mesh[ok] - 0.5) / 0.3) ** 2
-                + ((mu_mesh[ok] - 0.4) / 0.3) ** 2
-            )
-            score = target_score + prior_score
             block = np.column_stack(
                 [
                     score,
@@ -564,6 +644,9 @@ def main() -> None:
 
     summary, target_rows = empirical_target(series_list, base.K)
     diagnostics_path = _write_target_diagnostics(summary, target_rows)
+    identifiability_path = _write_identifiability_report(
+        _structural_identifiability_report(summary, base)
+    )
 
     print("=" * 72)
     print("Holling II global default calibration")
@@ -577,11 +660,12 @@ def main() -> None:
         print(f"  - {row['id']}: {row['classification']}")
     print(f"  included={len(summary['included_series'])}, excluded={len(summary['excluded_series'])}")
     print(f"  diagnostics: {diagnostics_path.relative_to(ROOT)}")
+    print(f"  identifiability: {identifiability_path.relative_to(ROOT)}")
     if summary["status"] != "ok":
         print("\nCalibration stopped:")
         print(f"  status={summary['status']}")
         print(f"  reason={summary['reason']}")
-        print("  No equilibrium target or recommended BaselineParams was produced.")
+        print("  No equilibrium target or representative BaselineParams was produced.")
         print("=" * 72)
         return
 
@@ -623,7 +707,7 @@ def main() -> None:
             e=best["e"],
             mu=best["mu"],
         )
-        print("\nRecommended BaselineParams:")
+        print("\nRepresentative best grid candidate (not uniquely identified):")
         print(f"  {asdict(params)}")
     print("=" * 72)
 
