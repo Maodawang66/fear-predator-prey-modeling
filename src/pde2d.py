@@ -9,7 +9,7 @@ import numpy as np
 from .k_damping import bd_fear_jacobian
 from .model import bd_fear_rhs
 from .parameters import BDAFearParams, bda_fear_default
-from .simulate import integrate_rhs, long_term_mean
+from .simulate import integrate_rhs, integrate_until_converged
 
 
 @dataclass(frozen=True)
@@ -194,12 +194,23 @@ def resolve_bda_coexistence(
     """
     if params is None:
         params = bda_fear_default
-    sol = integrate_rhs(
-        lambda t, s: bd_fear_rhs(t, s, params),
-        np.array(y0, dtype=float),
-        t_span=(0.0, t_end),
+    result = integrate_until_converged(
+        lambda end, points: integrate_rhs(
+            lambda t, s: bd_fear_rhs(t, s, params),
+            np.array(y0, dtype=float),
+            t_span=(0.0, end),
+            n_points=points,
+        ),
+        t_end=t_end,
+        scales=(1.0, 1.0),
     )
-    u, v = long_term_mean(sol, burn_in_frac=0.35)
+    if result.convergence.status != "converged":
+        raise RuntimeError(
+            f"B-D coexistence trajectory did not converge by t={result.t_end_used:g}"
+        )
+    if max(result.metrics.amplitudes) > 1e-6:
+        raise RuntimeError("B-D coexistence trajectory converged to a cycle, not an equilibrium")
+    u, v = result.metrics.means
     return float(u), float(v)
 
 

@@ -47,6 +47,7 @@ def _write_scan_csv(rows, path: Path) -> None:
         "k", "u_mean", "v_mean", "amplitude_u", "amplitude_v",
         "rel_amplitude_u", "peak_decay_ratio", "n_peaks",
         "re_max", "stability", "status",
+        "convergence_status", "t_end_used", "extensions",
     ]
     with path.open("w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=fields)

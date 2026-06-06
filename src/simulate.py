@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable
+from typing import Callable, Literal
 
 import numpy as np
 from scipy.integrate import solve_ivp
@@ -126,6 +126,142 @@ def long_term_mean(sol, burn_in_frac: float = 0.25) -> tuple[float, float]:
     x_mean = float(np.mean(sol.y[0, i0:]))
     y_mean = float(np.mean(sol.y[1, i0:]))
     return x_mean, y_mean
+
+
+@dataclass(frozen=True)
+class TailMetrics:
+    means: tuple[float, float]
+    amplitudes: tuple[float, float]
+
+
+@dataclass(frozen=True)
+class ConvergenceDiagnostics:
+    status: Literal["converged", "not_converged"]
+    mean_relative_changes: tuple[float, float]
+    amplitude_relative_changes: tuple[float, float]
+    drift_relative_changes: tuple[float, float]
+
+
+@dataclass(frozen=True)
+class LongTermResult:
+    sol: object
+    metrics: TailMetrics
+    convergence: ConvergenceDiagnostics
+    t_end_used: float
+    extensions: int
+
+
+def _window_metrics(values: np.ndarray) -> TailMetrics:
+    means = tuple(float(np.mean(values[index])) for index in range(2))
+    amplitudes = tuple(
+        float(np.max(values[index]) - np.min(values[index])) for index in range(2)
+    )
+    return TailMetrics(means=means, amplitudes=amplitudes)
+
+
+def tail_metrics(sol, window_frac: float = 0.20) -> TailMetrics:
+    """最终尾窗的均值和振幅。"""
+    if not 0.0 < window_frac <= 0.5:
+        raise ValueError("window_frac must be in (0, 0.5]")
+    window = max(2, int(sol.t.size * window_frac))
+    return _window_metrics(sol.y[:2, -window:])
+
+
+def diagnose_convergence(
+    sol,
+    *,
+    scales: tuple[float, float],
+    window_frac: float = 0.20,
+    relative_tolerance: float = 0.01,
+    numerical_zero_relative: float = 1e-6,
+) -> ConvergenceDiagnostics:
+    """比较相邻尾窗的均值与振幅，判断长期指标是否稳定。"""
+    if any(scale <= 0.0 for scale in scales):
+        raise ValueError("scales must be positive")
+    if not 0.0 < window_frac <= 0.5:
+        raise ValueError("window_frac must be in (0, 0.5]")
+    window = max(2, int(sol.t.size * window_frac))
+    if sol.t.size < 2 * window:
+        raise ValueError("solution does not contain two convergence windows")
+    previous = _window_metrics(sol.y[:2, -2 * window : -window])
+    final = _window_metrics(sol.y[:2, -window:])
+
+    mean_changes = []
+    amplitude_changes = []
+    drift_changes = []
+    for index, scale in enumerate(scales):
+        zero = numerical_zero_relative * scale
+        mean_changes.append(
+            abs(final.means[index] - previous.means[index])
+            / max(abs(final.means[index]), abs(previous.means[index]), zero)
+        )
+        if max(final.amplitudes[index], previous.amplitudes[index]) <= zero:
+            amplitude_changes.append(0.0)
+        else:
+            amplitude_changes.append(
+                abs(final.amplitudes[index] - previous.amplitudes[index])
+                / max(final.amplitudes[index], previous.amplitudes[index], zero)
+            )
+        amplitude_scale = max(final.amplitudes[index], previous.amplitudes[index])
+        if amplitude_scale <= zero:
+            drift_changes.append(0.0)
+        else:
+            drift_changes.append(
+                abs(final.means[index] - previous.means[index]) / amplitude_scale
+            )
+    changes = (*mean_changes, *amplitude_changes, *drift_changes)
+    status = (
+        "converged"
+        if all(change <= relative_tolerance for change in changes)
+        else "not_converged"
+    )
+    return ConvergenceDiagnostics(
+        status=status,
+        mean_relative_changes=tuple(mean_changes),
+        amplitude_relative_changes=tuple(amplitude_changes),
+        drift_relative_changes=tuple(drift_changes),
+    )
+
+
+def integrate_until_converged(
+    integrator: Callable[[float, int], object],
+    *,
+    t_end: float,
+    scales: tuple[float, float],
+    n_points: int = 800,
+    max_extensions: int = 3,
+    window_frac: float = 0.20,
+    relative_tolerance: float = 0.01,
+) -> LongTermResult:
+    """必要时将积分终点翻倍，直到长期均值和振幅收敛。"""
+    if t_end <= 0.0:
+        raise ValueError("t_end must be positive")
+    if n_points < 10:
+        raise ValueError("n_points must be at least 10")
+    if max_extensions < 0:
+        raise ValueError("max_extensions must be non-negative")
+    result = None
+    for extensions in range(max_extensions + 1):
+        factor = 2**extensions
+        t_end_used = t_end * factor
+        sol = integrator(t_end_used, n_points * factor)
+        convergence = diagnose_convergence(
+            sol,
+            scales=scales,
+            window_frac=window_frac,
+            relative_tolerance=relative_tolerance,
+        )
+        result = LongTermResult(
+            sol=sol,
+            metrics=tail_metrics(sol, window_frac=window_frac),
+            convergence=convergence,
+            t_end_used=t_end_used,
+            extensions=extensions,
+        )
+        if convergence.status == "converged":
+            return result
+    assert result is not None
+    return result
 
 
 @dataclass(frozen=True)

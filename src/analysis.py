@@ -21,7 +21,12 @@ from .parameters import (
     fear_handling_default,
     fear_saturating_default,
 )
-from .simulate import integrate_baseline, integrate_fear_memory, is_extinct, long_term_mean
+from .simulate import (
+    integrate_fear_memory,
+    integrate_rhs,
+    integrate_until_converged,
+    is_extinct,
+)
 
 
 def scan_phi(
@@ -34,9 +39,12 @@ def scan_phi(
     if base is None:
         base = fear_default
 
-    x_mean = np.zeros_like(phi_values)
-    y_mean = np.zeros_like(phi_values)
+    x_mean = np.zeros_like(phi_values, dtype=float)
+    y_mean = np.zeros_like(phi_values, dtype=float)
     status = []
+    convergence_status = []
+    t_end_used = np.zeros_like(phi_values, dtype=float)
+    extensions = np.zeros_like(phi_values, dtype=int)
 
     for i, phi in enumerate(phi_values):
         p = FearMemoryParams(
@@ -49,16 +57,29 @@ def scan_phi(
             phi=float(phi),
             delta=base.delta,
         )
-        sol = integrate_fear_memory(p, t_span=(0.0, t_end))
-        xm, ym = long_term_mean(sol, burn_in_frac=0.3)
+        result = integrate_until_converged(
+            lambda end, points: integrate_fear_memory(
+                p, t_span=(0.0, end), n_points=points
+            ),
+            t_end=t_end,
+            scales=(base.K, base.K),
+        )
+        sol = result.sol
+        xm, ym = result.metrics.means
         x_mean[i], y_mean[i] = xm, ym
         status.append(is_extinct(sol, scales=(base.K, base.K)))
+        convergence_status.append(result.convergence.status)
+        t_end_used[i] = result.t_end_used
+        extensions[i] = result.extensions
 
     return {
         "phi": phi_values,
         "x_mean": x_mean,
         "y_mean": y_mean,
         "status": np.array(status, dtype=object),
+        "convergence_status": np.array(convergence_status, dtype=object),
+        "t_end_used": t_end_used,
+        "extensions": extensions,
     }
 
 
@@ -73,8 +94,11 @@ def scan_delta(
     if base is None:
         base = fear_default
 
-    x_mean = np.zeros_like(delta_values)
-    y_mean = np.zeros_like(delta_values)
+    x_mean = np.zeros_like(delta_values, dtype=float)
+    y_mean = np.zeros_like(delta_values, dtype=float)
+    convergence_status = []
+    t_end_used = np.zeros_like(delta_values, dtype=float)
+    extensions = np.zeros_like(delta_values, dtype=int)
 
     for i, delta in enumerate(delta_values):
         p = FearMemoryParams(
@@ -87,11 +111,27 @@ def scan_delta(
             phi=phi,
             delta=float(delta),
         )
-        sol = integrate_fear_memory(p, t_span=(0.0, t_end))
-        xm, ym = long_term_mean(sol, burn_in_frac=0.3)
+        result = integrate_until_converged(
+            lambda end, points: integrate_fear_memory(
+                p, t_span=(0.0, end), n_points=points
+            ),
+            t_end=t_end,
+            scales=(base.K, base.K),
+        )
+        xm, ym = result.metrics.means
         x_mean[i], y_mean[i] = xm, ym
+        convergence_status.append(result.convergence.status)
+        t_end_used[i] = result.t_end_used
+        extensions[i] = result.extensions
 
-    return {"delta": delta_values, "x_mean": x_mean, "y_mean": y_mean}
+    return {
+        "delta": delta_values,
+        "x_mean": x_mean,
+        "y_mean": y_mean,
+        "convergence_status": np.array(convergence_status, dtype=object),
+        "t_end_used": t_end_used,
+        "extensions": extensions,
+    }
 
 
 def compare_mechanisms(
@@ -125,6 +165,11 @@ def compare_mechanisms(
         "y_mean_change_pct": [],
         "relative_amplitude_x_change_pct": [],
         "relative_amplitude_y_change_pct": [],
+        "convergence_status": [],
+        "t_end_used": [],
+        "extensions": [],
+        "baseline_convergence_status": [],
+        "comparison_valid": [],
     }
 
     from .parameters import MECHANISM_LABELS
@@ -135,20 +180,24 @@ def compare_mechanisms(
         return "Holling II", MechanismId.BASELINE
 
     def metrics(mid: MechanismId) -> dict[str, float | str]:
-        sol = run_mechanism(
-            mid,
-            t_span=(0.0, t_end),
-            params=params_by_mechanism.get(mid),
-        )
-        xm, ym = long_term_mean(sol, burn_in_frac=0.35)
-        tail = slice(int(sol.t.size * 0.5), None)
-        amp_x = float(np.max(sol.y[0, tail]) - np.min(sol.y[0, tail]))
-        amp_y = float(np.max(sol.y[1, tail]) - np.min(sol.y[1, tail]))
         scales = (
             (1.0, 1.0)
             if mid in (MechanismId.BDA_BASELINE, MechanismId.BDA_FEAR)
             else (baseline_default.K, baseline_default.K)
         )
+        result = integrate_until_converged(
+            lambda end, points: run_mechanism(
+                mid,
+                t_span=(0.0, end),
+                n_points=points,
+                params=params_by_mechanism.get(mid),
+            ),
+            t_end=t_end,
+            scales=scales,
+        )
+        sol = result.sol
+        xm, ym = result.metrics.means
+        amp_x, amp_y = result.metrics.amplitudes
         return {
             "x_mean": xm,
             "y_mean": ym,
@@ -157,6 +206,9 @@ def compare_mechanisms(
             "amplitude_y": amp_y,
             "relative_amplitude_x": amp_x / max(abs(xm), 1e-12),
             "relative_amplitude_y": amp_y / max(abs(ym), 1e-12),
+            "convergence_status": result.convergence.status,
+            "t_end_used": result.t_end_used,
+            "extensions": result.extensions,
         }
 
     needed_baselines = {family_and_baseline(mid)[1] for mid in mechanisms}
@@ -175,6 +227,11 @@ def compare_mechanisms(
         rows["label"].append(MECHANISM_LABELS[mid])
         rows["model_family"].append(family)
         rows["baseline_mechanism"].append(baseline_mid.value)
+        rows["baseline_convergence_status"].append(baseline["convergence_status"])
+        rows["comparison_valid"].append(
+            current["convergence_status"] == "converged"
+            and baseline["convergence_status"] == "converged"
+        )
         for key in (
             "x_mean",
             "y_mean",
@@ -183,6 +240,9 @@ def compare_mechanisms(
             "amplitude_y",
             "relative_amplitude_x",
             "relative_amplitude_y",
+            "convergence_status",
+            "t_end_used",
+            "extensions",
         ):
             rows[key].append(current[key])
         for key in ("x_mean", "y_mean", "relative_amplitude_x", "relative_amplitude_y"):
@@ -303,15 +363,34 @@ def nce_vs_consumptive_summary(
     对照“仅消耗”(基线) 与 “消耗+恐惧”(记忆模型) 的猎物平均密度差，
     对应 Preisser (2007) 中 TMI 与 DMI 可分离的思想（简化数值代理）。
     """
-    sol_b = run_mechanism(MechanismId.BASELINE, t_span=(0.0, t_end))
-    sol_f = run_mechanism(MechanismId.FEAR_MEMORY, t_span=(0.0, t_end))
-    xb, _ = long_term_mean(sol_b, 0.3)
-    xf, _ = long_term_mean(sol_f, 0.3)
+    base_result = integrate_until_converged(
+        lambda end, points: run_mechanism(
+            MechanismId.BASELINE, t_span=(0.0, end), n_points=points
+        ),
+        t_end=t_end,
+        scales=(baseline_default.K, baseline_default.K),
+    )
+    fear_result = integrate_until_converged(
+        lambda end, points: run_mechanism(
+            MechanismId.FEAR_MEMORY, t_span=(0.0, end), n_points=points
+        ),
+        t_end=t_end,
+        scales=(baseline_default.K, baseline_default.K),
+    )
+    xb = base_result.metrics.means[0]
+    xf = fear_result.metrics.means[0]
+    if (
+        base_result.convergence.status != "converged"
+        or fear_result.convergence.status != "converged"
+    ):
+        raise RuntimeError("NCE comparison trajectories did not converge")
     return {
         "prey_mean_baseline": xb,
         "prey_mean_fear": xf,
         "nce_reduction": xb - xf,
         "relative_reduction_pct": 100.0 * (xb - xf) / max(xb, 1e-9),
+        "baseline_convergence_status": base_result.convergence.status,
+        "fear_convergence_status": fear_result.convergence.status,
     }
 
 
@@ -324,9 +403,16 @@ def sensitivity_local(
         p = fear_default
 
     def run(params: FearMemoryParams) -> float:
-        sol = integrate_fear_memory(params, t_span=(0.0, t_end))
-        xm, _ = long_term_mean(sol, burn_in_frac=0.3)
-        return xm
+        result = integrate_until_converged(
+            lambda end, points: integrate_fear_memory(
+                params, t_span=(0.0, end), n_points=points
+            ),
+            t_end=t_end,
+            scales=(params.K, params.K),
+        )
+        if result.convergence.status != "converged":
+            raise RuntimeError("sensitivity trajectory did not converge")
+        return result.metrics.means[0]
 
     x0 = run(p)
     sens: dict[str, float] = {}
@@ -416,24 +502,44 @@ def scan_bda_fear_k(
 ) -> dict[str, np.ndarray]:
     """扫描 Myint 模型恐惧参数 k。"""
     from .model import bd_fear_rhs
-    from .simulate import integrate_rhs
-
     if k_values is None:
         k_values = np.linspace(0.0, 0.15, 16)
     if base is None:
         base = bda_fear_default
 
-    u_mean = np.zeros_like(k_values)
-    v_mean = np.zeros_like(k_values)
+    u_mean = np.zeros_like(k_values, dtype=float)
+    v_mean = np.zeros_like(k_values, dtype=float)
+    convergence_status = []
+    t_end_used = np.zeros_like(k_values, dtype=float)
+    extensions = np.zeros_like(k_values, dtype=int)
     for i, k in enumerate(k_values):
         p = BDAFearParams(
             r=base.r, d=base.d, a=base.a, k=float(k),
             p=base.p, q=base.q, c=base.c, m=base.m,
         )
         y0 = np.array([0.17, 3.9])
-        sol = integrate_rhs(lambda t, s: bd_fear_rhs(t, s, p), y0, t_span=(0.0, t_end))
-        u_mean[i], v_mean[i] = long_term_mean(sol, burn_in_frac=0.35)
-    return {"k": k_values, "u_mean": u_mean, "v_mean": v_mean}
+        result = integrate_until_converged(
+            lambda end, points: integrate_rhs(
+                lambda t, s: bd_fear_rhs(t, s, p),
+                y0,
+                t_span=(0.0, end),
+                n_points=points,
+            ),
+            t_end=t_end,
+            scales=(1.0, 1.0),
+        )
+        u_mean[i], v_mean[i] = result.metrics.means
+        convergence_status.append(result.convergence.status)
+        t_end_used[i] = result.t_end_used
+        extensions[i] = result.extensions
+    return {
+        "k": k_values,
+        "u_mean": u_mean,
+        "v_mean": v_mean,
+        "convergence_status": np.array(convergence_status, dtype=object),
+        "t_end_used": t_end_used,
+        "extensions": extensions,
+    }
 
 
 def equilibrium_baseline(p=None) -> dict[str, float | None]:

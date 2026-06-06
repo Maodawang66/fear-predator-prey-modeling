@@ -27,7 +27,7 @@ if str(ROOT) not in sys.path:
 from data.auto_discover import discover_and_load  # noqa: E402
 from data.series import PredatorPreySeries  # noqa: E402
 from src.parameters import BaselineParams  # noqa: E402
-from src.simulate import integrate_baseline, is_extinct, long_term_mean  # noqa: E402
+from src.simulate import integrate_baseline, integrate_until_converged, is_extinct  # noqa: E402
 
 MANIFEST_PATH = ROOT / "data" / "holling_report_series_manifest.json"
 OUT = ROOT / "results" / "holling_defaults"
@@ -450,13 +450,24 @@ def verify_candidates(
             e=row["e"],
             mu=row["mu"],
         )
-        sol = integrate_baseline(p, t_span=(0.0, t_end), n_points=1500)
-        x_mean, y_mean = long_term_mean(sol, burn_in_frac=0.5)
+        result = integrate_until_converged(
+            lambda end, points: integrate_baseline(
+                p, t_span=(0.0, end), n_points=points
+            ),
+            t_end=t_end,
+            n_points=1500,
+            scales=(base.K, base.K),
+        )
+        sol = result.sol
+        x_mean, y_mean = result.metrics.means
         tail = sol.y[:, int(sol.t.size * 0.75) :]
         verified.append(
             {
                 **row,
-                "status": is_extinct(sol),
+                "status": is_extinct(sol, scales=(base.K, base.K)),
+                "convergence_status": result.convergence.status,
+                "t_end_used": result.t_end_used,
+                "extensions": result.extensions,
                 "tail_x_min": float(np.min(tail[0])),
                 "tail_y_min": float(np.min(tail[1])),
                 "tail_x_max": float(np.max(tail[0])),

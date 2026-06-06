@@ -87,11 +87,16 @@ def main() -> None:
     phi_data = scan_phi()
     plot_phi_scan(phi_data, out_dir / "05_phi_scan.png")
     extinct = [s for s in phi_data["status"] if "extinct" in str(s)]
-    print(f"[5] φ 扫描: 灭绝类情景 {len(extinct)}/{len(phi_data['phi'])} → 05_phi_scan.png")
+    phi_not_converged = int(np.sum(phi_data["convergence_status"] == "not_converged"))
+    print(
+        f"[5] φ 扫描: 灭绝类情景 {len(extinct)}/{len(phi_data['phi'])}, "
+        f"未收敛 {phi_not_converged} → 05_phi_scan.png"
+    )
 
     delta_data = scan_delta(phi=0.03)
     plot_delta_scan(delta_data, out_dir / "06_delta_scan.png")
-    print("[6] 06_delta_scan.png")
+    delta_not_converged = int(np.sum(delta_data["convergence_status"] == "not_converged"))
+    print(f"[6] δ 扫描: 未收敛 {delta_not_converged} → 06_delta_scan.png")
 
     sens = sensitivity_local(fear_default)
     plot_sensitivity(sens, out_dir / "07_sensitivity.png")
@@ -142,12 +147,15 @@ def main() -> None:
     )
     print("    默认参数对照保留于 results/supplementary/")
 
-    nce = nce_vs_consumptive_summary()
-    print(
-        f"\n[NCE 代理] 基线猎物均值={nce['prey_mean_baseline']:.2f}, "
-        f"恐惧模型={nce['prey_mean_fear']:.2f}, "
-        f"相对下降={nce['relative_reduction_pct']:.1f}%"
-    )
+    try:
+        nce = nce_vs_consumptive_summary()
+        print(
+            f"\n[NCE 代理] 基线猎物均值={nce['prey_mean_baseline']:.2f}, "
+            f"恐惧模型={nce['prey_mean_fear']:.2f}, "
+            f"相对下降={nce['relative_reduction_pct']:.1f}%"
+        )
+    except RuntimeError as exc:
+        print(f"\n[NCE 代理] 未报告: {exc}")
 
     print("\n机制对照摘要:")
     for lab, dx, dy, da, st in zip(
@@ -180,6 +188,7 @@ def main() -> None:
         title="Myint (2025): k=0 vs k>0 (B-D + fear)",
     )
     k_scan = scan_bda_fear_k()
+    k_not_converged = int(np.sum(k_scan["convergence_status"] == "not_converged"))
     plot_phi_scan(
         {"phi": k_scan["k"], "x_mean": k_scan["u_mean"], "y_mean": k_scan["v_mean"]},
         out_dir / "12_bda_fear_k_scan.png",
@@ -190,7 +199,10 @@ def main() -> None:
         prey_label="prey u mean",
         pred_label="predator v mean",
     )
-    print("[11-12] 11_bda_fear_k0_vs_k.png, 12_bda_fear_k_scan.png")
+    print(
+        "[11-12] 11_bda_fear_k0_vs_k.png, 12_bda_fear_k_scan.png "
+        f"(未收敛 {k_not_converged})"
+    )
 
     # --- k 削弱振荡：三种科学检验 ---
     print("\n--- k 削弱振荡（Jacobian / 振幅 / 峰值衰减）---")

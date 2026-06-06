@@ -25,7 +25,7 @@ import numpy as np
 from .analysis import equilibrium_bda_fear
 from .model import bd_fear_rhs
 from .parameters import BDAFearParams, bda_fear_default
-from .simulate import integrate_rhs, is_extinct, long_term_mean
+from .simulate import integrate_rhs, integrate_until_converged, is_extinct
 
 
 StabilityClass = Literal[
@@ -249,6 +249,9 @@ class KDampingScanRow:
     re_max: float | None
     stability: StabilityClass
     status: str
+    convergence_status: str
+    t_end_used: float
+    extensions: int
 
 
 def scan_k_damping(
@@ -271,11 +274,17 @@ def scan_k_damping(
     for k in k_values:
         kf = float(k)
         ev = eigenvalue_at_k(kf, base)
-        sol = simulate_bda_at_k(kf, base=base, y0=y0, t_end=t_end)
-        u_mean, v_mean = long_term_mean(sol, burn_in_frac=0.35)
-        tail = slice(int(sol.t.size * 0.5), None)
-        amp_u = float(np.max(sol.y[0, tail]) - np.min(sol.y[0, tail]))
-        amp_v = float(np.max(sol.y[1, tail]) - np.min(sol.y[1, tail]))
+        result = integrate_until_converged(
+            lambda end, points: simulate_bda_at_k(
+                kf, base=base, y0=y0, t_end=end, n_points=points
+            ),
+            t_end=t_end,
+            n_points=1200,
+            scales=(1.0, 1.0),
+        )
+        sol = result.sol
+        u_mean, v_mean = result.metrics.means
+        amp_u, amp_v = result.metrics.amplitudes
         pk = peak_damping_metrics(
             sol.t, sol.y[0], u_star=ev.u_star, burn_in_frac=0.35,
         )
@@ -295,6 +304,9 @@ def scan_k_damping(
                 re_max=ev.re_max,
                 stability=ev.stability,
                 status=status,
+                convergence_status=result.convergence.status,
+                t_end_used=result.t_end_used,
+                extensions=result.extensions,
             )
         )
     return rows
@@ -307,9 +319,14 @@ def k_damping_summary(
     """生成文字摘要，便于写入报告或 JSON。"""
     hopf_k = estimate_hopf_k(eigen_rows)
 
-    k0 = next((r for r in scan_rows if abs(r.k) < 1e-12), scan_rows[0])
-    k_max = max(scan_rows, key=lambda r: r.k)
-    most_damped = min(scan_rows, key=lambda r: r.rel_amplitude_u)
+    converged_rows = [
+        row for row in scan_rows if row.convergence_status == "converged"
+    ]
+    if not converged_rows:
+        raise RuntimeError("no converged k-damping rows available for summary")
+    k0 = next((r for r in converged_rows if abs(r.k) < 1e-12), converged_rows[0])
+    k_max = max(converged_rows, key=lambda r: r.k)
+    most_damped = min(converged_rows, key=lambda r: r.rel_amplitude_u)
 
     return {
         "literature": [
@@ -339,6 +356,9 @@ def k_damping_summary(
             "k": most_damped.k,
             "rel_amplitude_u": most_damped.rel_amplitude_u,
         },
+        "not_converged_count": sum(
+            row.convergence_status == "not_converged" for row in scan_rows
+        ),
         "conclusion_hint": (
             "若随 k 增大 max Re(λ) 由正变负，则存在 Hopf 型阈值 k_H，恐惧使周期解失稳→稳定。"
             "默认 B-D 参数下平衡点对所有 k 已局部稳定，此时应解读为："
