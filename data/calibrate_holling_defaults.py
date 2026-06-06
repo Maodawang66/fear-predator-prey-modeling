@@ -16,6 +16,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 import numpy as np
+from scipy.signal import find_peaks
 
 os.environ.setdefault("MPLBACKEND", "Agg")
 
@@ -30,6 +31,17 @@ from src.simulate import integrate_baseline, is_extinct, long_term_mean  # noqa:
 
 MANIFEST_PATH = ROOT / "data" / "holling_report_series_manifest.json"
 OUT = ROOT / "results" / "holling_defaults"
+DIAGNOSTIC_CONFIG = {
+    "primary_scaling": "robust_q95",
+    "tail_frac": 0.5,
+    "tail_window_frac": 0.25,
+    "tail_mean_change_tolerance": 0.20,
+    "trend_correlation_threshold": 0.50,
+    "trend_change_threshold": 0.25,
+    "periodicity_correlation_threshold": 0.50,
+    "minimum_period_fraction": 0.10,
+    "minimum_cycles": 2.0,
+}
 
 
 def _load_report_series() -> tuple[list[PredatorPreySeries], dict]:
@@ -114,40 +126,208 @@ def _tail_mean(values: np.ndarray, tail_frac: float = 0.5) -> float:
     return float(np.mean(values[i0:]))
 
 
+def _scale_values(values: np.ndarray, method: str) -> tuple[np.ndarray, dict[str, float]]:
+    values = np.asarray(values, dtype=float)
+    if method == "max":
+        scale = max(float(np.max(np.abs(values))), 1e-12)
+        return values / scale, {"center": 0.0, "scale": scale}
+    if method == "robust_q95":
+        scale = max(float(np.quantile(np.abs(values), 0.95)), 1e-12)
+        return values / scale, {"center": 0.0, "scale": scale}
+    if method == "zscore":
+        center = float(np.mean(values))
+        scale = max(float(np.std(values)), 1e-12)
+        return (values - center) / scale, {"center": center, "scale": scale}
+    raise ValueError(f"unknown scaling method: {method}")
+
+
+def _population_diagnostics(values: np.ndarray) -> dict[str, float | int | bool | None]:
+    scaled, _ = _scale_values(values, "robust_q95")
+    n = scaled.size
+    t = np.linspace(0.0, 1.0, n)
+    slope, intercept = np.polyfit(t, scaled, 1)
+    trend_corr = (
+        float(np.corrcoef(t, scaled)[0, 1])
+        if np.std(scaled) > 1e-12
+        else 0.0
+    )
+    trend_change = float(abs(slope))
+    has_trend = (
+        abs(trend_corr) >= DIAGNOSTIC_CONFIG["trend_correlation_threshold"]
+        and trend_change >= DIAGNOSTIC_CONFIG["trend_change_threshold"]
+    )
+
+    window = max(3, int(n * DIAGNOSTIC_CONFIG["tail_window_frac"]))
+    previous = scaled[-2 * window : -window]
+    final = scaled[-window:]
+    previous_mean = float(np.mean(previous))
+    final_mean = float(np.mean(final))
+    tail_mean_change = abs(final_mean - previous_mean) / max(
+        abs(previous_mean),
+        abs(final_mean),
+        0.05,
+    )
+    tail_stable = tail_mean_change <= DIAGNOSTIC_CONFIG["tail_mean_change_tolerance"]
+
+    detrended = scaled - (slope * t + intercept)
+    max_lag = n // 2
+    autocorrelation = np.array(
+        [
+            float(np.corrcoef(detrended[:-lag], detrended[lag:])[0, 1])
+            if np.std(detrended[:-lag]) > 1e-12
+            and np.std(detrended[lag:]) > 1e-12
+            else 0.0
+            for lag in range(1, max_lag + 1)
+        ]
+    )
+    peaks, _ = find_peaks(autocorrelation)
+    min_period = max(3, int(np.ceil(n * DIAGNOSTIC_CONFIG["minimum_period_fraction"])))
+    valid_peaks = [
+        int(index)
+        for index in peaks
+        if index + 1 >= min_period
+        and n / (index + 1) >= DIAGNOSTIC_CONFIG["minimum_cycles"]
+    ]
+    if valid_peaks:
+        best_index = max(valid_peaks, key=lambda index: autocorrelation[index])
+        periodicity_correlation = float(autocorrelation[best_index])
+        period_points: int | None = best_index + 1
+    else:
+        periodicity_correlation = 0.0
+        period_points = None
+    is_periodic = (
+        periodicity_correlation
+        >= DIAGNOSTIC_CONFIG["periodicity_correlation_threshold"]
+    )
+    return {
+        "trend_correlation": trend_corr,
+        "trend_change": trend_change,
+        "has_trend": bool(has_trend),
+        "tail_mean_change": float(tail_mean_change),
+        "tail_stable": bool(tail_stable),
+        "periodicity_correlation": periodicity_correlation,
+        "period_points": period_points,
+        "is_periodic": bool(is_periodic),
+    }
+
+
+def _series_diagnostics(series: PredatorPreySeries) -> dict[str, object]:
+    prey = _population_diagnostics(series.prey)
+    predator = _population_diagnostics(series.predator)
+    if prey["has_trend"] or predator["has_trend"]:
+        classification = "nonstationary_trend"
+    elif prey["is_periodic"] or predator["is_periodic"]:
+        classification = "periodic"
+    elif prey["tail_stable"] and predator["tail_stable"]:
+        classification = "stable"
+    else:
+        classification = "nonstationary"
+    periods = [
+        int(diag["period_points"])
+        for diag in (prey, predator)
+        if diag["is_periodic"] and diag["period_points"] is not None
+    ]
+    return {
+        "id": series.name,
+        "classification": classification,
+        "included_in_target": classification in ("stable", "periodic"),
+        "target_definition": (
+            "last_complete_period_mean"
+            if classification == "periodic"
+            else "tail_mean"
+            if classification == "stable"
+            else "excluded"
+        ),
+        "period_points": int(round(float(np.median(periods)))) if periods else None,
+        "prey": prey,
+        "predator": predator,
+    }
+
+
+def _target_value(
+    values: np.ndarray,
+    classification: str,
+    period_points: int | None,
+) -> float:
+    if classification == "stable":
+        return _tail_mean(values, DIAGNOSTIC_CONFIG["tail_frac"])
+    if classification == "periodic" and period_points is not None:
+        return float(np.mean(values[-period_points:]))
+    raise ValueError(f"cannot compute target for {classification}")
+
+
 def empirical_target(
     series_list: list[PredatorPreySeries],
     K: float,
-) -> tuple[dict[str, float], list[dict[str, float]]]:
-    rows: list[dict[str, float]] = []
+) -> tuple[dict[str, object], list[dict[str, object]]]:
+    rows: list[dict[str, object]] = []
+    scaling_targets = {method: [] for method in ("max", "robust_q95", "zscore")}
     for series in series_list:
-        prey_scale = max(float(np.max(series.prey)), 1.0)
-        pred_scale = max(float(np.max(series.predator)), 1.0)
-        prey = series.prey / prey_scale
-        pred = series.predator / pred_scale
-        rows.append(
-            {
-                "tail_prey": _tail_mean(prey),
-                "tail_predator": _tail_mean(pred),
-                "median_prey": float(np.median(prey)),
-                "median_predator": float(np.median(pred)),
-                "mean_prey": float(np.mean(prey)),
-                "mean_predator": float(np.mean(pred)),
-            }
-        )
+        diagnostics = _series_diagnostics(series)
+        row = {**diagnostics, "scaling": {}}
+        if diagnostics["included_in_target"]:
+            for method in scaling_targets:
+                prey, prey_scaling = _scale_values(series.prey, method)
+                pred, pred_scaling = _scale_values(series.predator, method)
+                prey_target = _target_value(
+                    prey,
+                    str(diagnostics["classification"]),
+                    diagnostics["period_points"],
+                )
+                pred_target = _target_value(
+                    pred,
+                    str(diagnostics["classification"]),
+                    diagnostics["period_points"],
+                )
+                row["scaling"][method] = {
+                    "prey": prey_scaling,
+                    "predator": pred_scaling,
+                    "target_prey": prey_target,
+                    "target_predator": pred_target,
+                }
+                scaling_targets[method].append((prey_target, pred_target))
+        rows.append(row)
 
-    tail_prey = np.array([r["tail_prey"] for r in rows], dtype=float)
-    tail_pred = np.array([r["tail_predator"] for r in rows], dtype=float)
+    primary_targets = scaling_targets[DIAGNOSTIC_CONFIG["primary_scaling"]]
+    if not primary_targets:
+        raise RuntimeError("no stable or periodic report series available for calibration")
+    target_array = np.asarray(primary_targets, dtype=float)
+    target_prey = target_array[:, 0]
+    target_pred = target_array[:, 1]
+    scaling_sensitivity = {}
+    for method, targets in scaling_targets.items():
+        values = np.asarray(targets, dtype=float)
+        scaling_sensitivity[method] = {
+            "target_x": float(np.median(values[:, 0]) * K),
+            "target_y": float(np.median(values[:, 1]) * K),
+            "prey_median": float(np.median(values[:, 0])),
+            "predator_median": float(np.median(values[:, 1])),
+        }
     summary = {
-        "target_x": float(np.median(tail_prey) * K),
-        "target_y": float(np.median(tail_pred) * K),
-        "tail_prey_median": float(np.median(tail_prey)),
-        "tail_predator_median": float(np.median(tail_pred)),
-        "tail_prey_q25": float(np.quantile(tail_prey, 0.25)),
-        "tail_prey_q75": float(np.quantile(tail_prey, 0.75)),
-        "tail_predator_q25": float(np.quantile(tail_pred, 0.25)),
-        "tail_predator_q75": float(np.quantile(tail_pred, 0.75)),
+        "diagnostic_config": DIAGNOSTIC_CONFIG,
+        "included_series": [row["id"] for row in rows if row["included_in_target"]],
+        "excluded_series": [row["id"] for row in rows if not row["included_in_target"]],
+        "target_x": float(np.median(target_prey) * K),
+        "target_y": float(np.median(target_pred) * K),
+        "target_prey_median": float(np.median(target_prey)),
+        "target_predator_median": float(np.median(target_pred)),
+        "target_prey_q25": float(np.quantile(target_prey, 0.25)),
+        "target_prey_q75": float(np.quantile(target_prey, 0.75)),
+        "target_predator_q25": float(np.quantile(target_pred, 0.25)),
+        "target_predator_q75": float(np.quantile(target_pred, 0.75)),
+        "scaling_sensitivity": scaling_sensitivity,
     }
     return summary, rows
+
+
+def _write_target_diagnostics(summary: dict[str, object], rows: list[dict[str, object]]) -> Path:
+    OUT.mkdir(parents=True, exist_ok=True)
+    path = OUT / "equilibrium_target_diagnostics.json"
+    path.write_text(
+        json.dumps({"summary": summary, "series": rows}, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    return path
 
 
 def _equilibrium_and_stability(
@@ -297,7 +477,8 @@ def main() -> None:
     series_list, manifest = _load_report_series()
     validation_path = _write_series_validation(series_list, manifest)
 
-    summary, _ = empirical_target(series_list, base.K)
+    summary, target_rows = empirical_target(series_list, base.K)
+    diagnostics_path = _write_target_diagnostics(summary, target_rows)
     candidates = search_holling_defaults(
         target_x=summary["target_x"],
         target_y=summary["target_y"],
@@ -313,15 +494,17 @@ def main() -> None:
     for series in series_list:
         print(f"  - {series.name} ({series.n_points} points)")
     print(f"  validation: {validation_path.relative_to(ROOT)}")
-    print("\nEmpirical normalized tail means across series:")
+    print("\nEmpirical equilibrium target diagnostics:")
     print(
-        "  prey median={tail_prey_median:.3f} "
-        "IQR=({tail_prey_q25:.3f}, {tail_prey_q75:.3f})".format(**summary)
+        "  prey median={target_prey_median:.3f} "
+        "IQR=({target_prey_q25:.3f}, {target_prey_q75:.3f})".format(**summary)
     )
     print(
-        "  predator median={tail_predator_median:.3f} "
-        "IQR=({tail_predator_q25:.3f}, {tail_predator_q75:.3f})".format(**summary)
+        "  predator median={target_predator_median:.3f} "
+        "IQR=({target_predator_q25:.3f}, {target_predator_q75:.3f})".format(**summary)
     )
+    print(f"  included={len(summary['included_series'])}, excluded={len(summary['excluded_series'])}")
+    print(f"  diagnostics: {diagnostics_path.relative_to(ROOT)}")
     print(f"  target equilibrium on K={base.K:g} scale: x*={summary['target_x']:.3f}, y*={summary['target_y']:.3f}")
 
     print("\nTop verified candidates:")
