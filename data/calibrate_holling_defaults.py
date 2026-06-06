@@ -16,6 +16,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 import numpy as np
+from scipy.integrate import trapezoid
 from scipy.signal import find_peaks
 
 os.environ.setdefault("MPLBACKEND", "Agg")
@@ -40,10 +41,9 @@ DIAGNOSTIC_CONFIG = {
     "trend_change_threshold": 0.25,
     "periodicity_correlation_threshold": 0.50,
     "minimum_period_fraction": 0.10,
-    "minimum_cycles": 2.0,
+    "minimum_cycles": 3.0,
+    "period_compatibility_relative_tolerance": 0.25,
 }
-
-
 def _load_report_series() -> tuple[list[PredatorPreySeries], dict]:
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     report_entries = manifest["report_series"]
@@ -121,9 +121,16 @@ def _write_series_validation(
     return path
 
 
-def _tail_mean(values: np.ndarray, tail_frac: float = 0.5) -> float:
-    i0 = int(values.size * (1.0 - tail_frac))
-    return float(np.mean(values[i0:]))
+def _time_weighted_mean(t: np.ndarray, values: np.ndarray) -> float:
+    if values.size == 1:
+        return float(values[0])
+    return float(trapezoid(values, t) / (t[-1] - t[0]))
+
+
+def _tail_mean(t: np.ndarray, values: np.ndarray, tail_frac: float = 0.5) -> float:
+    start = t[-1] - tail_frac * (t[-1] - t[0])
+    mask = t >= start
+    return _time_weighted_mean(t[mask], values[mask])
 
 
 def _scale_values(values: np.ndarray, method: str) -> tuple[np.ndarray, dict[str, float]]:
@@ -141,13 +148,16 @@ def _scale_values(values: np.ndarray, method: str) -> tuple[np.ndarray, dict[str
     raise ValueError(f"unknown scaling method: {method}")
 
 
-def _population_diagnostics(values: np.ndarray) -> dict[str, float | int | bool | None]:
+def _population_diagnostics(
+    t: np.ndarray,
+    values: np.ndarray,
+) -> dict[str, float | int | bool | None]:
     scaled, _ = _scale_values(values, "robust_q95")
     n = scaled.size
-    t = np.linspace(0.0, 1.0, n)
-    slope, intercept = np.polyfit(t, scaled, 1)
+    t_normalized = (t - t[0]) / (t[-1] - t[0])
+    slope, intercept = np.polyfit(t_normalized, scaled, 1)
     trend_corr = (
-        float(np.corrcoef(t, scaled)[0, 1])
+        float(np.corrcoef(t_normalized, scaled)[0, 1])
         if np.std(scaled) > 1e-12
         else 0.0
     )
@@ -157,11 +167,11 @@ def _population_diagnostics(values: np.ndarray) -> dict[str, float | int | bool 
         and trend_change >= DIAGNOSTIC_CONFIG["trend_change_threshold"]
     )
 
-    window = max(3, int(n * DIAGNOSTIC_CONFIG["tail_window_frac"]))
-    previous = scaled[-2 * window : -window]
-    final = scaled[-window:]
-    previous_mean = float(np.mean(previous))
-    final_mean = float(np.mean(final))
+    window_duration = DIAGNOSTIC_CONFIG["tail_window_frac"] * (t[-1] - t[0])
+    previous_mask = (t >= t[-1] - 2.0 * window_duration) & (t < t[-1] - window_duration)
+    final_mask = t >= t[-1] - window_duration
+    previous_mean = _time_weighted_mean(t[previous_mask], scaled[previous_mask])
+    final_mean = _time_weighted_mean(t[final_mask], scaled[final_mask])
     tail_mean_change = abs(final_mean - previous_mean) / max(
         abs(previous_mean),
         abs(final_mean),
@@ -169,8 +179,11 @@ def _population_diagnostics(values: np.ndarray) -> dict[str, float | int | bool 
     )
     tail_stable = tail_mean_change <= DIAGNOSTIC_CONFIG["tail_mean_change_tolerance"]
 
-    detrended = scaled - (slope * t + intercept)
-    max_lag = n // 2
+    uniform_t = np.linspace(t[0], t[-1], n)
+    uniform_scaled = np.interp(uniform_t, t, scaled)
+    uniform_t_normalized = (uniform_t - uniform_t[0]) / (uniform_t[-1] - uniform_t[0])
+    detrended = uniform_scaled - (slope * uniform_t_normalized + intercept)
+    max_lag = n // 3
     autocorrelation = np.array(
         [
             float(np.corrcoef(detrended[:-lag], detrended[lag:])[0, 1])
@@ -192,9 +205,13 @@ def _population_diagnostics(values: np.ndarray) -> dict[str, float | int | bool 
         best_index = max(valid_peaks, key=lambda index: autocorrelation[index])
         periodicity_correlation = float(autocorrelation[best_index])
         period_points: int | None = best_index + 1
+        period_duration: float | None = float(
+            period_points * (uniform_t[1] - uniform_t[0])
+        )
     else:
         periodicity_correlation = 0.0
         period_points = None
+        period_duration = None
     is_periodic = (
         periodicity_correlation
         >= DIAGNOSTIC_CONFIG["periodicity_correlation_threshold"]
@@ -207,52 +224,81 @@ def _population_diagnostics(values: np.ndarray) -> dict[str, float | int | bool 
         "tail_stable": bool(tail_stable),
         "periodicity_correlation": periodicity_correlation,
         "period_points": period_points,
+        "period_duration": period_duration,
         "is_periodic": bool(is_periodic),
     }
 
 
 def _series_diagnostics(series: PredatorPreySeries) -> dict[str, object]:
-    prey = _population_diagnostics(series.prey)
-    predator = _population_diagnostics(series.predator)
+    if (
+        not np.all(np.isfinite(series.t))
+        or series.duration <= 0.0
+        or np.any(np.diff(series.t) <= 0.0)
+    ):
+        return {
+            "id": series.name,
+            "classification": "invalid_time",
+            "included_in_target": False,
+            "target_definition": "excluded",
+            "period_duration": None,
+            "prey": None,
+            "predator": None,
+        }
+    prey = _population_diagnostics(series.t, series.prey)
+    predator = _population_diagnostics(series.t, series.predator)
+    prey_period = prey["period_duration"]
+    predator_period = predator["period_duration"]
+    periods_compatible = (
+        prey["is_periodic"]
+        and predator["is_periodic"]
+        and prey_period is not None
+        and predator_period is not None
+        and abs(prey_period - predator_period) / max(prey_period, predator_period)
+        <= DIAGNOSTIC_CONFIG["period_compatibility_relative_tolerance"]
+    )
     if prey["has_trend"] or predator["has_trend"]:
         classification = "nonstationary_trend"
-    elif prey["is_periodic"] or predator["is_periodic"]:
+    elif periods_compatible:
         classification = "periodic"
     elif prey["tail_stable"] and predator["tail_stable"]:
         classification = "stable"
     else:
         classification = "nonstationary"
-    periods = [
-        int(diag["period_points"])
-        for diag in (prey, predator)
-        if diag["is_periodic"] and diag["period_points"] is not None
-    ]
+    period_duration = (
+        float(np.mean([prey_period, predator_period]))
+        if periods_compatible
+        else None
+    )
     return {
         "id": series.name,
         "classification": classification,
         "included_in_target": classification in ("stable", "periodic"),
         "target_definition": (
-            "last_complete_period_mean"
+            "complete_cycles_mean"
             if classification == "periodic"
             else "tail_mean"
             if classification == "stable"
             else "excluded"
         ),
-        "period_points": int(round(float(np.median(periods)))) if periods else None,
+        "period_duration": period_duration,
         "prey": prey,
         "predator": predator,
     }
 
 
 def _target_value(
+    t: np.ndarray,
     values: np.ndarray,
     classification: str,
-    period_points: int | None,
+    period_duration: float | None,
 ) -> float:
     if classification == "stable":
-        return _tail_mean(values, DIAGNOSTIC_CONFIG["tail_frac"])
-    if classification == "periodic" and period_points is not None:
-        return float(np.mean(values[-period_points:]))
+        return _tail_mean(t, values, DIAGNOSTIC_CONFIG["tail_frac"])
+    if classification == "periodic" and period_duration is not None:
+        complete_cycles = int((t[-1] - t[0]) // period_duration)
+        start = t[-1] - complete_cycles * period_duration
+        mask = t >= start
+        return _time_weighted_mean(t[mask], values[mask])
     raise ValueError(f"cannot compute target for {classification}")
 
 
@@ -270,14 +316,16 @@ def empirical_target(
                 prey, prey_scaling = _scale_values(series.prey, method)
                 pred, pred_scaling = _scale_values(series.predator, method)
                 prey_target = _target_value(
+                    series.t,
                     prey,
                     str(diagnostics["classification"]),
-                    diagnostics["period_points"],
+                    diagnostics["period_duration"],
                 )
                 pred_target = _target_value(
+                    series.t,
                     pred,
                     str(diagnostics["classification"]),
-                    diagnostics["period_points"],
+                    diagnostics["period_duration"],
                 )
                 row["scaling"][method] = {
                     "prey": prey_scaling,
@@ -288,35 +336,62 @@ def empirical_target(
                 scaling_targets[method].append((prey_target, pred_target))
         rows.append(row)
 
+    included_series = [row["id"] for row in rows if row["included_in_target"]]
+    excluded_series = [row["id"] for row in rows if not row["included_in_target"]]
     primary_targets = scaling_targets[DIAGNOSTIC_CONFIG["primary_scaling"]]
-    if not primary_targets:
-        raise RuntimeError("no stable or periodic report series available for calibration")
-    target_array = np.asarray(primary_targets, dtype=float)
-    target_prey = target_array[:, 0]
-    target_pred = target_array[:, 1]
     scaling_sensitivity = {}
     for method, targets in scaling_targets.items():
+        if not targets:
+            scaling_sensitivity[method] = {
+                "status": "not_available",
+                "reason": "no eligible equilibrium-target series",
+            }
+            continue
         values = np.asarray(targets, dtype=float)
-        scaling_sensitivity[method] = {
-            "target_x": float(np.median(values[:, 0]) * K),
-            "target_y": float(np.median(values[:, 1]) * K),
-            "prey_median": float(np.median(values[:, 0])),
-            "predator_median": float(np.median(values[:, 1])),
-        }
-    summary = {
+        scaling_sensitivity[method] = (
+            {
+                "diagnostic_only": True,
+                "prey_standardized_location_median": float(np.median(values[:, 0])),
+                "predator_standardized_location_median": float(np.median(values[:, 1])),
+            }
+            if method == "zscore"
+            else {
+                "target_x": float(np.median(values[:, 0]) * K),
+                "target_y": float(np.median(values[:, 1]) * K),
+                "prey_median": float(np.median(values[:, 0])),
+                "predator_median": float(np.median(values[:, 1])),
+            }
+        )
+    summary: dict[str, object] = {
+        "status": "ok" if primary_targets else "insufficient_eligible_series",
+        "reason": (
+            None
+            if primary_targets
+            else "No report series passed the strict stable-or-joint-periodic diagnostics."
+        ),
         "diagnostic_config": DIAGNOSTIC_CONFIG,
-        "included_series": [row["id"] for row in rows if row["included_in_target"]],
-        "excluded_series": [row["id"] for row in rows if not row["included_in_target"]],
-        "target_x": float(np.median(target_prey) * K),
-        "target_y": float(np.median(target_pred) * K),
-        "target_prey_median": float(np.median(target_prey)),
-        "target_predator_median": float(np.median(target_pred)),
-        "target_prey_q25": float(np.quantile(target_prey, 0.25)),
-        "target_prey_q75": float(np.quantile(target_prey, 0.75)),
-        "target_predator_q25": float(np.quantile(target_pred, 0.25)),
-        "target_predator_q75": float(np.quantile(target_pred, 0.75)),
+        "included_series": included_series,
+        "excluded_series": excluded_series,
+        "target_x": None,
+        "target_y": None,
         "scaling_sensitivity": scaling_sensitivity,
     }
+    if primary_targets:
+        target_array = np.asarray(primary_targets, dtype=float)
+        target_prey = target_array[:, 0]
+        target_pred = target_array[:, 1]
+        summary.update(
+            {
+                "target_x": float(np.median(target_prey) * K),
+                "target_y": float(np.median(target_pred) * K),
+                "target_prey_median": float(np.median(target_prey)),
+                "target_predator_median": float(np.median(target_pred)),
+                "target_prey_q25": float(np.quantile(target_prey, 0.25)),
+                "target_prey_q75": float(np.quantile(target_prey, 0.75)),
+                "target_predator_q25": float(np.quantile(target_pred, 0.25)),
+                "target_predator_q75": float(np.quantile(target_pred, 0.75)),
+            }
+        )
     return summary, rows
 
 
@@ -414,7 +489,6 @@ def search_holling_defaults(
 
     if not candidates:
         return []
-
     all_candidates = np.vstack(candidates)
     order = np.argsort(all_candidates[:, 0])[:top_n]
     rows: list[dict[str, float]] = []
@@ -490,13 +564,6 @@ def main() -> None:
 
     summary, target_rows = empirical_target(series_list, base.K)
     diagnostics_path = _write_target_diagnostics(summary, target_rows)
-    candidates = search_holling_defaults(
-        target_x=summary["target_x"],
-        target_y=summary["target_y"],
-        base=base,
-        top_n=args.top,
-    )
-    verified = verify_candidates(candidates, base)
 
     print("=" * 72)
     print("Holling II global default calibration")
@@ -506,6 +573,18 @@ def main() -> None:
         print(f"  - {series.name} ({series.n_points} points)")
     print(f"  validation: {validation_path.relative_to(ROOT)}")
     print("\nEmpirical equilibrium target diagnostics:")
+    for row in target_rows:
+        print(f"  - {row['id']}: {row['classification']}")
+    print(f"  included={len(summary['included_series'])}, excluded={len(summary['excluded_series'])}")
+    print(f"  diagnostics: {diagnostics_path.relative_to(ROOT)}")
+    if summary["status"] != "ok":
+        print("\nCalibration stopped:")
+        print(f"  status={summary['status']}")
+        print(f"  reason={summary['reason']}")
+        print("  No equilibrium target or recommended BaselineParams was produced.")
+        print("=" * 72)
+        return
+
     print(
         "  prey median={target_prey_median:.3f} "
         "IQR=({target_prey_q25:.3f}, {target_prey_q75:.3f})".format(**summary)
@@ -514,9 +593,15 @@ def main() -> None:
         "  predator median={target_predator_median:.3f} "
         "IQR=({target_predator_q25:.3f}, {target_predator_q75:.3f})".format(**summary)
     )
-    print(f"  included={len(summary['included_series'])}, excluded={len(summary['excluded_series'])}")
-    print(f"  diagnostics: {diagnostics_path.relative_to(ROOT)}")
     print(f"  target equilibrium on K={base.K:g} scale: x*={summary['target_x']:.3f}, y*={summary['target_y']:.3f}")
+
+    candidates = search_holling_defaults(
+        target_x=float(summary["target_x"]),
+        target_y=float(summary["target_y"]),
+        base=base,
+        top_n=args.top,
+    )
+    verified = verify_candidates(candidates, base)
 
     print("\nTop verified candidates:")
     for i, row in enumerate(verified, start=1):
