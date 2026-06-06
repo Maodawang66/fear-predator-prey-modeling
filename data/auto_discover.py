@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from datetime import datetime
 from pathlib import Path
 
 import numpy as np
@@ -405,7 +406,9 @@ def _detect_zooplankton(path: Path, rows: list[dict[str, str]]) -> list[Detected
     keys = list(rows[0].keys())
     prey_col = next((k for k in keys if re.search(r"d\.?mendotae|daphnia", k, re.I)), None)
     pred_col = next((k for k in keys if re.search(r"bythotrephes", k, re.I)), None)
-    time_col = next((k for k in keys if re.search(r"^julianday$", k, re.I)), None)
+    time_col = next((k for k in keys if re.search(r"^date$", k, re.I)), None)
+    if not time_col:
+        time_col = next((k for k in keys if re.search(r"^julianday$", k, re.I)), None)
     if not time_col:
         time_col = _find_time_col(keys)
     if not (prey_col and pred_col and time_col):
@@ -689,8 +692,17 @@ def load_candidate(cand: DetectedCandidate) -> PredatorPreySeries:
 
     area_col = next((k for k in sub[0] if re.search(r"^area$", k, re.I)), None)
 
-    for r in sorted(sub, key=lambda x: float(_parse_float(x.get(m.time_col or "0", "")) or 0)):
-        t = _parse_float(r.get(m.time_col or "", ""))
+    def parse_time(row: dict[str, str]) -> float | None:
+        raw_time = row.get(m.time_col or "", "")
+        if cand.signature == "zooplankton" and m.time_col and m.time_col.lower() == "date":
+            try:
+                return datetime.strptime(raw_time.strip(), "%m/%d/%y").toordinal() / 365.25
+            except ValueError:
+                return None
+        return _parse_float(raw_time)
+
+    for r in sorted(sub, key=lambda row: parse_time(row) or 0.0):
+        t = parse_time(r)
         if t is None:
             continue
         if m.month_col:
