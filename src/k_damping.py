@@ -25,7 +25,7 @@ import numpy as np
 from .analysis import equilibrium_bda_fear
 from .model import bd_fear_rhs
 from .parameters import BDAFearParams, bda_fear_default
-from .simulate import integrate_rhs, long_term_mean
+from .simulate import integrate_rhs, is_extinct, long_term_mean
 
 
 StabilityClass = Literal[
@@ -280,9 +280,8 @@ def scan_k_damping(
             sol.t, sol.y[0], u_star=ev.u_star, burn_in_frac=0.35,
         )
         rel_u = amp_u / max(abs(u_mean), 1e-9)
-        status = "coexist"
-        if u_mean < 1e-3 or v_mean < 1e-3:
-            status = "extinct"
+        extinction_status = is_extinct(sol, scales=(1.0, 1.0))
+        status = "coexist" if extinction_status == "coexist" else "extinct"
         rows.append(
             KDampingScanRow(
                 k=kf,

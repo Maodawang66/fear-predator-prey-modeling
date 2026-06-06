@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Callable
 
 import numpy as np
@@ -127,17 +128,95 @@ def long_term_mean(sol, burn_in_frac: float = 0.25) -> tuple[float, float]:
     return x_mean, y_mean
 
 
-def is_extinct(sol, threshold: float = 1e-3, tail_frac: float = 0.15) -> str:
-    """根据末期密度判定灭绝类型。"""
+@dataclass(frozen=True)
+class ExtinctionDiagnostics:
+    status: str
+    thresholds: tuple[float, float]
+    below_fractions: tuple[float, float]
+    final_below: tuple[bool, bool]
+    clear_recovery: tuple[bool, bool]
+
+
+def extinction_diagnostics(
+    sol,
+    *,
+    scales: tuple[float, float],
+    relative_threshold: float = 1e-3,
+    tail_frac: float = 0.15,
+    min_below_fraction: float = 0.80,
+    recovery_window_frac: float = 0.20,
+) -> ExtinctionDiagnostics:
+    """持续、尺度感知的尾段灭绝诊断。"""
+    if any(scale <= 0.0 for scale in scales):
+        raise ValueError("scales must be positive")
+    if not 0.0 < tail_frac <= 1.0:
+        raise ValueError("tail_frac must be in (0, 1]")
+    if not 0.0 < min_below_fraction <= 1.0:
+        raise ValueError("min_below_fraction must be in (0, 1]")
+    if not 0.0 < recovery_window_frac <= 1.0:
+        raise ValueError("recovery_window_frac must be in (0, 1]")
+
     n = sol.t.size
     i0 = int(n * (1.0 - tail_frac))
-    x_tail = sol.y[0, i0:]
-    y_tail = sol.y[1, i0:]
-    x_min, y_min = float(np.min(x_tail)), float(np.min(y_tail))
-    if x_min < threshold and y_min < threshold:
-        return "both_extinct"
-    if x_min < threshold:
-        return "prey_extinct"
-    if y_min < threshold:
-        return "predator_extinct"
-    return "coexist"
+    tail = sol.y[:2, i0:]
+    thresholds = tuple(relative_threshold * scale for scale in scales)
+    below_fractions = tuple(
+        float(np.mean(tail[index] < thresholds[index])) for index in range(2)
+    )
+    final_below = tuple(
+        bool(tail[index, -1] < thresholds[index]) for index in range(2)
+    )
+    recovery_points = max(1, int(np.ceil(tail.shape[1] * recovery_window_frac)))
+    clear_recovery = tuple(
+        bool(np.any(tail[index, -recovery_points:] >= thresholds[index]))
+        for index in range(2)
+    )
+    extinct = tuple(
+        below_fractions[index] >= min_below_fraction
+        and final_below[index]
+        and not clear_recovery[index]
+        for index in range(2)
+    )
+    if extinct == (True, True):
+        status = "both_extinct"
+    elif extinct[0]:
+        status = "prey_extinct"
+    elif extinct[1]:
+        status = "predator_extinct"
+    else:
+        status = "coexist"
+    return ExtinctionDiagnostics(
+        status=status,
+        thresholds=thresholds,
+        below_fractions=below_fractions,
+        final_below=final_below,
+        clear_recovery=clear_recovery,
+    )
+
+
+def is_extinct(
+    sol,
+    threshold: float | None = None,
+    tail_frac: float = 0.15,
+    *,
+    scales: tuple[float, float] | None = None,
+    relative_threshold: float = 1e-3,
+    min_below_fraction: float = 0.80,
+    recovery_window_frac: float = 0.20,
+) -> str:
+    """返回持续、尺度感知的末期灭绝类型。"""
+    if scales is None:
+        if threshold is None:
+            threshold = 1e-3
+        scales = (1.0, 1.0)
+        relative_threshold = threshold
+    elif threshold is not None:
+        raise ValueError("use either threshold or scales/relative_threshold, not both")
+    return extinction_diagnostics(
+        sol,
+        scales=scales,
+        relative_threshold=relative_threshold,
+        tail_frac=tail_frac,
+        min_below_fraction=min_below_fraction,
+        recovery_window_frac=recovery_window_frac,
+    ).status

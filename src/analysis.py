@@ -52,7 +52,7 @@ def scan_phi(
         sol = integrate_fear_memory(p, t_span=(0.0, t_end))
         xm, ym = long_term_mean(sol, burn_in_frac=0.3)
         x_mean[i], y_mean[i] = xm, ym
-        status.append(is_extinct(sol))
+        status.append(is_extinct(sol, scales=(base.K, base.K)))
 
     return {
         "phi": phi_values,
@@ -144,10 +144,15 @@ def compare_mechanisms(
         tail = slice(int(sol.t.size * 0.5), None)
         amp_x = float(np.max(sol.y[0, tail]) - np.min(sol.y[0, tail]))
         amp_y = float(np.max(sol.y[1, tail]) - np.min(sol.y[1, tail]))
+        scales = (
+            (1.0, 1.0)
+            if mid in (MechanismId.BDA_BASELINE, MechanismId.BDA_FEAR)
+            else (baseline_default.K, baseline_default.K)
+        )
         return {
             "x_mean": xm,
             "y_mean": ym,
-            "status": is_extinct(sol),
+            "status": is_extinct(sol, scales=scales),
             "amplitude_x": amp_x,
             "amplitude_y": amp_y,
             "relative_amplitude_x": amp_x / max(abs(xm), 1e-12),
