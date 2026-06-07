@@ -1,6 +1,6 @@
 # 恐惧效应下的捕食者—猎物动力学
 
-USTC 数学建模课程项目。建立多种生态数学模型（ODE 和 PDE），研究恐惧/记忆效应对捕食者—猎物系统稳定性的影响，并与 12 组真实生态时间序列数据拟合校准。
+USTC 数学建模课程项目。建立多种生态数学模型（ODE 和 PDE），研究恐惧/记忆效应的机制路径依赖性，并通过 12 条真实生态时间序列评估留后预测、复杂度、参数可辨识性和证据边界。
 
 ## 环境配置
 
@@ -17,10 +17,10 @@ pip install -r requirements.txt
 pro/
 ├── main.py                  # 主模型 ODE 数值实验入口
 ├── pde2d_turing.py          # 2D 反应—扩散 PDE + Turing 稳定性诊断
-├── k_damping_analysis.py    # k 参数削弱振荡专项分析
+├── k_damping_analysis.py    # k 参数局部稳定性与数值振幅专项分析
 ├── compile_docs.py          # pandoc → PDF 文档编译
 ├── compile_docs.bat         # 编译规划/教程为 PDF
-├── compile_report.bat       # 编译 report.tex 为 PDF
+├── compile_report.bat       # 编译 report/report.tex 为 PDF
 ├── run_deep_analysis.bat    # 运行深度数据分析
 ├── requirements.txt         # Python 依赖
 ├── CLAUDE.md                # Claude Code 辅助配置
@@ -32,7 +32,7 @@ pro/
 │   ├── literature.py        # 多机制统一对比框架
 │   ├── visualize.py         # matplotlib 绑图函数集
 │   ├── fit.py               # ODE 参数拟合（差分进化 + L-BFGS-B）
-│   ├── k_damping.py         # k 参数削弱振荡分析模块
+│   ├── k_damping.py         # k 参数局部稳定性分析模块
 │   └── pde2d.py             # 2D 反应—扩散 PDE 有限差分求解器
 ├── data/                    # 数据模块
 │   ├── common.py            # 共享工具（路径解析、CSV 读取）
@@ -67,10 +67,10 @@ pro/
 |---|---|
 | `main.py` | 主模型数值实验入口。运行基线 vs 恐惧+记忆 ODE、参数扫描、敏感性分析、按 20% 等效恐惧强度校准的机制对比、B-D+恐惧对比和 k-damping 分析 |
 | `pde2d_turing.py` | 2D 反应—扩散 PDE + Turing 线性稳定性诊断。支持命令行参数：`--fig demo/all/3/4/5/6` 选择图组，`--quick` 快速试跑，`--skip-pde` 仅输出稳定性曲线 |
-| `k_damping_analysis.py` | k 参数削弱振荡独立分析。执行 Jacobian 特征值扫描、数值振幅扫描、峰值衰减比拟合，输出 5 张图 + CSV + JSON 到 `results/k_damping/` |
+| `k_damping_analysis.py` | k 参数局部稳定性独立分析。执行 Jacobian 特征值扫描、数值振幅扫描和峰值衰减比计算；当前振幅与峰值衰减结果主要处于数值噪声量级 |
 | `compile_docs.py` | 使用 pandoc + xelatex 将 `report/规划.md` 和 `report/教程.md` 编译为 PDF |
 | `compile_docs.bat` | Windows 批处理，调用 `compile_docs.py` |
-| `compile_report.bat` | Windows 批处理，使用 latexmk + xelatex 编译 `report/report.tex` |
+| `compile_report.bat` | Windows 批处理，使用 latexmk + xelatex 编译 `report/report.tex`；部分 TeX Live 环境中 latexmk 启动器可能报错并因旧 PDF 存在而误报成功 |
 | `run_deep_analysis.bat` | Windows 批处理，运行 `data/deep_data_analysis.py` |
 
 ### src/ 核心库
@@ -84,7 +84,7 @@ pro/
 | `src/literature.py` | 统一多机制运行框架：`run_mechanism` / `run_all_mechanisms`，支持传入校准参数并分开 Holling/B-D 模型尺度 |
 | `src/visualize.py` | 所有 matplotlib 绑图：时间序列对比、相图、参数扫描、敏感性条形图、机制对比、2D 斑图、拟合结果、k-damping 分析图 |
 | `src/fit.py` | 三模型 ODE 参数拟合；输出训练/留后验证 RMSE、AIC/AICc/BIC、优化诊断；实现 B-D `k` profile likelihood，并保留条件敏感性扫描 |
-| `src/k_damping.py` | k 削弱振荡分析：Jacobian 矩阵求解、特征值扫描、Hopf 分岔阈值估计、峰值衰减指标、多 k 联合扫描 |
+| `src/k_damping.py` | k 局部稳定性分析：Jacobian 矩阵求解、特征值扫描、Hopf 分岔阈值估计、峰值衰减指标、多 k 联合扫描 |
 | `src/pde2d.py` | 2D 反应—扩散显式 Euler 有限差分（Neumann 边界），Turing 稳定性 λ(k) 分析，`scan_d2_patterns` 扩散系数扫描 |
 
 ### data/ 数据模块
@@ -121,7 +121,7 @@ python pde2d_turing.py --fig all      # 全部图组
 python pde2d_turing.py --quick        # 64×64 快速试跑
 python pde2d_turing.py --skip-pde     # 仅稳定性曲线
 
-# k 削弱振荡专项分析
+# k 局部稳定性专项分析
 python k_damping_analysis.py
 
 # 数据下载与标定
@@ -133,8 +133,27 @@ python data/deep_data_analysis.py     # 全序列 profile + LTER，耗时很长
 
 # 文档编译
 call compile_docs.bat                 # 规划/教程 → PDF
-call compile_report.bat               # report.tex → PDF
+call compile_report.bat               # report/report.tex → PDF
+
+# 若 latexmk 启动器异常，直接连续运行两次 XeLaTeX
+xelatex -interaction=nonstopmode -output-directory=report report/report.tex
+xelatex -interaction=nonstopmode -output-directory=report report/report.tex
 ```
+
+## 当前主要结论
+
+- 在各体系无恐惧正平衡点处校准为 20% 等效抑制后，六种恐惧机制均保持共存，但长期种群变化方向明显不同。
+- 记忆模型的 `phi` 扫描 31/31 为共存，其中 20 个情景通过长期收敛诊断，11 个未通过。
+- 12 条主序列中，B-D 在训练归一化 RMSE 上单独最优 11 条，GLERL 三模型并列。
+- 留后验证最优结果为 B-D 8 条、baseline 1 条、fear-memory 2 条、三模型并列 1 条；AICc 最优结果为 B-D 9 条、baseline 1 条、fear-memory 2 条。
+- baseline 仅 7/12 拟合可用于比较，5 次失败拟合不得进入胜负统计。
+- `k` 增大压缩 B-D 共存密度，但最大特征值实部始终为负且变化非单调；当前参数带未出现 Hopf 分岔，不能称为普遍“稳定化”。
+- 观测捕食者中位数处的 `eta` 类群中位数约为：哺乳类 0.0119、鱼类 0.000531、浮游动物 0.000053。
+- Peacor 数据中的 TMIE 37、NCE 27 是研究类型计数，不是效应量。Andrén 七区与 Killifish 三站存在研究内重复，序列级胜负不是 12 个独立证据。
+
+最终论文位于 `report/report.tex`，结构为：
+
+`引言 → 相关工作 → 预备知识 → 模型与方法 → 理论与动力学分析 → 实验与讨论 → 结论 → 参考文献 → 附录`
 
 ## 两种模型体系
 
@@ -155,8 +174,9 @@ call compile_report.bat               # report.tex → PDF
 - Holling 与 B-D 使用不同量纲，绝对时间序列只能分图展示；机制胜负使用相对各自无恐惧基线的长期均值变化和相对振幅 `A/mean` 变化。
 - 核心机制对比在各体系无恐惧正平衡点处校准为 20% 等效抑制。原始默认参数结果仅作为 `results/supplementary/` 中的补充实验。
 - B-D 必须与 `k=0` 的 B-D 基线比较。
-- `profile_bda_k` 会对每个固定 `k` 重新优化其余 B-D 参数并输出近似 95% profile 区间；`conditional_bda_k_scan` 才是固定其余参数的条件敏感性扫描。
+- `profile_bda_k` 会对每个固定 `k` 重新优化其余 B-D 参数并输出近似 95% profile 区间；`conditional_bda_k_scan` 才是固定其余参数的条件敏感性扫描。代表序列的 profile 区间较宽或不连续，预测表现不能自动解释为参数机制识别。
 - 跨系统恐惧抑制使用每条序列归一化捕食者的观测中位数：`eta_at_observed_median`。`eta_v5_theoretical_extrapolation` 仅为理论外推；当前 `v=5` 对 12/12 条序列均超出观测范围。
+- 12 条主序列是拟合单位，不是独立生态重复；LTER 额外拟合因物种配对、时间尺度和筛选规则不同，仅作为探索性输出。
 
 主要结果位于：
 
@@ -167,7 +187,7 @@ call compile_report.bat               # report.tex → PDF
 - `results/deep_analysis/tier1/k_conditional_sensitivity_long.csv`：固定其余参数的条件扫描。
 - `results/deep_analysis/tier1/cross_system_k_eta.csv`：观测中位捕食者密度、观测范围内 `eta` 和明确标记的 `v=5` 理论外推。
 
-`report/` 中的论文和规划文档尚未完成 TODO 18 的系统更新，可能包含修复前结论；当前实验口径以代码和上述机器可读结果为准。
+`report/report.tex` 已按当前机器可读结果重写。报告用于组织和解释证据；若报告文字与代码或机器可读输出冲突，以代码和上述输出为准。
 
 ## 参考文献
 
