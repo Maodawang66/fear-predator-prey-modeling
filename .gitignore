@@ -31,7 +31,6 @@ CLAUDE.md
 results/
 outputs/
 *.zip
-*.pdf
 *.xdv
 
 # OS / IDE
