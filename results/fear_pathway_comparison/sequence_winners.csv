@@ -1,0 +1,13 @@
+﻿series,n_usable_models,training_rmse_winner,training_rmse_best,validation_rmse_winner,validation_rmse_best,aicc_winner,aicc_best
+andren_lynx_roedeer_data_1,6,fear_saturating,0.058288025282550164,fear_memory,0.06409748590549634,fear_saturating,-198.28592064391472
+andren_lynx_roedeer_data_2,6,fear_memory,0.0980606197034218,fear_instant,0.07855439679736813,fear_memory,-158.7515428256015
+andren_lynx_roedeer_data_3,6,fear_foraging,0.11302158129603476,fear_handling,0.07551350175872577,baseline,-150.9836173571174
+andren_lynx_roedeer_data_4,6,fear_instant,0.14325885938894484,fear_memory,0.055352436871259555,fear_instant,-121.90334973498483
+andren_lynx_roedeer_data_5,6,fear_saturating,0.21649427885911626,fear_handling,0.21597825948352967,fear_saturating,-92.17376333868607
+andren_lynx_roedeer_data_6,6,fear_memory,0.3105080564103403,fear_saturating,0.2516245056854187,fear_memory,-56.18424094127355
+andren_lynx_roedeer_data_7,6,baseline,0.08698608981737421,baseline,0.14785259098578812,baseline,-120.75239537497922
+glerl_m110_zoop_1994-201,6,baseline;fear_foraging;fear_handling;fear_instant;fear_memory;fear_saturating,0.1954797286261119,baseline;fear_foraging;fear_handling;fear_instant;fear_memory;fear_saturating,0.29628651205670775,baseline,-901.7795207942494
+lynxhare,5,fear_foraging,0.3073405529588138,fear_memory,0.11087978483855503,fear_foraging,-211.24865253790333
+timeserieslogmeans_TP,6,fear_instant,0.21298651525314222,fear_instant,0.2673950875991796,baseline,-283.4996832772344
+timeserieslogmeans_WRGP,3,fear_instant,0.2195614907192453,fear_handling,0.25395320939522303,fear_instant,-251.4376384516087
+timeserieslogmeans_WRHW,3,fear_foraging,0.20986695627607804,fear_foraging,0.2194588361173621,fear_foraging,-290.76672770911784

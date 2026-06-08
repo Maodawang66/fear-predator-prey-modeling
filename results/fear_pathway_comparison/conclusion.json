@@ -1,0 +1,43 @@
+{
+  "complete_case_series_count": 9,
+  "failed_fit_count": 7,
+  "study_validation_winners": {
+    "andren_lynx_roedeer": "fear_memory",
+    "glerl_zooplankton": "baseline;fear_foraging;fear_handling;fear_instant;fear_memory;fear_saturating",
+    "killifish_mosquitofish": "fear_instant"
+  },
+  "study_aicc_winners": {
+    "andren_lynx_roedeer": "fear_instant",
+    "glerl_zooplankton": "baseline",
+    "killifish_mosquitofish": "baseline"
+  },
+  "fear_parameter_profile_summary": {
+    "fear_instant": {
+      "n_profiled": 11,
+      "ci95_includes_zero": 4,
+      "ci95_hits_grid_boundary": 6
+    },
+    "fear_memory": {
+      "n_profiled": 11,
+      "ci95_includes_zero": 5,
+      "ci95_hits_grid_boundary": 6
+    },
+    "fear_saturating": {
+      "n_profiled": 10,
+      "ci95_includes_zero": 8,
+      "ci95_hits_grid_boundary": 8
+    },
+    "fear_foraging": {
+      "n_profiled": 12,
+      "ci95_includes_zero": 9,
+      "ci95_hits_grid_boundary": 10
+    },
+    "fear_handling": {
+      "n_profiled": 12,
+      "ci95_includes_zero": 9,
+      "ci95_hits_grid_boundary": 11
+    }
+  },
+  "interpretation": "No single additional fear pathway wins validation RMSE and AICc consistently across the independent studies. Some alternatives win within individual studies, so the result supports study-specific channel uncertainty rather than a universal absence of fear effects.",
+  "synthetic_recovery_interpretation": "The controlled synthetic experiment recovers all five pathways when the shared core parameters are known, but joint core-and-fear refitting shows strong pathway substitutability. Real-data pathway labels therefore require cautious interpretation."
+}

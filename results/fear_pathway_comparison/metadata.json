@@ -1,0 +1,24 @@
+{
+  "models": [
+    "baseline",
+    "fear_instant",
+    "fear_memory",
+    "fear_saturating",
+    "fear_foraging",
+    "fear_handling"
+  ],
+  "shared_baseline_parameters": [
+    "r",
+    "K",
+    "a",
+    "theta",
+    "e",
+    "mu"
+  ],
+  "fear_parameters_per_candidate": 1,
+  "validation": "ordered 20% continuous multistep holdout",
+  "optimizer": "local",
+  "max_nfev": 500,
+  "series_count": 12,
+  "study_count": 4
+}

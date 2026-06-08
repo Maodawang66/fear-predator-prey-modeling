@@ -1,0 +1,4 @@
+﻿study,n_usable_models,median_training_rmse_winner,median_training_rmse_best,median_validation_rmse_winner,median_validation_rmse_best,median_aicc_winner,median_aicc_best
+andren_lynx_roedeer,6,fear_instant,0.14325885938894484,fear_memory,0.13983811985322883,fear_instant,-121.90334973498483
+glerl_zooplankton,6,baseline;fear_foraging;fear_handling;fear_instant;fear_memory;fear_saturating,0.1954797286261119,baseline;fear_foraging;fear_handling;fear_instant;fear_memory;fear_saturating,0.29628651205670775,baseline,-901.7795207942494
+killifish_mosquitofish,6,fear_instant,0.21298651525314222,fear_instant,0.2673950875991796,baseline,-283.4996832772344
