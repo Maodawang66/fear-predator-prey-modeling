@@ -27,7 +27,7 @@
 \newcommand{\trainrmse}{\mathrm{RMSE}_{\mathrm{train}}}
 \newcommand{\valrmse}{\mathrm{RMSE}_{\mathrm{val}}}
 
-\title{\textbf{恐惧效应下捕食者--猎物动力学：\\机制路径、模型比较与证据边界}}
+\title{\textbf{恐惧效应下捕食者--猎物动力学：\\机制路径、预测比较与参数可辨识性局限}}
 \author{%
   贺小轩（PB23151820）\quad 李松茂（PB23151824）\\[0.25em]
   王玉麟（PB23151808）%
@@ -38,11 +38,11 @@
 \maketitle
 
 \begin{abstract}
-经典捕食者--猎物模型通常把捕食风险等同于直接消耗，但猎物还会因感知风险改变繁殖、觅食和活动。本文以逻辑斯蒂--Holling II、带指数记忆的繁殖抑制模型，以及 Beddington--DeAngelis（B--D）恐惧模型为主线，比较六种非消耗性效应进入方程的机制路径。为避免参数默认值造成不公平比较，各机制均相对各自无恐惧基线，在参考正平衡点处校准为 20\% 等效抑制。真实数据比较采用前 80\% 拟合、后 20\% 连续多步留后验证，并统一使用归一化 RMSE、AICc、拟合状态过滤和参数可辨识性诊断。
+经典捕食者--猎物模型通常把捕食风险等同于直接消耗，但猎物还会因感知风险改变繁殖、觅食和活动。本文以逻辑斯蒂--Holling II 基线与带指数记忆的繁殖抑制模型为核心。为避免默认参数造成不公平比较，五种恐惧机制均相对各自无恐惧基线，在参考正平衡点处校准为 20\% 等效抑制。真实数据比较采用前 80\% 拟合、后 20\% 连续多步留后验证，并统一使用归一化 RMSE、AICc、拟合状态过滤和参数 profile 诊断。
 
-结果表明，恐惧效应具有显著的机制路径依赖性：等效抑制下六种机制均保持共存，但长期种群变化方向不同。记忆模型的 $\phi$ 扫描 31/31 为共存，其中 11 个情景未通过长期收敛诊断。12 条公开时间序列中，B--D 模型在训练 RMSE、留后验证和 AICc 上分别最优 11、8 和 9 条，因而不能表述为普遍胜出；同时 baseline 仅 7 条拟合可进入比较。B--D 的 $k$ 增大会压缩共存密度，但最大特征值实部始终为负且非单调，未出现 Hopf 分岔，不能概括为普遍“稳定化”。跨系统抑制应在观测捕食者中位数处比较，而不应直接比较裸参数 $k$。本文的中心结论是：恐惧模型的评价必须同时考虑机制路径、留后预测、复杂度、可辨识性和证据边界。
+结果表明，等效抑制下不同恐惧机制产生不同的长期种群响应，结论具有明显的机制路径依赖性。记忆模型的 $\phi$ 扫描 31/31 为共存，其中 11 个情景尚未通过长期收敛诊断。15 条真实种群序列中，含恐惧模型在留后预测上各有胜负，但 baseline 在 13 条序列上获 AICc 支持。代表序列的 profile 分析同时显示恐惧参数多数无法可靠辨识。因此，复杂模型可以改善部分序列的预测，但预测改善不能直接解释为恐惧机制真实存在，也不能支持对真实恐惧强度的稳定估计。
 
-\textbf{关键词：}捕食者--猎物；恐惧效应；记忆效应；Beddington--DeAngelis；留后验证；可辨识性
+\textbf{关键词：}捕食者--猎物；恐惧效应；记忆效应；留后验证；可辨识性
 \end{abstract}
 
 \tableofcontents
@@ -52,15 +52,15 @@
 
 捕食者不仅通过捕食直接减少猎物数量，也会通过风险线索改变猎物繁殖、觅食、活动和栖息地选择。这类非消耗性效应（non-consumptive effect, NCE）可能进一步改变捕食者资源、种群共存和系统稳定性。问题的难点不在于是否加入一个“恐惧参数”，而在于恐惧以何种机制进入方程，以及数据是否足以区分这些机制。
 
-本文围绕三个问题展开。第一，繁殖抑制、觅食抑制、处理时间延长和 B--D 繁殖因子等路径是否产生一致的种群结论？第二，真实时间序列是否支持含恐惧模型，并且这种支持能否通过留后预测和复杂度校正？第三，拟合得到的恐惧参数是否可辨识，证据能够支持到何种程度？
+本文围绕三个问题展开。第一，不同恐惧机制是否产生一致的种群动力学结论？第二，含恐惧模型能否改善真实时间序列的留后预测？第三，当模型复杂度增加时，数据能否可靠识别恐惧参数？
 
-为回答这些问题，本文建立经典 Holling II 与 B--D 两套模型体系，引入瞬时与记忆恐惧机制；在各自无恐惧基线的正平衡点处进行 20\% 等效抑制校准；对 12 条公开时间序列进行三模型比较；最后通过 $k$ profile、观测范围内等效抑制、文献清单和空间拓展界定证据边界。
+为回答这些问题，本文首先建立 Holling II 基线与 fear-memory 主模型，分析恐惧强度、记忆衰减和长期共存；随后在各自无恐惧基线的正平衡点处进行 20\% 等效抑制校准，比较六种机制路径；最后对 15 条公开种群时间序列进行三模型预测比较，并以高灵活度 B--D 模型的 $k$ profile 检验预测改善是否真正意味着恐惧参数被识别。
 
 \section{相关工作}
 
 Lotka--Volterra 模型奠定了捕食者--猎物动力学基础，逻辑斯蒂增长和 Holling II 功能反应进一步引入环境容量与饱和捕食。Abrams 强调，适应性行为进入模型的方式可能改变结论符号；Preisser 等的综合研究显示非消耗性效应具有重要生态意义。Wang 等讨论了恐惧因子和稳定性转变，Myint 等则在 B--D 功能反应下研究恐惧与反应--扩散动力学。
 
-这些工作提示两项方法要求。其一，不同机制不能在不公平的默认参数下直接比较，应在共同的生物学抑制强度下相对各自基线评价。其二，训练误差不是模型优越性的充分证据；真实数据比较还需留后预测、复杂度惩罚、优化状态和参数可辨识性。本文据此将“恐惧是否有效”改写为“何种机制在何种证据条件下得到支持”。
+这些工作提示两项方法要求。其一，不同机制不能在不公平的默认参数下直接比较，应在共同的生物学抑制强度下相对各自基线评价。其二，训练误差不是机制识别的充分证据；真实数据比较还需留后预测、复杂度惩罚、优化状态和参数可辨识性。本文据此区分“模型能否预测轨迹”与“数据能否识别恐惧机制”。
 
 \section{预备知识}
 
@@ -75,7 +75,7 @@ B--D 体系使用 $u(t),v(t)$，其功能反应分母 $1+qu+v$ 同时描述猎�
   f(k,v)=\frac{1}{1+kv},\qquad
   \eta(k,v)=1-f(k,v)=\frac{kv}{1+kv}.
 \]
-由于 $\eta$ 同时依赖 $k$ 和捕食者尺度 $v$，跨系统直接比较裸 $k$ 没有明确生态含义。
+由于 $\eta$ 同时依赖 $k$ 和捕食者尺度 $v$，跨系统直接比较裸 $k$ 没有明确生态含义；而当 $k$ 本身不可辨识时，由其计算的 $\eta$ 同样不能用于可靠的跨系统排序。
 
 \subsection{模型比较指标}
 
@@ -88,7 +88,7 @@ B--D 体系使用 $u(t),v(t)$，其功能反应分母 $1+qu+v$ 同时描述猎�
 
 \section{模型与方法}
 
-\subsection{三类核心模型}
+\subsection{核心模型：Holling II baseline 与 fear-memory}
 
 \paragraph{逻辑斯蒂--Holling II 基线}
 \begin{equation}
@@ -110,6 +110,10 @@ B--D 体系使用 $u(t),v(t)$，其功能反应分母 $1+qu+v$ 同时描述猎�
 \end{equation}
 指数核通过线性链转化为状态 $M$；稳态时 $M^*=y^*/\delta$。$\delta$ 越大表示记忆衰减越快。
 
+\subsection{扩展与竞争模型}
+
+除核心模型外，本文还使用瞬时繁殖抑制、饱和繁殖抑制、觅食抑制和处理时间延长模型检验机制路径依赖性，并使用下述 B--D 恐惧模型作为高灵活度竞争模型：
+
 \paragraph{B--D 恐惧模型}
 \begin{equation}
 \begin{aligned}
@@ -120,9 +124,11 @@ B--D 体系使用 $u(t),v(t)$，其功能反应分母 $1+qu+v$ 同时描述猎�
 \end{equation}
 当 $k=0$ 时得到同一体系的无恐惧基线。
 
+B--D 模型包含较多可调参数，不同参数组合可能产生相近轨迹。因此，本文不将其拟合所得 $k$ 直接解释为真实恐惧强度，而通过固定每个 $k$ 后重新优化其余参数的 profile 分析检验可辨识性。它在本文中的作用是提供机制路径对照，并展示复杂模型获得较低误差时可能伴随的参数补偿风险。
+
 \subsection{六种机制与公平比较}
 
-除式\,\eqref{eq:memory} 和式\,\eqref{eq:bda} 外，本文还比较瞬时繁殖抑制、饱和繁殖抑制、觅食抑制和处理时间延长。比较时不把 Holling II 与 B--D 的绝对密度直接相减，而是计算相对各自无恐惧基线的长期均值和相对振幅变化。
+比较时不把 Holling II 与 B--D 的绝对密度直接相减，而是计算相对各自无恐惧基线的长期均值和相对振幅变化。
 
 所有恐惧机制在各自无恐惧正平衡点处校准为 20\% 抑制：繁殖路径匹配增长项抑制，觅食与处理时间路径匹配捕食率抑制，B--D 路径匹配 $1/(1+kv)$。校准参数与规则见附录 B。
 
@@ -138,7 +144,7 @@ B--D 正平衡点由 $dv/dt=0$ 降维求根。由
 
 \subsection{数据拟合与证据过滤}
 
-12 条主序列包含哺乳类、鱼类与浮游动物，详见附录 A。每条序列分别拟合 \modeltrio{}。训练段为前 80\%，验证段为后 20\%；验证预测不是从验证起点重新初始化，而是从整条序列初始状态连续积分。比较顺序为：
+15 条主序列包含哺乳类、鱼类与浮游动物，详见附录 A。每条序列分别拟合 \modeltrio{}。训练段为前 80\%，验证段为后 20\%；验证预测不是从验证起点重新初始化，而是从整条序列初始状态连续积分。比较顺序为：
 \begin{enumerate}[label=(\arabic*),leftmargin=2em]
  \item 过滤失败拟合；
  \item 比较训练归一化 RMSE；
@@ -146,6 +152,12 @@ B--D 正平衡点由 $dv/dt=0$ 降维求根。由
  \item 比较统一归一化残差下的 AICc；
  \item 检查参数触边和 $k$ profile。
 \end{enumerate}
+
+baseline 逐序列拟合 $r,K,a,\theta,e,\mu$，fear-memory 拟合 $r,K,a,\theta,e,\mu,\phi$ 并固定 $\delta=1$，B--D 拟合其 8 个动力学参数；初始状态均取首条观测，不作为拟合参数。对 fear-memory 进一步令 $M(0)=y(0)$：这表示初始记忆与首个可观测捕食压力一致，并避免引入额外的弱可辨识初始状态。固定 $\delta=1$ 则提供统一的记忆时间尺度，避免在短序列中继续增加与 $\phi$ 等参数相互补偿的自由度。三模型均使用固定种子 $0,1,2$ 的差分进化，选择最低可用目标值后进行一次有界局部精修。因各序列时间尺度和观测含义不同，$e,\mu$ 点估计仅用于单序列轨迹拟合，不直接进行跨系统生态比较。
+
+profile 在每个固定 $k$ 下重新优化其余参数。当 profile 在较宽 $k$ 范围内基本平坦、95\% 区间触及扫描边界，或可接受区间不连续时，本文认为 $k$ 缺乏可靠可辨识性。
+
+为检验上述记忆设定是否主导结果，本文还对 $M(0)$ 与 $\delta$ 进行补充 profile。$M(0)$ 的变化通常可被其余参数补偿，14/15 条序列的 95\% profile 集触及 $M(0)/y(0)=5$ 的扫描上界。若在留后段上探索性选择最优 $\delta$，相对固定 $\delta=1$ 的验证 RMSE 改善中位数约为 2.1\%；Windermere 北湖盆与 Isle Royale 的改善较大，因此不能声称 $\delta$ 对所有序列均不重要。完整结果见附录 E。
 
 \section{理论与动力学分析}
 
@@ -157,20 +169,9 @@ B--D 正平衡点由 $dv/dt=0$ 降维求根。由
 \]
 因此 $x^*$ 主要由捕食与死亡参数决定。记忆稳态满足 $M^*=y^*/\delta$，恐惧通过降低猎物净增长改变 $y^*$。这解释了 $\phi$ 扫描中猎物长期均值近似不变、捕食者均值随 $\phi$ 下降的现象，但数值结论仍需收敛诊断支持。
 
-\subsection{B--D 局部稳定性}
+\subsection{B--D 理论扩展的内部性质}
 
-对式\,\eqref{eq:bda} 的正平衡点计算 Jacobian $J$。二维系统局部渐近稳定要求
-\[
- \operatorname{tr}(J)<0,\qquad \det(J)>0.
-\]
-进一步使用最大特征值实部 $\max\operatorname{Re}\lambda(J)$ 判断距失稳边界的方向。扫描结果中该量始终为负，因此没有出现 Hopf 型稳定性转换。值得注意的是，它随 $k$ 非单调变化：从 $k=0$ 的 $-0.628$ 先下降，随后上升至 $k=0.18$ 的 $-0.389$。因此，$k$ 的明确作用是压缩共存密度并改变局部阻尼，而不是普遍增强稳定性。
-
-\begin{figure}[H]
-  \centering
-  \imginclude[width=0.78\textwidth]{k_damping/01_eigenvalue_vs_k.png}
-  \caption{$k$ 扫描下 B--D 正平衡点最大特征值实部。全程为负但变化非单调，未出现 Hopf 分岔。}
-  \label{fig:eigen-k}
-\end{figure}
+在给定理论参数下，B--D 模型的 $k$ 增大使正平衡共存密度下降；局部稳定性影响则非单调，不能概括为普遍“稳定化”。这一结果仅说明模型内部性质，不代表真实数据识别出了相应的 $k$。Jacobian、特征值和完整局部稳定性扫描移至附录 C。
 
 \section{实验与讨论}
 
@@ -205,9 +206,9 @@ $\phi\in[0,0.06]$ 的 31 个扫描情景均被尺度感知灭绝判定归为共�
   \label{fig:mechanisms}
 \end{figure}
 
-\subsection{B--D 恐惧强度与稳定性边界}
+\subsection{B--D 理论扩展：共存密度压缩}
 
-B--D 的 $k$ 扫描显示共存密度持续压缩：$k=0$ 时 $(\bar u,\bar v)\approx(11.41,13.07)$，$k=0.18$ 时约为 $(3.51,3.33)$。与图\,\ref{fig:eigen-k} 合并解读可知，密度压缩是稳健现象，但“稳定化”不是。振幅与峰值衰减指标主要处于 $10^{-7}$ 数值噪声量级，因此不作为证据展示。
+B--D 的 $k$ 扫描显示共存密度持续压缩：$k=0$ 时 $(\bar u,\bar v)\approx(11.41,13.07)$，$k=0.18$ 时约为 $(3.51,3.33)$。密度压缩是给定参数下的稳健理论现象，但不能据此推断真实系统中的恐惧强度。稳定性与峰值衰减等补充诊断见附录 C。
 
 \begin{figure}[H]
   \centering
@@ -216,9 +217,9 @@ B--D 的 $k$ 扫描显示共存密度持续压缩：$k=0$ 时 $(\bar u,\bar v)\a
   \label{fig:bda-k}
 \end{figure}
 
-\subsection{真实数据模型比较}
+\subsection{真实数据的预测比较}
 
-表\,\ref{tab:wins} 汇总所有可比较拟合的胜负。B--D 在训练 RMSE 上最优 11/12，但留后验证仅最优 8/12，AICc 最优 9/12。GLERL 的三模型训练和验证 RMSE 相同，较简单的 baseline 因 AICc 更低而胜出；TP 的 baseline 留后验证最佳；Andrén 区 6 和 WRGP 的 fear-memory 在验证上最佳。训练拟合优势不能直接解释为泛化优势或机制真实性。
+表\,\ref{tab:wins} 汇总所有可比较拟合的预测结果。B--D 在 9 条序列的留后验证上单独最优，但 AICc 未支持 B--D；baseline 虽仅在 3 条序列的留后验证上单独最优，却因更低复杂度在 13 条序列上取得最低 AICc。GLERL 的三模型训练和验证 RMSE 相同，不能区分三种结构。该结果说明，短期留后预测改善与复杂度校正后的模型支持并不等价。
 
 \begin{table}[H]
  \centering
@@ -228,19 +229,44 @@ B--D 的 $k$ 扫描显示共存密度持续压缩：$k=0$ 时 $(\bar u,\bar v)\a
   \toprule
   标准 & baseline & fear-memory & B--D fear & 三模型并列\\
   \midrule
-  训练归一化 RMSE 最优 & 0 & 0 & 11 & 1\\
-  留后验证归一化 RMSE 最优 & 1 & 2 & 8 & 1\\
-  AICc 最优 & 1 & 2 & 9 & 0\\
+  训练归一化 RMSE 最优 & 5 & 7 & 2 & 1\\
+  留后验证归一化 RMSE 最优 & 3 & 2 & 9 & 1\\
+  AICc 最优 & 13 & 2 & 0 & 0\\
   \bottomrule
  \end{tabular}
 \end{table}
 
-baseline 的 12 次拟合中只有 7 次可用于比较，5 次失败不得进入胜负统计。图\,\ref{fig:rmse-improve} 仅展示这 7 条可用 baseline 比较，不能把图中改进比例外推到全部序列。
+按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到七模型后，105/105 次拟合均可比较。留后验证单独最优为 B--D 6 条、fear-instant 3 条、baseline 2 条、fear-memory 2 条、fear-handling 1 条，GLERL 七模型完全并列。该扩展仍不支持”某一种恐惧通道普遍正确”：不同序列由不同通道获胜，且预测胜出不能替代参数可辨识性证据。
+
+Windermere 南北两湖盆的拟合结果值得单独讨论。该两序列的 baseline 与 fear-memory 留后验证 RMSE 分别为 1.52 和 3.04（北）与 1.16 和 1.39（南），在所有 15 条序列中显著偏高。数据的时间模式是诊断关键：两个湖盆的河鲈在训练段内从极低值持续爆发至数百 $\mathrm{kg}\cdot\mathrm{ha}^{-1}$，但在验证段却见顶回落；与此同时，狗鱼因刺网移除干预，整个观测期内密度均处于低位（3--10\,$\mathrm{kg}\cdot\mathrm{ha}^{-1}$）。Holling II 框架唯一能使猎物密度下降的机制是捕食者恢复——功能反应将猎物大量转化为捕食者增长，从而抑制猎物。但当捕食者被人为压制时，该机制被切断。优化器只能在训练段内寻找补偿：baseline 将转化效率 $e$ 压至下界 0.01，使捕食者与猎物动力学几乎解耦，猎物在验证段被预测为冲向 $K\approx 3600$，而实际猎物已从 300 降至 135；fear-memory 凭借 7 参数 3 方程的记忆结构在训练段取得最优猎物拟合（训练猎物 RMSE 0.049），但记忆项 $-r\phi M x$ 与恐惧抑制项均只能减缓增长而不能产生下降，导致验证段外推完全失效。相比之下，B--D 模型的 $-au^2$ 种内竞争项以及 fear-instant、fear-saturating 等不含记忆滞后的恐惧参数化方式，提供了不依赖捕食者恢复即可从高密度自然回落的结构灵活性，验证 RMSE 分别降至 0.54 和 0.42。该案例分析表明，当数据包含外部人为移除干预时，封闭 ODE 模型的参数估计会因未建模过程而畸变，此类序列的拟合误差不能完全归因于模型结构的生态合理性。
+
+\begin{figure}[H]
+  \centering
+  \imginclude[width=0.92\textwidth]{seven_model_real_fits/report_protocol_seven_model_validation_heatmap.png}
+  \caption{15 条正式序列的七模型连续多步留后验证 RMSE。颜色表示相对该序列最佳可用模型的误差比。}
+  \label{fig:seven-model-heatmap}
+\end{figure}
+
+45 次拟合均通过成功或达限可用状态进入比较。全部结果均为成功或达限可用；边界触及仍说明部分速率点估计受参数补偿影响。
+
+\begin{table}[H]
+ \centering
+ \caption{预测结论与机制结论的区分}
+ \label{tab:prediction-mechanism}
+ \begin{tabular}{p{0.18\textwidth}p{0.70\textwidth}}
+  \toprule
+  层次 & 当前证据允许的结论\\
+  \midrule
+  预测层面 & B--D 在部分序列上具有更好的训练、留后预测或 AICc 表现。\\
+  机制层面 & 由于 $k$ 缺乏可靠可辨识性，不能据此证明真实恐惧机制或估计真实恐惧强度。\\
+  \bottomrule
+ \end{tabular}
+\end{table}
 
 \begin{figure}[H]
   \centering
   \imginclude[width=0.82\textwidth]{deep_analysis/tier1/rmse_improvement.png}
-  \caption{B--D 相对 baseline 的验证误差比较；图中仅包含 baseline 拟合可用的 7 条序列。}
+  \caption{B--D 相对 baseline 的验证误差比较；比值大于 1 表示 B--D 留后误差更低。}
   \label{fig:rmse-improve}
 \end{figure}
 
@@ -251,31 +277,35 @@ baseline 的 12 次拟合中只有 7 次可用于比较，5 次失败不得进�
   \label{fig:representative-fit}
 \end{figure}
 
-\subsection{跨系统等效抑制与外部证据}
+\subsection{\texorpdfstring{B--D 恐惧参数 $k$ 的可辨识性}{B--D 恐惧参数 k 的可辨识性}}
 
-跨系统比较采用观测捕食者归一化中位数 $v_{\mathrm{med}}$ 处的
-$\eta(k,v_{\mathrm{med}})$。哺乳类、鱼类和浮游动物的中位数分别约为
-0.0119、0.000531 和 0.000053。组间差异不应解释为因果效应，因为每组样本少，且哺乳类含同一 Andrén 研究的七个区域。
+为检验较低误差是否意味着恐惧参数被数据识别，本文选取 Isle Royale、GLERL 与 TP 三条代表序列，对每个固定 $k$ 重新优化其余 B--D 参数。该过程允许其他参数补偿 $k$ 的变化，因而是真正的 profile，而非固定其他参数的条件扫描。
 
 \begin{figure}[H]
-  \centering
-  \imginclude[width=0.76\textwidth]{deep_analysis/tier1/eta_by_group.png}
-  \caption{观测捕食者中位数处的等效抑制 $\eta$；序列并非相互独立重复。}
-  \label{fig:eta-group}
+ \centering
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/k_profile_isle_royale_wolf_moose_pre_2018.png}
+  \caption{Isle Royale}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/k_profile_glerl_m110_zoop_1994-201.png}
+  \caption{GLERL}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/k_profile_timeserieslogmeans_TP.png}
+  \caption{TP}
+ \end{subfigure}
+ \caption{固定每个 $k$ 并重新优化其余参数得到的 profile。宽区间、边界触及和不连续区间均表明可辨识性不足。}
+ \label{fig:k-profile-main}
 \end{figure}
 
-Peacor 数据中的“Predation effect”是研究类型分类而非效应量：64 条记录中 TMIE 37、NCE 27。图\,\ref{fig:peacor} 仅说明文献清单构成，不用于估计恐惧强度。珊瑚与豆娘数据的变量方向和机制映射不足，仅作为探索性材料，见附录 E。
-
-\begin{figure}[H]
-  \centering
-  \imginclude[width=0.60\textwidth]{deep_analysis/tier2/peacor_by_taxon.png}
-  \caption{Peacor 文献清单按类群的 TMIE/NCE 计数；计数不是效应量。}
-  \label{fig:peacor}
-\end{figure}
+Isle Royale、GLERL 与 TP 的 95\% 置信集均覆盖整个扫描边界 $[0.0001,0.5]$；其中 Isle Royale 的可接受集还呈不连续性。这表明多个 $k$ 值可通过其他参数补偿产生相近轨迹，精确区间边界还会受到扫描范围影响。当前数据主要约束模型整体轨迹，而不能将轨迹变化唯一归因于恐惧参数 $k$。
 
 \subsection{讨论：证据能够支持什么}
 
-数值实验支持“机制路径决定定性方向”，数据拟合支持“B--D 在多数序列的多项比较标准上表现较好”，但二者都不足以证明真实系统普遍遵循 B--D 恐惧机制。主要原因有三点：一是 12 条序列中 Andrén 七区和 Killifish 三站存在研究内重复，不能视为 12 个独立生态证据；二是 baseline 有 5 次失败拟合，模型比较并非完全对称；三是代表序列的 $k$ profile 很宽或不连续，说明参数解释弱于预测比较。
+数值实验支持“机制路径决定定性方向”，数据拟合支持“含恐惧模型能够改善部分序列的留后预测”，但二者都不足以证明真实系统存在相应恐惧机制。主要原因有三点：一是 15 条序列中 Andrén 七区、Killifish 三站和 Windermere 两湖盆存在研究内重复，不能视为 15 个独立生态证据；二是 AICc 在 13/15 条序列上支持较简单的 baseline，与 B--D 的留后预测优势形成明显分歧；三是 $e,\mu,\phi,k$ 等参数存在触边或宽 profile，显示额外参数之间存在补偿。四是 Windermere 序列中狗鱼的刺网移除属于外部人为干预，破坏了 ODE 模型的封闭系统假设。当捕食者被人为压制而猎物先爆发后自然回落时，Holling II 框架只能通过参数畸变（baseline 的 $e\rightarrow 0$）或过拟合（fear-memory）来匹配训练段，导致留后预测完全失效。预测能力与机制识别必须分开解释。
+
+记忆参数的补充结果同样需要遵守这一证据边界。固定 $\delta=1$ 的主比较使用预先统一的时间尺度；附录中所谓“留后最优 $\delta$”是在同一留后段上比较多个候选值后得到，只能作为敏感性与假设生成分析，不能再视为无偏留后验证，也不用于重新计算三模型胜负。
 
 \section{结论}
 
@@ -283,9 +313,10 @@ Peacor 数据中的“Predation effect”是研究类型分类而非效应量：
 \begin{enumerate}[label=(\arabic*),leftmargin=2em]
  \item 恐惧效应具有机制路径依赖性。等效 20\% 抑制下六种机制均共存，但种群变化方向不同。
  \item 记忆模型的 $\phi$ 扫描 31/31 共存，其中 11 个情景未通过长期收敛诊断，不能把有限积分结果误写为稳定平衡。
- \item B--D 在训练 RMSE、留后验证和 AICc 上分别最优 11/12、8/12 和 9/12；它表现较强，但并非普遍胜出。
- \item $k$ 增大压缩共存密度；最大特征值实部始终为负且非单调，当前参数带未出现 Hopf 分岔，不能宣称普遍稳定化。
- \item 模型比较必须共同报告留后预测、复杂度、拟合状态、参数触边、可辨识性与数据非独立性。结论强度不能超过证据边界。
+ \item B--D 在 9/15 条序列的留后验证上单独最优，但 AICc 未支持 B--D，baseline 获 13/15；预测优势与复杂度校正后的支持并不一致。
+ \item 七模型扩展中不同序列由不同恐惧通道胜出，不能据此认定某一种恐惧机制普遍正确。
+ \item 因此，预测误差降低只能支持模型的预测能力，不能单独证明恐惧机制存在，也不能用于估计或比较真实恐惧强度。
+ \item 当数据包含刺网移除等外部人为干预时，封闭 ODE 模型被迫通过参数畸变来补偿未建模的过程（如 Windermere 序列中 baseline 的转化效率 $e$ 被压至下界，fear-memory 的过拟合）。此类序列的预测误差不能完全归因于模型结构的生态合理性，参数估计也不应被解读为真实生态速率。
 \end{enumerate}
 
 \section*{参考文献}
@@ -312,7 +343,7 @@ Peacor 数据中的“Predation effect”是研究类型分类而非效应量：
 \subsection{主序列与分组}
 
 \begin{longtable}{p{0.19\textwidth}p{0.14\textwidth}p{0.16\textwidth}p{0.38\textwidth}}
- \caption{12 条主序列清单与观测含义}\label{tab:datasets}\\
+ \caption{15 条主序列清单与观测含义}\label{tab:datasets}\\
  \toprule
  简称 & 类群/分组 & 数据来源 & 猎物与捕食者观测\\
  \midrule
@@ -321,16 +352,18 @@ Peacor 数据中的“Predation effect”是研究类型分类而非效应量：
  简称 & 类群/分组 & 数据来源 & 猎物与捕食者观测\\
  \midrule
  \endhead
- Lynx--hare & mammal & Hudson Bay & 雪兔与猞猁毛皮记录代理量\\
  GLERL & zooplankton & Lake Michigan & \emph{Daphnia mendotae} 与 \emph{Bythotrephes}\\
  Andrén-1 至 7 & mammal & 同一 Andrén 研究 & 七个区域的狍猎获密度与猞猁家族群密度\\
  WRHW、TP、WRGP & fish & 同一 Killifish 研究 & 三站点 Least killifish 与 Eastern mosquitofish 月密度\\
+ Isle Royale & mammal & NPS & 1980--2017 年驼鹿与狼数量；排除 2018 年迁入狼干预\\
+ Windermere North/South & fish & GPDD & 两湖盆河鲈与狗鱼 kg/ha；狗鱼处于刺网移除干预背景\\
+ Komi lynx--hare & mammal & GPDD & 1922--1942 年山兔与欧亚猞猁比例变换计数\\
  \bottomrule
 \end{longtable}
 
-Andrén 七区共享研究设计、物种和时间背景；Killifish 三站共享研究设计和物种。因此，12 条序列是 12 个拟合单位，而不是 12 个相互独立的生态重复。序列级胜负只描述当前样本中的模型表现。
+Andrén 七区共享研究设计、物种和时间背景；Killifish 三站共享研究设计和物种；Windermere 两湖盆也来自同一研究。因此，15 条序列是 15 个拟合单位，而不是 15 个相互独立的生态重复。序列级胜负只描述当前样本中的模型表现。
 
-项目另有 LTER 湖泊鱼类额外拟合，但其物种配对、时间尺度和筛选规则与主序列集合不同，仅作为探索性输出，不纳入本文 12 条主序列的胜负统计。
+项目另有 LTER 湖泊鱼类额外拟合，但其物种配对、时间尺度和筛选规则与主序列集合不同，仅作为探索性输出，不纳入本文 15 条主序列的胜负统计。
 
 \subsection{预处理与质量控制}
 
@@ -455,16 +488,29 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
  \end{tabular}
 \end{table}
 
+\begin{figure}[H]
+  \centering
+  \imginclude[width=0.78\textwidth]{k_damping/01_eigenvalue_vs_k.png}
+  \caption{$k$ 扫描下 B--D 正平衡点最大特征值实部。全程为负但变化非单调，未出现 Hopf 分岔。该图仅描述给定理论参数下的模型内部性质。}
+  \label{fig:eigen-k}
+\end{figure}
+
+对式\,\eqref{eq:bda} 的正平衡点计算 Jacobian $J$。二维系统局部渐近稳定要求
+\[
+ \operatorname{tr}(J)<0,\qquad \det(J)>0.
+\]
+扫描中 $\max\operatorname{Re}\lambda(J)$ 始终为负，从 $k=0$ 的 $-0.628$ 先下降，随后上升至 $k=0.18$ 的 $-0.389$，未出现 Hopf 型稳定性转换。振幅与峰值衰减指标主要处于 $10^{-7}$ 数值噪声量级，不作为核心证据。
+
 \section{完整拟合结果}
 
-\subsection{36 次拟合逐行结果}
+\subsection{45 次拟合逐行结果}
 
-表\,\ref{tab:fit-full} 列出全部 36 次拟合。五次 baseline 失败分别为 Lynx--hare、Andrén-5、Andrén-7、WRHW 和 WRGP；失败结果虽然仍列出数值，但不得进入模型胜负统计。
+表\,\ref{tab:fit-full} 列出全部 45 次拟合。三模型分别拟合 6、7、8 个动力学参数，全部结果均达到成功或达限可用状态。触边参数尤其是 $e$、$K$、$\phi$ 和 B--D 参数仍提示点估计存在边界敏感性。
 
 \begin{landscape}
 \scriptsize
 \begin{longtable}{llrrrlll}
- \caption{12 条序列 $\times$ 3 模型拟合。训练与验证 RMSE 均为归一化总 RMSE；失败拟合不进入胜负统计。}\label{tab:fit-full}\\
+ \caption{15 条序列 $\times$ 3 模型拟合。训练与验证 RMSE 均为归一化总 RMSE；45 次拟合均可进入比较。}\label{tab:fit-full}\\
  \toprule
  序列 & 模型 & $\trainrmse$ & $\valrmse$ & AICc & 优化状态 & 可比较 & 触边参数\\
  \midrule
@@ -473,42 +519,51 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
  序列 & 模型 & $\trainrmse$ & $\valrmse$ & AICc & 优化状态 & 可比较 & 触边参数\\
  \midrule
  \endhead
- Lynx--hare & base & 0.5765 & 0.1113 & -97.3 & 失败 & 否 & -- \\
- Lynx--hare & memory & 0.2851 & 0.2919 & -230.2 & 达限可用 & 是 & -- \\
- Lynx--hare & B--D & 0.2051 & 0.1781 & -286.6 & 达限可用 & 是 & -- \\
- GLERL & base & 0.1646 & 0.2684 & -1002.3 & 成功 & 是 & -- \\
- GLERL & memory & 0.1646 & 0.2684 & -1000.2 & 成功 & 是 & -- \\
- GLERL & B--D & 0.1646 & 0.2684 & -993.9 & 成功 & 是 & -- \\
- Andrén-1 & base & 0.1400 & 0.1116 & -140.2 & 达限可用 & 是 & $K$ \\
- Andrén-1 & memory & 0.0847 & 0.1099 & -175.7 & 达限可用 & 是 & -- \\
- Andrén-1 & B--D & 0.0722 & 0.0501 & -178.8 & 达限可用 & 是 & -- \\
- Andrén-2 & base & 4.6328 & 0.4904 & 125.7 & 成功 & 是 & -- \\
- Andrén-2 & memory & 0.1343 & 0.0900 & -140.7 & 达限可用 & 是 & $K$ \\
- Andrén-2 & B--D & 0.1035 & 0.0736 & -151.4 & 达限可用 & 是 & -- \\
- Andrén-3 & base & 0.2072 & 0.0953 & -110.4 & 达限可用 & 是 & $K$ \\
- Andrén-3 & memory & 0.1550 & 0.0940 & -129.8 & 达限可用 & 是 & -- \\
- Andrén-3 & B--D & 0.1256 & 0.0550 & -136.7 & 达限可用 & 是 & -- \\
- Andrén-4 & base & 0.3401 & 0.2070 & -68.4 & 成功 & 是 & $K,a,\theta$ \\
- Andrén-4 & memory & 0.0966 & 0.1192 & -156.3 & 达限可用 & 是 & -- \\
- Andrén-4 & B--D & 0.0563 & 0.0415 & -185.8 & 达限可用 & 是 & -- \\
- Andrén-5 & base & 0.4274 & 0.2780 & -51.9 & 失败 & 否 & $K$ \\
- Andrén-5 & memory & 0.1340 & 0.1760 & -132.7 & 达限可用 & 是 & -- \\
- Andrén-5 & B--D & 0.0839 & 0.0622 & -157.1 & 达限可用 & 是 & -- \\
- Andrén-6 & base & 0.4666 & 0.3199 & -39.3 & 成功 & 是 & $K$ \\
- Andrén-6 & memory & 0.1549 & 0.1071 & -107.1 & 达限可用 & 是 & -- \\
- Andrén-6 & B--D & 0.1010 & 0.1127 & -124.5 & 达限可用 & 是 & -- \\
- Andrén-7 & base & 46.0161 & 0.4323 & 224.2 & 失败 & 否 & $K$ \\
- Andrén-7 & memory & 0.1500 & 0.1783 & -93.5 & 达限可用 & 是 & $K$ \\
- Andrén-7 & B--D & 0.0961 & 0.1152 & -107.6 & 达限可用 & 是 & -- \\
- WRHW & base & 0.5829 & 0.1654 & -97.4 & 失败 & 否 & -- \\
- WRHW & memory & 0.1885 & 0.1654 & -316.4 & 达限可用 & 是 & -- \\
- WRHW & B--D & 0.1871 & 0.1582 & -310.9 & 达限可用 & 是 & $p$ \\
- TP & base & 0.2275 & 0.0575 & -275.8 & 成功 & 是 & $r,K,a$ \\
- TP & memory & 0.1863 & 0.0976 & -311.9 & 达限可用 & 是 & -- \\
- TP & B--D & 0.1796 & 0.0769 & -312.0 & 达限可用 & 是 & $p$ \\
- WRGP & base & 0.2803 & 0.1000 & -215.3 & 失败 & 否 & -- \\
- WRGP & memory & 0.2304 & 0.0959 & -247.6 & 达限可用 & 是 & -- \\
- WRGP & B--D & 0.2283 & 0.1231 & -242.1 & 达限可用 & 是 & $r$ \\
+ GLERL & base & 0.1955 & 0.2963 & -901.8 & 成功 & 是 & -- \\
+ GLERL & memory & 0.1955 & 0.2963 & -899.7 & 成功 & 是 & -- \\
+ GLERL & B--D & 0.1955 & 0.2963 & -897.6 & 成功 & 是 & -- \\
+ Andrén-1 & base & 0.0601 & 0.0702 & -199.0 & 成功 & 是 & $e$ \\
+ Andrén-1 & memory & 0.0596 & 0.0652 & -196.6 & 成功 & 是 & -- \\
+ Andrén-1 & B--D & 0.0647 & 0.0665 & -187.2 & 成功 & 是 & $q$ \\
+ Andrén-2 & base & 0.1031 & 0.0968 & -157.9 & 成功 & 是 & $e$ \\
+ Andrén-2 & memory & 0.1011 & 0.0833 & -156.5 & 达限可用 & 是 & $e,\phi$ \\
+ Andrén-2 & B--D & 0.1019 & 0.0657 & -152.6 & 成功 & 是 & $c$ \\
+ Andrén-3 & base & 0.1130 & 0.0755 & -151.0 & 成功 & 是 & $K$ \\
+ Andrén-3 & memory & 0.1131 & 0.0734 & -147.9 & 成功 & 是 & $K$ \\
+ Andrén-3 & B--D & 0.1149 & 0.0904 & -143.5 & 达限可用 & 是 & -- \\
+ Andrén-4 & base & 0.0547 & 0.0652 & -194.3 & 达限可用 & 是 & $K$ \\
+ Andrén-4 & memory & 0.0547 & 0.0656 & -191.3 & 成功 & 是 & $K$ \\
+ Andrén-4 & B--D & 0.0508 & 0.0331 & -193.3 & 达限可用 & 是 & $c$ \\
+ Andrén-5 & base & 0.0618 & 0.0602 & -185.5 & 达限可用 & 是 & $K,e$ \\
+ Andrén-5 & memory & 0.0641 & 0.0530 & -179.8 & 达限可用 & 是 & $K,\phi$ \\
+ Andrén-5 & B--D & 0.0650 & 0.0346 & -175.4 & 达限可用 & 是 & $c$ \\
+ Andrén-6 & base & 0.0828 & 0.1810 & -144.0 & 达限可用 & 是 & $K$ \\
+ Andrén-6 & memory & 0.0834 & 0.1760 & -140.3 & 成功 & 是 & -- \\
+ Andrén-6 & B--D & 0.0927 & 0.1458 & -130.0 & 成功 & 是 & $c$ \\
+ Andrén-7 & base & 0.1057 & 0.2429 & -109.9 & 成功 & 是 & -- \\
+ Andrén-7 & memory & 0.0753 & 0.1916 & -125.2 & 成功 & 是 & $e$ \\
+ Andrén-7 & B--D & 0.0846 & 0.1135 & -114.8 & 达限可用 & 是 & $c$ \\
+ WRHW & base & 0.1835 & 0.1534 & -319.4 & 成功 & 是 & -- \\
+ WRHW & memory & 0.1833 & 0.1536 & -317.3 & 成功 & 是 & -- \\
+ WRHW & B--D & 0.1861 & 0.1548 & -312.0 & 达限可用 & 是 & -- \\
+ TP & base & 0.1772 & 0.1030 & -319.3 & 达限可用 & 是 & $e$ \\
+ TP & memory & 0.1767 & 0.0893 & -317.5 & 成功 & 是 & $e$ \\
+ TP & B--D & 0.1777 & 0.0837 & -314.0 & 达限可用 & 是 & $m$ \\
+ WRGP & base & 0.2052 & 0.1862 & -265.7 & 达限可用 & 是 & -- \\
+ WRGP & memory & 0.2276 & 0.1926 & -245.1 & 达限可用 & 是 & $\theta$ \\
+ WRGP & B--D & 0.2281 & 0.1434 & -242.3 & 成功 & 是 & -- \\
+ Isle Royale & base & 0.1461 & 0.2283 & -217.3 & 达限可用 & 是 & -- \\
+ Isle Royale & memory & 0.1543 & 0.2812 & -208.1 & 成功 & 是 & -- \\
+ Isle Royale & B--D & 0.1503 & 0.2275 & -208.6 & 达限可用 & 是 & $q$ \\
+ Windermere North & base & 0.1655 & 1.5234 & -114.6 & 达限可用 & 是 & $e$ \\
+ Windermere North & memory & 0.1607 & 3.0392 & -113.6 & 达限可用 & 是 & -- \\
+ Windermere North & B--D & 0.1515 & 0.5392 & -114.5 & 达限可用 & 是 & $q$ \\
+ Windermere South & base & 0.1405 & 1.1560 & -126.4 & 达限可用 & 是 & $a,e$ \\
+ Windermere South & memory & 0.1389 & 1.3883 & -124.2 & 达限可用 & 是 & -- \\
+ Windermere South & B--D & 0.1390 & 2.3468 & -120.8 & 达限可用 & 是 & -- \\
+ Komi lynx--hare & base & 0.3064 & 0.5811 & -60.3 & 成功 & 是 & -- \\
+ Komi lynx--hare & memory & 0.2660 & 0.6085 & -66.1 & 达限可用 & 是 & $r,e$ \\
+ Komi lynx--hare & B--D & 0.2671 & 0.6089 & -62.2 & 成功 & 是 & $m$ \\
  \bottomrule
 \end{longtable}
 \end{landscape}
@@ -522,16 +577,21 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
   \toprule
   序列 & 留后验证最优 & AICc 最优\\
   \midrule
-  Lynx--hare & B--D & B--D\\
   GLERL & 三模型并列 & baseline\\
-  Andrén-1 至 5 & B--D & B--D\\
-  Andrén-6 & fear-memory & B--D\\
-  Andrén-7 & B--D & B--D\\
-  WRHW & B--D & fear-memory\\
-  TP & baseline & B--D\\
-  WRGP & fear-memory & fear-memory\\
+  Andrén-1 & fear-memory & baseline\\
+  Andrén-2 & B--D & baseline\\
+  Andrén-3 & fear-memory & baseline\\
+  Andrén-4 至 6 & B--D & baseline\\
+  Andrén-7 & B--D & fear-memory\\
+  WRHW & baseline & baseline\\
+  TP & B--D & baseline\\
+  WRGP & B--D & baseline\\
+  Isle Royale & B--D & baseline\\
+  Windermere North & B--D & baseline\\
+  Windermere South & baseline & baseline\\
+  Komi lynx--hare & baseline & fear-memory\\
   \midrule
-  汇总 & B--D 8；base 1；memory 2；并列 1 & B--D 9；base 1；memory 2\\
+  汇总 & B--D 9；base 3；memory 2；并列 1 & base 13；memory 2\\
   \bottomrule
  \end{tabular}
 \end{table}
@@ -545,71 +605,97 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
   \caption{Andrén-4：B--D}
  \end{subfigure}\hfill
  \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{calibration_bda/figures/11_timeserieslogmeans_TP_baseline.png}
-  \caption{TP：baseline 验证最优}
+  \imginclude[width=\textwidth]{calibration_bda/figures/09_andren_lynx_roedeer_data_7_fear_memory.png}
+  \caption{Andrén-7：memory 的 AICc 最优}
  \end{subfigure}\hfill
  \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{calibration_bda/figures/12_timeserieslogmeans_WRGP_fear_memory.png}
-  \caption{WRGP：fear-memory}
+  \imginclude[width=\textwidth]{calibration_bda/figures/14_windermere_south_pike_perch_baseline.png}
+  \caption{Windermere South：baseline 验证最优}
  \end{subfigure}
  \caption{代表性拟合说明，不同模型可在不同序列和标准下获胜。}
 \end{figure}
 
-\section{参数可辨识性与证据边界}
+\section{参数可辨识性的补充限制}
 
-\subsection{观测范围内的等效抑制}
+理论上，$\eta(k,v)=kv/(1+kv)$ 比裸参数 $k$ 更能反映给定捕食者密度下的抑制比例。但该换算的有效性仍依赖于 $k$ 已被可靠辨识。由于正文中的 profile 显示代表序列的 $k$ 存在宽区间、扫描边界触及或不连续区间，本文不进行基于点估计 $k$ 或 $\eta$ 的跨类群恐惧强度排名。
 
-\begin{table}[H]
- \centering
- \caption{各序列在观测捕食者中位数处的 $\eta=kv/(1+kv)$}
- \label{tab:eta-full}
- \small
- \begin{tabular}{llrrr}
-  \toprule
-  序列 & 类群 & $k$ & $v_{\mathrm{med}}$ & $\eta(v_{\mathrm{med}})$\\
-  \midrule
-  Lynx--hare & mammal & 0.00723887 & 0.100000 & 0.000723363\\
-  GLERL & zooplankton & 0.00401303 & 0.0132518 & 0.000053177\\
-  Andrén-1 & mammal & 0.246113 & 0.291667 & 0.0669752\\
-  Andrén-2 & mammal & 0.0396409 & 0.578125 & 0.0224040\\
-  Andrén-3 & mammal & 0.0687136 & 0.425926 & 0.0284347\\
-  Andrén-4 & mammal & 0.120000 & 0.257576 & 0.0299823\\
-  Andrén-5 & mammal & 0.000798173 & 0.338710 & 0.000270276\\
-  Andrén-6 & mammal & 0.00267876 & 0.538462 & 0.00144033\\
-  Andrén-7 & mammal & 0.000471542 & 0.504071 & 0.000237634\\
-  WRHW & fish & 0.0264661 & 0.0507831 & 0.00134223\\
-  TP & fish & 0.00684469 & 0.0776247 & 0.000531035\\
-  WRGP & fish & 0.0161543 & 0.00988619 & 0.000159678\\
-  \bottomrule
- \end{tabular}
-\end{table}
+\subsection{初始记忆与记忆衰减率的稳健性}
 
-按序列计算的类群中位数为：哺乳类 0.011922、鱼类 0.000531、浮游动物 0.000053。$\eta(v=5)$ 只代表脱离观测范围的理论外推，不用于核心跨系统结论。
+为检验固定 $M(0)=y(0)$ 与 $\delta=1$ 是否主导 fear-memory 的预测结果，本文进行两类补充分析。第一，在 $M(0)/y(0)\in[0,5]$ 上同时进行条件敏感性扫描和 profile：前者固定其余参数，后者在每个固定 $M(0)$ 下重新优化 $r,K,a,\theta,e,\mu,\phi$。第二，在 $\delta\in[0.01,10]$ 上固定每个 $\delta$ 并重新优化其余参数，同时报告对应记忆时间尺度 $1/\delta$、训练 profile 与连续多步留后 RMSE。
 
-\subsection{\texorpdfstring{真实 $k$ profile}{真实 k profile}}
+$M(0)$ profile 普遍较平：11/15 条序列的 95\% profile 集覆盖整个扫描网格，14/15 条序列的可接受集触及 $M(0)/y(0)=5$ 的上边界。这说明初始记忆的变化通常可由其他动力学参数补偿，支持在主比较中固定 $M(0)=y(0)$，但不能将该初始状态解释为由数据精确识别的生态量。
 
 \begin{figure}[H]
  \centering
  \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/k_profile_lynxhare.png}
-  \caption{Lynx--hare}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/m0_profile_isle_royale_wolf_moose_pre_2018.png}
+  \caption{Isle Royale}
  \end{subfigure}\hfill
  \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/k_profile_glerl_m110_zoop_1994-201.png}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/m0_profile_glerl_m110_zoop_1994-201.png}
   \caption{GLERL}
  \end{subfigure}\hfill
  \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/k_profile_timeserieslogmeans_TP.png}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/m0_profile_timeserieslogmeans_TP.png}
   \caption{TP}
  \end{subfigure}
- \caption{固定每个 $k$ 并重新优化其余参数得到的真实 profile。}
+ \caption{$M(0)/y(0)$ profile 的代表序列。蓝线为训练 RMSE，红线为留后 RMSE；宽而平坦的训练 profile 表明初始记忆弱可辨识。}
+ \label{fig:m0-profile-appendix}
 \end{figure}
 
-Lynx--hare 的 profile 最优点为 0.4367，95\% 区间约为 $[0.1517,0.4367]$ 且区间不连续；GLERL 与 TP 的区间均覆盖整个扫描边界 $[0.0001,0.5]$。这些结果说明 $k$ 的点估计不稳健，预测比较不能自动升级为参数机制识别。
+\begin{figure}[H]
+ \centering
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/delta_profile_isle_royale_wolf_moose_pre_2018.png}
+  \caption{Isle Royale}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/delta_profile_glerl_m110_zoop_1994-201.png}
+  \caption{GLERL}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/delta_profile_timeserieslogmeans_TP.png}
+  \caption{TP}
+ \end{subfigure}
+ \caption{$\delta$ profile 的代表序列。训练最优与留后最优时间尺度可能不同，说明按训练拟合识别记忆尺度与按预测误差选择记忆尺度并不等价。}
+ \label{fig:delta-profile-appendix}
+\end{figure}
+
+\begin{landscape}
+\begin{table}[H]
+ \centering
+ \caption{固定 $\delta=1$ 与探索性留后最优记忆尺度的比较}
+ \label{tab:delta-holdout}
+ \small
+ \begin{tabular}{lrrrrr}
+  \toprule
+  序列 & $\valrmse(\delta=1)$ & 留后最优 $\delta$ & $1/\delta$ & 最优 $\valrmse$ & 改善比例\\
+  \midrule
+  GLERL & 0.2963 & 0.0100 & 100.00 & 0.2963 & 0.0\%\\
+  Andrén-1 & 0.0652 & 0.2054 & 4.87 & 0.0580 & 11.0\%\\
+  Andrén-2 & 0.0833 & 0.3162 & 3.16 & 0.0738 & 11.5\%\\
+  Andrén-3 & 0.0739 & 1.0000 & 1.00 & 0.0739 & 0.0\%\\
+  Andrén-4 & 0.0655 & 0.0100 & 100.00 & 0.0613 & 6.4\%\\
+  Andrén-5 & 0.0529 & 1.1548 & 0.87 & 0.0524 & 1.0\%\\
+  Andrén-6 & 0.1749 & 0.2054 & 4.87 & 0.1744 & 0.3\%\\
+  Andrén-7 & 0.1912 & 1.0000 & 1.00 & 0.1912 & 0.0\%\\
+  WRHW & 0.1536 & 0.2054 & 4.87 & 0.1504 & 2.1\%\\
+  TP & 0.0893 & 4.2170 & 0.24 & 0.0832 & 6.8\%\\
+  WRGP & 0.1948 & 0.4870 & 2.05 & 0.1637 & 16.0\%\\
+  Isle Royale & 0.2812 & 0.0562 & 17.78 & 0.1184 & 57.9\%\\
+  Windermere North & 3.1668 & 10.0000 & 0.10 & 0.6490 & 79.5\%\\
+  Windermere South & 1.3890 & 0.3162 & 3.16 & 1.3788 & 0.7\%\\
+  Komi lynx--hare & 0.6084 & 1.7783 & 0.56 & 0.6012 & 1.2\%\\
+  \bottomrule
+ \end{tabular}
+\end{table}
+\end{landscape}
+
+在 15 条序列中，探索性选择其他 $\delta$ 后有 12 条留后 RMSE 数值下降，7 条改善至少 5\%，5 条改善至少 10\%，改善比例中位数为 2.1\%。因此，固定 $\delta=1$ 对总体模型比较结论影响有限，但少数序列可能包含不同记忆时间尺度的预测信号。由于最优 $\delta$ 使用留后段选择，表\,\ref{tab:delta-holdout} 不构成新的无偏验证，也不改变正文的模型胜负统计。
 
 \subsection{Holling 默认目标与探索性证据}
 
-Holling 默认平衡目标诊断中，12 条报告序列均未同时通过严格的稳定或联合周期判定，因此不存在合格的统一平衡目标。这并非数值失败：观测序列包含瞬态、环境噪声和代理指标，本就不应被强制解释为同一平衡点。即使构造目标，平衡关系也只能约束参数组合，存在结构不可辨识性。
+Holling 默认平衡目标诊断中，15 条报告序列均未同时通过严格的稳定或联合周期判定，因此不存在合格的统一平衡目标。这并非数值失败：观测序列包含瞬态、环境噪声和代理指标，本就不应被强制解释为同一平衡点。即使构造目标，平衡关系也只能约束参数组合，存在结构不可辨识性。
 
 Peacor 的 64 条记录仅为研究类型清单：TMIE 37、NCE 27。下图作为清单分布的补充展示，不解释为效应量分布。
 
@@ -621,7 +707,7 @@ Peacor 的 64 条记录仅为研究类型清单：TMIE 37、NCE 27。下图作�
 
 珊瑚和豆娘结果仅记录为探索性数据。珊瑚位置变量与风险方向的映射不足，豆娘处理汇总中的活动方向也不能直接映射为繁殖抑制参数；二者均不进入定量结论。
 
-\section{空间拓展}
+\section{未验证的空间理论拓展}
 
 在 B--D 恐惧模型中加入对角扩散矩阵 $D=\operatorname{diag}(d_1,d_2)$，对均匀正平衡点分析
 \[
@@ -653,6 +739,6 @@ Peacor 的 64 条记录仅为研究类型清单：TMIE 37、NCE 27。下图作�
  \end{tabular}
 \end{table}
 
-然而，当前显式 Euler 数值实验中的空间场变化仅约为 $10^{-14}$，未形成可见斑图。场图的色标会放大数值噪声，因此不展示，也不把线性窗口直接解释为已观察到的空间斑图。
+然而，当前显式 Euler 数值实验中的空间场变化仅约为 $10^{-14}$，未形成可见斑图。场图的色标会放大数值噪声，因此不展示，也不把线性窗口直接解释为已观察到的空间斑图。该部分与真实数据可辨识性主线联系有限，仅作为未验证的理论拓展保留。
 
 \end{document}
