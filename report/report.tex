@@ -176,7 +176,7 @@ $\phi\in[0,0.06]$ 的 31 个扫描情景均被尺度感知灭绝判定归为共�
 
 \subsection{真实数据的预测比较}
 
-表\,\ref{tab:wins} 汇总核心三模型（baseline、fear-memory、fear-instant）的预测结果。baseline 在 13 条序列上取得最低 AICc；fear-memory 与 fear-instant 各在部分序列的留后验证上优于 baseline，但无单一恐惧通道一致胜出。GLERL 的模型训练和验证 RMSE 相同，不能区分不同结构。该结果说明，短期留后预测改善与复杂度校正后的模型支持并不等价。
+表\,\ref{tab:wins} 汇总核心三模型（baseline、fear-memory、fear-instant）的预测结果。fear-memory 在 6 条序列的留后验证上单独最优，fear-instant 在 5 条上最优，baseline 在 3 条上最优；但 baseline 在 10 条序列上取得最低 AICc。GLERL 的三模型训练和验证 RMSE 相同，不能区分三种结构。该结果说明，短期留后预测改善与复杂度校正后的模型支持并不等价。
 
 \begin{table}[H]
  \centering
@@ -186,20 +186,19 @@ $\phi\in[0,0.06]$ 的 31 个扫描情景均被尺度感知灭绝判定归为共�
   \toprule
   标准 & baseline & fear-memory & fear-instant & 并列\\
   \midrule
-  训练归一化 RMSE 最优 & 5 & 5 & 4 & 1\\
-  留后验证归一化 RMSE 最优 & 5 & 3 & 4 & 3\\
-  AICc 最优 & 13 & 2 & 0 & 0\\
+  留后验证归一化 RMSE 最优 & 3 & 6 & 5 & 1\\
+  AICc 最优 & 10 & 1 & 4 & 0\\
   \bottomrule
  \end{tabular}
 \end{table}
 
-按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到全部六模型（新增 fear-saturating、fear-foraging、fear-handling）后，90 次拟合均可比较。留后验证单独最优的分布为：fear-instant 4 条、fear-handling 2 条、baseline 3 条、fear-memory 2 条、fear-saturating 1 条、fear-foraging 1 条，GLERL 六模型并列。该扩展仍不支持”某一种恐惧通道普遍正确”：不同序列由不同通道获胜，且预测胜出不能替代参数可辨识性证据。完整六模型胜负表见附录 D。
+按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到全部六模型（新增 fear-saturating、fear-foraging、fear-handling）后，90 次拟合均可比较。留后验证单独最优的分布为：fear-memory 5 条、baseline 3 条、fear-instant 3 条、fear-handling 2 条、fear-foraging 1 条，GLERL 六模型并列。AICc 最优分布为：baseline 8 条、fear-foraging 3 条、fear-instant 2 条、fear-memory 1 条、fear-saturating 1 条。该扩展仍不支持”某一种恐惧通道普遍正确”：不同序列由不同通道获胜，且预测胜出不能替代参数可辨识性证据。完整六模型胜负表见附录 D。
 
 Windermere 南北两湖盆的拟合结果值得单独讨论。该两序列的 baseline 与 fear-memory 留后验证 RMSE 分别为 1.52 和 3.04（北）与 1.16 和 1.39（南），在所有 15 条序列中显著偏高。数据的时间模式是诊断关键：两个湖盆的河鲈在训练段内从极低值持续爆发至数百 $\mathrm{kg}\cdot\mathrm{ha}^{-1}$，但在验证段却见顶回落；与此同时，狗鱼因刺网移除干预，整个观测期内密度均处于低位（3--10\,$\mathrm{kg}\cdot\mathrm{ha}^{-1}$）。Holling II 框架唯一能使猎物密度下降的机制是捕食者恢复——功能反应将猎物大量转化为捕食者增长，从而抑制猎物。但当捕食者被人为压制时，该机制被切断。优化器只能在训练段内寻找补偿：baseline 将转化效率 $e$ 压至下界 0.01，使捕食者与猎物动力学几乎解耦，猎物在验证段被预测为冲向 $K\approx 3600$，而实际猎物已从 300 降至 135；fear-memory 凭借 7 参数 3 方程的记忆结构在训练段取得最优猎物拟合（训练猎物 RMSE 0.049），但记忆项 $-r\phi M x$ 与恐惧抑制项均只能减缓增长而不能产生下降，导致验证段外推完全失效。相比之下，fear-instant、fear-handling 等不含记忆滞后的恐惧参数化方式，提供了不依赖捕食者恢复即可从高密度自然回落的结构灵活性，验证 RMSE 分别降至 0.54 和 0.42。该案例分析表明，当数据包含外部人为移除干预时，封闭 ODE 模型的参数估计会因未建模过程而畸变，此类序列的拟合误差不能完全归因于模型结构的生态合理性。
 
 \begin{figure}[H]
   \centering
-  \imginclude[width=0.92\textwidth]{seven_model_real_fits/report_protocol_seven_model_validation_heatmap.png}
+  \imginclude[width=0.92\textwidth]{seven_model_real_fits/validation_rmse_heatmap_six_model.png}
   \caption{15 条正式序列的六模型连续多步留后验证 RMSE。颜色表示相对该序列最佳可用模型的误差比。}
   \label{fig:seven-model-heatmap}
 \end{figure}
