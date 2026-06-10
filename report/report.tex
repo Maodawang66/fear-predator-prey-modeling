@@ -243,7 +243,7 @@ $M(0)/y(0)$ profile 在 $[0,5]$ 上普遍平坦，14/15 条序列的 95\% profil
 
 数值实验支持”机制路径决定定性方向”，数据拟合支持”含恐惧模型能够改善部分序列的留后预测”，但二者都不足以证明真实系统存在相应恐惧机制。主要原因有三点：一是 15 条序列中 Andrén 七区、Killifish 三站和 Windermere 两湖盆存在研究内重复，不能视为 15 个独立生态证据；二是 AICc 在 13/15 条序列上支持较简单的 baseline，与含恐惧模型的留后预测优势形成明显分歧；三是 $e,\mu,\phi$ 等参数存在触边或宽 profile，且 Windermere 序列中狗鱼的刺网移除属于外部人为干预，破坏了 ODE 模型的封闭系统假设。当捕食者被人为压制而猎物先爆发后自然回落时，Holling II 框架只能通过参数畸变（baseline 的 $e\rightarrow 0$）或过拟合（fear-memory）来匹配训练段，导致留后预测完全失效。预测能力与机制识别必须分开解释。
 
-记忆参数的补充结果同样需要遵守这一证据边界。固定 $\delta=1$ 的主比较使用预先统一的时间尺度；附录中所谓“留后最优 $\delta$”是在同一留后段上比较多个候选值后得到，只能作为敏感性与假设生成分析，不能再视为无偏留后验证，也不用于重新计算三模型胜负。
+记忆参数的补充结果同样需要遵守这一证据边界。固定 $\delta=1$ 的主比较使用预先统一的时间尺度；附录中所谓“留后最优 $\delta$”是在同一留后段上比较多个候选值后得到，只能作为敏感性与假设生成分析，不能再视为无偏留后验证，也不用于重新计算模型胜负。
 
 \section{结论}
 
@@ -315,7 +315,7 @@ Andrén 七区共享研究设计、物种和时间背景；Killifish 三站共�
 
 \subsection{平衡点与残差校验}
 
-B--D 正平衡点先由 $dv/dt=0$ 降维求根，再将候选点代回完整二维右端项。仅当状态为正且无穷范数残差小于尺度化阈值时，才计算 Jacobian、特征值和 Hopf 判断。Holling 默认平衡目标的诊断见附录 E。
+Holling 默认平衡目标的诊断见附录 E。
 
 \subsection{20\% 等效恐惧校准}
 
@@ -333,14 +333,11 @@ B--D 正平衡点先由 $dv/dt=0$ 降维求根，再将候选点代回完整二�
   fear-saturating & Holling 增长项 & $\phi=0.4,\ h=20.4172$\\
   fear-foraging & Holling 捕食率 & $\psi=0.0122446$\\
   fear-handling & Holling 捕食率 & $\psi=0.129848$\\
-  B--D fear & B--D 繁殖因子 & $k=0.0191289$\\
   \bottomrule
  \end{tabular}
 \end{table}
 
-Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。
-
-B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制均达到 0.20 的目标抑制。
+Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。数值校验中五种机制均达到 0.20 的目标抑制。
 
 \section{完整机制与参数实验}
 
@@ -359,7 +356,6 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
   saturating reproduction & $+0.0000\%$ & $-18.0196\%$ & 共存 & 是\\
   foraging suppression & $+35.1503\%$ & $+23.2571\%$ & 共存 & 是\\
   handling extension & $+60.1151\%$ & $+36.0179\%$ & 共存 & 是\\
-  B--D fear & $-29.5184\%$ & $-31.7770\%$ & 共存 & 是\\
   \bottomrule
  \end{tabular}
 \end{table}
@@ -379,15 +375,8 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
 
 \begin{figure}[H]
  \centering
- \begin{subfigure}{0.48\textwidth}
-  \imginclude[width=\textwidth]{08_literature_mechanisms_timeseries.png}
-  \caption{等效强度机制时间序列}
- \end{subfigure}\hfill
- \begin{subfigure}{0.48\textwidth}
-  \imginclude[width=\textwidth]{11_bda_fear_k0_vs_k.png}
-  \caption{B--D 的 $k=0$ 与 $k>0$}
- \end{subfigure}
- \caption{机制与 B--D 补充对照。默认参数机制实验仅作为补充，不用于公平机制胜负。}
+ \imginclude[width=0.65\textwidth]{08_literature_mechanisms_timeseries.png}
+ \caption{等效强度下五种恐惧机制的时间序列。默认参数机制实验仅作为补充，不用于公平机制胜负。}
 \end{figure}
 
 \subsection{扫描摘要}
@@ -401,52 +390,20 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
   \midrule
   $\phi$ & $0$--$0.06$，31 点 & 31 共存；20 收敛，11 未收敛 & 猎物均值约 20.02；捕食者均值从 20.42 降至 8.06\\
   $\delta$ & $0.2$--$4.0$，20 点 & 16 收敛，4 未收敛 & 猎物均值 20.02--24.06；捕食者均值 3.96--17.14\\
-  $k$ & $0$--$0.18$，37 点 & 全部共存 & 密度持续压缩；$\max\operatorname{Re}\lambda<0$ 且非单调\\
   \bottomrule
  \end{tabular}
 \end{table}
-
-\begin{table}[H]
- \centering
- \caption{$k$ 扫描代表点}
- \begin{tabular}{rrrrl}
-  \toprule
-  $k$ & $\bar u$ & $\bar v$ & $\max\operatorname{Re}\lambda$ & 稳定性\\
-  \midrule
-  0.00 & 11.407 & 13.069 & $-0.6280$ & stable node\\
-  0.03 & 7.093 & 7.748 & $-0.6166$ & stable focus\\
-  0.06 & 5.578 & 5.882 & $-0.5246$ & stable focus\\
-  0.09 & 4.775 & 4.938 & $-0.4718$ & stable focus\\
-  0.12 & 4.223 & 4.320 & $-0.4360$ & stable focus\\
-  0.15 & 3.817 & 3.869 & $-0.4094$ & stable focus\\
-  0.18 & 3.509 & 3.325 & $-0.3886$ & stable focus\\
-  \bottomrule
- \end{tabular}
-\end{table}
-
-\begin{figure}[H]
-  \centering
-  \imginclude[width=0.78\textwidth]{k_damping/01_eigenvalue_vs_k.png}
-  \caption{$k$ 扫描下 B--D 正平衡点最大特征值实部。全程为负但变化非单调，未出现 Hopf 分岔。该图仅描述给定理论参数下的模型内部性质。}
-  \label{fig:eigen-k}
-\end{figure}
-
-对式\,\eqref{eq:bda} 的正平衡点计算 Jacobian $J$。二维系统局部渐近稳定要求
-\[
- \operatorname{tr}(J)<0,\qquad \det(J)>0.
-\]
-扫描中 $\max\operatorname{Re}\lambda(J)$ 始终为负，从 $k=0$ 的 $-0.628$ 先下降，随后上升至 $k=0.18$ 的 $-0.389$，未出现 Hopf 型稳定性转换。振幅与峰值衰减指标主要处于 $10^{-7}$ 数值噪声量级，不作为核心证据。
 
 \section{完整拟合结果}
 
-\subsection{45 次拟合逐行结果}
+\subsection{30 次拟合逐行结果}
 
-表\,\ref{tab:fit-full} 列出全部 45 次拟合。三模型分别拟合 6、7、8 个动力学参数，全部结果均达到成功或达限可用状态。触边参数尤其是 $e$、$K$、$\phi$ 和 B--D 参数仍提示点估计存在边界敏感性。
+表\,\ref{tab:fit-full} 列出全部 30 次拟合。两模型分别拟合 6、7 个动力学参数，全部结果均达到成功或达限可用状态。触边参数尤其是 $e$、$K$、$\phi$ 仍提示点估计存在边界敏感性。
 
 \begin{landscape}
 \scriptsize
 \begin{longtable}{llrrrlll}
- \caption{15 条序列 $\times$ 3 模型拟合。训练与验证 RMSE 均为归一化总 RMSE；45 次拟合均可进入比较。}\label{tab:fit-full}\\
+ \caption{15 条序列 $\times$ 2 模型拟合。训练与验证 RMSE 均为归一化总 RMSE；30 次拟合均可进入比较。}\label{tab:fit-full}\\
  \toprule
  序列 & 模型 & $\trainrmse$ & $\valrmse$ & AICc & 优化状态 & 可比较 & 触边参数\\
  \midrule
@@ -457,49 +414,34 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
  \endhead
  GLERL & base & 0.1955 & 0.2963 & -901.8 & 成功 & 是 & -- \\
  GLERL & memory & 0.1955 & 0.2963 & -899.7 & 成功 & 是 & -- \\
- GLERL & B--D & 0.1955 & 0.2963 & -897.6 & 成功 & 是 & -- \\
  Andrén-1 & base & 0.0601 & 0.0702 & -199.0 & 成功 & 是 & $e$ \\
  Andrén-1 & memory & 0.0596 & 0.0652 & -196.6 & 成功 & 是 & -- \\
- Andrén-1 & B--D & 0.0647 & 0.0665 & -187.2 & 成功 & 是 & $q$ \\
  Andrén-2 & base & 0.1031 & 0.0968 & -157.9 & 成功 & 是 & $e$ \\
  Andrén-2 & memory & 0.1011 & 0.0833 & -156.5 & 达限可用 & 是 & $e,\phi$ \\
- Andrén-2 & B--D & 0.1019 & 0.0657 & -152.6 & 成功 & 是 & $c$ \\
  Andrén-3 & base & 0.1130 & 0.0755 & -151.0 & 成功 & 是 & $K$ \\
  Andrén-3 & memory & 0.1131 & 0.0734 & -147.9 & 成功 & 是 & $K$ \\
- Andrén-3 & B--D & 0.1149 & 0.0904 & -143.5 & 达限可用 & 是 & -- \\
  Andrén-4 & base & 0.0547 & 0.0652 & -194.3 & 达限可用 & 是 & $K$ \\
  Andrén-4 & memory & 0.0547 & 0.0656 & -191.3 & 成功 & 是 & $K$ \\
- Andrén-4 & B--D & 0.0508 & 0.0331 & -193.3 & 达限可用 & 是 & $c$ \\
  Andrén-5 & base & 0.0618 & 0.0602 & -185.5 & 达限可用 & 是 & $K,e$ \\
  Andrén-5 & memory & 0.0641 & 0.0530 & -179.8 & 达限可用 & 是 & $K,\phi$ \\
- Andrén-5 & B--D & 0.0650 & 0.0346 & -175.4 & 达限可用 & 是 & $c$ \\
  Andrén-6 & base & 0.0828 & 0.1810 & -144.0 & 达限可用 & 是 & $K$ \\
  Andrén-6 & memory & 0.0834 & 0.1760 & -140.3 & 成功 & 是 & -- \\
- Andrén-6 & B--D & 0.0927 & 0.1458 & -130.0 & 成功 & 是 & $c$ \\
  Andrén-7 & base & 0.1057 & 0.2429 & -109.9 & 成功 & 是 & -- \\
  Andrén-7 & memory & 0.0753 & 0.1916 & -125.2 & 成功 & 是 & $e$ \\
- Andrén-7 & B--D & 0.0846 & 0.1135 & -114.8 & 达限可用 & 是 & $c$ \\
  WRHW & base & 0.1835 & 0.1534 & -319.4 & 成功 & 是 & -- \\
  WRHW & memory & 0.1833 & 0.1536 & -317.3 & 成功 & 是 & -- \\
- WRHW & B--D & 0.1861 & 0.1548 & -312.0 & 达限可用 & 是 & -- \\
  TP & base & 0.1772 & 0.1030 & -319.3 & 达限可用 & 是 & $e$ \\
  TP & memory & 0.1767 & 0.0893 & -317.5 & 成功 & 是 & $e$ \\
- TP & B--D & 0.1777 & 0.0837 & -314.0 & 达限可用 & 是 & $m$ \\
  WRGP & base & 0.2052 & 0.1862 & -265.7 & 达限可用 & 是 & -- \\
  WRGP & memory & 0.2276 & 0.1926 & -245.1 & 达限可用 & 是 & $\theta$ \\
- WRGP & B--D & 0.2281 & 0.1434 & -242.3 & 成功 & 是 & -- \\
  Isle Royale & base & 0.1461 & 0.2283 & -217.3 & 达限可用 & 是 & -- \\
  Isle Royale & memory & 0.1543 & 0.2812 & -208.1 & 成功 & 是 & -- \\
- Isle Royale & B--D & 0.1503 & 0.2275 & -208.6 & 达限可用 & 是 & $q$ \\
  Windermere North & base & 0.1655 & 1.5234 & -114.6 & 达限可用 & 是 & $e$ \\
  Windermere North & memory & 0.1607 & 3.0392 & -113.6 & 达限可用 & 是 & -- \\
- Windermere North & B--D & 0.1515 & 0.5392 & -114.5 & 达限可用 & 是 & $q$ \\
  Windermere South & base & 0.1405 & 1.1560 & -126.4 & 达限可用 & 是 & $a,e$ \\
  Windermere South & memory & 0.1389 & 1.3883 & -124.2 & 达限可用 & 是 & -- \\
- Windermere South & B--D & 0.1390 & 2.3468 & -120.8 & 达限可用 & 是 & -- \\
  Komi lynx--hare & base & 0.3064 & 0.5811 & -60.3 & 成功 & 是 & -- \\
  Komi lynx--hare & memory & 0.2660 & 0.6085 & -66.1 & 达限可用 & 是 & $r,e$ \\
- Komi lynx--hare & B--D & 0.2671 & 0.6089 & -62.2 & 成功 & 是 & $m$ \\
  \bottomrule
 \end{longtable}
 \end{landscape}
@@ -513,21 +455,23 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
   \toprule
   序列 & 留后验证最优 & AICc 最优\\
   \midrule
-  GLERL & 三模型并列 & baseline\\
+  GLERL & 两模型并列 & baseline\\
   Andrén-1 & fear-memory & baseline\\
-  Andrén-2 & B--D & baseline\\
+  Andrén-2 & fear-memory & baseline\\
   Andrén-3 & fear-memory & baseline\\
-  Andrén-4 至 6 & B--D & baseline\\
-  Andrén-7 & B--D & fear-memory\\
+  Andrén-4 & baseline & baseline\\
+  Andrén-5 & fear-memory & baseline\\
+  Andrén-6 & fear-memory & baseline\\
+  Andrén-7 & fear-memory & fear-memory\\
   WRHW & baseline & baseline\\
-  TP & B--D & baseline\\
-  WRGP & B--D & baseline\\
-  Isle Royale & B--D & baseline\\
-  Windermere North & B--D & baseline\\
+  TP & fear-memory & baseline\\
+  WRGP & baseline & baseline\\
+  Isle Royale & baseline & baseline\\
+  Windermere North & baseline & baseline\\
   Windermere South & baseline & baseline\\
   Komi lynx--hare & baseline & fear-memory\\
   \midrule
-  汇总 & B--D 9；base 3；memory 2；并列 1 & base 13；memory 2\\
+  汇总 & base 7；memory 7；并列 1 & base 13；memory 2\\
   \bottomrule
  \end{tabular}
 \end{table}
@@ -536,15 +480,11 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
 
 \begin{figure}[H]
  \centering
- \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{calibration_bda/figures/06_andren_lynx_roedeer_data_4_bda_fear.png}
-  \caption{Andrén-4：B--D}
- \end{subfigure}\hfill
- \begin{subfigure}{0.32\textwidth}
+ \begin{subfigure}{0.48\textwidth}
   \imginclude[width=\textwidth]{calibration_bda/figures/09_andren_lynx_roedeer_data_7_fear_memory.png}
   \caption{Andrén-7：memory 的 AICc 最优}
  \end{subfigure}\hfill
- \begin{subfigure}{0.32\textwidth}
+ \begin{subfigure}{0.48\textwidth}
   \imginclude[width=\textwidth]{calibration_bda/figures/14_windermere_south_pike_perch_baseline.png}
   \caption{Windermere South：baseline 验证最优}
  \end{subfigure}
@@ -552,8 +492,6 @@ B--D 的 $k=0$ 正平衡点为 $(11.4075,13.0692)$。数值校验中六种机制
 \end{figure}
 
 \section{参数可辨识性的补充限制}
-
-理论上，$\eta(k,v)=kv/(1+kv)$ 比裸参数 $k$ 更能反映给定捕食者密度下的抑制比例。但该换算的有效性仍依赖于 $k$ 已被可靠辨识。由于正文中的 profile 显示代表序列的 $k$ 存在宽区间、扫描边界触及或不连续区间，本文不进行基于点估计 $k$ 或 $\eta$ 的跨类群恐惧强度排名。
 
 \subsection{初始记忆与记忆衰减率的稳健性}
 
@@ -642,39 +580,5 @@ Peacor 的 64 条记录仅为研究类型清单：TMIE 37、NCE 27。下图作�
 \end{figure}
 
 珊瑚和豆娘结果仅记录为探索性数据。珊瑚位置变量与风险方向的映射不足，豆娘处理汇总中的活动方向也不能直接映射为繁殖抑制参数；二者均不进入定量结论。
-
-\section{未验证的空间理论拓展}
-
-在 B--D 恐惧模型中加入对角扩散矩阵 $D=\operatorname{diag}(d_1,d_2)$，对均匀正平衡点分析
-\[
- \det\!\left(\lambda I-J+\kappa^2D\right)=0.
-\]
-默认参数下数值正平衡点约为 $(4.9758,5.1369)$，$\operatorname{tr}(J)=-0.9041$、$\det(J)=0.5876$。取 $d_1=1$ 时，线性扫描显示 $d_2\leq0.10$ 存在正的最大增长率，而 $d_2\geq0.12$ 在扫描波数内为负；估计边界约为 $d_2=0.1113$。
-
-\begin{figure}[H]
- \centering
- \imginclude[width=0.80\textwidth]{pde2d/turing_stability_d2_a01.png}
- \caption{B--D 恐惧模型的 Turing 线性稳定性曲线。}
-\end{figure}
-
-\begin{table}[H]
- \centering
- \caption{Turing 线性稳定性代表结果}
- \begin{tabular}{rrrl}
-  \toprule
-  $d_2$ & $\max_\kappa\operatorname{Re}\lambda$ & 最大波数 & 线性 Turing 窗口\\
-  \midrule
-  0.02 & 1.1028 & 3.4409 & 是\\
-  0.05 & 0.4426 & 2.2056 & 是\\
-  0.08 & 0.1781 & 1.7654 & 是\\
-  0.10 & 0.0610 & 1.5954 & 是\\
-  0.12 & -0.0346 & 1.4704 & 否\\
-  0.18 & -0.2869 & 1.2303 & 否\\
-  0.20 & -0.4520 & 0 & 否\\
-  \bottomrule
- \end{tabular}
-\end{table}
-
-然而，当前显式 Euler 数值实验中的空间场变化仅约为 $10^{-14}$，未形成可见斑图。场图的色标会放大数值噪声，因此不展示，也不把线性窗口直接解释为已观察到的空间斑图。该部分与真实数据可辨识性主线联系有限，仅作为未验证的理论拓展保留。
 
 \end{document}
