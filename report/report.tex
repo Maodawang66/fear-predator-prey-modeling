@@ -23,7 +23,7 @@
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 \emergencystretch=2em
 \newcommand{\imginclude}[2][]{\includegraphics[#1]{results/#2}}
-\newcommand{\modeltrio}{\texttt{baseline}、\texttt{fear\_memory} 与 \texttt{bda\_fear}}
+\newcommand{\modeltrio}{\texttt{baseline} 与 \texttt{fear\_memory}}
 \newcommand{\trainrmse}{\mathrm{RMSE}_{\mathrm{train}}}
 \newcommand{\valrmse}{\mathrm{RMSE}_{\mathrm{val}}}
 
@@ -70,12 +70,6 @@ Lotka--Volterra 模型奠定了捕食者--猎物动力学基础，逻辑斯蒂�
 \[
   H(x,y)=\frac{axy}{1+\theta x}.
 \]
-B--D 体系使用 $u(t),v(t)$，其功能反应分母 $1+qu+v$ 同时描述猎物饱和和捕食者干扰。B--D 恐惧因子为
-\[
-  f(k,v)=\frac{1}{1+kv},\qquad
-  \eta(k,v)=1-f(k,v)=\frac{kv}{1+kv}.
-\]
-由于 $\eta$ 同时依赖 $k$ 和捕食者尺度 $v$，跨系统直接比较裸 $k$ 没有明确生态含义；而当 $k$ 本身不可辨识时，由其计算的 $\eta$ 同样不能用于可靠的跨系统排序。
 
 \subsection{模型比较指标}
 
@@ -110,37 +104,17 @@ B--D 体系使用 $u(t),v(t)$，其功能反应分母 $1+qu+v$ 同时描述猎�
 \end{equation}
 指数核通过线性链转化为状态 $M$；稳态时 $M^*=y^*/\delta$。$\delta$ 越大表示记忆衰减越快。
 
-\subsection{扩展与竞争模型}
+\subsection{扩展恐惧机制}
 
-除核心模型外，本文还使用瞬时繁殖抑制、饱和繁殖抑制、觅食抑制和处理时间延长模型检验机制路径依赖性，并使用下述 B--D 恐惧模型作为高灵活度竞争模型：
+除核心 fear-memory 模型外，本文还引入四种 Holling II 框架下的替代恐惧机制以检验机制路径依赖性：瞬时繁殖抑制（fear-instant）、饱和繁殖抑制（fear-saturating）、觅食抑制（fear-foraging）和处理时间延长（fear-handling）。各机制的方程形式见附录 B。
 
-\paragraph{B--D 恐惧模型}
-\begin{equation}
-\begin{aligned}
- \frac{du}{dt}&=\frac{ru}{1+kv}-du-au^2-\frac{puv}{1+qu+v},\\
- \frac{dv}{dt}&=v\left(-m+\frac{cpu}{1+qu+v}\right).
-\end{aligned}
-\label{eq:bda}
-\end{equation}
-当 $k=0$ 时得到同一体系的无恐惧基线。
+\subsection{五种机制与公平比较}
 
-B--D 模型包含较多可调参数，不同参数组合可能产生相近轨迹。因此，本文不将其拟合所得 $k$ 直接解释为真实恐惧强度，而通过固定每个 $k$ 后重新优化其余参数的 profile 分析检验可辨识性。它在本文中的作用是提供机制路径对照，并展示复杂模型获得较低误差时可能伴随的参数补偿风险。
-
-\subsection{六种机制与公平比较}
-
-比较时不把 Holling II 与 B--D 的绝对密度直接相减，而是计算相对各自无恐惧基线的长期均值和相对振幅变化。
-
-所有恐惧机制在各自无恐惧正平衡点处校准为 20\% 抑制：繁殖路径匹配增长项抑制，觅食与处理时间路径匹配捕食率抑制，B--D 路径匹配 $1/(1+kv)$。校准参数与规则见附录 B。
+所有恐惧机制在各自无恐惧正平衡点处校准为 20\% 抑制：繁殖路径匹配增长项抑制，觅食与处理时间路径匹配捕食率抑制。校准参数与规则见附录 B。
 
 \subsection{理论、数值与诊断方法}
 
 ODE 使用 \texttt{solve\_ivp} 的 RK45 积分，并线性插值到均匀网格。长期指标来自末尾 20\% 时间窗；若相邻尾窗的均值、振幅或漂移相对变化超过 1\%，则延长积分，最多延长三次。灭绝判定使用相对系统尺度的阈值，并要求尾段持续低于阈值且无明确恢复。
-
-B--D 正平衡点由 $dv/dt=0$ 降维求根。由
-\[
- u=\lambda(1+v),\qquad \lambda=\frac{m}{cp-mq},
-\]
-代入猎物人均增长方程求正根，并在计算 Jacobian 与特征值前检查原始二维右端项残差。
 
 \subsection{数据拟合与证据过滤}
 
@@ -150,12 +124,10 @@ B--D 正平衡点由 $dv/dt=0$ 降维求根。由
  \item 比较训练归一化 RMSE；
  \item 比较连续多步留后验证 RMSE；
  \item 比较统一归一化残差下的 AICc；
- \item 检查参数触边和 $k$ profile。
+ \item 检查参数触边。
 \end{enumerate}
 
-baseline 逐序列拟合 $r,K,a,\theta,e,\mu$，fear-memory 拟合 $r,K,a,\theta,e,\mu,\phi$ 并固定 $\delta=1$，B--D 拟合其 8 个动力学参数；初始状态均取首条观测，不作为拟合参数。对 fear-memory 进一步令 $M(0)=y(0)$：这表示初始记忆与首个可观测捕食压力一致，并避免引入额外的弱可辨识初始状态。固定 $\delta=1$ 则提供统一的记忆时间尺度，避免在短序列中继续增加与 $\phi$ 等参数相互补偿的自由度。三模型均使用固定种子 $0,1,2$ 的差分进化，选择最低可用目标值后进行一次有界局部精修。因各序列时间尺度和观测含义不同，$e,\mu$ 点估计仅用于单序列轨迹拟合，不直接进行跨系统生态比较。
-
-profile 在每个固定 $k$ 下重新优化其余参数。当 profile 在较宽 $k$ 范围内基本平坦、95\% 区间触及扫描边界，或可接受区间不连续时，本文认为 $k$ 缺乏可靠可辨识性。
+baseline 逐序列拟合 $r,K,a,\theta,e,\mu$，fear-memory 拟合 $r,K,a,\theta,e,\mu,\phi$ 并固定 $\delta=1$；初始状态均取首条观测，不作为拟合参数。对 fear-memory 进一步令 $M(0)=y(0)$：这表示初始记忆与首个可观测捕食压力一致，并避免引入额外的弱可辨识初始状态。固定 $\delta=1$ 则提供统一的记忆时间尺度，避免在短序列中继续增加与 $\phi$ 等参数相互补偿的自由度。两模型均使用固定种子 $0,1,2$ 的差分进化，选择最低可用目标值后进行一次有界局部精修。因各序列时间尺度和观测含义不同，$e,\mu$ 点估计仅用于单序列轨迹拟合，不直接进行跨系统生态比较。
 
 为检验上述记忆设定是否主导结果，本文还对 $M(0)$ 与 $\delta$ 进行补充 profile。$M(0)$ 的变化通常可被其余参数补偿，14/15 条序列的 95\% profile 集触及 $M(0)/y(0)=5$ 的扫描上界。若在留后段上探索性选择最优 $\delta$，相对固定 $\delta=1$ 的验证 RMSE 改善中位数约为 2.1\%；Windermere 北湖盆与 Isle Royale 的改善较大，因此不能声称 $\delta$ 对所有序列均不重要。完整结果见附录 E。
 
@@ -236,14 +208,14 @@ B--D 的 $k$ 扫描显示共存密度持续压缩：$k=0$ 时 $(\bar u,\bar v)\a
  \end{tabular}
 \end{table}
 
-按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到七模型后，105/105 次拟合均可比较。留后验证单独最优为 B--D 6 条、fear-instant 3 条、baseline 2 条、fear-memory 2 条、fear-handling 1 条，GLERL 七模型完全并列。该扩展仍不支持”某一种恐惧通道普遍正确”：不同序列由不同通道获胜，且预测胜出不能替代参数可辨识性证据。
+按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到六模型后，105/105 次拟合均可比较。留后验证单独最优为 B--D 6 条、fear-instant 3 条、baseline 2 条、fear-memory 2 条、fear-handling 1 条，GLERL 六模型完全并列。该扩展仍不支持”某一种恐惧通道普遍正确”：不同序列由不同通道获胜，且预测胜出不能替代参数可辨识性证据。
 
 Windermere 南北两湖盆的拟合结果值得单独讨论。该两序列的 baseline 与 fear-memory 留后验证 RMSE 分别为 1.52 和 3.04（北）与 1.16 和 1.39（南），在所有 15 条序列中显著偏高。数据的时间模式是诊断关键：两个湖盆的河鲈在训练段内从极低值持续爆发至数百 $\mathrm{kg}\cdot\mathrm{ha}^{-1}$，但在验证段却见顶回落；与此同时，狗鱼因刺网移除干预，整个观测期内密度均处于低位（3--10\,$\mathrm{kg}\cdot\mathrm{ha}^{-1}$）。Holling II 框架唯一能使猎物密度下降的机制是捕食者恢复——功能反应将猎物大量转化为捕食者增长，从而抑制猎物。但当捕食者被人为压制时，该机制被切断。优化器只能在训练段内寻找补偿：baseline 将转化效率 $e$ 压至下界 0.01，使捕食者与猎物动力学几乎解耦，猎物在验证段被预测为冲向 $K\approx 3600$，而实际猎物已从 300 降至 135；fear-memory 凭借 7 参数 3 方程的记忆结构在训练段取得最优猎物拟合（训练猎物 RMSE 0.049），但记忆项 $-r\phi M x$ 与恐惧抑制项均只能减缓增长而不能产生下降，导致验证段外推完全失效。相比之下，B--D 模型的 $-au^2$ 种内竞争项以及 fear-instant、fear-saturating 等不含记忆滞后的恐惧参数化方式，提供了不依赖捕食者恢复即可从高密度自然回落的结构灵活性，验证 RMSE 分别降至 0.54 和 0.42。该案例分析表明，当数据包含外部人为移除干预时，封闭 ODE 模型的参数估计会因未建模过程而畸变，此类序列的拟合误差不能完全归因于模型结构的生态合理性。
 
 \begin{figure}[H]
   \centering
   \imginclude[width=0.92\textwidth]{seven_model_real_fits/report_protocol_seven_model_validation_heatmap.png}
-  \caption{15 条正式序列的七模型连续多步留后验证 RMSE。颜色表示相对该序列最佳可用模型的误差比。}
+  \caption{15 条正式序列的六模型连续多步留后验证 RMSE。颜色表示相对该序列最佳可用模型的误差比。}
   \label{fig:seven-model-heatmap}
 \end{figure}
 
@@ -314,7 +286,7 @@ Isle Royale、GLERL 与 TP 的 95\% 置信集均覆盖整个扫描边界 $[0.000
  \item 恐惧效应具有机制路径依赖性。等效 20\% 抑制下六种机制均共存，但种群变化方向不同。
  \item 记忆模型的 $\phi$ 扫描 31/31 共存，其中 11 个情景未通过长期收敛诊断，不能把有限积分结果误写为稳定平衡。
  \item B--D 在 9/15 条序列的留后验证上单独最优，但 AICc 未支持 B--D，baseline 获 13/15；预测优势与复杂度校正后的支持并不一致。
- \item 七模型扩展中不同序列由不同恐惧通道胜出，不能据此认定某一种恐惧机制普遍正确。
+ \item 六模型扩展中不同序列由不同恐惧通道胜出，不能据此认定某一种恐惧机制普遍正确。
  \item 因此，预测误差降低只能支持模型的预测能力，不能单独证明恐惧机制存在，也不能用于估计或比较真实恐惧强度。
  \item 当数据包含刺网移除等外部人为干预时，封闭 ODE 模型被迫通过参数畸变来补偿未建模的过程（如 Windermere 序列中 baseline 的转化效率 $e$ 被压至下界，fear-memory 的过拟合）。此类序列的预测误差不能完全归因于模型结构的生态合理性，参数估计也不应被解读为真实生态速率。
 \end{enumerate}
