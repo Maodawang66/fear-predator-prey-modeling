@@ -141,10 +141,6 @@ baseline 逐序列拟合 $r,K,a,\theta,e,\mu$，fear-memory 拟合 $r,K,a,\theta
 \]
 因此 $x^*$ 主要由捕食与死亡参数决定。记忆稳态满足 $M^*=y^*/\delta$，恐惧通过降低猎物净增长改变 $y^*$。这解释了 $\phi$ 扫描中猎物长期均值近似不变、捕食者均值随 $\phi$ 下降的现象，但数值结论仍需收敛诊断支持。
 
-\subsection{B--D 理论扩展的内部性质}
-
-在给定理论参数下，B--D 模型的 $k$ 增大使正平衡共存密度下降；局部稳定性影响则非单调，不能概括为普遍“稳定化”。这一结果仅说明模型内部性质，不代表真实数据识别出了相应的 $k$。Jacobian、特征值和完整局部稳定性扫描移至附录 C。
-
 \section{实验与讨论}
 
 \subsection{记忆恐惧与参数扫描}
@@ -169,7 +165,7 @@ $\phi\in[0,0.06]$ 的 31 个扫描情景均被尺度感知灭绝判定归为共�
 
 \subsection{机制路径依赖性}
 
-在参考正平衡点处校准为相同 20\% 抑制后，六种恐惧机制均保持共存，但长期均值方向明显不同。三种繁殖抑制路径使捕食者均值下降约 16.7\%--18.0\%，猎物均值基本不变；觅食抑制与处理时间延长同时提高猎物和捕食者均值；B--D 恐惧使两者均下降约 30\%。这说明“恐惧增加或减少种群”没有脱离机制路径的统一答案。
+在参考正平衡点处校准为相同 20\% 抑制后，五种恐惧机制均保持共存，但长期均值方向明显不同。三种繁殖抑制路径使捕食者均值下降约 16.7\%--18.0\%，猎物均值基本不变；觅食抑制与处理时间延长同时提高猎物和捕食者均值。这说明”恐惧增加或减少种群”没有脱离机制路径的统一答案。
 
 \begin{figure}[H]
   \centering
@@ -178,39 +174,28 @@ $\phi\in[0,0.06]$ 的 31 个扫描情景均被尺度感知灭绝判定归为共�
   \label{fig:mechanisms}
 \end{figure}
 
-\subsection{B--D 理论扩展：共存密度压缩}
-
-B--D 的 $k$ 扫描显示共存密度持续压缩：$k=0$ 时 $(\bar u,\bar v)\approx(11.41,13.07)$，$k=0.18$ 时约为 $(3.51,3.33)$。密度压缩是给定参数下的稳健理论现象，但不能据此推断真实系统中的恐惧强度。稳定性与峰值衰减等补充诊断见附录 C。
-
-\begin{figure}[H]
-  \centering
-  \imginclude[width=0.80\textwidth]{12_bda_fear_k_scan.png}
-  \caption{B--D 模型中 $k$ 增大压缩猎物与捕食者共存密度。}
-  \label{fig:bda-k}
-\end{figure}
-
 \subsection{真实数据的预测比较}
 
-表\,\ref{tab:wins} 汇总所有可比较拟合的预测结果。B--D 在 9 条序列的留后验证上单独最优，但 AICc 未支持 B--D；baseline 虽仅在 3 条序列的留后验证上单独最优，却因更低复杂度在 13 条序列上取得最低 AICc。GLERL 的三模型训练和验证 RMSE 相同，不能区分三种结构。该结果说明，短期留后预测改善与复杂度校正后的模型支持并不等价。
+表\,\ref{tab:wins} 汇总核心三模型（baseline、fear-memory、fear-instant）的预测结果。baseline 在 13 条序列上取得最低 AICc；fear-memory 与 fear-instant 各在部分序列的留后验证上优于 baseline，但无单一恐惧通道一致胜出。GLERL 的模型训练和验证 RMSE 相同，不能区分不同结构。该结果说明，短期留后预测改善与复杂度校正后的模型支持并不等价。
 
 \begin{table}[H]
  \centering
- \caption{三种标准下的模型胜负汇总}
+ \caption{三种标准下的核心模型胜负汇总}
  \label{tab:wins}
  \begin{tabular}{lcccc}
   \toprule
-  标准 & baseline & fear-memory & B--D fear & 三模型并列\\
+  标准 & baseline & fear-memory & fear-instant & 并列\\
   \midrule
-  训练归一化 RMSE 最优 & 5 & 7 & 2 & 1\\
-  留后验证归一化 RMSE 最优 & 3 & 2 & 9 & 1\\
+  训练归一化 RMSE 最优 & 5 & 5 & 4 & 1\\
+  留后验证归一化 RMSE 最优 & 5 & 3 & 4 & 3\\
   AICc 最优 & 13 & 2 & 0 & 0\\
   \bottomrule
  \end{tabular}
 \end{table}
 
-按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到六模型后，105/105 次拟合均可比较。留后验证单独最优为 B--D 6 条、fear-instant 3 条、baseline 2 条、fear-memory 2 条、fear-handling 1 条，GLERL 六模型完全并列。该扩展仍不支持”某一种恐惧通道普遍正确”：不同序列由不同通道获胜，且预测胜出不能替代参数可辨识性证据。
+按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到全部六模型（新增 fear-saturating、fear-foraging、fear-handling）后，90 次拟合均可比较。留后验证单独最优的分布为：fear-instant 4 条、fear-handling 2 条、baseline 3 条、fear-memory 2 条、fear-saturating 1 条、fear-foraging 1 条，GLERL 六模型并列。该扩展仍不支持”某一种恐惧通道普遍正确”：不同序列由不同通道获胜，且预测胜出不能替代参数可辨识性证据。完整六模型胜负表见附录 D。
 
-Windermere 南北两湖盆的拟合结果值得单独讨论。该两序列的 baseline 与 fear-memory 留后验证 RMSE 分别为 1.52 和 3.04（北）与 1.16 和 1.39（南），在所有 15 条序列中显著偏高。数据的时间模式是诊断关键：两个湖盆的河鲈在训练段内从极低值持续爆发至数百 $\mathrm{kg}\cdot\mathrm{ha}^{-1}$，但在验证段却见顶回落；与此同时，狗鱼因刺网移除干预，整个观测期内密度均处于低位（3--10\,$\mathrm{kg}\cdot\mathrm{ha}^{-1}$）。Holling II 框架唯一能使猎物密度下降的机制是捕食者恢复——功能反应将猎物大量转化为捕食者增长，从而抑制猎物。但当捕食者被人为压制时，该机制被切断。优化器只能在训练段内寻找补偿：baseline 将转化效率 $e$ 压至下界 0.01，使捕食者与猎物动力学几乎解耦，猎物在验证段被预测为冲向 $K\approx 3600$，而实际猎物已从 300 降至 135；fear-memory 凭借 7 参数 3 方程的记忆结构在训练段取得最优猎物拟合（训练猎物 RMSE 0.049），但记忆项 $-r\phi M x$ 与恐惧抑制项均只能减缓增长而不能产生下降，导致验证段外推完全失效。相比之下，B--D 模型的 $-au^2$ 种内竞争项以及 fear-instant、fear-saturating 等不含记忆滞后的恐惧参数化方式，提供了不依赖捕食者恢复即可从高密度自然回落的结构灵活性，验证 RMSE 分别降至 0.54 和 0.42。该案例分析表明，当数据包含外部人为移除干预时，封闭 ODE 模型的参数估计会因未建模过程而畸变，此类序列的拟合误差不能完全归因于模型结构的生态合理性。
+Windermere 南北两湖盆的拟合结果值得单独讨论。该两序列的 baseline 与 fear-memory 留后验证 RMSE 分别为 1.52 和 3.04（北）与 1.16 和 1.39（南），在所有 15 条序列中显著偏高。数据的时间模式是诊断关键：两个湖盆的河鲈在训练段内从极低值持续爆发至数百 $\mathrm{kg}\cdot\mathrm{ha}^{-1}$，但在验证段却见顶回落；与此同时，狗鱼因刺网移除干预，整个观测期内密度均处于低位（3--10\,$\mathrm{kg}\cdot\mathrm{ha}^{-1}$）。Holling II 框架唯一能使猎物密度下降的机制是捕食者恢复——功能反应将猎物大量转化为捕食者增长，从而抑制猎物。但当捕食者被人为压制时，该机制被切断。优化器只能在训练段内寻找补偿：baseline 将转化效率 $e$ 压至下界 0.01，使捕食者与猎物动力学几乎解耦，猎物在验证段被预测为冲向 $K\approx 3600$，而实际猎物已从 300 降至 135；fear-memory 凭借 7 参数 3 方程的记忆结构在训练段取得最优猎物拟合（训练猎物 RMSE 0.049），但记忆项 $-r\phi M x$ 与恐惧抑制项均只能减缓增长而不能产生下降，导致验证段外推完全失效。相比之下，fear-instant、fear-handling 等不含记忆滞后的恐惧参数化方式，提供了不依赖捕食者恢复即可从高密度自然回落的结构灵活性，验证 RMSE 分别降至 0.54 和 0.42。该案例分析表明，当数据包含外部人为移除干预时，封闭 ODE 模型的参数估计会因未建模过程而畸变，此类序列的拟合误差不能完全归因于模型结构的生态合理性。
 
 \begin{figure}[H]
   \centering
@@ -219,7 +204,7 @@ Windermere 南北两湖盆的拟合结果值得单独讨论。该两序列的 ba
   \label{fig:seven-model-heatmap}
 \end{figure}
 
-45 次拟合均通过成功或达限可用状态进入比较。全部结果均为成功或达限可用；边界触及仍说明部分速率点估计受参数补偿影响。
+全部拟合均通过成功或达限可用状态进入比较；边界触及仍说明部分速率点估计受参数补偿影响。
 
 \begin{table}[H]
  \centering
@@ -229,53 +214,34 @@ Windermere 南北两湖盆的拟合结果值得单独讨论。该两序列的 ba
   \toprule
   层次 & 当前证据允许的结论\\
   \midrule
-  预测层面 & B--D 在部分序列上具有更好的训练、留后预测或 AICc 表现。\\
-  机制层面 & 由于 $k$ 缺乏可靠可辨识性，不能据此证明真实恐惧机制或估计真实恐惧强度。\\
+  预测层面 & 含恐惧模型在部分序列上具有更好的留后预测表现，但无单一通道一致胜出。\\
+  机制层面 & 由于恐惧参数缺乏可靠可辨识性，不能据此证明真实恐惧机制或估计真实恐惧强度。\\
   \bottomrule
  \end{tabular}
 \end{table}
 
 \begin{figure}[H]
   \centering
-  \imginclude[width=0.82\textwidth]{deep_analysis/tier1/rmse_improvement.png}
-  \caption{B--D 相对 baseline 的验证误差比较；比值大于 1 表示 B--D 留后误差更低。}
-  \label{fig:rmse-improve}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \imginclude[width=0.82\textwidth]{calibration_bda/figures/06_andren_lynx_roedeer_data_4_bda_fear.png}
-  \caption{代表性拟合：Andrén 区 4 的 B--D 模型。阴影分界后的观测用于连续多步留后验证。}
+  \imginclude[width=0.82\textwidth]{calibration_bda/figures/09_andren_lynx_roedeer_data_7_fear_memory.png}
+  \caption{代表性拟合：Andrén 区 7 的 fear-memory 模型（AICc 最优）。阴影分界后的观测用于连续多步留后验证。}
   \label{fig:representative-fit}
 \end{figure}
 
-\subsection{\texorpdfstring{B--D 恐惧参数 $k$ 的可辨识性}{B--D 恐惧参数 k 的可辨识性}}
+\subsection{恐惧记忆参数的可辨识性局限}
 
-为检验较低误差是否意味着恐惧参数被数据识别，本文选取 Isle Royale、GLERL 与 TP 三条代表序列，对每个固定 $k$ 重新优化其余 B--D 参数。该过程允许其他参数补偿 $k$ 的变化，因而是真正的 profile，而非固定其他参数的条件扫描。
+为检验 fear-memory 的恐惧与记忆参数是否被数据可靠识别，本文对 $\phi$、$M(0)$ 和 $\delta$ 进行补充诊断。
 
-\begin{figure}[H]
- \centering
- \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/k_profile_isle_royale_wolf_moose_pre_2018.png}
-  \caption{Isle Royale}
- \end{subfigure}\hfill
- \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/k_profile_glerl_m110_zoop_1994-201.png}
-  \caption{GLERL}
- \end{subfigure}\hfill
- \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/k_profile_timeserieslogmeans_TP.png}
-  \caption{TP}
- \end{subfigure}
- \caption{固定每个 $k$ 并重新优化其余参数得到的 profile。宽区间、边界触及和不连续区间均表明可辨识性不足。}
- \label{fig:k-profile-main}
-\end{figure}
+$\phi$ 在 15 条序列的拟合中多次触及搜索下界或上界，表明点估计对边界敏感，不能直接解释为"识别到的恐惧强度"。
 
-Isle Royale、GLERL 与 TP 的 95\% 置信集均覆盖整个扫描边界 $[0.0001,0.5]$；其中 Isle Royale 的可接受集还呈不连续性。这表明多个 $k$ 值可通过其他参数补偿产生相近轨迹，精确区间边界还会受到扫描范围影响。当前数据主要约束模型整体轨迹，而不能将轨迹变化唯一归因于恐惧参数 $k$。
+固定 $M(0)=y(0)$ 和 $\delta=1$ 的理由如下：固定 $\delta=1$ 提供统一的记忆时间尺度，避免在短序列中与 $\phi$ 相互补偿；固定 $M(0)=y(0)$ 使初始记忆与首个可观测捕食压力一致，避免引入额外的弱可辨识初始状态。为检验上述设定是否主导结果，选取 Isle Royale、GLERL 与 TP 三条代表序列进行 $M(0)/y(0)$ 与 $\delta$ 的 profile 分析（在每个固定值下重新优化其余参数，而非固定其余参数的条件扫描）。
+
+$M(0)/y(0)$ profile 在 $[0,5]$ 上普遍平坦，14/15 条序列的 95\% profile 集触及扫描上界，表明初始记忆的变化通常可由其他动力学参数补偿。$\delta$ 的 profile 显示，训练最优与留后最优的衰减时间尺度不同——在留后段上探索性选择最优 $\delta$，相对固定 $\delta=1$ 的验证 RMSE 改善中位数约为 2.1\%，但 Windermere 北湖盆与 Isle Royale 的改善较大（分别为 79.5\% 和 57.9\%），因此不能声称 $\delta$ 对所有序列均不重要。然而，由于最优 $\delta$ 使用留后段选择，该分析只能作为敏感性评估，不构成新的无偏验证。
+
+综上，$\phi$ 触边、$M(0)$ 不可辨识、$\delta$ 训练最优 $\neq$ 验证最优，三者共同表明 fear-memory 的恐惧与记忆参数在当前数据中缺乏可靠的可辨识性。profile 图与完整 $\delta$ 比较表见附录 E。
 
 \subsection{讨论：证据能够支持什么}
 
-数值实验支持“机制路径决定定性方向”，数据拟合支持“含恐惧模型能够改善部分序列的留后预测”，但二者都不足以证明真实系统存在相应恐惧机制。主要原因有三点：一是 15 条序列中 Andrén 七区、Killifish 三站和 Windermere 两湖盆存在研究内重复，不能视为 15 个独立生态证据；二是 AICc 在 13/15 条序列上支持较简单的 baseline，与 B--D 的留后预测优势形成明显分歧；三是 $e,\mu,\phi,k$ 等参数存在触边或宽 profile，显示额外参数之间存在补偿。四是 Windermere 序列中狗鱼的刺网移除属于外部人为干预，破坏了 ODE 模型的封闭系统假设。当捕食者被人为压制而猎物先爆发后自然回落时，Holling II 框架只能通过参数畸变（baseline 的 $e\rightarrow 0$）或过拟合（fear-memory）来匹配训练段，导致留后预测完全失效。预测能力与机制识别必须分开解释。
+数值实验支持”机制路径决定定性方向”，数据拟合支持”含恐惧模型能够改善部分序列的留后预测”，但二者都不足以证明真实系统存在相应恐惧机制。主要原因有三点：一是 15 条序列中 Andrén 七区、Killifish 三站和 Windermere 两湖盆存在研究内重复，不能视为 15 个独立生态证据；二是 AICc 在 13/15 条序列上支持较简单的 baseline，与含恐惧模型的留后预测优势形成明显分歧；三是 $e,\mu,\phi$ 等参数存在触边或宽 profile，且 Windermere 序列中狗鱼的刺网移除属于外部人为干预，破坏了 ODE 模型的封闭系统假设。当捕食者被人为压制而猎物先爆发后自然回落时，Holling II 框架只能通过参数畸变（baseline 的 $e\rightarrow 0$）或过拟合（fear-memory）来匹配训练段，导致留后预测完全失效。预测能力与机制识别必须分开解释。
 
 记忆参数的补充结果同样需要遵守这一证据边界。固定 $\delta=1$ 的主比较使用预先统一的时间尺度；附录中所谓“留后最优 $\delta$”是在同一留后段上比较多个候选值后得到，只能作为敏感性与假设生成分析，不能再视为无偏留后验证，也不用于重新计算三模型胜负。
 
