@@ -83,6 +83,7 @@ Abrams（2000）指出，适应性行为进入种群动力学方程的具体方�
 优化状态分为成功、达到迭代上限但结果可用、失败。失败拟合保留用于诊断，但不进入模型胜负统计。
 
 \section{模型与方法}
+\label{sec:model-method}
 
 \subsection{核心模型：Holling II baseline 与 fear-memory}
 
@@ -109,6 +110,8 @@ Abrams（2000）指出，适应性行为进入种群动力学方程的具体方�
 \subsection{扩展恐惧机制}
 
 除核心 fear-memory 模型外，本文还引入四种 Holling II 框架下的替代恐惧机制以检验机制路径依赖性：瞬时繁殖抑制（fear-instant）、饱和繁殖抑制（fear-saturating）、觅食抑制（fear-foraging）和处理时间延长（fear-handling）。各机制的方程形式见附录 B。
+
+fear-memory 与 fear-instant 在校准后具有相同的等效恐惧强度（$\phi=0.00783431$，$\delta=1$）：在正平衡点处，由于 $M^*=y^*/\delta=y^*$，恐惧项 $r\phi M x$ 退化为 $r\phi y x$，与 fear-instant 的 $r\phi y x$ 完全等价\footnote{两者在平衡点附近产生不同的一阶修正：fear-memory 的指数记忆低通滤波 $dM/dt = y-\delta M$ 造成 $\tau=1/\delta=1$ 的响应滞后，离开平衡点后时变恐惧强度不同。}。因此，三者（baseline、fear-memory、fear-instant）构成一个干净的机制三元组：无恐惧 $\rightarrow$ 恐惧+记忆滞后 $\rightarrow$ 恐惧无记忆，共享统一等效 $\phi$ 校准，为后续模型比较提供了有序的递进逻辑。
 
 \subsection{五种机制与公平比较}
 
@@ -159,7 +162,9 @@ $\phi\in[0,0.06]$ 的 31 个扫描情景均未触发灭绝判定。20 个情景�
 
 \subsection{真实数据的预测比较}
 
-表\,\ref{tab:wins} 汇总核心三模型（baseline、fear-memory、fear-instant）的序列级预测结果。fear-memory 在 6 条序列的留后验证上单独最优，fear-instant 在 5 条上最优，baseline 在 3 条上最优；但 baseline 在 10 条序列上取得最低 AICc。GLERL 的三模型训练和验证 RMSE 相同，不能区分三种结构。该结果说明，短期留后预测改善与复杂度校正后的模型支持并不等价。按研究聚合后（Andrén 七区取中位数、Killifish 三站取中位数、Windermere 两湖盆取中位数，其余独立研究各算 1 单位，共约 6 个研究级单位），模型胜负分布依然不支持任何通道的普遍优越性（完整研究级胜负见附录 D）。
+模型比较分为三层递进问题：(a) 含恐惧模型是否优于无恐惧 baseline？(b) 恐惧记忆滞后是否提供额外预测能力？(c) 四种替代恐惧通道（觅食抑制、处理时间延长等）是否有某一通道一致最优？
+
+核心比较限定于 baseline、fear-memory 与 fear-instant 三模型——三者已在第\,\ref{sec:model-method}\,节中论证共享等效 $\phi=0.00783431$，构成干净的可比较三元组（无恐惧 $\rightarrow$ 恐惧+记忆滞后 $\rightarrow$ 恐惧无记忆）。表\,\ref{tab:wins} 汇总三模型的序列级预测结果。fear-memory 在 6 条序列的留后验证上单独最优，fear-instant 在 5 条上最优，baseline 在 3 条上最优；但 baseline 在 10 条序列上取得最低 AICc。GLERL 的三模型训练和验证 RMSE 相同，不能区分三种结构。该结果说明两层分歧：首先，短期留后预测改善与复杂度校正后的模型支持并不等价；其次，即使 fear-instant 在中位数 AICc 上优于 fear-memory 约 30 单位，二者的区分仍受限于参数不确定性（第\,\ref{sec:identifiability}\,节），不可仅凭 AICc 高低宣称"记忆滞后不重要"或"瞬时恐惧更真实"。按研究聚合后（Andrén 七区取中位数、Killifish 三站取中位数、Windermere 两湖盆取中位数，其余独立研究各算 1 单位，共约 6 个研究级单位），模型胜负分布依然不支持任何通道的普遍优越性（完整研究级胜负见附录 D）。
 
 \begin{table}[H]
  \centering
@@ -175,7 +180,7 @@ $\phi\in[0,0.06]$ 的 31 个扫描情景均未触发灭绝判定。20 个情景�
  \end{tabular}
 \end{table}
 
-按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到全部六模型（新增 fear-saturating、fear-foraging、fear-handling）后，90 次拟合均可比较。序列级留后验证单独最优的分布为：fear-memory 5 条、baseline 3 条、fear-instant 3 条、fear-handling 2 条、fear-foraging 1 条，GLERL 六模型并列。序列级 AICc 最优分布为：baseline 8 条、fear-foraging 3 条、fear-instant 2 条、fear-memory 1 条、fear-saturating 1 条。该扩展仍不支持”某一种恐惧通道普遍正确”：不同序列由不同通道获胜，且预测胜出不能替代参数可辨识性证据。
+(c) 按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到全部六模型（新增 fear-saturating、fear-foraging、fear-handling）后，90 次拟合均可比较。六模型在序列级留后最优分布的离散程度高于三模型，但结论相同：无单一恐惧通道在留后预测和 AICc 上一致胜出。完整六模型胜负表、热力图及研究级聚合分析见附录 D。
 
 为检验胜负是否为微小数值波动所致，进一步计算每条序列的 baseline 与最佳恐惧模型之间的 $\Delta\mathrm{AICc}$。结果表明，5/15 条序列的 $|\Delta\mathrm{AICc}|<2$，胜负在实质上可忽略；仅 3 条序列的 $|\Delta\mathrm{AICc}|>7$（强证据），其中 2 条支持 baseline、1 条支持恐惧模型。换言之，多数序列无法在 baseline 与恐惧模型之间做出实质性区分。
 
@@ -210,7 +215,6 @@ Windermere 南北两湖盆的拟合误差在 15 条序列中最高（留后验�
   跨系统比较 & 6 个研究级聚合单位的胜负模式与序列级定性一致；哺乳类、鱼类和浮游动物均存在留后预测改善的个例 & 任一恐惧通道在某一类群中一致胜出；15 个拟合单位可视为 15 个独立生态证据\\
   \bottomrule
  \end{tabular}
-\end{table}
 \end{table}
 
 \begin{figure}[H]
@@ -396,7 +400,7 @@ Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。数值校验中五种机�
 
 \begin{table}[H]
  \centering
- \caption{20\% 等效抑制下相对各自无恐惧基线的长期均值变化}
+ \caption{20\% 等效抑制下相对各自无恐惧基线的长期均值变化。memory reproduction 与 instant reproduction 的 $\phi$ 值相同（0.00783431），平衡点处恐惧项等价；两者差异仅来自记忆滞后。}
  \label{tab:mechanism-full}
  \begin{tabular}{lrrll}
   \toprule
