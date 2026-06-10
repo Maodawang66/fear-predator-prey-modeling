@@ -249,11 +249,10 @@ $M(0)/y(0)$ profile 在 $[0,5]$ 上普遍平坦，14/15 条序列的 95\% profil
 
 本文得到以下结论：
 \begin{enumerate}[label=(\arabic*),leftmargin=2em]
- \item 恐惧效应具有机制路径依赖性。等效 20\% 抑制下六种机制均共存，但种群变化方向不同。
+ \item 恐惧效应具有机制路径依赖性。等效 20\% 抑制下五种机制均共存，但种群变化方向不同。
  \item 记忆模型的 $\phi$ 扫描 31/31 共存，其中 11 个情景未通过长期收敛诊断，不能把有限积分结果误写为稳定平衡。
- \item B--D 在 9/15 条序列的留后验证上单独最优，但 AICc 未支持 B--D，baseline 获 13/15；预测优势与复杂度校正后的支持并不一致。
  \item 六模型扩展中不同序列由不同恐惧通道胜出，不能据此认定某一种恐惧机制普遍正确。
- \item 因此，预测误差降低只能支持模型的预测能力，不能单独证明恐惧机制存在，也不能用于估计或比较真实恐惧强度。
+ \item 预测误差降低只能支持模型的预测能力，不能单独证明恐惧机制存在，也不能用于估计或比较真实恐惧强度。$\phi$ 触边、$M(0)$ 不可辨识、$\delta$ 训练最优 $\neq$ 验证最优，三者共同表明恐惧与记忆参数缺乏可靠的可辨识性。
  \item 当数据包含刺网移除等外部人为干预时，封闭 ODE 模型被迫通过参数畸变来补偿未建模的过程（如 Windermere 序列中 baseline 的转化效率 $e$ 被压至下界，fear-memory 的过拟合）。此类序列的预测误差不能完全归因于模型结构的生态合理性，参数估计也不应被解读为真实生态速率。
 \end{enumerate}
 
@@ -267,7 +266,6 @@ $M(0)/y(0)$ profile 在 $[0,5]$ 上普遍平坦，14/15 条序列的 95\% profil
  \item Preisser E L, et al. Scared to death: intimidation and consumption in predator--prey interactions. \emph{Ecology}, 2007.
  \item Peacor S D, Werner E E. Trait-mediated indirect effects. \emph{Ecology}, 2001.
  \item Wang S, et al. Tipping points for predator--prey systems with fear effect. \emph{Ecology Letters}, 2019.
- \item Myint T T, et al. B--D predator--prey model with fear effect. arXiv:2506.22070, 2025.
  \item Andrén H, et al. Eurasian lynx--roe deer multi-region dataset. Dryad, \url{https://doi.org/10.5061/dryad.9zw3r22mq}.
  \item Marino J A, et al. Lake Michigan zooplankton CE/NCE dataset. Dryad, \url{https://doi.org/10.5061/dryad.bh688ft}.
  \item Peacor S D, et al. Predation-risk effects literature review data. Dryad, \url{https://doi.org/10.5061/dryad.ffbg79cxt}.
