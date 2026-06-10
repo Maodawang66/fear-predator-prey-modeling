@@ -145,34 +145,13 @@ baseline 逐序列拟合 $r,K,a,\theta,e,\mu$，fear-memory 拟合 $r,K,a,\theta
 
 \subsection{记忆恐惧与参数扫描}
 
-默认情景的时间序列说明，恐惧与记忆会改变瞬态轨迹和捕食者长期水平，但图形本身不能替代长期诊断。
+默认情景的时间序列说明，恐惧与记忆会改变瞬态轨迹和捕食者长期水平（时间序列对照图见附录\,\ref{fig:main-ts}）。
 
-\begin{figure}[H]
-  \centering
-  \imginclude[width=0.82\textwidth]{01_timeseries_baseline_vs_fear.png}
-  \caption{Holling II 基线与恐惧记忆模型的时间序列对照。}
-  \label{fig:main-ts}
-\end{figure}
-
-$\phi\in[0,0.06]$ 的 31 个扫描情景均未触发灭绝判定。20 个情景通过长期收敛诊断，$\phi\geq0.040$ 的 11 个情景在最大延长后仍未通过；因此这些点只能说明当前积分范围内未灭绝，不能当作已收敛长期平衡。通过诊断的范围内，猎物长期均值约为 20.02，捕食者均值随 $\phi$ 增大而下降。
-
-\begin{figure}[H]
-  \centering
-  \imginclude[width=0.80\textwidth]{05_phi_scan.png}
-  \caption{$\phi$ 扫描：31/31 在当前积分范围内未灭绝，其中 11 个高 $\phi$ 情景未通过长期收敛诊断（不能视为已达平衡）。}
-  \label{fig:phi-scan}
-\end{figure}
+$\phi\in[0,0.06]$ 的 31 个扫描情景均未触发灭绝判定。20 个情景通过长期收敛诊断，$\phi\geq0.040$ 的 11 个情景在最大延长后仍未通过；因此这些点只能说明当前积分范围内未灭绝，不能当作已收敛长期平衡。通过诊断的范围内，猎物长期均值约为 20.02，捕食者均值随 $\phi$ 增大而下降（$\phi$ 扫描图见附录\,\ref{fig:phi-scan}）。
 
 \subsection{机制路径依赖性}
 
-在参考正平衡点处校准为相同 20\% 抑制后，五种恐惧机制均保持共存，但长期均值方向明显不同。三种繁殖抑制路径使捕食者均值下降约 16.7\%--18.0\%，猎物均值基本不变；觅食抑制与处理时间延长同时提高猎物和捕食者均值。这说明”恐惧增加或减少种群”没有脱离机制路径的统一答案。
-
-\begin{figure}[H]
-  \centering
-  \imginclude[width=0.88\textwidth]{09_literature_mechanisms_bars.png}
-  \caption{20\% 等效抑制下，各恐惧机制相对各自无恐惧基线的长期变化。}
-  \label{fig:mechanisms}
-\end{figure}
+在参考正平衡点处校准为相同 20\% 抑制后，五种恐惧机制均保持共存，但长期均值方向明显不同（机制比较柱状图见附录\,\ref{fig:mechanisms}）。三种繁殖抑制路径使捕食者均值下降约 16.7\%--18.0\%，猎物均值基本不变；觅食抑制与处理时间延长同时提高猎物和捕食者均值。这说明”恐惧增加或减少种群”没有脱离机制路径的统一答案。
 
 \subsection{真实数据的预测比较}
 
@@ -231,6 +210,7 @@ Windermere 南北两湖盆的拟合结果值得单独讨论。该两序列的 ba
 \end{figure}
 
 \subsection{恐惧记忆参数的可辨识性局限}
+\label{sec:identifiability}
 
 为检验 fear-memory 的恐惧与记忆参数是否被数据可靠识别，本文对 $\phi$、$M(0)$ 和 $\delta$ 进行补充诊断。其中 $\phi$ 的边界敏感性来自全部 15 条序列；$M(0)$ 与 $\delta$ 的 profile 分析仅覆盖 3 条代表序列（选取标准见下文），其余 12 条序列不可假定同样不可辨识。
 
@@ -242,7 +222,47 @@ $\phi$ 在 15 条序列的拟合中多次触及搜索下界或上界，表明点
 
 固定 $M(0)=y(0)$ 和 $\delta=1$ 的理由如下：固定 $\delta=1$ 提供统一的记忆时间尺度，避免在短序列中与 $\phi$ 相互补偿；固定 $M(0)=y(0)$ 使初始记忆与首个可观测捕食压力一致，避免引入额外的弱可辨识初始状态。为检验上述设定是否主导结果，选取 Isle Royale、GLERL 与 TP 三条代表序列进行 $M(0)/y(0)$ 与 $\delta$ 的 profile 分析（在每个固定值下重新优化其余参数，而非固定其余参数的条件扫描）。选取标准为：Isle Royale 为最长序列（38 年），GLERL 为全部六模型在留后验证上并列的代表，TP 为 Killifish 研究内 fear-memory 留后验证优于 baseline 的代表。
 
-$M(0)/y(0)$ profile 在 $[0,5]$ 上普遍平坦，14/15 条序列的 95\% profile 集触及扫描上界，表明初始记忆的变化通常可由其他动力学参数补偿。$\delta$ 的 profile 显示，训练最优与留后最优的衰减时间尺度不同——在留后段上探索性选择最优 $\delta$，相对固定 $\delta=1$ 的验证 RMSE 改善中位数约为 2.1\%，但 Windermere 北湖盆与 Isle Royale 的改善较大（分别为 79.5\% 和 57.9\%），因此不能声称 $\delta$ 对所有序列均不重要。然而，由于最优 $\delta$ 使用留后段选择，该分析只能作为敏感性评估，不构成新的无偏验证。
+$M(0)/y(0)$ profile 在 $[0,5]$ 上普遍平坦，14/15 条序列的 95\% profile 集触及扫描上界，表明初始记忆的变化通常可由其他动力学参数补偿。
+
+\begin{figure}[H]
+ \centering
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/m0_profile_isle_royale_wolf_moose_pre_2018.png}
+  \caption{Isle Royale}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/m0_profile_glerl_m110_zoop_1994-201.png}
+  \caption{GLERL}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/m0_profile_timeserieslogmeans_TP.png}
+  \caption{TP}
+ \end{subfigure}
+ \caption{$M(0)/y(0)$ profile 的三条代表序列。蓝线为训练 RMSE，红线为留后 RMSE；宽而平坦的训练 profile 表明初始记忆弱可辨识。}
+ \label{fig:m0-profile-body}
+\end{figure}
+
+$\delta$ 的 profile 显示，训练最优与留后最优的衰减时间尺度不同——在留后段上探索性选择最优 $\delta$，相对固定 $\delta=1$ 的验证 RMSE 改善中位数约为 2.1\%，但 Windermere 北湖盆与 Isle Royale 的改善较大（分别为 79.5\% 和 57.9\%），因此不能声称 $\delta$ 对所有序列均不重要。
+
+\begin{figure}[H]
+ \centering
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/delta_profile_isle_royale_wolf_moose_pre_2018.png}
+  \caption{Isle Royale}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/delta_profile_glerl_m110_zoop_1994-201.png}
+  \caption{GLERL}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.32\textwidth}
+  \imginclude[width=\textwidth]{deep_analysis/tier1/delta_profile_timeserieslogmeans_TP.png}
+  \caption{TP}
+ \end{subfigure}
+ \caption{$\delta$ profile 的三条代表序列。训练最优与留后最优时间尺度可能不同，说明按训练拟合识别记忆尺度与按预测误差选择记忆尺度并不等价。}
+ \label{fig:delta-profile-body}
+\end{figure}
+
+由于最优 $\delta$ 使用留后段选择，该分析只能作为敏感性评估，不构成新的无偏验证。
 
 综上，$\phi$ 触边（15 条序列）、$M(0)$ 不可辨识（3 条代表序列的 profile）、$\delta$ 训练最优 $\neq$ 验证最优（3 条代表序列），三者共同表明 fear-memory 的恐惧与记忆参数在当前数据中缺乏可靠的可辨识性。但由于 profile 仅覆盖 3 条代表序列，不能将"不可辨识"自动推广到所有序列。profile 图与完整 $\delta$ 比较表见附录 E。
 
@@ -370,24 +390,7 @@ Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。数值校验中五种机�
  \end{tabular}
 \end{table}
 
-\begin{figure}[H]
- \centering
- \begin{subfigure}{0.48\textwidth}
-  \imginclude[width=\textwidth]{04_three_scenarios.png}
-  \caption{三个主模型情景}
- \end{subfigure}\hfill
- \begin{subfigure}{0.48\textwidth}
-  \imginclude[width=\textwidth]{06_delta_scan.png}
-  \caption{$\delta$ 扫描}
- \end{subfigure}
- \caption{主模型补充实验。}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \imginclude[width=0.65\textwidth]{08_literature_mechanisms_timeseries.png}
- \caption{等效强度下五种恐惧机制的时间序列。默认参数机制实验仅作为补充，不用于公平机制胜负。}
-\end{figure}
+主模型补充实验（情景对比、$\delta$ 扫描、五种机制时间序列）图见附录\,\ref{sec:theory-figures}。
 
 \subsection{扫描摘要}
 
@@ -507,43 +510,7 @@ Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。数值校验中五种机�
 
 为检验固定 $M(0)=y(0)$ 与 $\delta=1$ 是否主导 fear-memory 的预测结果，本文进行两类补充分析。第一，在 $M(0)/y(0)\in[0,5]$ 上同时进行条件敏感性扫描和 profile：前者固定其余参数，后者在每个固定 $M(0)$ 下重新优化 $r,K,a,\theta,e,\mu,\phi$。第二，在 $\delta\in[0.01,10]$ 上固定每个 $\delta$ 并重新优化其余参数，同时报告对应记忆时间尺度 $1/\delta$、训练 profile 与连续多步留后 RMSE。
 
-$M(0)$ profile 普遍较平：11/15 条序列的 95\% profile 集覆盖整个扫描网格，14/15 条序列的可接受集触及 $M(0)/y(0)=5$ 的上边界。这说明初始记忆的变化通常可由其他动力学参数补偿，支持在主比较中固定 $M(0)=y(0)$，但不能将该初始状态解释为由数据精确识别的生态量。
-
-\begin{figure}[H]
- \centering
- \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/m0_profile_isle_royale_wolf_moose_pre_2018.png}
-  \caption{Isle Royale}
- \end{subfigure}\hfill
- \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/m0_profile_glerl_m110_zoop_1994-201.png}
-  \caption{GLERL}
- \end{subfigure}\hfill
- \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/m0_profile_timeserieslogmeans_TP.png}
-  \caption{TP}
- \end{subfigure}
- \caption{$M(0)/y(0)$ profile 的代表序列。蓝线为训练 RMSE，红线为留后 RMSE；宽而平坦的训练 profile 表明初始记忆弱可辨识。}
- \label{fig:m0-profile-appendix}
-\end{figure}
-
-\begin{figure}[H]
- \centering
- \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/delta_profile_isle_royale_wolf_moose_pre_2018.png}
-  \caption{Isle Royale}
- \end{subfigure}\hfill
- \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/delta_profile_glerl_m110_zoop_1994-201.png}
-  \caption{GLERL}
- \end{subfigure}\hfill
- \begin{subfigure}{0.32\textwidth}
-  \imginclude[width=\textwidth]{deep_analysis/tier1/delta_profile_timeserieslogmeans_TP.png}
-  \caption{TP}
- \end{subfigure}
- \caption{$\delta$ profile 的代表序列。训练最优与留后最优时间尺度可能不同，说明按训练拟合识别记忆尺度与按预测误差选择记忆尺度并不等价。}
- \label{fig:delta-profile-appendix}
-\end{figure}
+$M(0)$ 和 $\delta$ profile 分析的方法细节与完整图表见正文第\,\ref{sec:identifiability} 节；profile 图已移至正文展示，此处仅保留 $\delta$ 比较的数值表格。
 
 \begin{landscape}
 \begin{table}[H]
@@ -590,5 +557,50 @@ Peacor 的 64 条记录仅为研究类型清单：TMIE 37、NCE 27。下图作�
 \end{figure}
 
 珊瑚和豆娘结果仅记录为探索性数据。珊瑚位置变量与风险方向的映射不足，豆娘处理汇总中的活动方向也不能直接映射为繁殖抑制参数；二者均不进入定量结论。
+
+\section{理论分析补充图}
+\label{sec:theory-figures}
+
+以下为第\,5--\ref{sec:identifiability}\,节中引用的理论与数值实验图表，移至此附录以保持正文聚焦核心证据。
+
+\begin{figure}[H]
+  \centering
+  \imginclude[width=0.82\textwidth]{01_timeseries_baseline_vs_fear.png}
+  \caption{Holling II 基线与恐惧记忆模型的时间序列对照。}
+  \label{fig:main-ts}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \imginclude[width=0.80\textwidth]{05_phi_scan.png}
+  \caption{$\phi$ 扫描：31/31 在当前积分范围内未灭绝，其中 11 个高 $\phi$ 情景未通过长期收敛诊断（不能视为已达平衡）。}
+  \label{fig:phi-scan}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \imginclude[width=0.88\textwidth]{09_literature_mechanisms_bars.png}
+  \caption{20\% 等效抑制下，各恐惧机制相对各自无恐惧基线的长期变化。}
+  \label{fig:mechanisms}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+ \begin{subfigure}{0.48\textwidth}
+  \imginclude[width=\textwidth]{04_three_scenarios.png}
+  \caption{三个主模型情景}
+ \end{subfigure}\hfill
+ \begin{subfigure}{0.48\textwidth}
+  \imginclude[width=\textwidth]{06_delta_scan.png}
+  \caption{$\delta$ 扫描}
+ \end{subfigure}
+ \caption{主模型补充实验。}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+ \imginclude[width=0.65\textwidth]{08_literature_mechanisms_timeseries.png}
+ \caption{等效强度下五种恐惧机制的时间序列。默认参数机制实验仅作为补充，不用于公平机制胜负。}
+\end{figure}
 
 \end{document}
