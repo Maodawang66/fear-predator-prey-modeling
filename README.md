@@ -1,6 +1,6 @@
 # 恐惧效应下的捕食者—猎物动力学
 
-USTC 数学建模课程项目。建立多种生态数学模型（ODE 和 PDE），研究恐惧/记忆效应的机制路径依赖性，并通过 12 条真实生态时间序列评估留后预测、复杂度、参数可辨识性和证据边界。
+USTC 数学建模课程项目。建立多种生态数学模型（ODE 和 PDE），研究恐惧/记忆效应的机制路径依赖性，并通过 15 条真实种群时间序列评估留后预测、复杂度、参数可辨识性和证据边界。
 
 ## 环境配置
 
@@ -32,6 +32,7 @@ pro/
 │   ├── literature.py        # 多机制统一对比框架
 │   ├── visualize.py         # matplotlib 绑图函数集
 │   ├── fit.py               # ODE 参数拟合（差分进化 + L-BFGS-B）
+│   ├── fear_pathway_fit.py  # 等参数化 Holling II 恐惧通道拟合
 │   ├── k_damping.py         # k 参数局部稳定性分析模块
 │   └── pde2d.py             # 2D 反应—扩散 PDE 有限差分求解器
 ├── data/                    # 数据模块
@@ -44,6 +45,7 @@ pro/
 │   ├── calibrate_datasets.py# 手动标定（5 组数据集）
 │   ├── calibrate_bda.py     # 自动发现 + 批量标定管线
 │   ├── deep_data_analysis.py# 深度分析（双轨验证 + 实验先验）
+│   ├── generate_report_protocol_seven_heatmap.py # 报告口径六模型扩展与热力图
 │   ├── load_lynx_hare.py    # Hudson Bay 猞猁—雪兔数据加载器
 │   ├── load_lynx_roe.py     # 欧亚猞猁—狍数据加载器
 │   ├── load_killifish.py    # 鳉鱼—食蚊鱼数据加载器
@@ -65,7 +67,7 @@ pro/
 
 | 文件 | 功能 |
 |---|---|
-| `main.py` | 主模型数值实验入口。运行基线 vs 恐惧+记忆 ODE、参数扫描、敏感性分析、按 20% 等效恐惧强度校准的机制对比、B-D+恐惧对比和 k-damping 分析 |
+| `main.py` | 主模型数值实验入口。运行基线 vs 恐惧+记忆 ODE、参数扫描、敏感性分析、按 20% 等效恐惧强度校准的机制对比 |
 | `pde2d_turing.py` | 2D 反应—扩散 PDE + Turing 线性稳定性诊断。支持命令行参数：`--fig demo/all/3/4/5/6` 选择图组，`--quick` 快速试跑，`--skip-pde` 仅输出稳定性曲线 |
 | `k_damping_analysis.py` | k 参数局部稳定性独立分析。执行 Jacobian 特征值扫描、数值振幅扫描和峰值衰减比计算；当前振幅与峰值衰减结果主要处于数值噪声量级 |
 | `compile_docs.py` | 使用 pandoc + xelatex 将 `report/规划.md` 和 `report/教程.md` 编译为 PDF |
@@ -77,13 +79,14 @@ pro/
 
 | 文件 | 功能 |
 |---|---|
-| `src/model.py` | 7 种 ODE 右端项函数：`baseline_rhs`（logistic + Holling II）、`fear_memory_rhs`（Wang 2019 记忆核）、`fear_instant_rhs`（无记忆瞬时恐惧）、`fear_saturating_rhs`（Zanette 型饱和恐惧）、`fear_foraging_rhs`（Lima/Preisser 觅食抑制）、`fear_handling_rhs`（处理时间延长）、`bd_fear_rhs`（B-D + Wang 恐惧因子） |
-| `src/parameters.py` | Frozen dataclass 参数集，8 个 `MechanismId` 比较情景（含 Holling/B-D 各自无恐惧基线），以及预设参数实例 |
+| `src/model.py` | 6 种 ODE 右端项函数：`baseline_rhs`（logistic + Holling II）、`fear_memory_rhs`（Wang 2019 记忆核）、`fear_instant_rhs`（无记忆瞬时恐惧）、`fear_saturating_rhs`（Zanette 型饱和恐惧）、`fear_foraging_rhs`（Lima/Preisser 觅食抑制）、`fear_handling_rhs`（处理时间延长） |
+| `src/parameters.py` | Frozen dataclass 参数集，6 个 `MechanismId` 比较情景（含无恐惧基线），以及预设参数实例 |
 | `src/simulate.py` | `scipy.solve_ivp`（RK45）包装，均匀网格重采样（800 点），`long_term_mean` 长期均值，`is_extinct` 灭绝判定 |
 | `src/analysis.py` | 参数扫描、局部敏感性分析、带 RHS 残差校验的平衡点求解、20% 等效恐惧参数反解，以及相对各模型体系无恐惧基线的机制比较 |
-| `src/literature.py` | 统一多机制运行框架：`run_mechanism` / `run_all_mechanisms`，支持传入校准参数并分开 Holling/B-D 模型尺度 |
-| `src/visualize.py` | 所有 matplotlib 绑图：时间序列对比、相图、参数扫描、敏感性条形图、机制对比、2D 斑图、拟合结果、k-damping 分析图 |
-| `src/fit.py` | 三模型 ODE 参数拟合；输出训练/留后验证 RMSE、AIC/AICc/BIC、优化诊断；实现 B-D `k` profile likelihood，并保留条件敏感性扫描 |
+| `src/literature.py` | 统一多机制运行框架：`run_mechanism` / `run_all_mechanisms`，支持传入校准参数 |
+| `src/visualize.py` | 所有 matplotlib 绑图：时间序列对比、相图、参数扫描、敏感性条形图、机制对比、拟合结果 |
+| `src/fit.py` | baseline + fear-memory ODE 参数拟合；输出训练/留后验证 RMSE、AIC/AICc/BIC、优化诊断 |
+| `src/fear_pathway_fit.py` | 在相同 Holling II baseline 上拟合瞬时繁殖、记忆繁殖、饱和繁殖、觅食/攻击率抑制和处理时间延长通道；每个候选仅增加一个主要恐惧参数 |
 | `src/k_damping.py` | k 局部稳定性分析：Jacobian 矩阵求解、特征值扫描、Hopf 分岔阈值估计、峰值衰减指标、多 k 联合扫描 |
 | `src/pde2d.py` | 2D 反应—扩散显式 Euler 有限差分（Neumann 边界），Turing 稳定性 λ(k) 分析，`scan_d2_patterns` 扩散系数扫描 |
 
@@ -97,9 +100,10 @@ pro/
 | `data/dataset_catalog.json` | 12 组数据集的完整注册信息（DOI、角色、列映射、加载器引用） |
 | `data/download_datasets.py` | 一键下载所有数据集（Dryad API + GitHub + Zenodo），含反爬检测和 manifest 输出 |
 | `data/auto_discover.py` | 启发式自动发现引擎：扫描 CSV/TSV，识别时间/猎物/捕食者列，处理堆叠区域数据、长格式表格等复杂情况 |
-| `data/calibrate_datasets.py` | 手动标定 5 组数据集（hudson_bay, lynx_roe_r3, killifish_tp, zooplankton, lter_fish），分别拟合 baseline / fear_memory / B-D+fear |
-| `data/calibrate_bda.py` | 自动发现标定管线：三模型仅在前 80% 时间点拟合，再对末尾 20% 做连续多步预测；输出 RMSE、信息准则和优化诊断 |
-| `data/deep_data_analysis.py` | 深度分析：按留后验证误差与 AICc 比较模型；重新优化干扰参数的 `k` profile；在每条序列观测捕食者中位数处计算恐惧抑制 |
+| `data/calibrate_datasets.py` | 手动标定 5 组数据集（hudson_bay, lynx_roe_r3, killifish_tp, zooplankton, lter_fish），分别拟合 baseline / fear_memory |
+| `data/calibrate_bda.py` | 自动发现标定管线：baseline + fear-memory 仅在前 80% 时间点拟合，再对末尾 20% 做连续多步预测；输出 RMSE、信息准则和优化诊断 |
+| `data/deep_data_analysis.py` | 深度分析：按留后验证误差与 AICc 比较模型；在每条序列观测捕食者中位数处计算恐惧抑制 |
+| `data/generate_report_protocol_seven_heatmap.py` | 将 `report.tex` 的正式拟合口径扩展到六模型。四个新增通道可按 `--model` 断点运行，`--aggregate-only` 汇总正式热力图 |
 | `data/load_lynx_hare.py` | Hudson Bay 猞猁—雪兔毛皮记录（1845–1935，90+ 年）加载器 |
 | `data/load_lynx_roe.py` | Andren 等欧亚猞猁—狍 7 区域数据加载器，支持单区域或全区域 |
 | `data/load_killifish.py` | 鳉鱼—食蚊鱼月度 log 密度数据（3 站点 × 5 年 × 12 月）加载器 |
@@ -131,6 +135,13 @@ python data/calibrate_bda.py          # 自动发现 + 批量标定
 python data/deep_data_analysis.py --skip-profile-all --skip-lter  # 代表序列 profile，较快
 python data/deep_data_analysis.py     # 全序列 profile + LTER，耗时很长
 
+# 与 report.tex 相同口径的六模型扩展；四个新增通道可分别运行并断点续跑
+python data/generate_report_protocol_seven_heatmap.py --model fear_instant
+python data/generate_report_protocol_seven_heatmap.py --model fear_saturating
+python data/generate_report_protocol_seven_heatmap.py --model fear_foraging
+python data/generate_report_protocol_seven_heatmap.py --model fear_handling
+python data/generate_report_protocol_seven_heatmap.py --aggregate-only
+
 # 文档编译
 call compile_docs.bat                 # 规划/教程 → PDF
 call compile_report.bat               # report/report.tex → PDF
@@ -142,53 +153,60 @@ xelatex -interaction=nonstopmode -output-directory=report report/report.tex
 
 ## 当前主要结论
 
-- 在各体系无恐惧正平衡点处校准为 20% 等效抑制后，六种恐惧机制均保持共存，但长期种群变化方向明显不同。
+- 在各体系无恐惧正平衡点处校准为 20% 等效抑制后，五种恐惧机制均保持共存，但长期种群变化方向明显不同。
 - 记忆模型的 `phi` 扫描 31/31 为共存，其中 20 个情景通过长期收敛诊断，11 个未通过。
-- 12 条主序列中，B-D 在训练归一化 RMSE 上单独最优 11 条，GLERL 三模型并列。
-- 留后验证最优结果为 B-D 8 条、baseline 1 条、fear-memory 2 条、三模型并列 1 条；AICc 最优结果为 B-D 9 条、baseline 1 条、fear-memory 2 条。
-- baseline 仅 7/12 拟合可用于比较，5 次失败拟合不得进入胜负统计。
-- `k` 增大压缩 B-D 共存密度，但最大特征值实部始终为负且变化非单调；当前参数带未出现 Hopf 分岔，不能称为普遍“稳定化”。
-- 观测捕食者中位数处的 `eta` 类群中位数约为：哺乳类 0.0119、鱼类 0.000531、浮游动物 0.000053。
-- Peacor 数据中的 TMIE 37、NCE 27 是研究类型计数，不是效应量。Andrén 七区与 Killifish 三站存在研究内重复，序列级胜负不是 12 个独立证据。
+- 六模型（baseline + 5 种 Holling II 恐惧通道）留后验证 RMSE 最优为 fear-memory 5 条、fear-instant 3 条、fear-handling 3 条、baseline 3 条、fear-foraging 1 条；AICc 最优为 baseline 8 条、fear-foraging 3 条、fear-instant 2 条、fear-memory 1 条、fear-saturating 1 条。
+- 六模型 90/90 次拟合均可比较；不同序列由不同通道获胜，无单一恐惧通道一致胜出，预测胜出不能替代参数可辨识性证据。
+- 观测捕食者中位数处的 `eta` 类群中位数约为：哺乳类 0.00283、鱼类 0.0000123、浮游动物 0.000780。
+- Peacor 数据中的 TMIE 37、NCE 27 是研究类型计数，不是效应量。Andrén 七区、Killifish 三站和 Windermere 两湖盆存在研究内重复，序列级胜负不是 15 个独立证据。
 
 最终论文位于 `report/report.tex`，结构为：
 
 `引言 → 相关工作 → 预备知识 → 模型与方法 → 理论与动力学分析 → 实验与讨论 → 结论 → 参考文献 → 附录`
 
-## 两种模型体系
+## 模型体系
 
 - **经典体系**（x=猎物, y=捕食者, 可选 M=记忆）：logistic 增长 + Holling II 功能响应，参数为 `BaselineParams` / `FearMemoryParams`
-- **B-D 体系**（u=猎物, v=捕食者）：Beddington-DeAngelis 功能响应 + Wang 恐惧因子 `1/(1+kv)`，参数为 `BDAFearParams`，基于 Myint et al. (2025, arXiv:2506.22070)
 
 ## 拟合与模型比较口径
 
-- 三种模型只使用前 80% 时间点拟合，归一化尺度也只由训练段确定；末尾 20% 用于从序列初始状态连续积分得到的多步留后预测。
-- 三种模型均输出训练段 `rmse_normalized_*` / `rmse_raw_*` 和留后段 `validation_rmse_*`。跨模型胜负优先依据留后验证误差与 AICc，不能仅依据训练 RMSE。
+- 各模型只使用前 80% 时间点拟合，归一化尺度也只由训练段确定；末尾 20% 用于从序列初始状态连续积分得到的多步留后预测。
+- 各模型均输出训练段 `rmse_normalized_*` / `rmse_raw_*` 和留后段 `validation_rmse_*`。跨模型胜负优先依据留后验证误差与 AICc，不能仅依据训练 RMSE。
 - AIC、AICc 和 BIC 使用统一归一化训练残差，并按各模型实际拟合参数数量惩罚复杂度。
 - `optimization_status` 分为 `success`、`usable_limit` 和 `failed`；失败拟合保留用于诊断，但不进入模型胜负统计。
-- 每条拟合记录包含优化终止原因、目标函数值和参数触边情况。Holling II 搜索区间已覆盖当前默认 `theta=0.0052`，`fit_e_mu=True` 会实际拟合 `e`、`mu`。
-- B-D 正平衡点通过降维求根计算，返回前必须满足正值约束并通过 `bd_fear_rhs` 残差检查。
+- baseline 默认逐序列拟合 `r,K,a,theta,e,mu`；fear-memory 默认逐序列拟合 `r,K,a,theta,e,mu,phi`，仅固定 `delta=1`。`fit_e_mu=False` 可复现固定 `e、mu` 的旧模式。
+- 所有拟合均使用固定种子 `(0,1,2)` 的差分进化，选择最佳候选后进行局部精修；每条记录包含逐种子目标值、选中种子、优化终止原因、最终目标函数值和参数触边情况。
+- 正式六模型扩展沿用同一口径：训练段尺度归一化、20% 连续多步留后、固定种子 `(0,1,2)` 差分进化和局部精修。
+- `e、mu` 的点估计只在对应序列时间单位内解释；部分 `e` 拟合触及下界，不能进行未经可辨识性分析的跨系统生态比较。
 
-## 公平机制比较与 B-D 恐惧强度
+## 公平机制比较
 
-- Holling 与 B-D 使用不同量纲，绝对时间序列只能分图展示；机制胜负使用相对各自无恐惧基线的长期均值变化和相对振幅 `A/mean` 变化。
 - 核心机制对比在各体系无恐惧正平衡点处校准为 20% 等效抑制。原始默认参数结果仅作为 `results/supplementary/` 中的补充实验。
-- B-D 必须与 `k=0` 的 B-D 基线比较。
-- `profile_bda_k` 会对每个固定 `k` 重新优化其余 B-D 参数并输出近似 95% profile 区间；`conditional_bda_k_scan` 才是固定其余参数的条件敏感性扫描。代表序列的 profile 区间较宽或不连续，预测表现不能自动解释为参数机制识别。
-- 跨系统恐惧抑制使用每条序列归一化捕食者的观测中位数：`eta_at_observed_median`。`eta_v5_theoretical_extrapolation` 仅为理论外推；当前 `v=5` 对 12/12 条序列均超出观测范围。
-- 12 条主序列是拟合单位，不是独立生态重复；LTER 额外拟合因物种配对、时间尺度和筛选规则不同，仅作为探索性输出。
+- 跨系统恐惧抑制使用每条序列归一化捕食者的观测中位数：`eta_at_observed_median`。`eta_v5_theoretical_extrapolation` 仅为理论外推。
+- 15 条主序列是拟合单位，不是独立生态重复；LTER 额外拟合因物种配对、时间尺度和筛选规则不同，仅作为探索性输出。
 
 主要结果位于：
 
-- `results/calibration_bda/fit_summary.csv`：36 条三模型拟合记录。
+- `results/calibration_bda/fit_summary.csv`：30 条 baseline + fear-memory 拟合记录。
+- `results/seven_model_real_fits/report_protocol_seven_model_metrics.csv`：与 `report.tex` 相同口径的 90 条六模型拟合指标。
+- `results/seven_model_real_fits/validation_rmse_heatmap_six_model.png`：正式六模型留后验证热力图。
+- `results/seven_model_real_fits/validation_rmse_heatmap.png`：上述热力图的默认文件名副本。
+- `results/seven_model_real_fits/report_protocol_fear_*_metrics.csv`：四个新增通道的正式拟合断点缓存。
 - `results/deep_analysis/tier1/rmse_improvement.csv`：训练 RMSE、留后验证 RMSE、AICc/BIC 和两类胜者。
 - `results/equivalent_fear_calibration.json`：20% 等效恐惧参数与参考状态。
-- `results/deep_analysis/tier1/k_profile_long.csv`：重新优化干扰参数后的 profile likelihood。
-- `results/deep_analysis/tier1/k_conditional_sensitivity_long.csv`：固定其余参数的条件扫描。
 - `results/deep_analysis/tier1/cross_system_k_eta.csv`：观测中位捕食者密度、观测范围内 `eta` 和明确标记的 `v=5` 理论外推。
+
+真实数据与诊断输出位于：
+
+- `data/raw/`：下载得到的原始真实数据。
+- `data/bundled/`：原始下载不可用时的项目内打包数据。
+- `data/dataset_catalog.json`：数据集 DOI、用途、列映射和加载器注册信息。
+- `results/calibration_bda/identification_report.json`：15 条正式序列的来源文件和元数据。
+- `results/calibration_bda/params/`、`results/calibration_bda/figures/`：正式 baseline + fear-memory 参数与拟合图。
+- `results/fear_pathway_comparison/`：等参数化通道开发、合成恢复和 profile 诊断。该目录使用的早期优化预算与正式报告口径不同，不用于正式六模型胜负统计。
 
 `report/report.tex` 已按当前机器可读结果重写。报告用于组织和解释证据；若报告文字与代码或机器可读输出冲突，以代码和上述输出为准。
 
 ## 参考文献
 
-Myint, S. S., Wang, Y., & Preisser, E. L. (2025). Fear-induced destabilization in a Beddington-DeAngelis predator-prey model. *arXiv:2506.22070*.
+见 `report/report.tex` 中的完整文献列表。

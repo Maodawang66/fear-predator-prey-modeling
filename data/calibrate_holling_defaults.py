@@ -1,5 +1,5 @@
 """
-Use the 12 fitted population time series to choose stable Holling II defaults.
+Use the pinned formal population time series to choose stable Holling II defaults.
 
 The script prints a global empirical coexistence target and searches constrained
 BaselineParams(a, theta, e, mu) values whose no-fear equilibrium is positive,
@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from data.auto_discover import discover_and_load  # noqa: E402
+from data.formal_series import load_formal_series  # noqa: E402
 from data.series import PredatorPreySeries  # noqa: E402
 from src.parameters import BaselineParams  # noqa: E402
 from src.simulate import integrate_baseline, integrate_until_converged, is_extinct  # noqa: E402
@@ -63,13 +63,12 @@ SEARCH_BOUND_SCENARIOS = {
 def _load_report_series() -> tuple[list[PredatorPreySeries], dict]:
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     report_entries = manifest["report_series"]
-    excluded_entries = manifest["excluded_series"]
-    entries = report_entries + excluded_entries
+    entries = report_entries
     expected_ids = [entry["id"] for entry in entries]
     if len(expected_ids) != len(set(expected_ids)):
         raise RuntimeError("duplicate series id in Holling report manifest")
 
-    discovered = discover_and_load(min_confidence=float(manifest["min_confidence"]))
+    discovered = load_formal_series()
     by_id = {series.name: series for series in discovered}
     actual_ids = set(by_id)
     expected_id_set = set(expected_ids)

@@ -1,11 +1,10 @@
 # Auto-discovery report
-generated: 2026-06-05T09:57:11.367286+00:00
-scanned_valid_csv: 5
-candidates: 13
+generated: 2026-06-11T14:03:01.138742+00:00
+scanned_valid_csv: 4
+candidates: 12
 
 - [OK] data\raw\01_lynx_roe_deer\Andren_lynx_roedeer_data.csv
 - [OK] data\raw\02_killifish_mosquitofish\TimeSeriesLogMeans.csv
-- [OK] data\raw\03_hudson_bay_lynx_hare\lynxhare.csv
 - [OK] data\raw\04_lake_michigan_zooplankton\GLERL_M110_Zoop_1994-2012.txt
 - [OK] data\raw\07_lter_fish\WIfishAbundance.csv
 
@@ -40,11 +39,8 @@ candidates: 13
 - **TimeSeriesLogMeans.csv** (killifish) conf=0.90 method=killifish_by_site
   - time=`DATESEQ` prey=`ME2LOGHETADS` pred=`ME4LOGGAMBO` group=WRHW
   - site=WRHW, log->linear
-- **lynxhare.csv** (lynx_hare) conf=0.95 method=lynx_hare_signature
-  - time=`year` prey=`hare` pred=`lynx` group=-
-  - classic hudson bay or lynx-roedeer style
 - **GLERL_M110_Zoop_1994-2012.txt** (zooplankton) conf=0.93 method=zooplankton_glerl
-  - time=`JulianDay` prey=`D.mendotae` pred=`Bythotrephes` group=-
+  - time=`Date` prey=`D.mendotae` pred=`Bythotrephes` group=-
   - Marino et al. Lake Michigan CE/NCE monitoring
 - **WIfishAbundance.csv** (lter_fish) conf=0.88 method=lter_fish_pair
   - time=`YEAR` prey=`Bluegill` pred=`Largemouth Bass` group=WBIC=804600

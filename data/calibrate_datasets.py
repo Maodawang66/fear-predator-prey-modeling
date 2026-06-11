@@ -89,8 +89,16 @@ def _run_one(series, tag: str, log: list[str]) -> None:
             f"AICc={res.aicc:.4g}  "
             f"status={res.optimization_status}"
         )
+        if res.model in ("baseline", "fear_memory"):
+            print(
+                f"    e={res.params.get('e', 0):.5f}, "
+                f"mu={res.params.get('mu', 0):.5f}"
+            )
         if res.model == "fear_memory":
-            print(f"    phi={res.params.get('phi', 0):.5f}")
+            print(
+                f"    phi={res.params.get('phi', 0):.5f}, "
+                f"delta={res.params.get('delta', 0):.5f} (fixed)"
+            )
         if res.model == "bda_fear":
             print(f"    k={res.params.get('k', 0):.5f}, p={res.params.get('p', 0):.3f}, q={res.params.get('q', 0):.3f}")
 

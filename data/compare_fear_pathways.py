@@ -1,4 +1,4 @@
-"""Compare equally parameterized fear pathways on the 12 primary time series."""
+"""Compare equally parameterized fear pathways on the pinned formal time series."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from data.auto_discover import discover_and_load  # noqa: E402
+from data.formal_series import load_formal_series  # noqa: E402
 from src.fear_pathway_fit import (  # noqa: E402
     HOLLING_FEAR_PATHWAYS,
     fit_holling_baseline_to_series,
@@ -36,8 +36,12 @@ def _study_id(series_name: str) -> str:
         return "killifish_mosquitofish"
     if "glerl" in name or "zoop" in name:
         return "glerl_zooplankton"
-    if "lynxhare" in name:
-        return "hudson_bay_lynx_hare"
+    if "isle_royale" in name:
+        return "isle_royale_wolf_moose"
+    if "windermere" in name:
+        return "windermere_pike_perch"
+    if "komi_lynx_hare" in name:
+        return "komi_lynx_hare"
     return series_name
 
 
@@ -264,7 +268,7 @@ def _memory_initializations(series, delta: float) -> dict[str, float]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--max-series", type=int, default=12)
+    parser.add_argument("--max-series", type=int, default=15)
     parser.add_argument("--optimizer", choices=("auto", "global", "local"), default="auto")
     parser.add_argument("--max-nfev", type=int, default=500)
     parser.add_argument("--skip-profiles", action="store_true")
@@ -285,8 +289,7 @@ def main() -> None:
         _write_conclusion(rows, study_rows, profiles)
         return
 
-    series_list = discover_and_load(min_confidence=0.5)
-    series_list.sort(key=lambda s: (s.meta.get("confidence", 0), s.n_points), reverse=True)
+    series_list = load_formal_series()
     series_list = series_list[: args.max_series]
     OUT.mkdir(parents=True, exist_ok=True)
 

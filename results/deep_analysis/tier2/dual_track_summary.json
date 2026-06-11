@@ -1,22 +1,28 @@
 {
   "track_A_eta_by_group": {
-    "mammal": {
-      "n": 8,
-      "eta_observed_median_group_median": 0.011922146998031864,
-      "eta_observed_median_group_min": 0.0002376343093949672,
-      "eta_observed_median_group_max": 0.06697520717478561
-    },
     "zooplankton": {
       "n": 1,
-      "eta_observed_median_group_median": 5.3176972217342114e-05,
-      "eta_observed_median_group_min": 5.3176972217342114e-05,
-      "eta_observed_median_group_max": 5.3176972217342114e-05
+      "eta_observed_median_group_median": 0.0007798293183851012,
+      "eta_observed_median_group_min": 0.0007798293183851012,
+      "eta_observed_median_group_max": 0.0007798293183851012
+    },
+    "mammal": {
+      "n": 9,
+      "eta_observed_median_group_median": 0.00283234509876516,
+      "eta_observed_median_group_min": 0.00010588570415023207,
+      "eta_observed_median_group_max": 0.16780255445017075
     },
     "fish": {
       "n": 3,
-      "eta_observed_median_group_median": 0.0005310347901129086,
-      "eta_observed_median_group_min": 0.00015967843097745106,
-      "eta_observed_median_group_max": 0.0013422283349533205
+      "eta_observed_median_group_median": 1.2293076097274145e-05,
+      "eta_observed_median_group_min": 1.2242662154861787e-05,
+      "eta_observed_median_group_max": 0.00025277393244512987
+    },
+    "other": {
+      "n": 2,
+      "eta_observed_median_group_median": 0.000780073246583647,
+      "eta_observed_median_group_min": 0.00045282634351440565,
+      "eta_observed_median_group_max": 0.0011073201496528884
     }
   },
   "track_B_priors": {

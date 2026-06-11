@@ -23,3 +23,6 @@ python data/download_datasets.py
 - `raw/04_lake_michigan_zooplankton/GLERL_M110_Zoop_1994-2012.txt`
 - `raw/07_lter_fish/WIfishAbundance.csv`
 - `raw/12_peacor_risk_meta/PeacorEtAl_Data_ELE-00137-2022.xlsx`
+- `raw/15_isle_royale_wolf_moose/isle_royale_wolf_moose_pre_2018.csv`
+
+`raw/03_hudson_bay_lynx_hare/lynxhare.csv` 保留作历史资料，但毛皮交易代理量不进入正式 15 条种群序列分析。Windermere 北/南湖盆与 Komi 配对由 `raw/05_gpdd/data/` 中的 GPDD 记录显式加载。

@@ -1,9 +1,8 @@
 {
-  "generated": "2026-06-05T10:07:33.245874+00:00",
+  "generated": "2026-06-11T14:07:42.079707+00:00",
   "scanned_files": [
     "data\\raw\\01_lynx_roe_deer\\Andren_lynx_roedeer_data.csv",
     "data\\raw\\02_killifish_mosquitofish\\TimeSeriesLogMeans.csv",
-    "data\\raw\\03_hudson_bay_lynx_hare\\lynxhare.csv",
     "data\\raw\\04_lake_michigan_zooplankton\\GLERL_M110_Zoop_1994-2012.txt",
     "data\\raw\\07_lter_fish\\WIfishAbundance.csv"
   ],
@@ -119,22 +118,11 @@
       "notes": "site=WRHW, log->linear"
     },
     {
-      "file": "data\\raw\\03_hudson_bay_lynx_hare\\lynxhare.csv",
-      "signature": "lynx_hare",
-      "confidence": 0.95,
-      "method": "lynx_hare_signature",
-      "time_col": "year",
-      "prey_col": "hare",
-      "predator_col": "lynx",
-      "group_key": null,
-      "notes": "classic hudson bay or lynx-roedeer style"
-    },
-    {
       "file": "data\\raw\\04_lake_michigan_zooplankton\\GLERL_M110_Zoop_1994-2012.txt",
       "signature": "zooplankton",
       "confidence": 0.93,
       "method": "zooplankton_glerl",
-      "time_col": "JulianDay",
+      "time_col": "Date",
       "prey_col": "D.mendotae",
       "predator_col": "Bythotrephes",
       "group_key": null,
@@ -154,35 +142,23 @@
   ],
   "loaded_series": [
     {
-      "name": "lynxhare",
-      "n_points": 60,
-      "source": "D:\\code\\USTC_MM_26_animalfear\\data\\raw\\03_hudson_bay_lynx_hare\\lynxhare.csv",
-      "meta": {
-        "signature": "lynx_hare",
-        "detection_method": "lynx_hare_signature",
-        "confidence": 0.95,
-        "time_col": "year",
-        "prey_col": "hare",
-        "predator_col": "lynx",
-        "group_key": null,
-        "notes": "classic hudson bay or lynx-roedeer style",
-        "n_points": 60
-      }
-    },
-    {
       "name": "glerl_m110_zoop_1994-201",
-      "n_points": 175,
+      "n_points": 172,
       "source": "D:\\code\\USTC_MM_26_animalfear\\data\\raw\\04_lake_michigan_zooplankton\\GLERL_M110_Zoop_1994-2012.txt",
       "meta": {
         "signature": "zooplankton",
         "detection_method": "zooplankton_glerl",
         "confidence": 0.93,
-        "time_col": "JulianDay",
+        "time_col": "Date",
         "prey_col": "D.mendotae",
         "predator_col": "Bythotrephes",
         "group_key": null,
         "notes": "Marino et al. Lake Michigan CE/NCE monitoring",
-        "n_points": 175
+        "n_points": 172,
+        "formal_start_rule": "first_joint_positive_observation",
+        "leading_observations_dropped": 3,
+        "original_n_points": 175,
+        "original_start_time": 0.26009582477763615
       }
     },
     {
@@ -343,6 +319,85 @@
         "group_key": "WRGP",
         "notes": "site=WRGP, log->linear",
         "n_points": 56
+      }
+    },
+    {
+      "name": "isle_royale_wolf_moose_pre_2018",
+      "n_points": 38,
+      "source": "D:\\code\\USTC_MM_26_animalfear\\data\\raw\\15_isle_royale_wolf_moose\\isle_royale_wolf_moose_pre_2018.csv",
+      "meta": {
+        "signature": "isle_royale_wolf_moose",
+        "detection_method": "formal_loader",
+        "confidence": 1.0,
+        "time_col": "year",
+        "prey_col": "moose",
+        "predator_col": "wolves",
+        "group_key": null,
+        "year_start": 1980,
+        "year_end": 2017,
+        "n_points": 38,
+        "source_url": "https://www.nps.gov/isro/learn/nature/wolf-moose-populations.htm",
+        "intervention_excluded": "NPS wolf relocation beginning September 2018"
+      }
+    },
+    {
+      "name": "windermere_north_pike_perch",
+      "n_points": 23,
+      "source": "D:\\code\\USTC_MM_26_animalfear\\data\\raw\\05_gpdd\\data\\gpdd_population_records.csv",
+      "meta": {
+        "signature": "gpdd_formal_pair",
+        "detection_method": "formal_gpdd_pair",
+        "confidence": 1.0,
+        "time_col": "SampleYear",
+        "prey_col": "Population(MainID=6097)",
+        "predator_col": "Population(MainID=6098)",
+        "group_key": "Windermere North Basin",
+        "year_start": 1944,
+        "year_end": 1966,
+        "n_points": 23,
+        "gpdd_prey_main_id": "6097",
+        "gpdd_predator_main_id": "6098",
+        "notes": "Pike were removed by gill netting; both series use kg/ha."
+      }
+    },
+    {
+      "name": "windermere_south_pike_perch",
+      "n_points": 23,
+      "source": "D:\\code\\USTC_MM_26_animalfear\\data\\raw\\05_gpdd\\data\\gpdd_population_records.csv",
+      "meta": {
+        "signature": "gpdd_formal_pair",
+        "detection_method": "formal_gpdd_pair",
+        "confidence": 1.0,
+        "time_col": "SampleYear",
+        "prey_col": "Population(MainID=6099)",
+        "predator_col": "Population(MainID=6100)",
+        "group_key": "Windermere South Basin",
+        "year_start": 1944,
+        "year_end": 1966,
+        "n_points": 23,
+        "gpdd_prey_main_id": "6099",
+        "gpdd_predator_main_id": "6100",
+        "notes": "Pike were removed by gill netting; both series use kg/ha."
+      }
+    },
+    {
+      "name": "komi_lynx_hare",
+      "n_points": 21,
+      "source": "D:\\code\\USTC_MM_26_animalfear\\data\\raw\\05_gpdd\\data\\gpdd_population_records.csv",
+      "meta": {
+        "signature": "gpdd_formal_pair",
+        "detection_method": "formal_gpdd_pair",
+        "confidence": 1.0,
+        "time_col": "SampleYear",
+        "prey_col": "Population(MainID=9511)",
+        "predator_col": "Population(MainID=9512)",
+        "group_key": "Komi Republic",
+        "year_start": 1922,
+        "year_end": 1942,
+        "n_points": 21,
+        "gpdd_prey_main_id": "9511",
+        "gpdd_predator_main_id": "9512",
+        "notes": "GPDD proportion-transformed count series; reliability grade 1."
       }
     }
   ]

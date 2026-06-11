@@ -1,0 +1,110 @@
+{
+  "model": "fear_memory",
+  "series": "windermere_south_pike_perch",
+  "params": {
+    "r": 0.3920088428479402,
+    "K": 18400.537372577757,
+    "a": 0.1318849641331227,
+    "theta": 0.011579863046161083,
+    "e": 0.016495839344667383,
+    "mu": 0.11755765911854588,
+    "phi": 0.003521486028620211,
+    "delta": 1.0,
+    "x0": 123.0,
+    "y0": 6.9,
+    "m0": 6.9
+  },
+  "rmse_normalized_prey": 0.057097401428011854,
+  "rmse_normalized_predator": 0.18788086637087564,
+  "rmse_normalized_total": 0.1388512390980044,
+  "rmse_raw_prey": 28.091921502581837,
+  "rmse_raw_predator": 1.7097158839749682,
+  "rmse_raw_total": 19.90074347996999,
+  "validation_rmse_normalized_prey": 1.9334593121255423,
+  "validation_rmse_normalized_predator": 0.34156728524708413,
+  "validation_rmse_normalized_total": 1.3883322948768493,
+  "validation_rmse_raw_prey": 951.2619815657667,
+  "validation_rmse_raw_predator": 3.1082622957484642,
+  "validation_rmse_raw_total": 672.6473886320115,
+  "aic": -128.1533541710652,
+  "aicc": -124.15335417106519,
+  "bic": -117.06872160187243,
+  "n_parameters": 7,
+  "n_train_points": 18,
+  "n_validation_points": 5,
+  "success": false,
+  "optimization_status": "usable_limit",
+  "usable_for_comparison": true,
+  "message": "STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
+  "meta": {
+    "nfev": 504,
+    "objective_value": 0.6939246417765266,
+    "termination_reason": "STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
+    "parameter_bound_hits": [],
+    "optimizer_seeds": [
+      0,
+      1,
+      2
+    ],
+    "optimizer_runs": [
+      {
+        "seed": 0,
+        "status": "usable_limit",
+        "success": false,
+        "objective_value": 0.8911047088370596,
+        "nfev": 5355,
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": [
+          "K"
+        ]
+      },
+      {
+        "seed": 1,
+        "status": "usable_limit",
+        "success": false,
+        "objective_value": 0.8911817872164589,
+        "nfev": 5355,
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
+      },
+      {
+        "seed": 2,
+        "status": "usable_limit",
+        "success": false,
+        "objective_value": 0.8632506629866501,
+        "nfev": 5355,
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
+      }
+    ],
+    "selected_seed": 2,
+    "local_refinement_used": true,
+    "local_refinement": {
+      "status": "usable_limit",
+      "success": false,
+      "objective_value": 0.6939246417765266,
+      "nfev": 504,
+      "termination_reason": "STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
+      "parameter_bound_hits": []
+    },
+    "initial_memory_source": "predator_initial",
+    "validation_fraction": 0.2,
+    "validation_mode": "ordered_holdout_continuous_multistep",
+    "train_end_time": 17.0,
+    "validation_start_time": 18.0,
+    "signature": "gpdd_formal_pair",
+    "detection_method": "formal_gpdd_pair",
+    "confidence": 1.0,
+    "time_col": "SampleYear",
+    "prey_col": "Population(MainID=6099)",
+    "predator_col": "Population(MainID=6100)",
+    "group_key": "Windermere South Basin",
+    "year_start": 1944,
+    "year_end": 1966,
+    "n_points": 23,
+    "gpdd_prey_main_id": "6099",
+    "gpdd_predator_main_id": "6100",
+    "notes": "Pike were removed by gill netting; both series use kg/ha.",
+    "source_file": "D:\\code\\USTC_MM_26_animalfear\\data\\raw\\05_gpdd\\data\\gpdd_population_records.csv"
+  }
+}

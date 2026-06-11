@@ -47,8 +47,8 @@
     "title": "Hudson Bay lynx–hare fur records",
     "doi": null,
     "citation": "https://www.math.duke.edu/education/ccp/materials/diffeq/predprey/pred1.html",
-    "role": "population_dynamics",
-    "fit_ode": true,
+    "role": "archived_proxy_series",
+    "fit_ode": false,
     "loader": "data.load_lynx_hare.load_lynx_hare",
     "primary_file": "lynxhare.csv",
     "files": {
@@ -60,6 +60,22 @@
           "prey": "hare",
           "predator": "lynx"
         }
+      }
+    }
+  },
+  "15_isle_royale_wolf_moose": {
+    "title": "Isle Royale wolf-moose populations before wolf relocation",
+    "citation": "https://www.nps.gov/isro/learn/nature/wolf-moose-populations.htm",
+    "role": "population_dynamics",
+    "fit_ode": false,
+    "loader": "data.load_isle_royale.load_isle_royale_pre_intervention",
+    "primary_file": "isle_royale_wolf_moose_pre_2018.csv",
+    "notes": "Uses 1980-2017 only; NPS wolf relocation began in September 2018.",
+    "files": {
+      "isle_royale_wolf_moose_pre_2018.csv": {
+        "format": "csv",
+        "rows_approx": 38,
+        "columns": {"time": "year", "prey": "moose", "predator": "wolves"}
       }
     }
   },

@@ -1,5 +1,5 @@
 """
-自动发现 data/raw 中的捕食者—猎物 CSV → 拟合 ODE（基线 / 恐惧记忆 / B-D+恐惧）→ 出图与参数表。
+加载正式捕食者—猎物序列 → 增量拟合 ODE（基线 / 恐惧记忆 / B-D+恐惧）→ 出图与参数表。
 
 无需手动指定文件或列名；识别逻辑见 data/auto_discover.py。
 
@@ -19,14 +19,17 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+import numpy as np
+
 os.environ.setdefault("MPLBACKEND", "Agg")
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from data.auto_discover import discover_all_candidates, discover_and_load, discover_csv_paths  # noqa: E402
+from data.auto_discover import discover_all_candidates, discover_csv_paths  # noqa: E402
 from data.common import is_valid_csv  # noqa: E402
+from data.formal_series import LEGACY_FORMAL_IDS, load_formal_series  # noqa: E402
 from src.fit import FitResult, fit_baseline_to_series, fit_bda_fear_to_series, fit_fear_memory_to_series  # noqa: E402
 from src.visualize import plot_fit_result  # noqa: E402
 
@@ -65,7 +68,69 @@ def _save_json(result: FitResult, path: Path) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def _fit_one_series(series, tag: str) -> list[FitResult]:
+def _load_json_result(path: Path) -> FitResult:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return FitResult(
+        model=payload["model"],
+        series_name=payload["series"],
+        params=payload["params"],
+        rmse_normalized_prey=payload["rmse_normalized_prey"],
+        rmse_normalized_predator=payload["rmse_normalized_predator"],
+        rmse_normalized_total=payload["rmse_normalized_total"],
+        rmse_raw_prey=payload["rmse_raw_prey"],
+        rmse_raw_predator=payload["rmse_raw_predator"],
+        rmse_raw_total=payload["rmse_raw_total"],
+        validation_rmse_normalized_prey=payload["validation_rmse_normalized_prey"],
+        validation_rmse_normalized_predator=payload["validation_rmse_normalized_predator"],
+        validation_rmse_normalized_total=payload["validation_rmse_normalized_total"],
+        validation_rmse_raw_prey=payload["validation_rmse_raw_prey"],
+        validation_rmse_raw_predator=payload["validation_rmse_raw_predator"],
+        validation_rmse_raw_total=payload["validation_rmse_raw_total"],
+        aic=payload["aic"],
+        aicc=payload["aicc"],
+        bic=payload["bic"],
+        n_parameters=payload["n_parameters"],
+        n_train_points=payload["n_train_points"],
+        n_validation_points=payload["n_validation_points"],
+        success=payload["success"],
+        optimization_status=payload["optimization_status"],
+        message=payload["message"],
+        t_obs=np.array([]),
+        prey_obs=np.array([]),
+        predator_obs=np.array([]),
+        prey_pred=np.array([]),
+        predator_pred=np.array([]),
+        meta=payload["meta"],
+    )
+
+
+def _load_cached_results() -> dict[tuple[str, str], FitResult]:
+    results: dict[tuple[str, str], FitResult] = {}
+    for path in sorted((OUT / "params").glob("*.json")):
+        try:
+            result = _load_json_result(path)
+        except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+            continue
+        key = (result.series_name, result.model)
+        if key in results:
+            raise RuntimeError(f"duplicate cached formal fit for {key}: {path}")
+        results[key] = result
+    return results
+
+
+def _existing_tag(series_name: str, fallback: str) -> str:
+    matches = sorted((OUT / "params").glob(f"*_{series_name}_*.json"))
+    if not matches:
+        return fallback
+    for model in ("baseline", "fear_memory", "bda_fear"):
+        suffix = f"_{model}"
+        stem = matches[0].stem
+        if stem.endswith(suffix):
+            return stem[:-len(suffix)]
+    return fallback
+
+
+def _fit_one_series(series, tag: str, model_names: set[str] | None = None) -> list[FitResult]:
     print(f"\n--- {series.name} ({series.n_points} pts) ---")
     print(
         f"    source: {Path(series.source_path).name} | "
@@ -83,6 +148,8 @@ def _fit_one_series(series, tag: str) -> list[FitResult]:
         (fit_fear_memory_to_series, "fear_memory"),
         (fit_bda_fear_to_series, "bda_fear"),
     ):
+        if model_names is not None and model_name not in model_names:
+            continue
         try:
             res = fitter(series)
             res.meta = {**res.meta, **series.meta, "source_file": series.source_path}
@@ -100,8 +167,16 @@ def _fit_one_series(series, tag: str) -> list[FitResult]:
             f"AICc={res.aicc:.4g}  "
             f"status={res.optimization_status}"
         )
+        if model_name in ("baseline", "fear_memory"):
+            print(
+                f"    e={res.params.get('e', 0):.5f}, "
+                f"mu={res.params.get('mu', 0):.5f}"
+            )
         if model_name == "fear_memory":
-            print(f"    phi={res.params.get('phi', 0):.5f}")
+            print(
+                f"    phi={res.params.get('phi', 0):.5f}, "
+                f"delta={res.params.get('delta', 0):.5f} (fixed)"
+            )
         if model_name == "bda_fear":
             print(
                 f"    k={res.params.get('k', 0):.5f}, "
@@ -211,10 +286,16 @@ def _write_summary_table(all_results: list[FitResult]) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Auto-discover CSV and calibrate B-D+ fear ODE")
+    parser = argparse.ArgumentParser(description="Incrementally fit the pinned formal series")
     parser.add_argument("--min-confidence", type=float, default=0.5)
-    parser.add_argument("--max-series", type=int, default=12, help="最多拟合序列数（防止区域×站点爆炸）")
+    parser.add_argument(
+        "--refit-series",
+        action="append",
+        default=[],
+        help="discard cached fits for this formal series and recompute all three models",
+    )
     args = parser.parse_args()
+    refit_series = set(args.refit_series)
 
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "figures").mkdir(exist_ok=True)
@@ -232,22 +313,59 @@ def main() -> None:
     candidates = discover_all_candidates()
     _write_discovery_report(candidates, scanned)
 
-    series_list = discover_and_load(min_confidence=args.min_confidence)
-    series_list.sort(
-        key=lambda s: (s.meta.get("confidence", 0), s.n_points),
-        reverse=True,
-    )
-    series_list = series_list[: args.max_series]
+    series_list = load_formal_series()
 
     print(f"\n[加载] 可拟合序列: {len(series_list)}")
     for s in series_list:
         print(f"  - {s.name} ({s.n_points} pts) <- {Path(s.source_path).name}")
 
-    all_results: list[FitResult] = []
-    log: list[str] = []
+    cached = _load_cached_results()
+    cached = {
+        key: result for key, result in cached.items()
+        if key[0] not in refit_series
+    }
+    required_legacy = {
+        (series_name, model)
+        for series_name in LEGACY_FORMAL_IDS
+        for model in ("baseline", "fear_memory", "bda_fear")
+    }
+    missing_legacy = sorted(
+        key for key in required_legacy - set(cached)
+        if key[0] not in refit_series
+    )
+    if missing_legacy:
+        raise RuntimeError(
+            "legacy formal fit cache is incomplete; refusing to refit existing series: "
+            f"{missing_legacy}"
+        )
+    all_results = [
+        cached[(series.name, model)]
+        for series in series_list
+        for model in ("baseline", "fear_memory", "bda_fear")
+        if (series.name, model) in cached
+    ]
+    log = [
+        f"{r.optimization_status.upper()} {r.series_name}_{r.model} "
+        f"train_RMSE={r.rmse_total:.4g} "
+        f"validation_RMSE={r.validation_rmse_normalized_total:.4g} "
+        f"AICc={r.aicc:.4g} reason={r.message.strip()}"
+        for r in all_results
+    ]
+    print(f"\n[恢复] 已加载 {len(all_results)} 个正式缓存拟合")
     for i, series in enumerate(series_list):
-        tag = f"{i+1:02d}_{series.name}"[:48]
-        results = _fit_one_series(series, tag)
+        missing_models = [
+            model for model in ("baseline", "fear_memory", "bda_fear")
+            if (series.name, model) not in cached
+        ]
+        if not missing_models:
+            continue
+        if series.name in LEGACY_FORMAL_IDS and series.name not in refit_series:
+            raise RuntimeError(f"refusing to refit legacy formal series: {series.name}")
+        fallback_tag = f"{i+1:02d}_{series.name}"[:48]
+        tag = _existing_tag(series.name, fallback_tag)
+        results = _fit_one_series(series, tag, set(missing_models))
+        if {result.model for result in results} != set(missing_models):
+            raise RuntimeError(f"incomplete new fits for {series.name}: {missing_models}")
         all_results.extend(results)
         for r in results:
             log.append(
@@ -257,9 +375,22 @@ def main() -> None:
                 f"AICc={r.aicc:.4g} reason={r.message.strip()}"
             )
 
-    _write_summary_table(all_results)
+    result_lookup = {(result.series_name, result.model): result for result in all_results}
+    expected = {
+        (series.name, model)
+        for series in series_list
+        for model in ("baseline", "fear_memory", "bda_fear")
+    }
+    if set(result_lookup) != expected:
+        raise RuntimeError(f"formal three-model result mismatch: missing={sorted(expected - set(result_lookup))}")
+    ordered_results = [
+        result_lookup[(series.name, model)]
+        for series in series_list
+        for model in ("baseline", "fear_memory", "bda_fear")
+    ]
+    _write_summary_table(ordered_results)
     (OUT / "calibration_log.txt").write_text(
-        "\n".join(log) + f"\n\nseries={len(series_list)} fits={len(all_results)}\n",
+        "\n".join(log) + f"\n\nseries={len(series_list)} fits={len(ordered_results)}\n",
         encoding="utf-8",
     )
 
@@ -296,7 +427,7 @@ def main() -> None:
     )
 
     print("\n" + "=" * 60)
-    print(f"完成: {len(series_list)} 条序列, {len(all_results)} 次拟合")
+    print(f"完成: {len(series_list)} 条序列, {len(ordered_results)} 次拟合")
     print(f"参数表: {OUT / 'fit_summary.csv'}")
     print(f"识别报告: {OUT / 'discovery_report.md'}")
     print(f"JSON: {OUT / 'identification_report.json'}")

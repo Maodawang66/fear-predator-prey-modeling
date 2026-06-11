@@ -1,0 +1,103 @@
+{
+  "model": "baseline",
+  "series": "isle_royale_wolf_moose_pre_2018",
+  "params": {
+    "r": 0.34158538428152846,
+    "K": 1633.9560998284423,
+    "a": 0.0052331489730692675,
+    "theta": 3.6439319568633657e-06,
+    "e": 0.13222458119961245,
+    "mu": 0.747346019535878,
+    "x0": 664.0,
+    "y0": 50.0
+  },
+  "rmse_normalized_prey": 0.17726049788021572,
+  "rmse_normalized_predator": 0.10608408009569525,
+  "rmse_normalized_total": 0.14607381038107387,
+  "rmse_raw_prey": 425.4251949125178,
+  "rmse_raw_predator": 5.304204004784762,
+  "rmse_raw_total": 300.84442079460115,
+  "validation_rmse_normalized_prey": 0.15300368273949733,
+  "validation_rmse_normalized_predator": 0.28435791791137444,
+  "validation_rmse_normalized_total": 0.2283304101633647,
+  "validation_rmse_raw_prey": 367.2088385747936,
+  "validation_rmse_raw_predator": 14.21789589556872,
+  "validation_rmse_raw_total": 259.8504182131963,
+  "aic": -218.83718813593543,
+  "aicc": -217.25228247555808,
+  "bic": -206.27112076260283,
+  "n_parameters": 6,
+  "n_train_points": 30,
+  "n_validation_points": 8,
+  "success": false,
+  "optimization_status": "usable_limit",
+  "usable_for_comparison": true,
+  "message": "STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
+  "meta": {
+    "nfev": 448,
+    "objective_value": 1.2802766025201626,
+    "termination_reason": "STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
+    "parameter_bound_hits": [],
+    "optimizer_seeds": [
+      0,
+      1,
+      2
+    ],
+    "optimizer_runs": [
+      {
+        "seed": 0,
+        "status": "usable_limit",
+        "success": false,
+        "objective_value": 1.653624749949199,
+        "nfev": 3690,
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
+      },
+      {
+        "seed": 1,
+        "status": "usable_limit",
+        "success": false,
+        "objective_value": 1.5858893862096708,
+        "nfev": 3690,
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
+      },
+      {
+        "seed": 2,
+        "status": "usable_limit",
+        "success": false,
+        "objective_value": 1.8116503795637269,
+        "nfev": 3690,
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
+      }
+    ],
+    "selected_seed": 1,
+    "local_refinement_used": true,
+    "local_refinement": {
+      "status": "usable_limit",
+      "success": false,
+      "objective_value": 1.2802766025201626,
+      "nfev": 448,
+      "termination_reason": "STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
+      "parameter_bound_hits": []
+    },
+    "validation_fraction": 0.2,
+    "validation_mode": "ordered_holdout_continuous_multistep",
+    "train_end_time": 29.0,
+    "validation_start_time": 30.0,
+    "signature": "isle_royale_wolf_moose",
+    "detection_method": "formal_loader",
+    "confidence": 1.0,
+    "time_col": "year",
+    "prey_col": "moose",
+    "predator_col": "wolves",
+    "group_key": null,
+    "year_start": 1980,
+    "year_end": 2017,
+    "n_points": 38,
+    "source_url": "https://www.nps.gov/isro/learn/nature/wolf-moose-populations.htm",
+    "intervention_excluded": "NPS wolf relocation beginning September 2018",
+    "source_file": "D:\\code\\USTC_MM_26_animalfear\\data\\raw\\15_isle_royale_wolf_moose\\isle_royale_wolf_moose_pre_2018.csv"
+  }
+}

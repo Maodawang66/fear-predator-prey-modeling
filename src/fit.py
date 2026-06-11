@@ -13,6 +13,8 @@ from scipy.stats import chi2
 from .model import baseline_rhs, bd_fear_rhs, fear_memory_rhs
 from .parameters import BDAFearParams, BaselineParams, FearMemoryParams
 
+DEFAULT_OPTIMIZER_SEEDS = (0, 1, 2)
+
 
 @dataclass
 class _OptResult:
@@ -32,6 +34,7 @@ def _bounded_minimize(
     ub: np.ndarray,
     max_nfev: int = 250,
     method: str = "auto",
+    seed: int = 0,
 ) -> _OptResult:
     """有界非线性最小二乘；参数较多时用差分进化，避免 Windows LAPACK 崩溃。"""
     nfev = 0
@@ -50,7 +53,7 @@ def _bounded_minimize(
         res = differential_evolution(
             objective,
             bounds,
-            seed=0,
+            seed=seed,
             maxiter=max(20, max_nfev // 10),
             polish=False,
             tol=1e-3,
@@ -98,6 +101,107 @@ def _bounded_minimize(
         cost=cost,
         bound_hit_indices=bound_hit_indices,
     )
+
+
+def _multiseed_bounded_minimize(
+    residual: Callable[[np.ndarray], np.ndarray],
+    p0: np.ndarray,
+    lb: np.ndarray,
+    ub: np.ndarray,
+    max_nfev: int,
+    method: str = "auto",
+    seeds: tuple[int, ...] = DEFAULT_OPTIMIZER_SEEDS,
+    param_names: list[str] | None = None,
+) -> tuple[_OptResult, dict]:
+    """Run local optimization, or reproducible global searches followed by refinement."""
+    if method not in ("auto", "global", "local"):
+        raise ValueError("method must be 'auto', 'global', or 'local'")
+    use_global = method == "global" or (method == "auto" and len(p0) >= 5)
+    if not use_global:
+        result = _bounded_minimize(
+            residual,
+            p0,
+            lb,
+            ub,
+            max_nfev=max_nfev,
+            method="local",
+        )
+        return result, {
+            "optimizer_seeds": [],
+            "optimizer_runs": [],
+            "selected_seed": None,
+            "local_refinement_used": False,
+        }
+
+    if not seeds:
+        raise ValueError("at least one optimizer seed is required for global optimization")
+
+    global_runs: list[tuple[int, _OptResult]] = []
+    for seed in seeds:
+        result = _bounded_minimize(
+            residual,
+            p0,
+            lb,
+            ub,
+            max_nfev=max_nfev,
+            method="global",
+            seed=int(seed),
+        )
+        global_runs.append((int(seed), result))
+
+    usable = [
+        item for item in global_runs
+        if item[1].status in ("success", "usable_limit") and np.isfinite(item[1].cost)
+    ]
+    selected_seed, selected_global = min(
+        usable or global_runs,
+        key=lambda item: item[1].cost if np.isfinite(item[1].cost) else float("inf"),
+    )
+    refined = _bounded_minimize(
+        residual,
+        selected_global.x,
+        lb,
+        ub,
+        max_nfev=max_nfev,
+        method="local",
+    )
+    refined_usable = refined.status in ("success", "usable_limit") and np.isfinite(refined.cost)
+    global_usable = selected_global.status in ("success", "usable_limit") and np.isfinite(selected_global.cost)
+    selected = refined if refined_usable and (not global_usable or refined.cost <= selected_global.cost) else selected_global
+
+    def bound_hit_names(result: _OptResult) -> list[str | int]:
+        return (
+            [param_names[index] for index in result.bound_hit_indices]
+            if param_names is not None
+            else result.bound_hit_indices
+        )
+
+    optimizer_runs = [
+        {
+            "seed": seed,
+            "status": result.status,
+            "success": bool(result.success),
+            "objective_value": float(result.cost),
+            "nfev": int(result.nfev),
+            "termination_reason": str(result.message),
+            "parameter_bound_hits": bound_hit_names(result),
+        }
+        for seed, result in global_runs
+    ]
+    return selected, {
+        "optimizer_seeds": [int(seed) for seed in seeds],
+        "optimizer_runs": optimizer_runs,
+        "selected_seed": int(selected_seed),
+        "local_refinement_used": selected is refined,
+        "local_refinement": {
+            "status": refined.status,
+            "success": bool(refined.success),
+            "objective_value": float(refined.cost),
+            "nfev": int(refined.nfev),
+            "termination_reason": str(refined.message),
+            "parameter_bound_hits": bound_hit_names(refined),
+        },
+    }
 
 
 @dataclass
@@ -214,6 +318,18 @@ def _train_end_index(n_points: int, validation_fraction: float) -> int:
     return n_train
 
 
+def _positive_initial_state(series) -> tuple[float, float]:
+    """Return the observed initial state, rejecting absorbing zero-population starts."""
+    x0 = float(series.prey[0])
+    y0 = float(series.predator[0])
+    if not np.isfinite(x0) or not np.isfinite(y0) or x0 <= 0.0 or y0 <= 0.0:
+        raise ValueError(
+            f"{series.name}: ODE fitting requires positive finite initial prey and predator; "
+            "start the series at the first joint positive observation"
+        )
+    return x0, y0
+
+
 def _information_criteria(
     normalized_residuals: np.ndarray,
     n_parameters: int,
@@ -312,17 +428,25 @@ def _pack_baseline(
     )
 
 
-def _pack_fear_memory(log_params: np.ndarray, fixed: FearMemoryParams) -> FearMemoryParams:
+def _pack_fear_memory(
+    log_params: np.ndarray,
+    fixed: FearMemoryParams,
+    fit_e_mu: bool = True,
+) -> FearMemoryParams:
     exp4 = np.exp(log_params[:4])
-    phi = float(np.exp(log_params[4]))
+    if fit_e_mu:
+        e, mu, phi = np.exp(log_params[4:7])
+    else:
+        e, mu = fixed.e, fixed.mu
+        phi = float(np.exp(log_params[4]))
     return FearMemoryParams(
         r=float(exp4[0]),
         K=float(exp4[1]),
         a=float(exp4[2]),
         theta=float(exp4[3]),
-        e=fixed.e,
-        mu=fixed.mu,
-        phi=phi,
+        e=float(e),
+        mu=float(mu),
+        phi=float(phi),
         delta=fixed.delta,
     )
 
@@ -343,12 +467,16 @@ def _holling_core_setup(
 def fit_baseline_to_series(
     series,
     fixed: BaselineParams | None = None,
-    fit_e_mu: bool = False,
+    fit_e_mu: bool = True,
     validation_fraction: float = 0.20,
+    optimizer: str = "auto",
+    optimizer_seeds: tuple[int, ...] = DEFAULT_OPTIMIZER_SEEDS,
+    max_nfev: int = 400,
 ) -> FitResult:
     """
     非线性最小二乘拟合基线 ODE 到 (t, prey, predator)。
-    默认拟合 log(r), log(K), log(a), log(theta)；e, mu 固定。
+    默认拟合 log(r), log(K), log(a), log(theta), log(e), log(mu)。
+    fit_e_mu=False 可复现固定 e、mu 的旧拟合模式。
     """
     if fixed is None:
         fixed = BaselineParams()
@@ -356,8 +484,7 @@ def fit_baseline_to_series(
     train_end = _train_end_index(series.n_points, validation_fraction)
     prey_max = max(float(np.max(series.prey[:train_end])), 1.0)
     pred_max = max(float(np.max(series.predator[:train_end])), 1.0)
-    x0 = float(series.prey[0])
-    y0 = float(series.predator[0])
+    x0, y0 = _positive_initial_state(series)
     t_obs = series.t
     t_train = t_obs[:train_end]
 
@@ -389,7 +516,16 @@ def fit_baseline_to_series(
         ub = np.concatenate([ub, np.log(e_mu_ub)])
         param_names.extend(["e", "mu"])
 
-    res = _bounded_minimize(residual, p0, lb, ub, max_nfev=200)
+    res, optimizer_meta = _multiseed_bounded_minimize(
+        residual,
+        p0,
+        lb,
+        ub,
+        max_nfev=max_nfev,
+        method=optimizer,
+        seeds=optimizer_seeds,
+        param_names=param_names,
+    )
     p_fit = _pack_baseline(res.x, fixed, fit_e_mu=fit_e_mu)
     y_pred = _simulate_at_times(
         lambda t, s: baseline_rhs(t, s, p_fit),
@@ -432,6 +568,7 @@ def fit_baseline_to_series(
         predator_pred=y_pred[1],
         meta={
             **_optimization_meta(res, param_names),
+            **optimizer_meta,
             "validation_fraction": validation_fraction,
             "validation_mode": "ordered_holdout_continuous_multistep",
             "train_end_time": float(t_obs[train_end - 1]),
@@ -444,9 +581,14 @@ def fit_fear_memory_to_series(
     series,
     fixed: FearMemoryParams | None = None,
     baseline_params: BaselineParams | None = None,
+    fit_e_mu: bool = True,
     validation_fraction: float = 0.20,
+    optimizer: str = "auto",
+    optimizer_seeds: tuple[int, ...] = DEFAULT_OPTIMIZER_SEEDS,
+    max_nfev: int = 500,
+    initial_memory: float | None = None,
 ) -> FitResult:
-    """在基线参数初值上额外拟合 phi（恐惧强度）。"""
+    """拟合恐惧记忆模型的动力学参数；delta 与 M(0) 保持固定。"""
     if fixed is None:
         fixed = FearMemoryParams(phi=0.02, delta=1.0)
 
@@ -465,14 +607,15 @@ def fit_fear_memory_to_series(
     train_end = _train_end_index(series.n_points, validation_fraction)
     prey_max = max(float(np.max(series.prey[:train_end])), 1.0)
     pred_max = max(float(np.max(series.predator[:train_end])), 1.0)
-    x0 = float(series.prey[0])
-    y0 = float(series.predator[0])
-    m0 = y0
+    x0, y0 = _positive_initial_state(series)
+    m0 = y0 if initial_memory is None else float(initial_memory)
+    if not np.isfinite(m0) or m0 < 0.0:
+        raise ValueError("initial_memory must be a finite non-negative value")
     t_obs = series.t
     t_train = t_obs[:train_end]
 
     def residual(log_p: np.ndarray) -> np.ndarray:
-        p = _pack_fear_memory(log_p, fixed)
+        p = _pack_fear_memory(log_p, fixed, fit_e_mu=fit_e_mu)
         try:
             y = _simulate_at_times(
                 lambda t, s: fear_memory_rhs(t, s, p),
@@ -489,18 +632,37 @@ def fit_fear_memory_to_series(
 
     p0_core, lb_core, ub_core = _holling_core_setup(prey_max, fixed)
     phi_initial = float(np.clip(fixed.phi, 1.01e-5, 0.2 / 1.01))
-    p0 = np.concatenate([p0_core, np.log([phi_initial])])
-    lb = np.concatenate([lb_core, np.log([1e-5])])
-    ub = np.concatenate([ub_core, np.log([0.2])])
+    param_names = ["r", "K", "a", "theta"]
+    if fit_e_mu:
+        e_mu_lb = np.array([0.01, 0.01])
+        e_mu_ub = np.array([2.0, 3.0])
+        e_mu_p0 = np.clip(np.array([fixed.e, fixed.mu]), e_mu_lb * 1.01, e_mu_ub / 1.01)
+        p0 = np.concatenate([p0_core, np.log(e_mu_p0), np.log([phi_initial])])
+        lb = np.concatenate([lb_core, np.log(e_mu_lb), np.log([1e-5])])
+        ub = np.concatenate([ub_core, np.log(e_mu_ub), np.log([0.2])])
+        param_names.extend(["e", "mu"])
+    else:
+        p0 = np.concatenate([p0_core, np.log([phi_initial])])
+        lb = np.concatenate([lb_core, np.log([1e-5])])
+        ub = np.concatenate([ub_core, np.log([0.2])])
+    param_names.append("phi")
 
-    res = _bounded_minimize(residual, p0, lb, ub, max_nfev=250)
-    p_fit = _pack_fear_memory(res.x, fixed)
+    res, optimizer_meta = _multiseed_bounded_minimize(
+        residual,
+        p0,
+        lb,
+        ub,
+        max_nfev=max_nfev,
+        method=optimizer,
+        seeds=optimizer_seeds,
+        param_names=param_names,
+    )
+    p_fit = _pack_fear_memory(res.x, fixed, fit_e_mu=fit_e_mu)
     y_pred = _simulate_at_times(
         lambda t, s: fear_memory_rhs(t, s, p_fit),
         np.array([x0, y0, m0]),
         t_obs,
     )
-    param_names = ["r", "K", "a", "theta", "phi"]
     fit_metrics = _fit_evaluation_metrics(
         series.prey,
         series.predator,
@@ -539,6 +701,8 @@ def fit_fear_memory_to_series(
         predator_pred=y_pred[1],
         meta={
             **_optimization_meta(res, param_names),
+            **optimizer_meta,
+            "initial_memory_source": "predator_initial" if initial_memory is None else "fixed_input",
             "validation_fraction": validation_fraction,
             "validation_mode": "ordered_holdout_continuous_multistep",
             "train_end_time": float(t_obs[train_end - 1]),
@@ -554,7 +718,8 @@ def fit_bda_fear_to_series(
     validation_fraction: float = 0.20,
     initial: BDAFearParams | None = None,
     optimizer: str = "auto",
-    max_nfev: int = 300,
+    optimizer_seeds: tuple[int, ...] = DEFAULT_OPTIMIZER_SEEDS,
+    max_nfev: int = 600,
 ) -> FitResult:
     """
     拟合 Myint B-D + 恐惧 ODE（无量纲 u,v）。
@@ -568,8 +733,9 @@ def fit_bda_fear_to_series(
     v_scale = max(float(np.max(series.predator[:train_end])), 1.0)
     prey = series.prey / u_scale
     predator = series.predator / v_scale
-    u0 = float(prey[0])
-    v0 = float(predator[0])
+    raw_x0, raw_y0 = _positive_initial_state(series)
+    u0 = raw_x0 / u_scale
+    v0 = raw_y0 / v_scale
     t_obs = series.t
     t_train = t_obs[:train_end]
 
@@ -623,13 +789,15 @@ def fit_bda_fear_to_series(
         ub_list.append(0.5)
 
     p0 = np.clip(np.array(p0_list), np.array(lb_list) * 1.0001, np.array(ub_list) / 1.0001)
-    res = _bounded_minimize(
+    res, optimizer_meta = _multiseed_bounded_minimize(
         residual,
         np.log(p0),
         np.log(lb_list),
         np.log(ub_list),
         max_nfev=max_nfev,
         method=optimizer,
+        seeds=optimizer_seeds,
+        param_names=names,
     )
     p_fit = pack(res.x)
     y_pred = _simulate_at_times(
@@ -677,6 +845,7 @@ def fit_bda_fear_to_series(
         predator_pred=predator_pred_raw,
         meta={
             **_optimization_meta(res, names),
+            **optimizer_meta,
             "normalized_fit": True,
             "validation_fraction": validation_fraction,
             "validation_mode": "ordered_holdout_continuous_multistep",
@@ -737,6 +906,246 @@ def bda_params_from_dict(d: dict[str, float]) -> BDAFearParams:
         c=kw.get("c", base.c),
         m=kw.get("m", base.m),
     )
+
+
+def fear_memory_params_from_dict(d: dict[str, float]) -> FearMemoryParams:
+    """从 fit_summary / params.json 字典构造 FearMemoryParams。"""
+    base = FearMemoryParams()
+
+    def value(name: str) -> float:
+        raw = d.get(name)
+        return float(raw) if raw not in ("", None) else float(getattr(base, name))
+
+    return FearMemoryParams(
+        r=value("r"),
+        K=value("K"),
+        a=value("a"),
+        theta=value("theta"),
+        e=value("e"),
+        mu=value("mu"),
+        phi=value("phi"),
+        delta=value("delta"),
+    )
+
+
+def fear_memory_metrics_at_params(
+    series,
+    params: FearMemoryParams,
+    initial_memory: float,
+    validation_fraction: float = 0.20,
+) -> dict[str, float | int]:
+    """Evaluate fixed fear-memory parameters and M(0) on train and holdout segments."""
+    m0 = float(initial_memory)
+    if not np.isfinite(m0) or m0 < 0.0:
+        raise ValueError("initial_memory must be a finite non-negative value")
+    x0, y0 = _positive_initial_state(series)
+    train_end = _train_end_index(series.n_points, validation_fraction)
+    prey_scale = max(float(np.max(series.prey[:train_end])), 1.0)
+    predator_scale = max(float(np.max(series.predator[:train_end])), 1.0)
+    try:
+        prediction = _simulate_at_times(
+            lambda t, s: fear_memory_rhs(t, s, params),
+            np.array([x0, y0, m0]),
+            series.t,
+        )
+    except RuntimeError:
+        return {
+            "rmse_normalized_prey": float("inf"),
+            "rmse_normalized_predator": float("inf"),
+            "rmse_normalized_total": float("inf"),
+            "validation_rmse_normalized_prey": float("inf"),
+            "validation_rmse_normalized_predator": float("inf"),
+            "validation_rmse_normalized_total": float("inf"),
+        }
+    if np.any(prediction[:2] < 0) or np.any(~np.isfinite(prediction[:2])):
+        return {
+            "rmse_normalized_prey": float("inf"),
+            "rmse_normalized_predator": float("inf"),
+            "rmse_normalized_total": float("inf"),
+            "validation_rmse_normalized_prey": float("inf"),
+            "validation_rmse_normalized_predator": float("inf"),
+            "validation_rmse_normalized_total": float("inf"),
+        }
+    metrics = _fit_evaluation_metrics(
+        series.prey,
+        series.predator,
+        prediction[0],
+        prediction[1],
+        prey_scale,
+        predator_scale,
+        train_end,
+        n_parameters=0,
+    )
+    for key in ("aic", "aicc", "bic", "n_parameters"):
+        metrics.pop(key)
+    return metrics
+
+
+def _finalize_profile_rows(
+    rows: list[dict[str, float | str | bool]],
+    n_residuals: int,
+    confidence_level: float,
+) -> list[dict[str, float | str | bool]]:
+    usable_rows = [
+        row for row in rows
+        if row["optimization_status"] in ("success", "usable_limit")
+        and np.isfinite(float(row["profile_rss"]))
+    ]
+    if not usable_rows:
+        return rows
+
+    rss_min = min(float(row["profile_rss"]) for row in usable_rows)
+    threshold = float(chi2.ppf(confidence_level, df=1))
+    for row in rows:
+        if row["optimization_status"] not in ("success", "usable_limit"):
+            row["profile_likelihood_ratio"] = float("nan")
+            row["inside_confidence_interval"] = False
+            continue
+        lr = n_residuals * np.log(float(row["profile_rss"]) / rss_min)
+        row["profile_likelihood_ratio"] = float(lr)
+        row["inside_confidence_interval"] = bool(lr <= threshold)
+        row["confidence_level"] = confidence_level
+        row["likelihood_ratio_threshold"] = threshold
+    return rows
+
+
+def conditional_fear_memory_m0_scan(
+    series,
+    base_params: dict[str, float],
+    m0_ratio_grid: np.ndarray | None = None,
+    validation_fraction: float = 0.20,
+) -> list[dict[str, float]]:
+    """Scan M(0)/y(0) while holding all fear-memory parameters fixed."""
+    if m0_ratio_grid is None:
+        m0_ratio_grid = np.array([0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 5.0])
+    base = fear_memory_params_from_dict(base_params)
+    _, y0 = _positive_initial_state(series)
+    rows: list[dict[str, float]] = []
+    for ratio in m0_ratio_grid:
+        m0 = float(ratio) * y0
+        metrics = fear_memory_metrics_at_params(
+            series,
+            base,
+            initial_memory=m0,
+            validation_fraction=validation_fraction,
+        )
+        rows.append({
+            "m0": m0,
+            "m0_over_y0": float(ratio),
+            "rmse_normalized_prey": float(metrics["rmse_normalized_prey"]),
+            "rmse_normalized_predator": float(metrics["rmse_normalized_predator"]),
+            "rmse_normalized_total": float(metrics["rmse_normalized_total"]),
+            "validation_rmse_normalized_prey": float(metrics["validation_rmse_normalized_prey"]),
+            "validation_rmse_normalized_predator": float(metrics["validation_rmse_normalized_predator"]),
+            "validation_rmse_normalized_total": float(metrics["validation_rmse_normalized_total"]),
+        })
+    return rows
+
+
+def profile_fear_memory_m0(
+    series,
+    base_params: dict[str, float],
+    m0_ratio_grid: np.ndarray | None = None,
+    validation_fraction: float = 0.20,
+    confidence_level: float = 0.95,
+    max_nfev: int = 500,
+) -> list[dict[str, float | str | bool]]:
+    """Profile M(0) by reoptimizing all fear-memory dynamics parameters."""
+    if not 0.0 < confidence_level < 1.0:
+        raise ValueError("confidence_level must be between 0 and 1")
+    if m0_ratio_grid is None:
+        m0_ratio_grid = np.array([0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 5.0])
+
+    base = fear_memory_params_from_dict(base_params)
+    _, y0 = _positive_initial_state(series)
+    train_end = _train_end_index(series.n_points, validation_fraction)
+    n_residuals = 2 * train_end
+    rows: list[dict[str, float | str | bool]] = []
+    for ratio in m0_ratio_grid:
+        m0 = float(ratio) * y0
+        result = fit_fear_memory_to_series(
+            series,
+            fixed=base,
+            initial_memory=m0,
+            validation_fraction=validation_fraction,
+            optimizer="local",
+            max_nfev=max_nfev,
+        )
+        row: dict[str, float | str | bool] = {
+            "m0": m0,
+            "m0_over_y0": float(ratio),
+            "rmse_normalized_prey": result.rmse_normalized_prey,
+            "rmse_normalized_predator": result.rmse_normalized_predator,
+            "rmse_normalized_total": result.rmse_normalized_total,
+            "validation_rmse_normalized_prey": result.validation_rmse_normalized_prey,
+            "validation_rmse_normalized_predator": result.validation_rmse_normalized_predator,
+            "validation_rmse_normalized_total": result.validation_rmse_normalized_total,
+            "profile_rss": float(n_residuals * result.rmse_normalized_total**2),
+            "optimization_status": result.optimization_status,
+        }
+        row.update({name: float(result.params[name]) for name in (
+            "r", "K", "a", "theta", "e", "mu", "phi", "delta"
+        )})
+        rows.append(row)
+    return _finalize_profile_rows(rows, n_residuals, confidence_level)
+
+
+def profile_fear_memory_delta(
+    series,
+    base_params: dict[str, float],
+    delta_grid: np.ndarray | None = None,
+    validation_fraction: float = 0.20,
+    confidence_level: float = 0.95,
+    max_nfev: int = 500,
+) -> list[dict[str, float | str | bool]]:
+    """Profile delta and report whether alternative memory timescales improve holdout RMSE."""
+    if not 0.0 < confidence_level < 1.0:
+        raise ValueError("confidence_level must be between 0 and 1")
+    base = fear_memory_params_from_dict(base_params)
+    if delta_grid is None:
+        delta_grid = np.unique(np.concatenate([np.logspace(-2, 1, 17), [base.delta]]))
+
+    initial_memory = float(base_params.get("m0", series.predator[0]))
+    train_end = _train_end_index(series.n_points, validation_fraction)
+    n_residuals = 2 * train_end
+    rows: list[dict[str, float | str | bool]] = []
+    for delta in delta_grid:
+        fixed = FearMemoryParams(
+            r=base.r,
+            K=base.K,
+            a=base.a,
+            theta=base.theta,
+            e=base.e,
+            mu=base.mu,
+            phi=base.phi,
+            delta=float(delta),
+        )
+        result = fit_fear_memory_to_series(
+            series,
+            fixed=fixed,
+            initial_memory=initial_memory,
+            validation_fraction=validation_fraction,
+            optimizer="local",
+            max_nfev=max_nfev,
+        )
+        row: dict[str, float | str | bool] = {
+            "delta": float(delta),
+            "memory_timescale": float(1.0 / delta),
+            "m0": initial_memory,
+            "rmse_normalized_prey": result.rmse_normalized_prey,
+            "rmse_normalized_predator": result.rmse_normalized_predator,
+            "rmse_normalized_total": result.rmse_normalized_total,
+            "validation_rmse_normalized_prey": result.validation_rmse_normalized_prey,
+            "validation_rmse_normalized_predator": result.validation_rmse_normalized_predator,
+            "validation_rmse_normalized_total": result.validation_rmse_normalized_total,
+            "profile_rss": float(n_residuals * result.rmse_normalized_total**2),
+            "optimization_status": result.optimization_status,
+        }
+        row.update({name: float(result.params[name]) for name in (
+            "r", "K", "a", "theta", "e", "mu", "phi"
+        )})
+        rows.append(row)
+    return _finalize_profile_rows(rows, n_residuals, confidence_level)
 
 
 def conditional_bda_k_scan(
@@ -844,24 +1253,4 @@ def profile_bda_k(
             row[name] = float(result.params[name])
         rows.append(row)
 
-    usable_rows = [
-        row for row in rows
-        if row["optimization_status"] in ("success", "usable_limit")
-        and np.isfinite(float(row["profile_rss"]))
-    ]
-    if not usable_rows:
-        return rows
-
-    rss_min = min(float(row["profile_rss"]) for row in usable_rows)
-    threshold = float(chi2.ppf(confidence_level, df=1))
-    for row in rows:
-        if row["optimization_status"] not in ("success", "usable_limit"):
-            row["profile_likelihood_ratio"] = float("nan")
-            row["inside_confidence_interval"] = False
-            continue
-        lr = n_residuals * np.log(float(row["profile_rss"]) / rss_min)
-        row["profile_likelihood_ratio"] = float(lr)
-        row["inside_confidence_interval"] = bool(lr <= threshold)
-        row["confidence_level"] = confidence_level
-        row["likelihood_ratio_threshold"] = threshold
-    return rows
+    return _finalize_profile_rows(rows, n_residuals, confidence_level)

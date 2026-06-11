@@ -1,9 +1,8 @@
 {
-  "description": "Pinned population time series used to calibrate the report Holling II defaults.",
+  "description": "Pinned 15 population time series used by the formal report analyses.",
   "min_confidence": 0.5,
   "report_series": [
-    {"id": "lynxhare", "signature": "lynx_hare", "group_key": null, "n_points": 60},
-    {"id": "glerl_m110_zoop_1994-201", "signature": "zooplankton", "group_key": null, "n_points": 175},
+    {"id": "glerl_m110_zoop_1994-201", "signature": "zooplankton", "group_key": null, "n_points": 172},
     {"id": "andren_lynx_roedeer_data_1", "signature": "lynx_roe", "group_key": "1", "n_points": 24},
     {"id": "andren_lynx_roedeer_data_2", "signature": "lynx_roe", "group_key": "2", "n_points": 24},
     {"id": "andren_lynx_roedeer_data_3", "signature": "lynx_roe", "group_key": "3", "n_points": 24},
@@ -13,9 +12,20 @@
     {"id": "andren_lynx_roedeer_data_7", "signature": "lynx_roe", "group_key": "7", "n_points": 18},
     {"id": "timeserieslogmeans_WRHW", "signature": "killifish", "group_key": "WRHW", "n_points": 62},
     {"id": "timeserieslogmeans_TP", "signature": "killifish", "group_key": "TP", "n_points": 61},
-    {"id": "timeserieslogmeans_WRGP", "signature": "killifish", "group_key": "WRGP", "n_points": 56}
+    {"id": "timeserieslogmeans_WRGP", "signature": "killifish", "group_key": "WRGP", "n_points": 56},
+    {"id": "isle_royale_wolf_moose_pre_2018", "signature": "isle_royale_wolf_moose", "group_key": null, "n_points": 38},
+    {"id": "windermere_north_pike_perch", "signature": "gpdd_formal_pair", "group_key": "Windermere North Basin", "n_points": 23},
+    {"id": "windermere_south_pike_perch", "signature": "gpdd_formal_pair", "group_key": "Windermere South Basin", "n_points": 23},
+    {"id": "komi_lynx_hare", "signature": "gpdd_formal_pair", "group_key": "Komi Republic", "n_points": 21}
   ],
   "excluded_series": [
+    {
+      "id": "lynxhare",
+      "signature": "lynx_hare",
+      "group_key": null,
+      "n_points": 60,
+      "reason": "Archived fur-trade proxy series; excluded from formal population analysis."
+    },
     {
       "id": "wifishabundance_WBIC804600",
       "signature": "lter_fish",

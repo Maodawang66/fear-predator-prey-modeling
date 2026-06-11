@@ -1,0 +1,114 @@
+{
+  "model": "fear_memory",
+  "series": "komi_lynx_hare",
+  "params": {
+    "r": 4.999999999999999,
+    "K": 203.3310088477391,
+    "a": 0.01446429885206667,
+    "theta": 5.246630567803692e-07,
+    "e": 2.0,
+    "mu": 2.5239692227754236,
+    "phi": 0.003876735407302973,
+    "delta": 1.0,
+    "x0": 110.0,
+    "y0": 18.0,
+    "m0": 18.0
+  },
+  "rmse_normalized_prey": 0.22783108867323454,
+  "rmse_normalized_predator": 0.29939905548898826,
+  "rmse_normalized_total": 0.2660327041866559,
+  "rmse_raw_prey": 37.819960719756935,
+  "rmse_raw_predator": 50.299041322150025,
+  "rmse_raw_total": 44.49911789446681,
+  "validation_rmse_normalized_prey": 0.5229383009345626,
+  "validation_rmse_normalized_predator": 0.6833743991301553,
+  "validation_rmse_normalized_total": 0.6084673516183214,
+  "validation_rmse_raw_prey": 86.80775795513739,
+  "validation_rmse_raw_predator": 114.80689905386609,
+  "validation_rmse_raw_total": 101.7747780925174,
+  "aic": -70.74470590001904,
+  "aicc": -66.07803923335237,
+  "bic": -60.484554580420955,
+  "n_parameters": 7,
+  "n_train_points": 16,
+  "n_validation_points": 5,
+  "success": false,
+  "optimization_status": "usable_limit",
+  "usable_for_comparison": true,
+  "message": "STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
+  "meta": {
+    "nfev": 512,
+    "objective_value": 2.264736124242913,
+    "termination_reason": "STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
+    "parameter_bound_hits": [
+      "r",
+      "e"
+    ],
+    "optimizer_seeds": [
+      0,
+      1,
+      2
+    ],
+    "optimizer_runs": [
+      {
+        "seed": 0,
+        "status": "usable_limit",
+        "success": false,
+        "objective_value": 3.4173121715106145,
+        "nfev": 5355,
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
+      },
+      {
+        "seed": 1,
+        "status": "usable_limit",
+        "success": false,
+        "objective_value": 3.4178562770600664,
+        "nfev": 5355,
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
+      },
+      {
+        "seed": 2,
+        "status": "usable_limit",
+        "success": false,
+        "objective_value": 2.4197534180701568,
+        "nfev": 5355,
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
+      }
+    ],
+    "selected_seed": 2,
+    "local_refinement_used": true,
+    "local_refinement": {
+      "status": "usable_limit",
+      "success": false,
+      "objective_value": 2.264736124242913,
+      "nfev": 512,
+      "termination_reason": "STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
+      "parameter_bound_hits": [
+        "r",
+        "e"
+      ]
+    },
+    "initial_memory_source": "predator_initial",
+    "validation_fraction": 0.2,
+    "validation_mode": "ordered_holdout_continuous_multistep",
+    "train_end_time": 15.0,
+    "validation_start_time": 16.0,
+    "signature": "gpdd_formal_pair",
+    "detection_method": "formal_gpdd_pair",
+    "confidence": 1.0,
+    "time_col": "SampleYear",
+    "prey_col": "Population(MainID=9511)",
+    "predator_col": "Population(MainID=9512)",
+    "group_key": "Komi Republic",
+    "year_start": 1922,
+    "year_end": 1942,
+    "n_points": 21,
+    "gpdd_prey_main_id": "9511",
+    "gpdd_predator_main_id": "9512",
+    "notes": "GPDD proportion-transformed count series; reliability grade 1.",
+    "source_file": "D:\\code\\USTC_MM_26_animalfear\\data\\raw\\05_gpdd\\data\\gpdd_population_records.csv"
+  }
+}

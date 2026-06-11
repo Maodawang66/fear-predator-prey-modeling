@@ -31,13 +31,16 @@ if str(ROOT) not in sys.path:
 import matplotlib.pyplot as plt
 import numpy as np
 
-from data.auto_discover import discover_and_load
 from data.common import RAW, read_csv_dicts
+from data.formal_series import load_formal_series
 from data.load_lter_fish import load_lter_fish_pair
 from data.load_peacor import load_peacor_plp
 from src.fit import (
+    conditional_fear_memory_m0_scan,
     conditional_bda_k_scan,
     fit_bda_fear_to_series,
+    profile_fear_memory_delta,
+    profile_fear_memory_m0,
     profile_bda_k,
 )
 from src.parameters import BDAFearParams
@@ -47,7 +50,7 @@ OUT = ROOT / "results" / "deep_analysis"
 # k profile 代表序列（可在全 12 条上扩展）
 PROFILE_REPRESENTATIVES = (
     "glerl_m110_zoop_1994-201",
-    "lynxhare",
+    "isle_royale_wolf_moose_pre_2018",
     "timeserieslogmeans_TP",
 )
 
@@ -102,7 +105,7 @@ def _classify_group(series: str) -> str:
         return "zooplankton"
     if "timeserieslogmeans" in s or "killifish" in s:
         return "fish"
-    if "andren" in s or "lynxhare" in s or "lynx" in s:
+    if "andren" in s or "isle_royale" in s or "komi_lynx" in s or "lynx" in s:
         return "mammal"
     return "other"
 
@@ -124,6 +127,25 @@ def _write_csv(rows: list[dict], path: Path, fieldnames: list[str]) -> None:
         w.writeheader()
         for r in rows:
             w.writerow(r)
+
+
+def _read_typed_csv(path: Path) -> list[dict]:
+    if not path.is_file():
+        return []
+    with path.open(encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    for row in rows:
+        for key, value in list(row.items()):
+            if value in ("True", "False"):
+                row[key] = value == "True"
+                continue
+            if value in ("", None) or key in ("series", "group", "optimization_status", "holdout_selection_role"):
+                continue
+            try:
+                row[key] = float(value)
+            except ValueError:
+                pass
+    return rows
 
 
 def build_cross_system_table(rows: list[dict]) -> list[dict]:
@@ -504,14 +526,44 @@ def run_k_profiles(
     series_by_name: dict,
     out_dir: Path,
     representatives_only: bool = False,
+    refit_series: set[str] | None = None,
 ) -> tuple[dict[str, list[dict]], list[dict]]:
+    refit_series = refit_series or set()
+    formal_names = set(series_by_name)
+    cached_profile_rows = _read_typed_csv(out_dir / "k_profile_long.csv")
+    cached_conditional_rows = _read_typed_csv(out_dir / "k_conditional_sensitivity_long.csv")
     all_profiles: dict[str, list[dict]] = {}
     all_conditional_scans: dict[str, list[dict]] = {}
+    for cached_row in cached_profile_rows:
+        name = cached_row.pop("series")
+        if (
+            name in formal_names
+            and name not in refit_series
+            and (not representatives_only or name in PROFILE_REPRESENTATIVES)
+        ):
+            all_profiles.setdefault(name, []).append(cached_row)
+    for cached_row in cached_conditional_rows:
+        name = cached_row.pop("series")
+        if (
+            name in formal_names
+            and name not in refit_series
+            and (not representatives_only or name in PROFILE_REPRESENTATIVES)
+        ):
+            all_conditional_scans.setdefault(name, []).append(cached_row)
     ident_rows: list[dict] = []
 
     for row in bda_rows:
         name = row["series"]
         if representatives_only and name not in PROFILE_REPRESENTATIVES:
+            continue
+        if name in all_profiles and name in all_conditional_scans:
+            profile = all_profiles[name]
+            fk = _f(row, "k")
+            ident = _profile_identifiability(profile, fk)
+            ident["series"] = name
+            ident["group"] = _classify_group(name)
+            ident_rows.append(ident)
+            print(f"  [reuse k profile] {name}")
             continue
         if name not in series_by_name:
             print(f"  [skip profile] series not loaded: {name}")
@@ -583,6 +635,174 @@ def run_k_profiles(
         ],
     )
     return all_profiles, ident_rows
+
+
+def _plot_memory_profile(
+    series_name: str,
+    rows: list[dict],
+    parameter: str,
+    path: Path,
+) -> None:
+    x = [r[parameter] for r in rows]
+    train = [r["rmse_normalized_total"] for r in rows]
+    validation = [r["validation_rmse_normalized_total"] for r in rows]
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.plot(x, train, "b.-", label="training RMSE")
+    ax.plot(x, validation, "r.-", label="holdout RMSE")
+    if parameter == "delta":
+        ax.set_xscale("log")
+        xlabel = "fixed delta (memory timescale = 1/delta)"
+    else:
+        xlabel = "fixed M(0) / y(0)"
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel("normalized RMSE total")
+    ax.set_title(f"{parameter} profile: {series_name}")
+    ax.legend(fontsize=8)
+    fig.tight_layout()
+    fig.savefig(path, dpi=150)
+    plt.close(fig)
+
+
+def run_memory_profiles(
+    fear_rows: list[dict],
+    series_by_name: dict,
+    out_dir: Path,
+    representatives_only: bool = False,
+    refit_series: set[str] | None = None,
+) -> list[dict]:
+    refit_series = refit_series or set()
+    formal_names = set(series_by_name)
+    m0_profiles = [
+        row for row in _read_typed_csv(out_dir / "m0_profile_long.csv")
+        if row["series"] in formal_names and row["series"] not in refit_series
+    ]
+    m0_conditional = [
+        row for row in _read_typed_csv(out_dir / "m0_conditional_sensitivity_long.csv")
+        if row["series"] in formal_names and row["series"] not in refit_series
+    ]
+    delta_profiles = [
+        row for row in _read_typed_csv(out_dir / "delta_profile_long.csv")
+        if row["series"] in formal_names and row["series"] not in refit_series
+    ]
+    summary = [
+        row for row in _read_typed_csv(out_dir / "delta_holdout_improvement.csv")
+        if row["series"] in formal_names and row["series"] not in refit_series
+    ]
+    completed = {row["series"] for row in summary}
+
+    for row in fear_rows:
+        name = row["series"]
+        if name in completed:
+            print(f"  [reuse memory profiles] {name}")
+            continue
+        if name not in series_by_name:
+            print(f"  [skip memory profile] series not loaded: {name}")
+            continue
+        fitted_delta = _f(row, "delta")
+        if not np.isfinite(fitted_delta):
+            print(f"  [skip memory profile] fitted delta missing: {name}")
+            continue
+        series = series_by_name[name]
+        m0_profile = profile_fear_memory_m0(series, row)
+        m0_scan = conditional_fear_memory_m0_scan(series, row)
+        delta_profile = profile_fear_memory_delta(series, row)
+        m0_profiles.extend({"series": name, **profile_row} for profile_row in m0_profile)
+        m0_conditional.extend({"series": name, **scan_row} for scan_row in m0_scan)
+        delta_profiles.extend({"series": name, **profile_row} for profile_row in delta_profile)
+
+        usable_delta = [
+            profile_row for profile_row in delta_profile
+            if profile_row["optimization_status"] in ("success", "usable_limit")
+            and np.isfinite(profile_row["validation_rmse_normalized_total"])
+        ]
+        reference = min(delta_profile, key=lambda profile_row: abs(profile_row["delta"] - fitted_delta))
+        best_validation = min(
+            usable_delta,
+            key=lambda profile_row: profile_row["validation_rmse_normalized_total"],
+            default=None,
+        )
+        best_train = min(
+            usable_delta,
+            key=lambda profile_row: profile_row["profile_rss"],
+            default=None,
+        )
+        reference_validation = reference["validation_rmse_normalized_total"]
+        best_validation_rmse = (
+            best_validation["validation_rmse_normalized_total"]
+            if best_validation is not None else float("nan")
+        )
+        summary.append({
+            "series": name,
+            "fitted_delta": fitted_delta,
+            "reference_grid_delta": reference["delta"],
+            "reference_validation_rmse": reference_validation,
+            "profile_train_best_delta": best_train["delta"] if best_train else float("nan"),
+            "profile_validation_best_delta": best_validation["delta"] if best_validation else float("nan"),
+            "profile_validation_best_memory_timescale": (
+                best_validation["memory_timescale"] if best_validation else float("nan")
+            ),
+            "profile_validation_best_rmse": best_validation_rmse,
+            "validation_rmse_improvement": reference_validation - best_validation_rmse,
+            "validation_rmse_improvement_fraction": (
+                (reference_validation - best_validation_rmse) / reference_validation
+                if reference_validation > 0 and np.isfinite(reference_validation) else float("nan")
+            ),
+            "holdout_selection_role": "exploratory_not_unbiased_validation",
+        })
+        if name in PROFILE_REPRESENTATIVES:
+            _plot_memory_profile(
+                name,
+                m0_profile,
+                "m0_over_y0",
+                out_dir / f"m0_profile_{name[:40]}.png",
+            )
+            _plot_memory_profile(
+                name,
+                delta_profile,
+                "delta",
+                out_dir / f"delta_profile_{name[:40]}.png",
+            )
+
+    common_profile_fields = [
+        "series", "rmse_normalized_prey", "rmse_normalized_predator",
+        "rmse_normalized_total", "validation_rmse_normalized_prey",
+        "validation_rmse_normalized_predator", "validation_rmse_normalized_total",
+        "profile_rss", "profile_likelihood_ratio", "inside_confidence_interval",
+        "confidence_level", "likelihood_ratio_threshold", "optimization_status",
+        "r", "K", "a", "theta", "e", "mu", "phi",
+    ]
+    _write_csv(
+        m0_profiles,
+        out_dir / "m0_profile_long.csv",
+        ["series", "m0", "m0_over_y0", *common_profile_fields[1:], "delta"],
+    )
+    _write_csv(
+        m0_conditional,
+        out_dir / "m0_conditional_sensitivity_long.csv",
+        [
+            "series", "m0", "m0_over_y0",
+            "rmse_normalized_prey", "rmse_normalized_predator", "rmse_normalized_total",
+            "validation_rmse_normalized_prey", "validation_rmse_normalized_predator",
+            "validation_rmse_normalized_total",
+        ],
+    )
+    _write_csv(
+        delta_profiles,
+        out_dir / "delta_profile_long.csv",
+        ["series", "delta", "memory_timescale", "m0", *common_profile_fields[1:]],
+    )
+    _write_csv(
+        summary,
+        out_dir / "delta_holdout_improvement.csv",
+        [
+            "series", "fitted_delta", "reference_grid_delta", "reference_validation_rmse",
+            "profile_train_best_delta", "profile_validation_best_delta",
+            "profile_validation_best_memory_timescale", "profile_validation_best_rmse",
+            "validation_rmse_improvement", "validation_rmse_improvement_fraction",
+            "holdout_selection_role",
+        ],
+    )
+    return summary
 
 
 def analyze_peacor(out_dir: Path) -> dict | None:
@@ -1001,7 +1221,14 @@ def main() -> None:
     parser.add_argument("--skip-lter", action="store_true", help="跳过 LTER 额外拟合（省时）")
     parser.add_argument("--skip-profile-all", action="store_true",
                         help="仅 profile 代表序列，不跑全 12 条")
+    parser.add_argument(
+        "--refit-series",
+        action="append",
+        default=[],
+        help="discard cached k and memory profiles for this formal series",
+    )
     args = parser.parse_args()
+    refit_series = set(args.refit_series)
 
     tier1 = OUT / "tier1"
     tier2 = OUT / "tier2"
@@ -1049,7 +1276,7 @@ def main() -> None:
 
     # k profiles need loaded series
     print("\n[tier1] loading series for k profiles ...")
-    series_list = discover_and_load(min_confidence=0.5)
+    series_list = load_formal_series()
     series_by_name = _series_index(series_list)
 
     bda_rows = [
@@ -1058,10 +1285,29 @@ def main() -> None:
     ]
 
     if args.skip_profile_all:
-        _, ident = run_k_profiles(bda_rows, series_by_name, tier1, representatives_only=True)
+        _, ident = run_k_profiles(
+            bda_rows, series_by_name, tier1,
+            representatives_only=True, refit_series=refit_series,
+        )
     else:
-        _, ident = run_k_profiles(bda_rows, series_by_name, tier1, representatives_only=False)
+        _, ident = run_k_profiles(
+            bda_rows, series_by_name, tier1,
+            representatives_only=False, refit_series=refit_series,
+        )
     print(f"[tier1] k profiles + identifiability ({len(ident)} series) OK")
+
+    fear_rows = [
+        r for r in fit_rows
+        if r.get("model") == "fear_memory" and _is_usable_fit(r)
+    ]
+    memory_summary = run_memory_profiles(
+        fear_rows,
+        series_by_name,
+        tier1,
+        representatives_only=args.skip_profile_all,
+        refit_series=refit_series,
+    )
+    print(f"[tier1] M(0) sensitivity/profile + delta profile ({len(memory_summary)} series) OK")
 
     # --- Tier 2: mechanism priors ---
     print("\n[tier2] Peacor / coral / damselfly ...")
