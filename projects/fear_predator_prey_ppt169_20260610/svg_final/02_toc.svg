@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="accentBar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2563A0" />
+      <stop offset="100%" stop-color="#1B3A5C" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1280" height="720" fill="#FAFBFC" />
+  
+  <path fill="url(#accentBar)" d="M62,45 H62 A2,2 0 0 1 64,47 V83 A2,2 0 0 1 62,85 H62 A2,2 0 0 1 60,83 V47 A2,2 0 0 1 62,45 Z" />
+  <text x="76" y="75" font-family="Georgia, 'Noto Serif CJK SC', SimSun, serif" font-size="32" font-weight="bold" fill="#1B3A5C">目录</text>
+  <text x="76" y="98" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#94A3B8">CONTENTS</text>
+  
+  <line x1="60" y1="115" x2="1220" y2="115" stroke="#CBD5E1" stroke-width="1" />
+  
+  <g>
+    <path fill="#F0F3F7" d="M108,165 H612 A8,8 0 0 1 620,173 V257 A8,8 0 0 1 612,265 H108 A8,8 0 0 1 100,257 V173 A8,8 0 0 1 108,165 Z" />
+    <text x="130" y="200" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#2563A0">01</text>
+    <text x="190" y="200" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E293B">研究背景与模型</text>
+    <text x="190" y="230" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">核心问题 · 三种 ODE 体系 · 六种恐惧机制</text>
+  </g>
+  
+  <g>
+    <path fill="#F0F3F7" d="M668,165 H1172 A8,8 0 0 1 1180,173 V257 A8,8 0 0 1 1172,265 H668 A8,8 0 0 1 660,257 V173 A8,8 0 0 1 668,165 Z" />
+    <text x="690" y="200" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#2563A0">02</text>
+    <text x="750" y="200" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E293B">动力学分析与机制比较</text>
+    <text x="750" y="230" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">φ 扫描 · 机制路径依赖性 · 等效抑制</text>
+  </g>
+  
+  <g>
+    <path fill="#F0F3F7" d="M108,305 H612 A8,8 0 0 1 620,313 V397 A8,8 0 0 1 612,405 H108 A8,8 0 0 1 100,397 V313 A8,8 0 0 1 108,305 Z" />
+    <text x="130" y="340" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#2563A0">03</text>
+    <text x="190" y="340" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E293B">真实数据拟合与预测</text>
+    <text x="190" y="370" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">15 条序列 · 三模型 · 七模型 · 留后验证</text>
+  </g>
+  
+  <g>
+    <path fill="#F0F3F7" d="M668,305 H1172 A8,8 0 0 1 1180,313 V397 A8,8 0 0 1 1172,405 H668 A8,8 0 0 1 660,397 V313 A8,8 0 0 1 668,305 Z" />
+    <text x="690" y="340" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#2563A0">04</text>
+    <text x="750" y="340" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E293B">参数可辨识性与结论</text>
+    <text x="750" y="370" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">k profile · 跨系统 η · 预测改善 ≠ 机制识别</text>
+  </g>
+  
+  <path fill="#CBD5E1" d="M641,620 H759 A1,1 0 0 1 760,621 V621 A1,1 0 0 1 759,622 H641 A1,1 0 0 1 640,621 V621 A1,1 0 0 1 641,620 Z" />
+  
+  <text x="1220" y="690" text-anchor="end" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="11" fill="#94A3B8">02 / 13</text>
+</svg>

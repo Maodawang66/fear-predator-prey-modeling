@@ -1,79 +1,108 @@
 # TODO List
 
 > 执行规则：每完成一条 TODO，完成对应验证后单独创建一次 Git 提交。不要将多个 TODO 合并到同一提交中。
+>
+> 分为三个阶段：Phase 1（移除 B-D fear）→ Phase 2（修正过度宣称、重写结论、补充实验、重组图表、统一语言）→ Phase 3（完善恐惧机制区分与三层叙事结构）。
+>
+> **Phase 1（项目 1--24）已于 2026-06-10 完成。** 共 8 次提交，涵盖标题/摘要/关键词、引言/相关工作、预备知识/模型方法、理论/实验、结论/参考文献、附录、图表引用和编译验证。六模型热力图重绘（项目 44）也在 Phase 1 收尾时提前完成。
 
-## P0：会导致核心结论无效的问题
+---
 
-1. 问题：三种数据拟合模型使用的 RMSE 尺度不一致。`src/fit.py` 中 baseline 和 fear_memory 的最终 `rmse_total`、`rmse_prey`、`rmse_predator` 使用原始丰度计算，而 bda_fear 使用按各物种最大值归一化后的丰度计算。`data/deep_data_analysis.py` 又直接计算 baseline/B-D RMSE 比值，导致报告中的“B-D 改进 10^2--10^6 倍”和“12/12 最优”缺乏公平比较基础。
-   修复方法：在 `src/fit.py` 中定义统一的模型比较误差口径，建议所有模型同时输出归一化 RMSE 和原始尺度 RMSE，并明确字段名称；让 `data/calibrate_bda.py`、`data/calibrate_datasets.py` 和 `data/deep_data_analysis.py` 只使用统一的归一化 RMSE 进行跨模型比较。重新运行 12 条序列的三模型拟合并更新比较表。
-   Git 提交说明：单独提交，例如 `fix(fit): use comparable normalized RMSE across models`。
+## Phase 2：修正过度宣称、重组论文
 
-2. 问题：`src/analysis.py::equilibrium_bda_fear` 返回的 B-D 正平衡点不满足 `bd_fear_rhs=0`。默认参数下函数返回约 `(5.166, 5.371)`，但代回方程得到非零 `du/dt`。这会污染 B-D Jacobian、特征值、稳定性分类和 Hopf 判断。
-   修复方法：重新推导并实现 B-D 正平衡点求解；可使用解析关系降维后求根，或使用带正值约束和多初值的数值求根。返回结果前必须检查状态为正且 RHS 残差低于容差。同步检查 `src/k_damping.py` 中所有依赖该平衡点的计算。
-   Git 提交说明：单独提交，例如 `fix(analysis): compute valid B-D coexistence equilibrium`。
+### P1 — 修正过度宣称和不严谨表述
 
-3. 问题：现有拟合结果大量未成功收敛，但仍被写入汇总并用于报告结论。当前结果中 baseline 仅 7/12、fear_memory 仅 2/12、bda_fear 仅 1/12 标记为 `success=True`。
-   修复方法：在 `data/calibrate_bda.py` 和 `data/calibrate_datasets.py` 中区分成功、达到迭代上限但可用、失败三种状态；失败拟合不得进入模型胜负统计。记录优化终止原因、目标函数值和参数是否触边，并为失败序列增加重试或明确标记。
-   Git 提交说明：单独提交，例如 `fix(calibration): exclude failed optimizations from model comparison`。
+25. **第 6.1 节 "31/31 共存"**：11 个情景未通过收敛诊断。改为"31/31 在当前积分范围内未灭绝（其中 11 个情景未通过长期收敛诊断）"。
+    Git 提交说明：`fix(report): qualify coexistence claim with convergence caveat`
 
-4. 问题：Holling II 数据拟合仍使用旧参数范围。`src/fit.py` 中 baseline/fear 的 `theta` 初值约为 `20`、下界为 `0.1`，无法搜索到当前合理默认值 `theta=0.0052`；`fit_e_mu` 参数存在但没有实际作用。
-   修复方法：根据当前模型尺度重新设置 `a`、`theta`、`e`、`mu` 的初值和边界；实现或删除无效的 `fit_e_mu` 参数。使用修正后的边界重新拟合 12 条序列，并检查参数触边情况。
-   Git 提交说明：单独提交，例如 `fix(fit): align Holling parameter bounds with calibrated regime`。
+26. **全文"15 条序列"的计数**：在首次出现处加脚注说明"含研究内重复（Andrén 七区、Killifish 三站、Windermere 两湖盆来自同一研究）"。汇总统计处改为"15 个拟合单位"或"序列级"。
+    Git 提交说明：`fix(report): qualify per-series counts with non-independence caveat`
 
-## P1：实验比较设计欠缺
+27. **可辨识性结论的限定**：注明 M(0)/$\delta$ profile 仅覆盖 3 条代表序列；选取标准需在正文中说明；其余序列不可假定同样不可辨识。
+    Git 提交说明：`fix(report): limit identifiability conclusions to profiled series`
 
-5. 问题：`src/literature.py` 和 `src/analysis.py::compare_mechanisms` 将 Holling 系列与 B-D 模型的绝对长期均值直接画在同一柱状图中。两类模型使用不同量纲、参数体系和初值，因此 `20` 与 `5` 不具有直接定量可比性。
-   修复方法：将机制比较指标改为相对各自无恐惧基线的变化比例，例如猎物和捕食者长期均值变化百分比、相对振幅变化；如仍展示绝对均值，应拆分图表并明确标注模型尺度。B-D 必须与 `k=0` 的 B-D 基线比较。
-   Git 提交说明：单独提交，例如 `fix(analysis): compare fear mechanisms relative to model-specific baselines`。
+### P2 — 重写结论使其与现有实验一致
 
-6. 问题：不同恐惧机制使用的默认 `phi`、`psi`、`h`、`k` 没有校准到相同的等效恐惧强度，当前机制对照同时混合了“机制形式差异”和“参数强度差异”。
-   修复方法：定义统一的参考状态或等效抑制指标，例如在指定捕食者密度下使猎物增长或捕食率降低相同百分比；据此为各机制反解参数，再重新运行机制对照。保留原始默认参数实验作为补充而非公平比较结论。
-   Git 提交说明：单独提交，例如 `feat(analysis): calibrate equivalent fear strength across mechanisms`。
+28. **结论重构**：从当前 5-6 条改为三段——(a) 理论层：机制路径依赖性；(b) 预测层：六模型比较，无单一恐惧通道一致胜出；(c) 机制层：为什么预测改善≠机制识别。每条标注证据强度。
+    Git 提交说明：`refactor(report): restructure conclusion around three core questions`
 
-7. 问题：三模型复杂度不同，当前直接比较训练集 RMSE。baseline、fear_memory 和 B-D 拟合参数数量不同，B-D 更灵活，训练误差更低不能单独证明模型更优。
-   修复方法：基于统一残差尺度增加 AIC、AICc 和 BIC；同时实现按时间顺序划分的留后验证或滚动时间序列验证，报告训练误差和验证误差。模型胜负结论优先依据验证误差与 AICc。
-   Git 提交说明：单独提交，例如 `feat(fit): add complexity-aware and out-of-sample model comparison`。
+29. **讨论增加与文献的对话**：增加一段说明"理论模型关心可能存在什么，数据模型检验在当前数据中实际被支持什么"；明确"15 个拟合单位中没有任何一个产生了恐惧强度的可靠估计"（如果属实）。
+    Git 提交说明：`feat(report): connect discussion to existing literature`
 
-8. 问题：`src/fit.py::profile_bda_k` 固定其他 B-D 参数后仅扫描 `k`，不是真正的 profile likelihood，可能低估 `k` 与其他参数的 trade-off 和不确定性。
-   修复方法：对每个固定 `k` 重新优化其余 B-D 参数，输出 profile RMSE 曲线和近似置信区间；保留当前固定其他参数的扫描，但改名为条件敏感性扫描，避免误称 profile likelihood。
-   Git 提交说明：单独提交，例如 `feat(fit): reoptimize nuisance parameters in B-D k profile`。
+### P3 — 补充最必要的实验与分析
 
-9. 问题：B-D 拟合将捕食者归一化到约 `[0,1]`，但跨系统比较使用 `eta(v=5)`，该参考值通常位于拟合数据范围之外，属于外推。
-   修复方法：将等效抑制改为数据支持范围内的参考量，例如每条序列的归一化捕食者中位数、均值或指定分位数；跨系统汇总时同时报告参考密度。若保留 `eta(v=5)`，必须明确标记为理论外推。
-   Git 提交说明：单独提交，例如 `fix(analysis): evaluate B-D fear suppression within observed predator range`。
+30. **退化检验**：数值验证 $\phi=0$ 时 fear-memory 的 ODE 轨迹与 baseline 完全重合。对 AICc 支持 baseline 的序列，检查 fitted $\phi$ 是否集中在接近 0 的区域。绘制 $\Delta$AICc vs fitted $\phi$ 散点图。
+    Git 提交说明：`feat(analysis): add null-model degeneration checks`
 
-## P1：默认参数标定和状态判定欠缺
+31. **$\Delta$AICc 实质阈值**：对每条序列计算 baseline 与最佳恐惧模型的 $\Delta$AICc；报告 $\Delta$AICc > 2、> 4、> 7 的序列各有多少。
+    Git 提交说明：`feat(analysis): report substantial AICc differences with thresholds`
 
-10. 问题：`data/calibrate_holling_defaults.py` 通过自动发现后按置信度和点数排序截取前 12 条序列，未显式锁定报告使用的 12 条序列。数据文件变化后，默认参数标定样本可能悄然改变。
-    修复方法：建立显式的报告序列清单或稳定 ID，并让标定脚本校验实际加载序列与清单完全一致；输出序列清单和数据摘要，缺失或新增时直接失败。
-    Git 提交说明：单独提交，例如 `fix(calibration): pin Holling default calibration to report series manifest`。
+32. **参数不确定性量化**：对 baseline 的 15 条序列，使用 Fisher 信息矩阵或 parametric bootstrap（从残差重采样 10 次）报告参数 95% CI。标注 CI 包含 0 的参数。
+    Git 提交说明：`feat(analysis): add parameter uncertainty quantification`
 
-11. 问题：`data/calibrate_holling_defaults.py` 使用每条序列最大值归一化，容易受异常峰值影响；使用后半段均值代表长期平衡，也没有先检验序列是否平稳或是否仍处于趋势/周期状态。
-    修复方法：比较最大值、稳健分位数和 z-score 等缩放方法；增加趋势、周期性和尾段稳定性诊断。对于明显非平稳或周期序列，应使用周期均值、状态空间估计或从平衡目标样本中排除，并做敏感性分析。
-    Git 提交说明：单独提交，例如 `feat(calibration): add robust scaling and stationarity checks for equilibrium target`。
+33. **研究级聚合胜负分析**：Andrén 七区取组内验证 RMSE 中位数；Killifish 三站同理；Windermere 两湖盆同理。重新计算 N≈6 的研究级胜负表。正文同时报告序列级和研究级。
+    Git 提交说明：`fix(analysis): aggregate model comparison to study level`
 
-12. 问题：Holling 默认参数的目标函数包含人为弱先验和硬编码平衡区间，但当前输出没有量化参数不可辨识性，也没有说明结果对先验和搜索范围的敏感程度。
-    修复方法：输出接近最优的参数集合、参数分布和目标函数等高线；分别改变先验权重、搜索边界和目标平衡定义，报告默认参数和平衡点的敏感性。将弱先验和硬约束写入输出说明。
-    Git 提交说明：单独提交，例如 `feat(calibration): report identifiability and sensitivity of Holling defaults`。
+### P4 — 重组图表和结果呈现
 
-13. 问题：`src/simulate.py::is_extinct` 使用末期窗口最小值判断灭绝。具有正常振荡的种群只要短暂低于阈值，就会被标记为灭绝；固定绝对阈值也无法跨不同量纲模型公平使用。
-    修复方法：将灭绝判定改为持续低于阈值一定时间，或结合尾部均值、分位数和恢复趋势；阈值应支持相对模型尺度配置。增加对稳定共存、低谷振荡和真实灭绝轨迹的测试。
-    Git 提交说明：单独提交，例如 `fix(simulate): make extinction classification persistent and scale-aware`。
+34. **正文图表精简**：正文保留 4 个核心 exhibit——(a) 六模型留后验证热力图；(b) 六模型胜负汇总表；(c) M(0) 和 $\delta$ profile（新 6.5 节）；(d) 一个代表性拟合图。其余理论分析图（时序图、$\phi$ 扫描、机制柱状图、$\delta$ 扫描等）移至附录。
+    Git 提交说明：`refactor(report): streamline figures to 4 core exhibits`
 
-14. 问题：长期均值、振幅和稳定状态使用固定积分终点及固定 burn-in 比例，没有检查轨迹是否已经收敛。不同参数下收敛速度差异会导致扫描结果偏差。
-    修复方法：增加收敛诊断，例如比较相邻尾部窗口均值和振幅、检查状态导数或平衡残差；未收敛时自动延长积分或标记为 `not_converged`。扫描输出必须包含收敛状态。
-    Git 提交说明：单独提交，例如 `feat(simulate): add convergence diagnostics to long-term metrics`。
+35. **Windermere 案例分析归属**：从 6.4 节移入 6.6 节"讨论"，缩短正文版本，细节移至附录。
+    Git 提交说明：`refactor(report): relocate Windermere case study to discussion`
 
-## P2：验证、复现和报告欠缺
+36. **证据边界表扩展**：当前表 5 仅两行。扩展为三列多行，覆盖预测能力、机制识别、恐惧强度估计、跨系统比较四个维度。
+    Git 提交说明：`feat(report): expand evidence-boundary table`
 
-15.  问题：拟合使用单个差分进化随机种子和有限优化预算，结果可能依赖随机初始化；当前没有报告多次拟合的参数和目标函数稳定性。
-    修复方法：对每条序列和模型使用多个随机种子重复拟合，选择最佳结果并报告均值、方差、成功率和参数分散程度；确保不同模型使用可比较的优化预算。
-    Git 提交说明：单独提交，例如 `feat(fit): add multi-seed calibration stability checks`。
+### P5 — 统一论文语言风格
 
-16.  问题：12 条时间序列并不都是独立样本，例如 Andrén 七个区域来自同一研究，直接将其作为 12 个独立胜负样本会夸大证据量。
-    修复方法：在模型比较中按数据集或研究来源分组，分别报告序列级和研究级结果；如计算总体统计，采用分层汇总或组内聚合，避免伪重复。
-    Git 提交说明：单独提交，例如 `fix(analysis): account for grouped and non-independent time series`。
+37. **模型名统一**：全文统一模型引用——`fear_memory`（代码）→ "fear-memory"（正文），首次出现加中文注释。同样统一 fear-instant、fear-saturating、fear-foraging、fear-handling、baseline。
+    Git 提交说明：`style(report): unify model name conventions`
 
-17.  问题：报告 `report/report.tex` 仍包含与当前实验冲突的旧结论，包括“phi 扫描 31/31 灭绝”“仅 B-D 共存”，并包含基于不可比 RMSE 的大幅改进结论。
-    修复方法：完成上述核心代码修复并重新生成全部实验结果后，系统更新摘要、方法、结果、结论、表格和图注；明确区分绝对密度、相对变化、归一化 RMSE 和原始尺度 RMSE。不得在核心修复完成前仅修改文字结论。
-    Git 提交说明：单独提交，例如 `docs(report): align conclusions with corrected experiment pipeline`。
+38. **口语化/辩护性表达替换**：见 REBUTTAL.md 附录 A 完整清单。逐句替换。
+    Git 提交说明：`style(report): replace colloquial and defensive phrasing`
+
+39. **相关工作加入批判性评述**：每项文献后增加 1 句评价（"X 提出了 Y，但未检验 Z"）。
+    Git 提交说明：`feat(report): add critical engagement to related work`
+
+40. **高密度段落拆分**：L156-159（拟合程序段）等拆分为短句，每个方法论决策紧跟 1 句理由。
+    Git 提交说明：`style(report): unpack dense methodological paragraphs`
+
+---
+
+## Phase 3：完善恐惧机制区分与三层叙事结构
+
+> 执行前提：Phase 1（删 B-D）和 Phase 2（修正宣称/重组）已全部完成。
+> 以下任务基于已确认结论编写，按编号顺序执行。
+
+41. **正文说明 fear-memory 与 fear-instant 的区分**：
+    - 在 4.3 节（等效恐惧强度校准段）增加一句："fear-memory 与 fear-instant 的 $\phi$ 值相同（0.00783431，$\delta=1$），在平衡点处恐惧项 $r\phi y x$ 完全等价；两者差异仅来自记忆方程 $dM/dt = y-\delta M$ 产生的一阶滞后（$\tau=1$），离开平衡点后时变恐惧强度不同。"
+    - 在 6.2 节机制对照图中，在 fear-memory 和 fear-instant 的柱/条上标注"$\phi$ 相同"
+    - 删除任何暗示"两者恐惧强度不同"的表述
+    - 背景：合成恢复实验确证结构差异可辨识（核心参数固定时交叉拟合 RMSE 差约 50 倍），但真实数据中 fear-instant 在中位数 AICc 上优于 fear-memory 约 30 单位（-147.96 vs -118.03），记忆滞后未得到数据支持
+    Git 提交说明：`docs(report): clarify fear-memory vs fear-instant distinction`
+
+42. **正文核心比较改为三模型递进叙事**：
+    - 叙事改为三层递进：
+      (a) baseline vs fear-memory → 检验恐惧效应是否存在
+      (b) fear-memory vs fear-instant → 检验记忆滞后是否重要（两者 $\phi$ 相同、$\delta=1$，差异仅来自 $dM/dt$ 的时滞）
+      (c) 附录给出全部六模型，正文提炼一句话："无单一恐惧通道在留后预测和 AICc 上一致胜出"
+    - 与 Phase 1 第 14 条协同：正文胜负表（表 2、表 8、表 9）聚焦 baseline / fear-memory / fear-instant 三列；fear-saturating / fear-foraging / fear-handling 三列移至附录
+    - 六模型热力图正文保留（概览），但主表聚焦三模型
+    - 正文首次列出三模型时注明："三者共享等效 $\phi=0.00783431$，构成一个干净的可比较三元组（无恐惧 → 恐惧+记忆 → 恐惧无记忆）"
+    Git 提交说明：`refactor(report): three-model core comparison with tiered narrative`
+
+43. **正文补充固定 $M(0)=y(0)$ 和 $\delta=1$ 的原因**：
+    - 与 Phase 2 第 15 条协同：M(0)/$\delta$ profile 从附录升级到正文（新 6.5 节）时，增加方法论解释
+    - 文字："固定 $\delta=1$ 提供统一的记忆时间尺度，避免在短序列中与 $\phi$ 相互补偿；固定 $M(0)=y(0)$ 使初始记忆与首个可观测捕食压力一致，避免引入额外的弱可辨识初始状态"
+    - 如 Phase 2 第 27 条所述，注明此分析仅覆盖 3 条代表序列
+    Git 提交说明：`docs(report): justify fixed M(0) and delta assumptions`
+
+44. **重新生成六模型热力图**：
+    - 从 `results/seven_model_real_fits/report_protocol_seven_model_metrics.csv` 读取数据
+    - 删除 B-D 列（保留 baseline + 5 个 Holling II 恐惧通道）
+    - 用与当前热力图相同的绘图参数重新生成
+    - 输出到 `results/seven_model_real_fits/validation_rmse_heatmap_six_model.png`
+    - 更新正文引用（与 Phase 1 第 14 条协调）
+    - 不重新运行优化
+    Git 提交说明：`fix(fig): regenerate heatmap without B-D column`

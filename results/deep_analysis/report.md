@@ -1,5 +1,5 @@
 # Deep data analysis report
-generated: 2026-06-11T14:13:50.561292+00:00
+generated: 2026-06-12T11:07:54.622246+00:00
 
 ## Tier 1
 - cross_system rows: 15

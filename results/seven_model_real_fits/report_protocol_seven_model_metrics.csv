@@ -1,106 +1,106 @@
-﻿series,model,validation_rmse,aicc,optimization_status,usable_for_comparison,source
-glerl_m110_zoop_1994-201,baseline,0.28136146085061686,-956.3020446989494,success,True,formal_report_fit_summary
-glerl_m110_zoop_1994-201,fear_instant,0.27981203992613546,-954.2334892120713,success,True,report_protocol_extension_multiseed_global_local
-glerl_m110_zoop_1994-201,fear_memory,0.2815414527951463,-954.4434388293122,success,True,formal_report_fit_summary
-glerl_m110_zoop_1994-201,fear_saturating,0.28184754948981977,-954.5977934791204,success,True,report_protocol_extension_multiseed_global_local
-glerl_m110_zoop_1994-201,fear_foraging,0.2818423545241804,-954.4960627604748,usable_limit,True,report_protocol_extension_multiseed_global_local
-glerl_m110_zoop_1994-201,fear_handling,0.2792609108982908,-954.4835769344717,success,True,report_protocol_extension_multiseed_global_local
-glerl_m110_zoop_1994-201,bda_fear,0.2831294241711791,-951.8585003781488,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_1,baseline,0.0701619728283596,-198.97940460579065,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_1,fear_instant,0.06660473703488454,-195.896243571341,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_1,fear_memory,0.06523219334533982,-196.59810881655685,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_1,fear_saturating,0.08184493639850933,-200.19520818328067,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_1,fear_foraging,0.06988657132532046,-195.81378103894926,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_1,fear_handling,0.08160867428459012,-200.1652929095732,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_1,bda_fear,0.066477294016699,-187.1700714738419,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_2,baseline,0.09675850584305756,-157.94824787956384,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_2,fear_instant,0.08706997555129746,-158.68043298526936,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_2,fear_memory,0.08330112661472336,-156.45617424710954,usable_limit,True,formal_report_fit_summary
-andren_lynx_roedeer_data_2,fear_saturating,0.09453142101319947,-155.20902433841403,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_2,fear_foraging,0.09804351410932438,-154.9224726854331,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_2,fear_handling,0.09462126283771363,-155.0539721938593,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_2,bda_fear,0.06565547020125366,-152.58931465543876,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_3,baseline,0.0755197457120694,-150.98386613091543,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_3,fear_instant,0.07551999579292683,-147.96012781304495,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_3,fear_memory,0.07344411184570378,-147.89607325751086,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_3,fear_saturating,0.07566726283855363,-147.92527111611025,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_3,fear_foraging,0.07551898636057348,-147.96041584865816,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_3,fear_handling,0.07552190165961614,-147.96041246901947,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_3,bda_fear,0.09035873337706471,-143.47805568142277,usable_limit,True,formal_report_fit_summary
-andren_lynx_roedeer_data_4,baseline,0.06519083289568395,-194.34249163273844,usable_limit,True,formal_report_fit_summary
-andren_lynx_roedeer_data_4,fear_instant,0.06508985628751142,-191.23309213665544,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_4,fear_memory,0.06557605356495567,-191.28286237581153,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_4,fear_saturating,0.06467153129739124,-191.25086199419246,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_4,fear_foraging,0.041719052022384996,-194.38976219175606,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_4,fear_handling,0.06507319024471596,-191.23290720577333,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_4,bda_fear,0.033127990585354095,-193.28120136473456,usable_limit,True,formal_report_fit_summary
-andren_lynx_roedeer_data_5,baseline,0.060220024094795814,-185.49735882528717,usable_limit,True,formal_report_fit_summary
-andren_lynx_roedeer_data_5,fear_instant,0.05587513671546979,-181.64496902448002,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_5,fear_memory,0.053049000331296024,-179.80289323769736,usable_limit,True,formal_report_fit_summary
-andren_lynx_roedeer_data_5,fear_saturating,0.06173240031075991,-182.52490718660334,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_5,fear_foraging,0.0746766687339312,-171.28881463029947,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_5,fear_handling,0.07467717208315072,-171.28901735855843,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_5,bda_fear,0.03456692739225133,-175.43934655385897,usable_limit,True,formal_report_fit_summary
-andren_lynx_roedeer_data_6,baseline,0.18100090978474087,-144.04776781058032,usable_limit,True,formal_report_fit_summary
-andren_lynx_roedeer_data_6,fear_instant,0.17799762613602532,-140.55095668617798,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_6,fear_memory,0.17599613934030625,-140.32559865579634,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_6,fear_saturating,0.18106483078550806,-140.73742155415033,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_6,fear_foraging,0.18006342935102346,-140.80594493003753,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_6,fear_handling,0.17888014398679788,-142.00175885715365,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_6,bda_fear,0.14581432032342864,-129.96095542484105,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_7,baseline,0.2428782459364254,-109.85954258801542,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_7,fear_instant,0.15371055769594003,-126.62311105953839,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_7,fear_memory,0.19157973150322707,-125.19625061749716,success,True,formal_report_fit_summary
-andren_lynx_roedeer_data_7,fear_saturating,0.2119518594491548,-126.16345107101733,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_7,fear_foraging,0.18887626101001678,-125.10523801592362,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_7,fear_handling,0.12977883441167257,-107.11294327239236,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_7,bda_fear,0.11347521876389514,-114.76159060633587,usable_limit,True,formal_report_fit_summary
-timeserieslogmeans_WRHW,baseline,0.15342050704249063,-319.3555308165882,success,True,formal_report_fit_summary
-timeserieslogmeans_WRHW,fear_instant,0.12664171945362798,-323.6075990240487,usable_limit,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_WRHW,fear_memory,0.15362183383115482,-317.2666807684336,success,True,formal_report_fit_summary
-timeserieslogmeans_WRHW,fear_saturating,0.18382385515188235,-323.4094502959762,usable_limit,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_WRHW,fear_foraging,0.1416549789922916,-339.2796621407103,usable_limit,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_WRHW,fear_handling,0.1526342492815432,-317.15454727044283,success,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_WRHW,bda_fear,0.1548381288461353,-311.9617642338168,usable_limit,True,formal_report_fit_summary
-timeserieslogmeans_TP,baseline,0.10301369746769957,-319.2625993027866,usable_limit,True,formal_report_fit_summary
-timeserieslogmeans_TP,fear_instant,0.10908208013734297,-316.5135381971269,usable_limit,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_TP,fear_memory,0.08927945010935116,-317.4920488920734,success,True,formal_report_fit_summary
-timeserieslogmeans_TP,fear_saturating,0.10330228853233912,-316.8647046537122,usable_limit,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_TP,fear_foraging,0.10060003080572877,-316.3550515312636,success,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_TP,fear_handling,0.08013947480821489,-317.26505422044943,usable_limit,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_TP,bda_fear,0.08367747552095747,-314.0337734349974,usable_limit,True,formal_report_fit_summary
-timeserieslogmeans_WRGP,baseline,0.1862484512328017,-265.6755243869564,usable_limit,True,formal_report_fit_summary
-timeserieslogmeans_WRGP,fear_instant,0.12537742518908682,-245.13945046262748,success,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_WRGP,fear_memory,0.19258376495682966,-245.09079365466746,usable_limit,True,formal_report_fit_summary
-timeserieslogmeans_WRGP,fear_saturating,0.1317706735953452,-245.3605038067271,success,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_WRGP,fear_foraging,0.16303579602312837,-257.17513499326947,usable_limit,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_WRGP,fear_handling,0.16450031772228163,-251.59825043098712,success,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_WRGP,bda_fear,0.14335366008127537,-242.33116919678704,success,True,formal_report_fit_summary
-isle_royale_wolf_moose_pre_2018,baseline,0.2283304101633647,-217.25228247555808,usable_limit,True,formal_report_fit_summary
-isle_royale_wolf_moose_pre_2018,fear_instant,0.22851460920377697,-214.67159364968205,usable_limit,True,report_protocol_extension_multiseed_global_local
-isle_royale_wolf_moose_pre_2018,fear_memory,0.28123252488731015,-208.12081802844844,success,True,formal_report_fit_summary
-isle_royale_wolf_moose_pre_2018,fear_saturating,0.22841868113702113,-214.6676755468944,usable_limit,True,report_protocol_extension_multiseed_global_local
-isle_royale_wolf_moose_pre_2018,fear_foraging,0.2285184009683272,-214.6489770223263,usable_limit,True,report_protocol_extension_multiseed_global_local
-isle_royale_wolf_moose_pre_2018,fear_handling,0.22850169734910106,-214.7300352522977,usable_limit,True,report_protocol_extension_multiseed_global_local
-isle_royale_wolf_moose_pre_2018,bda_fear,0.22752826823339278,-208.61756771923933,usable_limit,True,formal_report_fit_summary
-windermere_north_pike_perch,baseline,1.5234492844961285,-114.61316137464064,usable_limit,True,formal_report_fit_summary
-windermere_north_pike_perch,fear_instant,0.42307355821019804,-114.91289870115153,success,True,report_protocol_extension_multiseed_global_local
-windermere_north_pike_perch,fear_memory,3.039241798066608,-113.61015004444005,usable_limit,True,formal_report_fit_summary
-windermere_north_pike_perch,fear_saturating,0.42310177169250024,-114.91353329997997,usable_limit,True,report_protocol_extension_multiseed_global_local
-windermere_north_pike_perch,fear_foraging,0.42934103289231373,-116.02390244412828,usable_limit,True,report_protocol_extension_multiseed_global_local
-windermere_north_pike_perch,fear_handling,0.42309844479041286,-114.91406110928378,success,True,report_protocol_extension_multiseed_global_local
-windermere_north_pike_perch,bda_fear,0.5391577722569432,-114.52829528010896,usable_limit,True,formal_report_fit_summary
-windermere_south_pike_perch,baseline,1.1560310524523996,-126.40111704856744,usable_limit,True,formal_report_fit_summary
-windermere_south_pike_perch,fear_instant,1.1699892849721807,-123.35944794317498,usable_limit,True,report_protocol_extension_multiseed_global_local
-windermere_south_pike_perch,fear_memory,1.3883322948768493,-124.15335417106519,usable_limit,True,formal_report_fit_summary
-windermere_south_pike_perch,fear_saturating,1.5010556737888097,-123.95392913256563,usable_limit,True,report_protocol_extension_multiseed_global_local
-windermere_south_pike_perch,fear_foraging,1.5541132416259156,-124.15047384496395,usable_limit,True,report_protocol_extension_multiseed_global_local
-windermere_south_pike_perch,fear_handling,1.3131183604768246,-124.19515754184124,usable_limit,True,report_protocol_extension_multiseed_global_local
-windermere_south_pike_perch,bda_fear,2.346768763389447,-120.75370916604125,usable_limit,True,formal_report_fit_summary
-komi_lynx_hare,baseline,0.5810655355482642,-60.3354330104833,success,True,formal_report_fit_summary
-komi_lynx_hare,fear_instant,0.6003678398050175,-64.85078953014408,success,True,report_protocol_extension_multiseed_global_local
-komi_lynx_hare,fear_memory,0.6084673516183214,-66.07803923335237,usable_limit,True,formal_report_fit_summary
-komi_lynx_hare,fear_saturating,0.6132349276125258,-65.09772262261251,success,True,report_protocol_extension_multiseed_global_local
-komi_lynx_hare,fear_foraging,0.5964390793886363,-65.15212639140061,usable_limit,True,report_protocol_extension_multiseed_global_local
-komi_lynx_hare,fear_handling,0.6028165152649243,-65.02249357671563,usable_limit,True,report_protocol_extension_multiseed_global_local
-komi_lynx_hare,bda_fear,0.6089288659354598,-62.2200409854474,success,True,formal_report_fit_summary
+﻿series,model,training_rmse,validation_rmse,aicc,optimization_status,usable_for_comparison,fear_strength,fear_parameter,fear_parameter_bounds,optimized_fear_objective,nested_baseline_candidate_objective,nested_baseline_candidate_selected,source
+glerl_m110_zoop_1994-201,baseline,0.17075104952077877,0.28136146085061686,-956.3020446989494,success,True,,,,,,,formal_report_fit_summary
+glerl_m110_zoop_1994-201,fear_instant,0.17073924367692078,0.27981203992613546,-954.2334892120713,success,True,7.515463908096797e-06,phi,"[1e-08, 3.1938677738741617]",7.987842029542618,7.9887223300106,False,report_protocol_extension_multiseed_global_local
+glerl_m110_zoop_1994-201,fear_memory,0.17067384263137816,0.2815414527951463,-954.4434388293122,success,True,0.010002477673725509,phi,"[1e-05, 0.2]",7.981530875738992,7.990120818271832,False,formal_report_fit_summary
+glerl_m110_zoop_1994-201,fear_saturating,0.1706257758588021,0.28184754948981977,-954.5977934791204,success,True,4.536587956003509e-06,phi,"[1e-08, 0.99]",7.977294565270195,7.9887223300106,False,report_protocol_extension_multiseed_global_local
+glerl_m110_zoop_1994-201,fear_foraging,0.17065745376766325,0.2818423545241804,-954.4960627604748,usable_limit,True,1.1341897156047408e-08,psi,"[1e-08, 3.1938677738741617]",7.980190466070942,7.9887223300106,False,report_protocol_extension_multiseed_global_local
+glerl_m110_zoop_1994-201,fear_handling,0.17066134213180287,0.2792609108982908,-954.4835769344717,success,True,0.0044891935372179115,psi,"[1e-08, 3.1938677738741617]",7.980343935932628,7.9887223300106,False,report_protocol_extension_multiseed_global_local
+glerl_m110_zoop_1994-201,bda_fear,0.17081797798750528,0.2831294241711791,-951.8585003781488,success,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_1,baseline,0.06010282414982824,0.0701619728283596,-198.97940460579065,success,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_1,fear_instant,0.06010282414982824,0.0701619728283596,-195.95574869181218,success,True,0.0,phi,"[1e-08, 2.4374999999999996]",0.13748287525912312,0.1372692798898367,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_1,fear_memory,0.05959696943535041,0.06523219334533982,-196.59810881655685,success,True,0.19473690158385806,phi,"[1e-05, 0.2]",0.13496749031036104,0.13749009217884256,False,formal_report_fit_summary
+andren_lynx_roedeer_data_1,fear_saturating,0.0568419420470383,0.08184493639850933,-200.19520818328067,usable_limit,True,0.00019969178042985027,phi,"[1e-08, 0.99]",0.12277671673217339,0.1372692798898367,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_1,fear_foraging,0.06010282414982824,0.0701619728283596,-195.95574869181218,success,True,0.0,psi,"[1e-08, 2.4374999999999996]",0.1377803682146087,0.1372692798898367,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_1,fear_handling,0.05686432069130245,0.08160867428459012,-200.1652929095732,usable_limit,True,1.1070509209781217e-06,psi,"[1e-08, 2.4374999999999996]",0.1228725551444896,0.1372692798898367,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_1,bda_fear,0.0646591167102992,0.066477294016699,-187.1700714738419,success,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_2,baseline,0.10312485848811241,0.09675850584305756,-157.94824787956384,success,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_2,fear_instant,0.09815241362745686,0.08706997555129746,-158.68043298526936,success,True,0.777796096280274,phi,"[1e-08, 7.5375000000000005]",0.36608803092909936,0.4041199846513419,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_2,fear_memory,0.10106744578009128,0.08330112661472336,-156.45617424710954,usable_limit,True,0.2,phi,"[1e-05, 0.2]",0.388155548078782,0.40387272993011425,False,formal_report_fit_summary
+andren_lynx_roedeer_data_2,fear_saturating,0.10273963179661622,0.09453142101319947,-155.20902433841403,usable_limit,True,0.1866003018780964,phi,"[1e-08, 0.99]",0.40107098198943836,0.4041199846513419,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_2,fear_foraging,0.10312485848811241,0.09675850584305756,-154.92459196558536,success,True,0.0,psi,"[1e-08, 7.5375000000000005]",0.4041220291534774,0.4041199846513419,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_2,fear_handling,0.10294945102254087,0.09462126283771363,-155.0539721938593,success,True,1.8910738475221983e-05,psi,"[1e-08, 7.5375000000000005]",0.402718461463713,0.4041199846513419,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_2,bda_fear,0.10191499360766564,0.06565547020125366,-152.58931465543876,success,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_3,baseline,0.11302138791351844,0.0755197457120694,-150.98386613091543,success,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_3,fear_instant,0.11302151045835125,0.07551999579292683,-147.96012781304495,success,True,1.3016712550542598e-08,phi,"[1e-08, 6.092592592592593]",0.485375489017851,0.48540569678412443,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_3,fear_memory,0.11307632620920315,0.07563538359203949,-147.92327653478617,success,True,0.0,phi,"[1e-05, 0.2]",0.4862238862289698,0.48587771086086473,True,formal_report_fit_summary
+andren_lynx_roedeer_data_3,fear_saturating,0.11302138791351844,0.0755197457120694,-147.96021021693696,success,True,0.0,phi,"[1e-08, 0.99]",0.4858157003394271,0.48540569678412443,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_3,fear_foraging,0.113021082114162,0.07551898636057348,-147.96041584865816,success,True,6.356560726573223e-08,psi,"[1e-08, 6.092592592592593]",0.48537179961431187,0.48540569678412443,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_3,fear_handling,0.11302108714008871,0.07552190165961614,-147.96041246901947,success,True,5.192486994907416e-06,psi,"[1e-08, 6.092592592592593]",0.48537185025315027,0.48540569678412443,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_3,bda_fear,0.11489561911415559,0.09035873337706471,-143.47805568142277,usable_limit,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_4,baseline,0.05468871902329486,0.06519083289568395,-194.34249163273844,usable_limit,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_4,fear_instant,0.05468871902329486,0.06519083289568395,-191.23904335687638,usable_limit,True,0.0,phi,"[1e-08, 2.672727272727273]",0.10769018070909887,0.10767081558272014,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_4,fear_memory,0.05463538210282891,0.06527863342139535,-191.30929792176522,usable_limit,True,0.0,phi,"[1e-05, 0.2]",0.10754739408818512,0.10746089919079625,True,formal_report_fit_summary
+andren_lynx_roedeer_data_4,fear_saturating,0.05468871902329486,0.06519083289568395,-191.23904335687638,usable_limit,True,0.0,phi,"[1e-08, 0.99]",0.10768267031217854,0.10767081558272014,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_4,fear_foraging,0.05234714875358722,0.041719052022384996,-194.38976219175606,success,True,0.1529968735734723,psi,"[1e-08, 2.672727272727273]",0.09868976713980136,0.10767081558272014,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_4,fear_handling,0.05468871902329486,0.06519083289568395,-191.23904335687638,usable_limit,True,0.0,psi,"[1e-08, 2.672727272727273]",0.10769310345719824,0.10767081558272014,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_4,bda_fear,0.05075437659963763,0.033127990585354095,-193.28120136473456,usable_limit,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_5,baseline,0.0618372863392787,0.060220024094795814,-185.49735882528717,usable_limit,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_5,fear_instant,0.0618372863392787,0.060220024094795814,-182.3939105494251,usable_limit,True,0.0,phi,"[1e-08, 2.829032258064516]",0.1408401293265289,0.137658599345014,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_5,fear_memory,0.061840770934749774,0.0603481894506281,-182.38985338876924,usable_limit,True,0.0,phi,"[1e-05, 0.2]",0.14796231703695856,0.1376741141929509,True,formal_report_fit_summary
+andren_lynx_roedeer_data_5,fear_saturating,0.06172488200545489,0.06173240031075991,-182.52490718660334,usable_limit,True,0.0010199868469135177,phi,"[1e-08, 0.99]",0.1373782407292206,0.137658599345014,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_5,fear_foraging,0.0618372863392787,0.060220024094795814,-182.3939105494251,usable_limit,True,0.0,psi,"[1e-08, 2.829032258064516]",0.18762230504098043,0.137658599345014,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_5,fear_handling,0.0618372863392787,0.060220024094795814,-182.3939105494251,usable_limit,True,0.0,psi,"[1e-08, 2.829032258064516]",0.18762129692643542,0.137658599345014,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_5,bda_fear,0.06502692348910162,0.03456692739225133,-175.43934655385897,usable_limit,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_6,baseline,0.08284810798189116,0.18100090978474087,-144.04776781058032,usable_limit,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_6,fear_instant,0.08284810798189116,0.18100090978474087,-140.74110114391368,usable_limit,True,0.0,phi,"[1e-08, 4.592307692307692]",0.22077929351084669,0.2196418878777311,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_6,fear_memory,0.08297846728562017,0.1811813224018806,-140.6404779821098,usable_limit,True,0.0,phi,"[1e-05, 0.2]",0.22249025631719158,0.2203336330582636,True,formal_report_fit_summary
+andren_lynx_roedeer_data_6,fear_saturating,0.08285287135397847,0.18106483078550806,-140.73742155415033,success,True,8.44754626985705e-06,phi,"[1e-08, 0.99]",0.2195474938564163,0.2196418878777311,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_6,fear_foraging,0.08276421010052754,0.18006342935102346,-140.80594493003753,success,True,0.003382987968418544,psi,"[1e-08, 4.592307692307692]",0.21906883425766888,0.2196418878777311,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_6,fear_handling,0.08123215206379868,0.17888014398679788,-142.00175885715365,usable_limit,True,4.297519320211243,psi,"[1e-08, 4.592307692307692]",0.21103701755974758,0.2196418878777311,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_6,bda_fear,0.09269265761099528,0.14581432032342864,-129.96095542484105,success,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_7,baseline,0.10566391533734851,0.2428782459364254,-109.85954258801542,success,True,,,,,,,formal_report_fit_summary
+andren_lynx_roedeer_data_7,fear_instant,0.07345171824742103,0.15371055769594003,-126.62311105953839,usable_limit,True,1.311816043302069,phi,"[1e-08, 10.0]",0.15108366122344546,0.31261616412371396,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_7,fear_memory,0.07534728906535151,0.19157973150322707,-125.19625061749716,success,True,3.494267202312098e-05,phi,"[1e-05, 0.2]",0.15896783718331423,0.3130460470162348,False,formal_report_fit_summary
+andren_lynx_roedeer_data_7,fear_saturating,0.07405710685605459,0.2119518594491548,-126.16345107101733,usable_limit,True,1.766635129035549e-08,phi,"[1e-08, 0.99]",0.1536087230285842,0.31261616412371396,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_7,fear_foraging,0.07546984492879207,0.18887626101001678,-125.10523801592362,usable_limit,True,0.0014061998563256303,psi,"[1e-08, 10.0]",0.15948610887430414,0.31261616412371396,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_7,fear_handling,0.10406587885425794,0.12977883441167257,-107.11294327239236,usable_limit,True,4.385116253365373e-08,psi,"[1e-08, 10.0]",0.30320802644268874,0.31261616412371396,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_7,bda_fear,0.0845538432305118,0.11347521876389514,-114.76159060633587,usable_limit,True,,,,,,,formal_report_fit_summary
+timeserieslogmeans_WRHW,baseline,0.18354433756238595,0.15342050704249063,-319.3555308165882,success,True,,,,,,,formal_report_fit_summary
+timeserieslogmeans_WRHW,fear_instant,0.177490719405697,0.12664171945362798,-323.6075990240487,usable_limit,True,0.005143083968291592,phi,"[1e-08, 0.2]",3.0872572664153752,3.3014753374190775,False,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_WRHW,fear_memory,0.18332672551499463,0.15362183383115482,-317.2666807684336,success,True,5.9991243281875394e-05,phi,"[1e-05, 0.2]",3.293645996216115,3.30145418066917,False,formal_report_fit_summary
+timeserieslogmeans_WRHW,fear_saturating,0.17767024667022527,0.18382385515188235,-323.4094502959762,usable_limit,True,1.4871288411198438e-05,phi,"[1e-08, 0.99]",3.0935315222806863,3.3014753374190775,False,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_WRHW,fear_foraging,0.1638512193218643,0.1416549789922916,-339.2796621407103,usable_limit,True,0.0031491638442276712,psi,"[1e-08, 0.2]",2.631048153911637,3.3014753374190775,False,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_WRHW,fear_handling,0.1834316385179402,0.1526342492815432,-317.15454727044283,success,True,1.4573558688369799e-05,psi,"[1e-08, 0.2]",3.2974009898124237,3.3014753374190775,False,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_WRHW,bda_fear,0.18608917313425694,0.1548381288461353,-311.9617642338168,usable_limit,True,,,,,,,formal_report_fit_summary
+timeserieslogmeans_TP,baseline,0.1772415533875148,0.10301369746769957,-319.2625993027866,usable_limit,True,,,,,,,formal_report_fit_summary
+timeserieslogmeans_TP,fear_instant,0.1772415533875148,0.10301369746769957,-316.93369225477846,usable_limit,True,0.0,phi,"[1e-08, 0.3311311214825911]",3.0290007643938095,3.015798551733049,True,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_TP,fear_memory,0.17672686464711415,0.08927945010935116,-317.4920488920734,success,True,0.0006042753715739819,phi,"[1e-05, 0.2]",2.9983003203536374,3.01626099991769,False,formal_report_fit_summary
+timeserieslogmeans_TP,fear_saturating,0.1772415533875148,0.10301369746769957,-316.93369225477846,usable_limit,True,0.0,phi,"[1e-08, 0.99]",3.0179470682567366,3.015798551733049,True,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_TP,fear_foraging,0.1772415533875148,0.10301369746769957,-316.93369225477846,usable_limit,True,0.0,psi,"[1e-08, 0.3311311214825911]",3.0340126046401092,3.015798551733049,True,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_TP,fear_handling,0.17693592600044167,0.08013947480821489,-317.26505422044943,usable_limit,True,0.00999463777258023,psi,"[1e-08, 0.3311311214825911]",3.005405034865597,3.015798551733049,False,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_TP,bda_fear,0.17771989478125685,0.08367747552095747,-314.0337734349974,usable_limit,True,,,,,,,formal_report_fit_summary
+timeserieslogmeans_WRGP,baseline,0.20523613206461,0.1862484512328017,-265.6755243869564,usable_limit,True,,,,,,,formal_report_fit_summary
+timeserieslogmeans_WRGP,fear_instant,0.20523613206461,0.1862484512328017,-263.31256142399343,usable_limit,True,0.0,phi,"[1e-08, 0.2]",4.557085204124293,3.706724551626099,True,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_WRGP,fear_memory,0.2052232055355649,0.18623562286139958,-263.3236469026476,usable_limit,True,0.0,phi,"[1e-05, 0.2]",4.559515412969883,3.7062576399457576,True,formal_report_fit_summary
+timeserieslogmeans_WRGP,fear_saturating,0.20523613206461,0.1862484512328017,-263.31256142399343,usable_limit,True,0.0,phi,"[1e-08, 0.99]",4.545767740209286,3.706724551626099,True,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_WRGP,fear_foraging,0.20523613206461,0.1862484512328017,-263.31256142399343,usable_limit,True,0.0,psi,"[1e-08, 0.2]",3.97447145849904,3.706724551626099,True,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_WRGP,fear_handling,0.20523613206461,0.1862484512328017,-263.31256142399343,usable_limit,True,0.0,psi,"[1e-08, 0.2]",4.2345015206399195,3.706724551626099,True,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_WRGP,bda_fear,0.22805978580718664,0.14335366008127537,-242.33116919678704,success,True,,,,,,,formal_report_fit_summary
+isle_royale_wolf_moose_pre_2018,baseline,0.14607381038107387,0.2283304101633647,-217.25228247555808,usable_limit,True,,,,,,,formal_report_fit_summary
+isle_royale_wolf_moose_pre_2018,fear_instant,0.14607381038107387,0.2283304101633647,-214.68334198208927,usable_limit,True,0.0,phi,"[1e-08, 0.2]",1.2805272275638258,1.2802534847547555,True,report_protocol_extension_multiseed_global_local
+isle_royale_wolf_moose_pre_2018,fear_memory,0.1460998980967647,0.22832701640422035,-214.6619127719969,usable_limit,True,0.0,phi,"[1e-05, 0.2]",1.4282190739680423,1.2807108134331027,True,formal_report_fit_summary
+isle_royale_wolf_moose_pre_2018,fear_saturating,0.14607381038107387,0.2283304101633647,-214.68334198208927,usable_limit,True,0.0,phi,"[1e-08, 0.99]",1.2806110439139036,1.2802534847547555,True,report_protocol_extension_multiseed_global_local
+isle_royale_wolf_moose_pre_2018,fear_foraging,0.14607381038107387,0.2283304101633647,-214.68334198208927,usable_limit,True,0.0,psi,"[1e-08, 0.2]",1.2810099789616922,1.2802534847547555,True,report_protocol_extension_multiseed_global_local
+isle_royale_wolf_moose_pre_2018,fear_handling,0.14601698257212103,0.22850169734910106,-214.7300352522977,usable_limit,True,1.1421953678625803e-07,psi,"[1e-08, 0.2]",1.2792802186185799,1.2802534847547555,False,report_protocol_extension_multiseed_global_local
+isle_royale_wolf_moose_pre_2018,bda_fear,0.15026686342490572,0.22752826823339278,-208.61756771923933,usable_limit,True,,,,,,,formal_report_fit_summary
+windermere_north_pike_perch,baseline,0.16550630052357232,1.5234492844961285,-114.61316137464064,usable_limit,True,,,,,,,formal_report_fit_summary
+windermere_north_pike_perch,fear_instant,0.1578654040730617,0.42307355821019804,-114.91289870115153,success,True,2.0413232966364153e-08,phi,"[1e-08, 1.0204081632653061]",0.8971734971593757,0.9861240784679651,False,report_protocol_extension_multiseed_global_local
+windermere_north_pike_perch,fear_memory,0.16074777607886878,3.039241798066608,-113.61015004444005,usable_limit,True,0.11380835049221193,phi,"[1e-05, 0.2]",0.9305174485080536,0.9860495930878151,False,formal_report_fit_summary
+windermere_north_pike_perch,fear_saturating,0.1578640126736314,0.42310177169250024,-114.91353329997997,usable_limit,True,0.0009386432345858439,phi,"[1e-08, 0.99]",0.8971576837698771,0.9861240784679651,False,report_protocol_extension_multiseed_global_local
+windermere_north_pike_perch,fear_foraging,0.15544814284614966,0.42934103289231373,-116.02390244412828,usable_limit,True,0.23949789566646515,psi,"[1e-08, 1.0204081632653061]",0.8699088185413182,0.9861240784679651,False,report_protocol_extension_multiseed_global_local
+windermere_north_pike_perch,fear_handling,0.15786285542655884,0.42309844479041286,-114.91406110928378,success,True,0.005149399269377171,psi,"[1e-08, 1.0204081632653061]",0.8971445320119302,0.9861240784679651,False,report_protocol_extension_multiseed_global_local
+windermere_north_pike_perch,bda_fear,0.15153069548769832,0.5391577722569432,-114.52829528010896,usable_limit,True,,,,,,,formal_report_fit_summary
+windermere_south_pike_perch,baseline,0.14051126410681797,1.1560310524523996,-126.40111704856744,usable_limit,True,,,,,,,formal_report_fit_summary
+windermere_south_pike_perch,fear_instant,0.1403907509650842,1.1699892849721807,-123.35944794317498,usable_limit,True,0.0002643635427067751,phi,"[1e-08, 1.098901098901099]",0.7095425562184838,0.7107629522722545,False,report_protocol_extension_multiseed_global_local
+windermere_south_pike_perch,fear_memory,0.1388512390980044,1.3883322948768493,-124.15335417106519,usable_limit,True,0.003521486028620211,phi,"[1e-05, 0.2]",0.6939246417765266,0.7108613159945192,False,formal_report_fit_summary
+windermere_south_pike_perch,fear_saturating,0.13923636128521236,1.5010556737888097,-123.95392913256563,usable_limit,True,3.117912440558212e-07,phi,"[1e-08, 0.99]",0.6976558113737821,0.7107629522722545,False,report_protocol_extension_multiseed_global_local
+windermere_south_pike_perch,fear_foraging,0.13885679388755873,1.5541132416259156,-124.15047384496395,usable_limit,True,0.0008334474875070832,psi,"[1e-08, 1.098901098901099]",0.6940121668300938,0.7107629522722545,False,report_protocol_extension_multiseed_global_local
+windermere_south_pike_perch,fear_handling,0.13877064513803045,1.3131183604768246,-124.19515754184124,usable_limit,True,0.012554855800980511,psi,"[1e-08, 1.098901098901099]",0.6932307881566274,0.7107629522722545,False,report_protocol_extension_multiseed_global_local
+windermere_south_pike_perch,bda_fear,0.13897917936322934,2.346768763389447,-120.75370916604125,usable_limit,True,,,,,,,formal_report_fit_summary
+komi_lynx_hare,baseline,0.306437597686739,0.5810655355482642,-60.3354330104833,success,True,,,,,,,formal_report_fit_summary
+komi_lynx_hare,fear_instant,0.2711833135341713,0.6003678398050175,-64.85078953014408,success,True,0.0002016174246664251,phi,"[1e-08, 0.2]",2.3532921146932693,3.00492804083263,False,report_protocol_extension_multiseed_global_local
+komi_lynx_hare,fear_memory,0.2660327041866559,0.6084673516183214,-66.07803923335237,usable_limit,True,0.003876735407302973,phi,"[1e-05, 0.2]",2.264736124242913,3.0054559903135853,False,formal_report_fit_summary
+komi_lynx_hare,fear_saturating,0.2701390148564685,0.6132349276125258,-65.09772262261251,success,True,7.103563077226186e-07,phi,"[1e-08, 0.99]",2.335140987586988,3.00492804083263,False,report_protocol_extension_multiseed_global_local
+komi_lynx_hare,fear_foraging,0.269909478359671,0.5964390793886363,-65.15212639140061,usable_limit,True,0.06841654362351936,psi,"[1e-08, 0.2]",2.3312360523463123,3.00492804083263,False,report_protocol_extension_multiseed_global_local
+komi_lynx_hare,fear_handling,0.27045673749695953,0.6028165152649243,-65.02249357671563,usable_limit,True,0.0372158157551707,psi,"[1e-08, 0.2]",2.3407018845441514,3.00492804083263,False,report_protocol_extension_multiseed_global_local
+komi_lynx_hare,bda_fear,0.26713150136434305,0.6089288659354598,-62.2200409854474,success,True,,,,,,,formal_report_fit_summary

@@ -1,0 +1,12 @@
+No,Filename,Width,Height,AspectRatio,PixelAspectRatio,RatioSource,UsageCount,DisplayRatioVariants,AssetKind,SvgRenderable,PptxNativeSupported,SizeKB,Category,ImageArea_SxS,TextArea_SxS
+1,05_phi_scan.png,1200,675,1.78,1.78,pixel,1,,bitmap,True,True,49.7,Wide landscape,812x457,328x600
+2,09_literature_mechanisms_bars.png,1500,750,2.00,2.00,pixel,1,,bitmap,True,True,118.4,Wide landscape,812x406,328x600
+3,12_isle_royale_wolf_moose_pre_2018_baseline.png,1350,900,1.50,1.50,pixel,1,,bitmap,True,True,81.8,Standard landscape,812x541,328x600
+4,12_isle_royale_wolf_moose_pre_2018_bda_fear.png,1350,900,1.50,1.50,pixel,1,,bitmap,True,True,83.0,Standard landscape,812x541,328x600
+5,12_isle_royale_wolf_moose_pre_2018_fear_memory.png,1350,900,1.50,1.50,pixel,1,,bitmap,True,True,82.7,Standard landscape,812x541,328x600
+6,eta_by_group.png,1500,600,2.50,2.50,pixel,1,,bitmap,True,True,77.9,Ultra-wide,812x325,328x600
+7,k_profile_glerl_m110_zoop_1994-201.png,900,600,1.50,1.50,pixel,1,,bitmap,True,True,49.4,Standard landscape,812x541,328x600
+8,k_profile_isle_royale_wolf_moose_pre_2018.png,900,600,1.50,1.50,pixel,1,,bitmap,True,True,53.4,Standard landscape,812x541,328x600
+9,k_profile_timeserieslogmeans_TP.png,900,600,1.50,1.50,pixel,1,,bitmap,True,True,56.0,Standard landscape,812x541,328x600
+10,rmse_improvement.png,1500,945,1.59,1.59,pixel,1,,bitmap,True,True,91.0,Wide landscape,812x512,328x600
+11,validation_rmse_heatmap.png,2375,1425,1.67,1.67,pixel,1,,bitmap,True,True,370.0,Wide landscape,812x487,328x600

@@ -53,7 +53,8 @@
         "success": false,
         "objective_value": 0.1380853423152306,
         "nfev": 5355,
-        "termination_reason": "Maximum number of iterations has been exceeded."
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
       },
       {
         "seed": 1,
@@ -61,7 +62,8 @@
         "success": false,
         "objective_value": 0.14014341016262974,
         "nfev": 5355,
-        "termination_reason": "Maximum number of iterations has been exceeded."
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
       },
       {
         "seed": 2,
@@ -69,7 +71,8 @@
         "success": false,
         "objective_value": 0.1411243731563847,
         "nfev": 5355,
-        "termination_reason": "Maximum number of iterations has been exceeded."
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
       }
     ],
     "selected_seed": 0,
@@ -79,8 +82,18 @@
       "success": true,
       "objective_value": 0.13496749031036104,
       "nfev": 256,
-      "termination_reason": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      "termination_reason": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "parameter_bound_hits": []
     },
+    "optimized_fear_objective": 0.13496749031036104,
+    "nested_baseline_candidate_objective": 0.13749009217884256,
+    "nested_baseline_candidate_selected": false,
+    "fear_parameter": "phi",
+    "fear_parameter_bounds": [
+      1e-05,
+      0.2
+    ],
+    "initial_memory_source": "predator_initial",
     "validation_fraction": 0.2,
     "validation_mode": "ordered_holdout_continuous_multistep",
     "train_end_time": 22.0,

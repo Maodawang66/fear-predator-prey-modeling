@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  
+  <rect width="1280" height="720" fill="#FAFBFC" />
+  
+  <path fill="#1B3A5C" d="M62,40 H62 A2,2 0 0 1 64,42 V74 A2,2 0 0 1 62,76 H62 A2,2 0 0 1 60,74 V42 A2,2 0 0 1 62,40 Z" />
+  <text x="76" y="66" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="32" font-weight="bold" fill="#1B3A5C">研究背景与核心问题</text>
+  <line x1="60" y1="95" x2="1220" y2="95" stroke="#CBD5E1" stroke-width="1" />
+
+  
+  <path fill="#F0F3F7" d="M108,130 H1172 A8,8 0 0 1 1180,138 V202 A8,8 0 0 1 1172,210 H108 A8,8 0 0 1 100,202 V138 A8,8 0 0 1 108,130 Z" />
+  <text x="130" y="162" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#1E293B">捕食者不仅通过直接捕食减少猎物数量，还会通过</text>
+  <text x="130" y="192" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#1E293B">风险线索改变猎物</text>
+  <text x="340" y="192" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#DC2626">繁殖</text>
+  <text x="390" y="192" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#1E293B">、</text>
+  <text x="410" y="192" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#DC2626">觅食</text>
+  <text x="460" y="192" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#1E293B">、</text>
+  <text x="480" y="192" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#DC2626">活动与栖息地选择</text>
+  <text x="670" y="192" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#1E293B">——非消耗性效应（NCE）</text>
+
+  
+  
+  <g>
+    <path fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" d="M108,260 H1172 A8,8 0 0 1 1180,268 V367 A8,8 0 0 1 1172,375 H108 A8,8 0 0 1 100,367 V268 A8,8 0 0 1 108,260 Z" />
+    <path fill="#2563A0" d="M103,260 H103 A3,3 0 0 1 106,263 V372 A3,3 0 0 1 103,375 H103 A3,3 0 0 1 100,372 V263 A3,3 0 0 1 103,260 Z" />
+    <text x="140" y="298" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#2563A0">Q1</text>
+    <text x="200" y="298" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E293B">不同恐惧机制是否产生一致的种群动力学结论？</text>
+    <text x="200" y="330" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#64748B">比较六种恐惧通道（繁殖/觅食/处理时间/B-D）在相同等效抑制强度下的长期种群变化方向</text>
+  </g>
+  
+  <g>
+    <path fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" d="M108,400 H1172 A8,8 0 0 1 1180,408 V507 A8,8 0 0 1 1172,515 H108 A8,8 0 0 1 100,507 V408 A8,8 0 0 1 108,400 Z" />
+    <path fill="#2563A0" d="M103,400 H103 A3,3 0 0 1 106,403 V512 A3,3 0 0 1 103,515 H103 A3,3 0 0 1 100,512 V403 A3,3 0 0 1 103,400 Z" />
+    <text x="140" y="438" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#2563A0">Q2</text>
+    <text x="200" y="438" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E293B">含恐惧模型能否改善真实时间序列的留后预测？</text>
+    <text x="200" y="470" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#64748B">15 条真实种群序列，前 80% 拟合 + 后 20% 连续多步留后验证，AICc 修正复杂度</text>
+  </g>
+  
+  <g>
+    <path fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" d="M108,540 H1172 A8,8 0 0 1 1180,548 V647 A8,8 0 0 1 1172,655 H108 A8,8 0 0 1 100,647 V548 A8,8 0 0 1 108,540 Z" />
+    <path fill="#2563A0" d="M103,540 H103 A3,3 0 0 1 106,543 V652 A3,3 0 0 1 103,655 H103 A3,3 0 0 1 100,652 V543 A3,3 0 0 1 103,540 Z" />
+    <text x="140" y="578" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#2563A0">Q3</text>
+    <text x="200" y="578" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E293B">当模型复杂度增加时，数据能否可靠识别恐惧参数？</text>
+    <text x="200" y="610" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#64748B">区分"模型能否预测轨迹"与"数据能否识别恐惧机制"——通过 k profile 和参数触边诊断</text>
+  </g>
+
+  
+  <text x="1220" y="690" text-anchor="end" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="11" fill="#94A3B8">03 / 13</text>
+</svg>

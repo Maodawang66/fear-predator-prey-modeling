@@ -91,6 +91,14 @@
         "e"
       ]
     },
+    "optimized_fear_objective": 2.264736124242913,
+    "nested_baseline_candidate_objective": 3.0054559903135853,
+    "nested_baseline_candidate_selected": false,
+    "fear_parameter": "phi",
+    "fear_parameter_bounds": [
+      1e-05,
+      0.2
+    ],
     "initial_memory_source": "predator_initial",
     "validation_fraction": 0.2,
     "validation_mode": "ordered_holdout_continuous_multistep",

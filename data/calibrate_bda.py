@@ -130,7 +130,23 @@ def _existing_tag(series_name: str, fallback: str) -> str:
     return fallback
 
 
-def _fit_one_series(series, tag: str, model_names: set[str] | None = None) -> list[FitResult]:
+def _baseline_params_from_result(result: FitResult | None):
+    if result is None:
+        return None
+    from src.parameters import BaselineParams
+
+    return BaselineParams(**{
+        name: float(result.params[name])
+        for name in ("r", "K", "a", "theta", "e", "mu")
+    })
+
+
+def _fit_one_series(
+    series,
+    tag: str,
+    model_names: set[str] | None = None,
+    baseline_result: FitResult | None = None,
+) -> list[FitResult]:
     print(f"\n--- {series.name} ({series.n_points} pts) ---")
     print(
         f"    source: {Path(series.source_path).name} | "
@@ -151,9 +167,21 @@ def _fit_one_series(series, tag: str, model_names: set[str] | None = None) -> li
         if model_names is not None and model_name not in model_names:
             continue
         try:
-            res = fitter(series)
+            kwargs = {}
+            if model_name == "fear_memory":
+                kwargs["baseline_params"] = _baseline_params_from_result(baseline_result)
+                kwargs["baseline_parameter_bound_hits"] = tuple(
+                    baseline_result.meta.get("parameter_bound_hits", [])
+                    if baseline_result is not None else ()
+                )
+                if baseline_result is not None:
+                    kwargs["baseline_candidate_status"] = baseline_result.optimization_status
+                    kwargs["baseline_candidate_message"] = baseline_result.message
+            res = fitter(series, **kwargs)
             res.meta = {**res.meta, **series.meta, "source_file": series.source_path}
             results.append(res)
+            if model_name == "baseline":
+                baseline_result = res
         except Exception as exc:
             print(f"  [{model_name}] FAIL: {exc}")
             continue
@@ -227,6 +255,10 @@ def _write_summary_table(all_results: list[FitResult]) -> None:
         "prey_col",
         "predator_col",
         "group_key",
+        "optimized_fear_objective",
+        "nested_baseline_candidate_objective",
+        "nested_baseline_candidate_selected",
+        "fear_parameter_bounds",
     ]
     fieldnames = (
         [
@@ -294,8 +326,16 @@ def main() -> None:
         default=[],
         help="discard cached fits for this formal series and recompute all three models",
     )
+    parser.add_argument(
+        "--refit-model",
+        action="append",
+        choices=("baseline", "fear_memory", "bda_fear"),
+        default=[],
+        help="discard cached fits for this model across every formal series",
+    )
     args = parser.parse_args()
     refit_series = set(args.refit_series)
+    refit_models = set(args.refit_model)
 
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "figures").mkdir(exist_ok=True)
@@ -322,7 +362,7 @@ def main() -> None:
     cached = _load_cached_results()
     cached = {
         key: result for key, result in cached.items()
-        if key[0] not in refit_series
+        if key[0] not in refit_series and key[1] not in refit_models
     }
     required_legacy = {
         (series_name, model)
@@ -331,7 +371,7 @@ def main() -> None:
     }
     missing_legacy = sorted(
         key for key in required_legacy - set(cached)
-        if key[0] not in refit_series
+        if key[0] not in refit_series and key[1] not in refit_models
     )
     if missing_legacy:
         raise RuntimeError(
@@ -359,11 +399,20 @@ def main() -> None:
         ]
         if not missing_models:
             continue
-        if series.name in LEGACY_FORMAL_IDS and series.name not in refit_series:
+        if (
+            series.name in LEGACY_FORMAL_IDS
+            and series.name not in refit_series
+            and not set(missing_models).issubset(refit_models)
+        ):
             raise RuntimeError(f"refusing to refit legacy formal series: {series.name}")
         fallback_tag = f"{i+1:02d}_{series.name}"[:48]
         tag = _existing_tag(series.name, fallback_tag)
-        results = _fit_one_series(series, tag, set(missing_models))
+        results = _fit_one_series(
+            series,
+            tag,
+            set(missing_models),
+            baseline_result=cached.get((series.name, "baseline")),
+        )
         if {result.model for result in results} != set(missing_models):
             raise RuntimeError(f"incomplete new fits for {series.name}: {missing_models}")
         all_results.extend(results)

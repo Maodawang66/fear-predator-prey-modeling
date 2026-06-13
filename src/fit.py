@@ -587,10 +587,17 @@ def fit_fear_memory_to_series(
     optimizer_seeds: tuple[int, ...] = DEFAULT_OPTIMIZER_SEEDS,
     max_nfev: int = 500,
     initial_memory: float | None = None,
+    phi_upper: float = 0.2,
+    baseline_parameter_bound_hits: tuple[str, ...] = (),
+    baseline_candidate_status: str = "success",
+    baseline_candidate_message: str = "nested baseline candidate",
 ) -> FitResult:
     """拟合恐惧记忆模型的动力学参数；delta 与 M(0) 保持固定。"""
     if fixed is None:
         fixed = FearMemoryParams(phi=0.02, delta=1.0)
+    phi_lower = 1e-5
+    if not np.isfinite(phi_upper) or phi_upper <= phi_lower:
+        raise ValueError(f"phi_upper must be finite and greater than {phi_lower}")
 
     if baseline_params is not None:
         fixed = FearMemoryParams(
@@ -631,20 +638,20 @@ def fit_fear_memory_to_series(
         return np.concatenate([rp, rq])
 
     p0_core, lb_core, ub_core = _holling_core_setup(prey_max, fixed)
-    phi_initial = float(np.clip(fixed.phi, 1.01e-5, 0.2 / 1.01))
+    phi_initial = float(np.clip(fixed.phi, 1.01 * phi_lower, phi_upper / 1.01))
     param_names = ["r", "K", "a", "theta"]
     if fit_e_mu:
         e_mu_lb = np.array([0.01, 0.01])
         e_mu_ub = np.array([2.0, 3.0])
         e_mu_p0 = np.clip(np.array([fixed.e, fixed.mu]), e_mu_lb * 1.01, e_mu_ub / 1.01)
         p0 = np.concatenate([p0_core, np.log(e_mu_p0), np.log([phi_initial])])
-        lb = np.concatenate([lb_core, np.log(e_mu_lb), np.log([1e-5])])
-        ub = np.concatenate([ub_core, np.log(e_mu_ub), np.log([0.2])])
+        lb = np.concatenate([lb_core, np.log(e_mu_lb), np.log([phi_lower])])
+        ub = np.concatenate([ub_core, np.log(e_mu_ub), np.log([phi_upper])])
         param_names.extend(["e", "mu"])
     else:
         p0 = np.concatenate([p0_core, np.log([phi_initial])])
-        lb = np.concatenate([lb_core, np.log([1e-5])])
-        ub = np.concatenate([ub_core, np.log([0.2])])
+        lb = np.concatenate([lb_core, np.log([phi_lower])])
+        ub = np.concatenate([ub_core, np.log([phi_upper])])
     param_names.append("phi")
 
     res, optimizer_meta = _multiseed_bounded_minimize(
@@ -657,12 +664,62 @@ def fit_fear_memory_to_series(
         seeds=optimizer_seeds,
         param_names=param_names,
     )
-    p_fit = _pack_fear_memory(res.x, fixed, fit_e_mu=fit_e_mu)
-    y_pred = _simulate_at_times(
-        lambda t, s: fear_memory_rhs(t, s, p_fit),
+    optimized_params = _pack_fear_memory(res.x, fixed, fit_e_mu=fit_e_mu)
+    try:
+        optimized_prediction = _simulate_at_times(
+            lambda t, s: fear_memory_rhs(t, s, optimized_params),
+            np.array([x0, y0, m0]),
+            t_obs,
+        )
+        optimized_prediction_usable = bool(
+            np.all(np.isfinite(optimized_prediction[:2]))
+            and np.all(optimized_prediction[:2] >= 0.0)
+        )
+    except RuntimeError:
+        optimized_prediction = None
+        optimized_prediction_usable = False
+
+    nested_core = baseline_params or BaselineParams(
+        r=fixed.r,
+        K=fixed.K,
+        a=fixed.a,
+        theta=fixed.theta,
+        e=fixed.e,
+        mu=fixed.mu,
+    )
+    nested_params = FearMemoryParams(
+        r=nested_core.r,
+        K=nested_core.K,
+        a=nested_core.a,
+        theta=nested_core.theta,
+        e=nested_core.e,
+        mu=nested_core.mu,
+        phi=0.0,
+        delta=fixed.delta,
+    )
+    nested_prediction = _simulate_at_times(
+        lambda t, s: fear_memory_rhs(t, s, nested_params),
         np.array([x0, y0, m0]),
         t_obs,
     )
+    nested_residual = np.concatenate([
+        (nested_prediction[0, :train_end] - series.prey[:train_end]) / prey_max,
+        (nested_prediction[1, :train_end] - series.predator[:train_end]) / pred_max,
+    ])
+    nested_cost = float(np.dot(nested_residual, nested_residual))
+    nested_selected = (
+        res.status not in ("success", "usable_limit")
+        or not np.isfinite(res.cost)
+        or not optimized_prediction_usable
+        or nested_cost < res.cost
+    )
+    p_fit = nested_params if nested_selected else optimized_params
+    y_pred = nested_prediction if nested_selected else optimized_prediction
+    final_cost = nested_cost if nested_selected else float(res.cost)
+    tolerance = max(1e-10, 1e-8 * max(1.0, nested_cost))
+    if final_cost > nested_cost + tolerance:
+        raise RuntimeError("fear-memory nested-baseline invariant violated")
+
     fit_metrics = _fit_evaluation_metrics(
         series.prey,
         series.predator,
@@ -673,6 +730,14 @@ def fit_fear_memory_to_series(
         train_end,
         len(param_names),
     )
+    final_optimization_meta = _optimization_meta(res, param_names)
+    final_optimization_meta.update({
+        "objective_value": final_cost,
+        "parameter_bound_hits": (
+            list(baseline_parameter_bound_hits)
+            if nested_selected else final_optimization_meta["parameter_bound_hits"]
+        ),
+    })
 
     return FitResult(
         model="fear_memory",
@@ -691,17 +756,25 @@ def fit_fear_memory_to_series(
             "m0": m0,
         },
         **fit_metrics,
-        success=bool(res.success),
-        optimization_status=res.status,
-        message=str(res.message),
+        success=(baseline_candidate_status == "success") if nested_selected else bool(res.success),
+        optimization_status=baseline_candidate_status if nested_selected else res.status,
+        message=(
+            f"nested baseline candidate selected: {baseline_candidate_message}"
+            if nested_selected else str(res.message)
+        ),
         t_obs=t_obs,
         prey_obs=series.prey,
         predator_obs=series.predator,
         prey_pred=y_pred[0],
         predator_pred=y_pred[1],
         meta={
-            **_optimization_meta(res, param_names),
+            **final_optimization_meta,
             **optimizer_meta,
+            "optimized_fear_objective": float(res.cost),
+            "nested_baseline_candidate_objective": nested_cost,
+            "nested_baseline_candidate_selected": nested_selected,
+            "fear_parameter": "phi",
+            "fear_parameter_bounds": [phi_lower, phi_upper],
             "initial_memory_source": "predator_initial" if initial_memory is None else "fixed_input",
             "validation_fraction": validation_fraction,
             "validation_mode": "ordered_holdout_continuous_multistep",
@@ -1146,6 +1219,80 @@ def profile_fear_memory_delta(
         )})
         rows.append(row)
     return _finalize_profile_rows(rows, n_residuals, confidence_level)
+
+
+def adaptive_fear_memory_phi_bound_diagnostic(
+    series,
+    baseline_params: BaselineParams,
+    phi_upper_grid: tuple[float, ...] = (0.2, 1.0, 5.0),
+    validation_fraction: float = 0.20,
+    optimizer: str = "auto",
+    optimizer_seeds: tuple[int, ...] = DEFAULT_OPTIMIZER_SEEDS,
+    max_nfev: int = 500,
+    fit_function: Callable | None = None,
+    baseline_parameter_bound_hits: tuple[str, ...] = (),
+    baseline_candidate_status: str = "success",
+    baseline_candidate_message: str = "nested baseline candidate",
+) -> list[dict[str, float | str | bool]]:
+    """Refit fear-memory with expanding phi bounds until the upper hit resolves."""
+    if not phi_upper_grid:
+        raise ValueError("phi_upper_grid must not be empty")
+    if any(
+        not np.isfinite(upper) or upper <= 1e-5
+        for upper in phi_upper_grid
+    ):
+        raise ValueError("every phi upper bound must be finite and greater than 1e-5")
+    if any(right <= left for left, right in zip(phi_upper_grid, phi_upper_grid[1:])):
+        raise ValueError("phi_upper_grid must be strictly increasing")
+
+    fitter = fit_fear_memory_to_series if fit_function is None else fit_function
+    rows: list[dict[str, float | str | bool]] = []
+    for upper in phi_upper_grid:
+        result = fitter(
+            series,
+            baseline_params=baseline_params,
+            validation_fraction=validation_fraction,
+            optimizer=optimizer,
+            optimizer_seeds=optimizer_seeds,
+            max_nfev=max_nfev,
+            phi_upper=float(upper),
+            baseline_parameter_bound_hits=baseline_parameter_bound_hits,
+            baseline_candidate_status=baseline_candidate_status,
+            baseline_candidate_message=baseline_candidate_message,
+        )
+        phi = float(result.params["phi"])
+        bound_hits = result.meta.get("parameter_bound_hits", [])
+        upper_hit = "phi" in bound_hits and phi >= float(upper) * (1.0 - 2e-3)
+        rows.append({
+            "phi_upper": float(upper),
+            "phi": phi,
+            "phi_upper_hit": upper_hit,
+            "boundary_resolved": not upper_hit,
+            "boundary_unresolved_at_maximum": False,
+            "rmse_normalized_total": result.rmse_normalized_total,
+            "validation_rmse_normalized_total": result.validation_rmse_normalized_total,
+            "aicc": result.aicc,
+            "optimization_status": result.optimization_status,
+            "objective_value": float(result.meta["objective_value"]),
+            "optimized_fear_objective": float(result.meta["optimized_fear_objective"]),
+            "nested_baseline_candidate_objective": float(
+                result.meta["nested_baseline_candidate_objective"]
+            ),
+            "nested_baseline_candidate_selected": bool(
+                result.meta["nested_baseline_candidate_selected"]
+            ),
+            "parameter_bound_hits": ";".join(bound_hits),
+            **{
+                name: float(result.params[name])
+                for name in ("r", "K", "a", "theta", "e", "mu", "delta", "m0")
+            },
+            "diagnostic_role": "boundary_sensitivity_not_formal_model_selection",
+        })
+        if not upper_hit:
+            break
+    if rows and bool(rows[-1]["phi_upper_hit"]):
+        rows[-1]["boundary_unresolved_at_maximum"] = True
+    return rows
 
 
 def conditional_bda_k_scan(

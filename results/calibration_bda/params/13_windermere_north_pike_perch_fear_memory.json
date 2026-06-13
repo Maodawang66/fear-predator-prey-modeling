@@ -85,6 +85,14 @@
       "termination_reason": "STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
       "parameter_bound_hits": []
     },
+    "optimized_fear_objective": 0.9305174485080536,
+    "nested_baseline_candidate_objective": 0.9860495930878151,
+    "nested_baseline_candidate_selected": false,
+    "fear_parameter": "phi",
+    "fear_parameter_bounds": [
+      1e-05,
+      0.2
+    ],
     "initial_memory_source": "predator_initial",
     "validation_fraction": 0.2,
     "validation_mode": "ordered_holdout_continuous_multistep",

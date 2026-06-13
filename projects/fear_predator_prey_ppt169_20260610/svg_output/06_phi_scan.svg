@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#FAFBFC"/>
+  <rect x="60" y="40" width="4" height="36" fill="#1B3A5C" rx="2"/>
+  <text x="76" y="66" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="32" font-weight="bold" fill="#1B3A5C">φ 扫描：共存与收敛</text>
+  <line x1="60" y1="85" x2="1220" y2="85" stroke="#CBD5E1" stroke-width="1"/>
+
+  <!-- Key numbers -->
+  <g>
+    <rect x="60" y="110" width="280" height="160" rx="8" fill="#1B3A5C"/>
+    <text x="200" y="150" text-anchor="middle" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="#FFFFFF">31/31</text>
+    <text x="200" y="185" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" fill="#CBD5E1">φ 情景共存</text>
+    <text x="200" y="220" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#94A3B8">恐惧不导致灭绝</text>
+
+    <rect x="360" y="110" width="280" height="160" rx="8" fill="#F0F3F7"/>
+    <text x="500" y="150" text-anchor="middle" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="#DC2626">11</text>
+    <text x="500" y="185" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" fill="#64748B">未通过收敛诊断</text>
+    <text x="500" y="220" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#94A3B8">高 φ 区域 · 需更长积分</text>
+
+    <rect x="660" y="110" width="560" height="160" rx="8" fill="#F0F3F7"/>
+    <text x="700" y="150" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="bold" fill="#1E293B">核心发现</text>
+    <text x="700" y="182" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">猎物均值 ≈ 20.02，基本不受 φ 影响</text>
+    <text x="700" y="212" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">捕食者均值随 φ 递增而递减</text>
+    <text x="700" y="242" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#64748B">共存 ≠ 动力学稳态 · 记忆强度存在上界</text>
+  </g>
+
+  <!-- Phi scan plot -->
+  <rect x="60" y="290" width="1160" height="380" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <image x="80" y="310" width="1120" height="340" href="../images/05_phi_scan.png" preserveAspectRatio="xMidYMid meet"/>
+
+  <text x="1220" y="690" text-anchor="end" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="11" fill="#94A3B8">06 / 13</text>
+</svg>

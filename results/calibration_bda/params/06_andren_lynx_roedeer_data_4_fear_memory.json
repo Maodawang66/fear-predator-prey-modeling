@@ -2,44 +2,44 @@
   "model": "fear_memory",
   "series": "andren_lynx_roedeer_data_4",
   "params": {
-    "r": 0.1746620676947857,
+    "r": 0.17282827485093816,
     "K": 316.6950113378686,
-    "a": 0.0718580672966852,
-    "theta": 7.957104610932867e-07,
-    "e": 0.015604993301230047,
-    "mu": 0.27412081507711644,
-    "phi": 0.03100770268492357,
+    "a": 0.07705858566709496,
+    "theta": 2.6439481327983107e-06,
+    "e": 0.01459024638876147,
+    "mu": 0.27454847699616114,
+    "phi": 0.0,
     "delta": 1.0,
     "x0": 633.390022675737,
     "y0": 1.7006802721088434,
     "m0": 1.7006802721088434
   },
-  "rmse_normalized_prey": 0.037460458080933,
-  "rmse_normalized_predator": 0.06761027715368276,
-  "rmse_normalized_total": 0.05465544573247544,
-  "rmse_raw_prey": 23.727080393325654,
-  "rmse_raw_predator": 0.2529636220035749,
-  "rmse_raw_total": 16.778532930286183,
-  "validation_rmse_normalized_prey": 0.05817237440954139,
-  "validation_rmse_normalized_predator": 0.07222473577566074,
-  "validation_rmse_normalized_total": 0.06557605356495567,
-  "validation_rmse_raw_prey": 36.845801546360875,
-  "validation_rmse_raw_predator": 0.27022860324226805,
-  "validation_rmse_raw_total": 26.05461681825142,
-  "aic": -195.28286237581153,
-  "aicc": -191.28286237581153,
-  "bic": -184.19822980661877,
+  "rmse_normalized_prey": 0.03755300866754037,
+  "rmse_normalized_predator": 0.06752645033658938,
+  "rmse_normalized_total": 0.05463538210282891,
+  "rmse_raw_prey": 23.78570101147555,
+  "rmse_raw_predator": 0.2526499842525453,
+  "rmse_raw_total": 16.81997926012175,
+  "validation_rmse_normalized_prey": 0.05755391697171219,
+  "validation_rmse_normalized_predator": 0.07218134526276916,
+  "validation_rmse_normalized_total": 0.06527863342139535,
+  "validation_rmse_raw_prey": 36.45407677579027,
+  "validation_rmse_raw_predator": 0.270066257785871,
+  "validation_rmse_raw_total": 25.777632255104482,
+  "aic": -195.30929792176522,
+  "aicc": -191.30929792176522,
+  "bic": -184.22466535257246,
   "n_parameters": 7,
   "n_train_points": 18,
   "n_validation_points": 5,
-  "success": true,
-  "optimization_status": "success",
+  "success": false,
+  "optimization_status": "usable_limit",
   "usable_for_comparison": true,
-  "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+  "message": "nested baseline candidate selected: STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
   "meta": {
     "nfev": 248,
-    "objective_value": 0.10754739408818512,
-    "termination_reason": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "objective_value": 0.10746089919079625,
+    "termination_reason": "nested baseline candidate selected: STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
     "parameter_bound_hits": [
       "K"
     ],
@@ -55,7 +55,8 @@
         "success": false,
         "objective_value": 0.1091404793743312,
         "nfev": 5355,
-        "termination_reason": "Maximum number of iterations has been exceeded."
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
       },
       {
         "seed": 1,
@@ -63,7 +64,10 @@
         "success": false,
         "objective_value": 0.10837699705663334,
         "nfev": 5355,
-        "termination_reason": "Maximum number of iterations has been exceeded."
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": [
+          "K"
+        ]
       },
       {
         "seed": 2,
@@ -71,7 +75,8 @@
         "success": false,
         "objective_value": 0.10870260712485583,
         "nfev": 5355,
-        "termination_reason": "Maximum number of iterations has been exceeded."
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
       }
     ],
     "selected_seed": 1,
@@ -81,8 +86,20 @@
       "success": true,
       "objective_value": 0.10754739408818512,
       "nfev": 248,
-      "termination_reason": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      "termination_reason": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "parameter_bound_hits": [
+        "K"
+      ]
     },
+    "optimized_fear_objective": 0.10754739408818512,
+    "nested_baseline_candidate_objective": 0.10746089919079625,
+    "nested_baseline_candidate_selected": true,
+    "fear_parameter": "phi",
+    "fear_parameter_bounds": [
+      1e-05,
+      0.2
+    ],
+    "initial_memory_source": "predator_initial",
     "validation_fraction": 0.2,
     "validation_mode": "ordered_holdout_continuous_multistep",
     "train_end_time": 22.0,

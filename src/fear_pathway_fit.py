@@ -286,11 +286,17 @@ def fit_holling_fear_pathway_to_series(
     series,
     pathway: str,
     fixed: BaselineParams | None = None,
+    baseline_result: FitResult | None = None,
+    baseline_params: BaselineParams | None = None,
+    baseline_parameter_bound_hits: tuple[str, ...] = (),
+    baseline_candidate_status: str = "success",
+    baseline_candidate_message: str = "nested baseline candidate",
     validation_fraction: float = 0.20,
     optimizer: str = "auto",
     optimizer_seeds: tuple[int, ...] = DEFAULT_OPTIMIZER_SEEDS,
     max_nfev: int = 500,
     fear_strength: float | None = None,
+    fear_strength_upper: float | None = None,
     memory_delta: float = 1.0,
     initial_memory: float | None = None,
     saturating_half_response: float | None = None,
@@ -298,6 +304,8 @@ def fit_holling_fear_pathway_to_series(
     """Fit one pathway with six shared core parameters and one fear parameter."""
     if pathway not in HOLLING_FEAR_PATHWAYS:
         raise ValueError(f"unknown Holling fear pathway: {pathway}")
+    if baseline_result is not None and baseline_params is not None:
+        raise ValueError("provide baseline_result or baseline_params, not both")
     if fixed is None:
         fixed = BaselineParams()
     if memory_delta <= 0.0 or not np.isfinite(memory_delta):
@@ -321,7 +329,10 @@ def fit_holling_fear_pathway_to_series(
 
     strength_name = "phi" if pathway in ("fear_instant", "fear_memory", "fear_saturating") else "psi"
     strength_lower = 1e-8
-    strength_upper = 0.99 if pathway == "fear_saturating" else max(0.2, 10.0 / predator_scale)
+    default_upper = 0.99 if pathway == "fear_saturating" else max(0.2, 10.0 / predator_scale)
+    strength_upper = default_upper if fear_strength_upper is None else float(fear_strength_upper)
+    if not np.isfinite(strength_upper) or strength_upper <= strength_lower:
+        raise ValueError(f"fear_strength_upper must be finite and greater than {strength_lower}")
     default_strength = 0.2 if pathway == "fear_saturating" else min(0.02, strength_upper / 2.0)
     fit_strength = fear_strength is None
     fixed_strength = default_strength if fit_strength else float(fear_strength)
@@ -396,8 +407,84 @@ def fit_holling_fear_pathway_to_series(
         seeds=optimizer_seeds,
         param_names=param_names,
     )
-    params, strength = pack(result.x)
-    prediction = _simulate_at_times(lambda t, state: rhs(t, state, params), y0_fit, t_obs)
+    optimized_params, optimized_strength = pack(result.x)
+    try:
+        optimized_prediction = _simulate_at_times(
+            lambda t, state: rhs(t, state, optimized_params), y0_fit, t_obs
+        )
+        optimized_prediction_usable = bool(
+            np.all(np.isfinite(optimized_prediction[:2]))
+            and np.all(optimized_prediction[:2] >= 0.0)
+        )
+    except RuntimeError:
+        optimized_prediction = None
+        optimized_prediction_usable = False
+
+    nested_selected = False
+    nested_cost = float("nan")
+    params = optimized_params
+    strength = optimized_strength
+    prediction = optimized_prediction
+    final_cost = float(result.cost)
+    if fit_strength:
+        if baseline_result is None and baseline_params is None:
+            baseline_result = fit_holling_baseline_to_series(
+                series,
+                fixed=fixed,
+                validation_fraction=validation_fraction,
+                optimizer=optimizer,
+                optimizer_seeds=optimizer_seeds,
+                max_nfev=max_nfev,
+            )
+        if baseline_result is not None:
+            baseline_parameter_bound_hits = tuple(
+                baseline_result.meta.get("parameter_bound_hits", [])
+            )
+            baseline_candidate_status = baseline_result.optimization_status
+            baseline_candidate_message = baseline_result.message
+        nested_core = baseline_params or BaselineParams(**{
+            name: float(baseline_result.params[name])
+            for name in ("r", "K", "a", "theta", "e", "mu")
+        })
+        common = {
+            "r": nested_core.r,
+            "K": nested_core.K,
+            "a": nested_core.a,
+            "theta": nested_core.theta,
+            "e": nested_core.e,
+            "mu": nested_core.mu,
+        }
+        if pathway in ("fear_instant", "fear_memory"):
+            nested_params = FearMemoryParams(**common, phi=0.0, delta=memory_delta)
+        elif pathway == "fear_saturating":
+            nested_params = FearSaturatingParams(**common, phi=0.0, h=h)
+        elif pathway == "fear_foraging":
+            nested_params = FearForagingParams(**common, psi=0.0)
+        else:
+            nested_params = FearHandlingParams(**common, psi=0.0)
+        nested_prediction = _simulate_at_times(
+            lambda t, state: rhs(t, state, nested_params), y0_fit, t_obs
+        )
+        nested_residual = np.concatenate([
+            (nested_prediction[0, :train_end] - series.prey[:train_end]) / prey_scale,
+            (nested_prediction[1, :train_end] - series.predator[:train_end]) / predator_scale,
+        ])
+        nested_cost = float(np.dot(nested_residual, nested_residual))
+        nested_selected = (
+            result.status not in ("success", "usable_limit")
+            or not np.isfinite(result.cost)
+            or not optimized_prediction_usable
+            or nested_cost < result.cost
+        )
+        if nested_selected:
+            params = nested_params
+            strength = 0.0
+            prediction = nested_prediction
+            final_cost = nested_cost
+        tolerance = max(1e-10, 1e-8 * max(1.0, nested_cost))
+        if final_cost > nested_cost + tolerance:
+            raise RuntimeError(f"{pathway} nested-baseline invariant violated")
+
     metrics = _fit_evaluation_metrics(
         series.prey,
         series.predator,
@@ -417,22 +504,36 @@ def fit_holling_fear_pathway_to_series(
     if pathway == "fear_saturating":
         fitted_params["h"] = h
 
+    final_optimization_meta = _optimization_meta(result, param_names)
+    final_optimization_meta.update({
+        "objective_value": final_cost,
+        "parameter_bound_hits": (
+            list(baseline_parameter_bound_hits)
+            if nested_selected else final_optimization_meta["parameter_bound_hits"]
+        ),
+    })
     return FitResult(
         model=pathway,
         series_name=series.name,
         params=fitted_params,
         **metrics,
-        success=bool(result.success),
-        optimization_status=result.status,
-        message=str(result.message),
+        success=(baseline_candidate_status == "success") if nested_selected else bool(result.success),
+        optimization_status=baseline_candidate_status if nested_selected else result.status,
+        message=(
+            f"nested baseline candidate selected: {baseline_candidate_message}"
+            if nested_selected else str(result.message)
+        ),
         t_obs=t_obs,
         prey_obs=series.prey,
         predator_obs=series.predator,
         prey_pred=prediction[0],
         predator_pred=prediction[1],
         meta={
-            **_optimization_meta(result, param_names),
+            **final_optimization_meta,
             **optimizer_meta,
+            "optimized_fear_objective": float(result.cost),
+            "nested_baseline_candidate_objective": nested_cost,
+            "nested_baseline_candidate_selected": nested_selected,
             "fear_parameter": strength_name,
             "fear_parameter_fitted": fit_strength,
             "fear_parameter_bounds": [strength_lower, strength_upper],

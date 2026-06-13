@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#FAFBFC" />
+  
+  <path fill="#1B3A5C" d="M62,40 H62 A2,2 0 0 1 64,42 V74 A2,2 0 0 1 62,76 H62 A2,2 0 0 1 60,74 V42 A2,2 0 0 1 62,40 Z" />
+  <text x="76" y="66" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="32" font-weight="bold" fill="#1B3A5C">结论</text>
+  <line x1="60" y1="85" x2="1220" y2="85" stroke="#CBD5E1" stroke-width="1" />
+
+  
+  <g>
+    
+    <path fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" d="M88,110 H612 A8,8 0 0 1 620,118 V262 A8,8 0 0 1 612,270 H88 A8,8 0 0 1 80,262 V118 A8,8 0 0 1 88,110 Z" />
+    <circle cx="110" cy="150" r="20" fill="#1B3A5C" />
+    <text x="110" y="157" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#FFFFFF">1</text>
+    <text x="150" y="148" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#1E293B">20% 等效抑制下所有机制保持共存</text>
+    <text x="150" y="180" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">31/31 φ 情景猎物与捕食者共存 · 11 个高 φ 情景</text>
+    <text x="150" y="205" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">未通过长期收敛诊断，但保守积分确认未灭绝</text>
+    <text x="150" y="235" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">恐惧不导致种群灭绝</text>
+
+    
+    <path fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" d="M668,110 H1192 A8,8 0 0 1 1200,118 V262 A8,8 0 0 1 1192,270 H668 A8,8 0 0 1 660,262 V118 A8,8 0 0 1 668,110 Z" />
+    <circle cx="690" cy="150" r="20" fill="#2563A0" />
+    <text x="690" y="157" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#FFFFFF">2</text>
+    <text x="730" y="148" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#1E293B">恐惧的种群效应取决于通道</text>
+    <text x="730" y="180" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">繁殖抑制 ↓捕食者 ~17% · 觅食/处理 ↑捕食者 ↑猎物</text>
+    <text x="730" y="205" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">B-D ↓ 两者 ~30%（但绝对密度不可比较）</text>
+    <text x="730" y="235" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">"恐惧增加还是减少种群"无机制无关的答案</text>
+
+    
+    <path fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" d="M88,290 H612 A8,8 0 0 1 620,298 V442 A8,8 0 0 1 612,450 H88 A8,8 0 0 1 80,442 V298 A8,8 0 0 1 88,290 Z" />
+    <circle cx="110" cy="330" r="20" fill="#1B3A5C" />
+    <text x="110" y="337" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#FFFFFF">3</text>
+    <text x="150" y="328" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#1E293B">B-D 留后预测最优但 AICc 不支持</text>
+    <text x="150" y="360" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">留后验证 B-D 单独最优 9/15 · Baseline 3/15</text>
+    <text x="150" y="385" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">AICc Baseline 最优 13/15 · 复杂度惩罚抵消预测优势</text>
+    <text x="150" y="415" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">GLERL 三模型留后与训练 RMSE 完全并列</text>
+
+    
+    <path fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" d="M668,290 H1192 A8,8 0 0 1 1200,298 V442 A8,8 0 0 1 1192,450 H668 A8,8 0 0 1 660,442 V298 A8,8 0 0 1 668,290 Z" />
+    <circle cx="690" cy="330" r="20" fill="#2563A0" />
+    <text x="690" y="337" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#FFFFFF">4</text>
+    <text x="730" y="328" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#1E293B">k 参数不可辨识 · 预测改善 ≠ 机制识别</text>
+    <text x="730" y="360" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">Profile 95% 置信集覆盖全扫描区间 [0.0001, 0.5]</text>
+    <text x="730" y="385" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">15 条序列的低 RMSE 不能证明恐惧机制真实存在</text>
+    <text x="730" y="415" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">多参数 B-D 模型可能仅通过额外自由度改善拟合</text>
+
+    
+    <path fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" d="M88,470 H612 A8,8 0 0 1 620,478 V592 A8,8 0 0 1 612,600 H88 A8,8 0 0 1 80,592 V478 A8,8 0 0 1 88,470 Z" />
+    <circle cx="110" cy="510" r="20" fill="#1B3A5C" />
+    <text x="110" y="517" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#FFFFFF">5</text>
+    <text x="150" y="508" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#1E293B">Peacor TMIE/NCE 文献不可作为效应先验</text>
+    <text x="150" y="540" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">TMIE 和 NCE 仅为研究类型计数 · 不包含效应量信息</text>
+    <text x="150" y="568" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">生态文献普遍引用此类数据作为恐惧证据，存在系统性误用</text>
+
+    
+    <path fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" d="M668,470 H1192 A8,8 0 0 1 1200,478 V592 A8,8 0 0 1 1192,600 H668 A8,8 0 0 1 660,592 V478 A8,8 0 0 1 668,470 Z" />
+    <circle cx="690" cy="510" r="20" fill="#2563A0" />
+    <text x="690" y="517" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#FFFFFF">6</text>
+    <text x="730" y="508" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#1E293B">证据边界方法应用于恐惧建模</text>
+    <text x="730" y="540" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">区分"模型能否预测轨迹"与"数据能否识别恐惧机制"</text>
+    <text x="730" y="568" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#64748B">复杂性、可辨识性、通道依赖性三者构成三联检验框架</text>
+  </g>
+
+  
+  <text x="1220" y="690" text-anchor="end" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="11" fill="#94A3B8">12 / 13</text>
+</svg>

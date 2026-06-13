@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#FAFBFC"/>
+  <!-- Header -->
+  <rect x="60" y="40" width="4" height="36" fill="#1B3A5C" rx="2"/>
+  <text x="76" y="66" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="32" font-weight="bold" fill="#1B3A5C">六种恐惧机制与公平比较</text>
+  <line x1="60" y1="85" x2="1220" y2="85" stroke="#CBD5E1" stroke-width="1"/>
+
+  <!-- Left column: Key points -->
+  <g>
+    <text x="80" y="125" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="24" font-weight="bold" fill="#1E293B">公平比较框架</text>
+    <!-- Point 1 -->
+    <rect x="80" y="150" width="460" height="70" rx="6" fill="#F0F3F7"/>
+    <text x="100" y="178" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">各体系无恐惧正平衡点处校准为</text>
+    <text x="100" y="204" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" font-weight="bold" fill="#DC2626">20% 等效抑制</text>
+    <!-- Point 2 -->
+    <rect x="80" y="235" width="460" height="50" rx="6" fill="#F0F3F7"/>
+    <text x="100" y="266" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">比较相对各自无恐惧基线的长期均值变化</text>
+    <!-- Point 3 -->
+    <rect x="80" y="300" width="460" height="50" rx="6" fill="#F0F3F7"/>
+    <text x="100" y="331" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">Holling 与 B-D 绝对密度不可直接比较（不同量纲）</text>
+
+    <text x="80" y="390" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="24" font-weight="bold" fill="#1E293B">六种恐惧通道</text>
+    <!-- Channel list -->
+    <g font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">
+      <text x="100" y="425">1. 瞬时繁殖抑制</text>
+      <text x="100" y="455">2. 记忆繁殖抑制（核心模型）</text>
+      <text x="100" y="485">3. 饱和繁殖抑制（Zanette 型）</text>
+      <text x="100" y="515">4. 觅食/攻击率抑制（Lima/Preisser）</text>
+      <text x="100" y="545">5. 处理时间延长</text>
+      <text x="100" y="575">6. B-D + Wang 恐惧因子</text>
+    </g>
+
+    <!-- Key conclusion -->
+    <rect x="80" y="600" width="460" height="55" rx="6" fill="#1B3A5C" fill-opacity="0.08"/>
+    <text x="310" y="625" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" font-weight="bold" fill="#1B3A5C">繁殖抑制 ↓捕食者 ~17%  |  觅食/处理 ↑两者  |  B-D ↓两者 ~30%</text>
+    <text x="310" y="648" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">恐惧增加还是减少种群？没有机制无关的答案</text>
+  </g>
+
+  <!-- Right column: Bar chart image -->
+  <g>
+    <text x="590" y="125" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" font-weight="bold" fill="#64748B">机制对比图</text>
+    <rect x="590" y="140" width="630" height="510" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <image x="600" y="155" width="610" height="390" href="../images/09_literature_mechanisms_bars.png" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+
+  <text x="1220" y="690" text-anchor="end" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="11" fill="#94A3B8">05 / 13</text>
+</svg>

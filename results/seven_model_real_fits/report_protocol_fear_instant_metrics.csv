@@ -1,16 +1,16 @@
-﻿series,model,validation_rmse,aicc,optimization_status,usable_for_comparison,source
-andren_lynx_roedeer_data_1,fear_instant,0.06660473703488454,-195.896243571341,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_2,fear_instant,0.08706997555129746,-158.68043298526936,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_3,fear_instant,0.07551999579292683,-147.96012781304495,success,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_4,fear_instant,0.06508985628751142,-191.23309213665544,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_5,fear_instant,0.05587513671546979,-181.64496902448002,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_6,fear_instant,0.17799762613602532,-140.55095668617798,usable_limit,True,report_protocol_extension_multiseed_global_local
-andren_lynx_roedeer_data_7,fear_instant,0.15371055769594003,-126.62311105953839,usable_limit,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_WRHW,fear_instant,0.12664171945362798,-323.6075990240487,usable_limit,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_TP,fear_instant,0.10908208013734297,-316.5135381971269,usable_limit,True,report_protocol_extension_multiseed_global_local
-timeserieslogmeans_WRGP,fear_instant,0.12537742518908682,-245.13945046262748,success,True,report_protocol_extension_multiseed_global_local
-isle_royale_wolf_moose_pre_2018,fear_instant,0.22851460920377697,-214.67159364968205,usable_limit,True,report_protocol_extension_multiseed_global_local
-windermere_north_pike_perch,fear_instant,0.42307355821019804,-114.91289870115153,success,True,report_protocol_extension_multiseed_global_local
-windermere_south_pike_perch,fear_instant,1.1699892849721807,-123.35944794317498,usable_limit,True,report_protocol_extension_multiseed_global_local
-komi_lynx_hare,fear_instant,0.6003678398050175,-64.85078953014408,success,True,report_protocol_extension_multiseed_global_local
-glerl_m110_zoop_1994-201,fear_instant,0.27981203992613546,-954.2334892120713,success,True,report_protocol_extension_multiseed_global_local
+﻿series,model,training_rmse,validation_rmse,aicc,optimization_status,usable_for_comparison,fear_strength,fear_parameter,fear_parameter_bounds,optimized_fear_objective,nested_baseline_candidate_objective,nested_baseline_candidate_selected,source
+glerl_m110_zoop_1994-201,fear_instant,0.17073924367692078,0.27981203992613546,-954.2334892120713,success,True,7.515463908096797e-06,phi,"[1e-08, 3.1938677738741617]",7.987842029542618,7.9887223300106,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_1,fear_instant,0.06010282414982824,0.0701619728283596,-195.95574869181218,success,True,0.0,phi,"[1e-08, 2.4374999999999996]",0.13748287525912312,0.1372692798898367,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_2,fear_instant,0.09815241362745686,0.08706997555129746,-158.68043298526936,success,True,0.777796096280274,phi,"[1e-08, 7.5375000000000005]",0.36608803092909936,0.4041199846513419,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_3,fear_instant,0.11302151045835125,0.07551999579292683,-147.96012781304495,success,True,1.3016712550542598e-08,phi,"[1e-08, 6.092592592592593]",0.485375489017851,0.48540569678412443,False,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_4,fear_instant,0.05468871902329486,0.06519083289568395,-191.23904335687638,usable_limit,True,0.0,phi,"[1e-08, 2.672727272727273]",0.10769018070909887,0.10767081558272014,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_5,fear_instant,0.0618372863392787,0.060220024094795814,-182.3939105494251,usable_limit,True,0.0,phi,"[1e-08, 2.829032258064516]",0.1408401293265289,0.137658599345014,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_6,fear_instant,0.08284810798189116,0.18100090978474087,-140.74110114391368,usable_limit,True,0.0,phi,"[1e-08, 4.592307692307692]",0.22077929351084669,0.2196418878777311,True,report_protocol_extension_multiseed_global_local
+andren_lynx_roedeer_data_7,fear_instant,0.07345171824742103,0.15371055769594003,-126.62311105953839,usable_limit,True,1.311816043302069,phi,"[1e-08, 10.0]",0.15108366122344546,0.31261616412371396,False,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_WRHW,fear_instant,0.177490719405697,0.12664171945362798,-323.6075990240487,usable_limit,True,0.005143083968291592,phi,"[1e-08, 0.2]",3.0872572664153752,3.3014753374190775,False,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_TP,fear_instant,0.1772415533875148,0.10301369746769957,-316.93369225477846,usable_limit,True,0.0,phi,"[1e-08, 0.3311311214825911]",3.0290007643938095,3.015798551733049,True,report_protocol_extension_multiseed_global_local
+timeserieslogmeans_WRGP,fear_instant,0.20523613206461,0.1862484512328017,-263.31256142399343,usable_limit,True,0.0,phi,"[1e-08, 0.2]",4.557085204124293,3.706724551626099,True,report_protocol_extension_multiseed_global_local
+isle_royale_wolf_moose_pre_2018,fear_instant,0.14607381038107387,0.2283304101633647,-214.68334198208927,usable_limit,True,0.0,phi,"[1e-08, 0.2]",1.2805272275638258,1.2802534847547555,True,report_protocol_extension_multiseed_global_local
+windermere_north_pike_perch,fear_instant,0.1578654040730617,0.42307355821019804,-114.91289870115153,success,True,2.0413232966364153e-08,phi,"[1e-08, 1.0204081632653061]",0.8971734971593757,0.9861240784679651,False,report_protocol_extension_multiseed_global_local
+windermere_south_pike_perch,fear_instant,0.1403907509650842,1.1699892849721807,-123.35944794317498,usable_limit,True,0.0002643635427067751,phi,"[1e-08, 1.098901098901099]",0.7095425562184838,0.7107629522722545,False,report_protocol_extension_multiseed_global_local
+komi_lynx_hare,fear_instant,0.2711833135341713,0.6003678398050175,-64.85078953014408,success,True,0.0002016174246664251,phi,"[1e-08, 0.2]",2.3532921146932693,3.00492804083263,False,report_protocol_extension_multiseed_global_local

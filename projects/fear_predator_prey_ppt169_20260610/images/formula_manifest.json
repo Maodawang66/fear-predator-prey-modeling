@@ -1,0 +1,106 @@
+{
+  "items": [
+    {
+      "id": "eq_baseline",
+      "latex": "\\begin{aligned} \\frac{dx}{dt} &= rx\\left(1-\\frac{x}{K}\\right) - \\frac{axy}{1+\\theta x} \\\\ \\frac{dy}{dt} &= e\\frac{axy}{1+\\theta x} - \\mu y \\end{aligned}",
+      "color": "#1E293B",
+      "size": "large",
+      "filename": "eq_baseline.png",
+      "file": "images/eq_baseline.png",
+      "dpi": 300,
+      "display": "block",
+      "providers": [
+        "codecogs",
+        "quicklatex",
+        "mathpad",
+        "wikimedia"
+      ],
+      "transparent": true,
+      "transparent_tolerance": 12,
+      "provider": "codecogs",
+      "pixel_width": 586,
+      "pixel_height": 229,
+      "ratio": 2.559,
+      "status": "Rendered"
+    },
+    {
+      "id": "eq_fear_memory",
+      "latex": "\\begin{aligned} \\frac{dx}{dt} &= rx\\left(1-\\frac{x}{K}\\right) - \\frac{axy}{1+\\theta x} - r\\phi Mx \\\\ \\frac{dy}{dt} &= e\\frac{axy}{1+\\theta x} - \\mu y \\\\ \\frac{dM}{dt} &= y - \\delta M \\end{aligned}",
+      "color": "#1E293B",
+      "size": "large",
+      "filename": "eq_fear_memory.png",
+      "file": "images/eq_fear_memory.png",
+      "dpi": 300,
+      "display": "block",
+      "providers": [
+        "codecogs",
+        "quicklatex",
+        "mathpad",
+        "wikimedia"
+      ],
+      "transparent": true,
+      "transparent_tolerance": 12,
+      "provider": "codecogs",
+      "pixel_width": 806,
+      "pixel_height": 349,
+      "ratio": 2.3095,
+      "status": "Rendered"
+    },
+    {
+      "id": "eq_bda_fear",
+      "latex": "\\begin{aligned} \\frac{du}{dt} &= \\frac{ru}{1+kv} - du - au^{2} - \\frac{puv}{1+qu+v} \\\\ \\frac{dv}{dt} &= v\\left(-m + \\frac{cpu}{1+qu+v}\\right) \\end{aligned}",
+      "color": "#1E293B",
+      "size": "large",
+      "filename": "eq_bda_fear.png",
+      "file": "images/eq_bda_fear.png",
+      "dpi": 300,
+      "display": "block",
+      "providers": [
+        "codecogs",
+        "quicklatex",
+        "mathpad",
+        "wikimedia"
+      ],
+      "transparent": true,
+      "transparent_tolerance": 12,
+      "provider": "codecogs",
+      "pixel_width": 806,
+      "pixel_height": 249,
+      "ratio": 3.2369,
+      "status": "Rendered"
+    },
+    {
+      "id": "eq_fear_factor",
+      "latex": "f(k,v) = \\frac{1}{1+kv}, \\quad \\eta(k,v) = 1 - f(k,v) = \\frac{kv}{1+kv}",
+      "color": "#1E293B",
+      "size": "medium",
+      "filename": "eq_fear_factor.png",
+      "file": "images/eq_fear_factor.png",
+      "dpi": 300,
+      "display": "block",
+      "providers": [
+        "codecogs",
+        "quicklatex",
+        "mathpad",
+        "wikimedia"
+      ],
+      "transparent": true,
+      "transparent_tolerance": 12,
+      "provider": "codecogs",
+      "pixel_width": 1060,
+      "pixel_height": 107,
+      "ratio": 9.9065,
+      "status": "Rendered"
+    }
+  ],
+  "renderer": {
+    "providers": [
+      "codecogs",
+      "quicklatex",
+      "mathpad",
+      "wikimedia"
+    ],
+    "default_dpi": 300,
+    "output_dir": "images"
+  }
+}

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#FAFBFC"/>
+  <!-- Header -->
+  <rect x="60" y="40" width="4" height="36" fill="#1B3A5C" rx="2"/>
+  <text x="76" y="66" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="32" font-weight="bold" fill="#1B3A5C">七模型扩展</text>
+  <text x="76" y="88" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#94A3B8">与 report.tex 相同实验口径 · 15 序列 × 7 模型 · 105/105 拟合可比较</text>
+  <line x1="60" y1="105" x2="1220" y2="105" stroke="#CBD5E1" stroke-width="1"/>
+
+  <!-- Left: Seven models list -->
+  <g>
+    <text x="80" y="145" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E293B">七模型体系</text>
+    <text x="80" y="175" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">均使用 Holling II 功能反应，只在恐惧通道上不同</text>
+
+    <!-- Model cards -->
+    <rect x="80" y="195" width="350" height="42" rx="6" fill="#F0F3F7"/>
+    <text x="100" y="222" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">1. Baseline · 无恐惧 · 6 参数</text>
+
+    <rect x="80" y="247" width="350" height="42" rx="6" fill="#F0F3F7"/>
+    <text x="100" y="274" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">2. Fear-Memory · 指数记忆核 · 7 参数</text>
+
+    <rect x="80" y="299" width="350" height="42" rx="6" fill="#F0F3F7"/>
+    <text x="100" y="326" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">3. Fear-Instant · 瞬时繁殖抑制 · 7 参数</text>
+
+    <rect x="80" y="351" width="350" height="42" rx="6" fill="#F0F3F7"/>
+    <text x="100" y="378" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">4. Fear-Saturating · Zanette 型 · 7 参数</text>
+
+    <rect x="80" y="403" width="350" height="42" rx="6" fill="#F0F3F7"/>
+    <text x="100" y="430" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">5. Fear-Foraging · Lima/Preisser · 7 参数</text>
+
+    <rect x="80" y="455" width="350" height="42" rx="6" fill="#F0F3F7"/>
+    <text x="100" y="482" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">6. Fear-Handling · 处理时间延长 · 7 参数</text>
+
+    <rect x="80" y="507" width="350" height="42" rx="6" fill="#4A90B8" fill-opacity="0.12"/>
+    <text x="100" y="534" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#4A90B8">7. B-D+Fear · 高灵活度 · 8 参数</text>
+
+    <!-- Winning tally -->
+    <text x="80" y="580" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="bold" fill="#1E293B">留后验证单独最优次数</text>
+    <g font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#1E293B">
+      <text x="100" y="608">B-D+Fear: <tspan font-weight="bold" fill="#DC2626">6</tspan> | Fear-Instant: 3 | Baseline: 2</text>
+      <text x="100" y="630">Fear-Memory: 2 | Fear-Handling: 1 | GLERL 并列: 1</text>
+    </g>
+
+    <rect x="80" y="650" width="350" height="36" rx="6" fill="#FEF3C7"/>
+    <text x="255" y="674" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#92400E">无单一恐惧通道普遍胜出</text>
+  </g>
+
+  <!-- Right: Heatmap image -->
+  <g>
+    <rect x="480" y="140" width="740" height="520" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="850" y="170" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" font-weight="bold" fill="#64748B">留后验证 RMSE 热力图</text>
+    <image x="500" y="185" width="700" height="460" href="../images/validation_rmse_heatmap.png" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+
+  <!-- Page number -->
+  <text x="1220" y="690" text-anchor="end" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="11" fill="#94A3B8">09 / 13</text>
+</svg>

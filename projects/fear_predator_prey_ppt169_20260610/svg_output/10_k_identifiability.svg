@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#FAFBFC"/>
+  <!-- Header -->
+  <rect x="60" y="40" width="4" height="36" fill="#1B3A5C" rx="2"/>
+  <text x="76" y="66" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="32" font-weight="bold" fill="#1B3A5C">k 参数可辨识性</text>
+  <text x="76" y="88" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#94A3B8">Profile Likelihood 诊断 · 预测改善 ≠ 恐惧机制可识别</text>
+  <line x1="60" y1="105" x2="1220" y2="105" stroke="#CBD5E1" stroke-width="1"/>
+
+  <!-- Top: Explanation -->
+  <g>
+    <text x="80" y="145" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E293B">Profile Likelihood 方法</text>
+
+    <rect x="80" y="165" width="1120" height="70" rx="6" fill="#F0F3F7"/>
+    <text x="110" y="192" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">固定 k，重新优化其余 7 个参数 → 获得 profile 似然曲线</text>
+    <text x="110" y="218" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">95% 置信集 = {k : 2[ℓ(k_max) − ℓ(k)] ≤ χ²₀.₉₅(1) ≈ 3.84}  ·  置信集覆盖全扫描区间 = k 不可辨识</text>
+  </g>
+
+  <!-- Three k-profile plots -->
+  <g>
+    <!-- Isle Royale -->
+    <rect x="60" y="260" width="380" height="310" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <rect x="60" y="260" width="380" height="34" rx="8" fill="#1B3A5C"/>
+    <rect x="60" y="274" width="380" height="20" fill="#1B3A5C"/>
+    <text x="250" y="283" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">Isle Royale 狼−驼鹿</text>
+    <image x="70" y="300" width="360" height="240" href="../images/k_profile_isle_royale_wolf_moose_pre_2018.png" preserveAspectRatio="xMidYMid meet"/>
+    <text x="250" y="558" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="13" fill="#DC2626">置信集覆盖 [0.0001, 0.5] 全区间</text>
+
+    <!-- GLERL -->
+    <rect x="450" y="260" width="380" height="310" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <rect x="450" y="260" width="380" height="34" rx="8" fill="#2563A0"/>
+    <rect x="450" y="274" width="380" height="20" fill="#2563A0"/>
+    <text x="640" y="283" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">GLERL M110 贻贝−浮游动物</text>
+    <image x="460" y="300" width="360" height="240" href="../images/k_profile_glerl_m110_zoop_1994-201.png" preserveAspectRatio="xMidYMid meet"/>
+    <text x="640" y="558" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="13" fill="#DC2626">置信集覆盖 [0.0001, 0.5] 全区间</text>
+
+    <!-- TP -->
+    <rect x="840" y="260" width="380" height="310" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <rect x="840" y="260" width="380" height="34" rx="8" fill="#4A90B8"/>
+    <rect x="840" y="274" width="380" height="20" fill="#4A90B8"/>
+    <text x="1030" y="283" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">TP 浮游动物均值序列</text>
+    <image x="850" y="300" width="360" height="240" href="../images/k_profile_timeserieslogmeans_TP.png" preserveAspectRatio="xMidYMid meet"/>
+    <text x="1030" y="558" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="13" fill="#DC2626">置信集覆盖 [0.0001, 0.5] 全区间</text>
+  </g>
+
+  <!-- Bottom conclusion -->
+  <rect x="80" y="590" width="1120" height="55" rx="8" fill="#1B3A5C"/>
+  <text x="640" y="617" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">拟合误差低 ≠ 恐惧机制被数据可靠识别</text>
+  <text x="640" y="639" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#CBD5E1">三序列的 k 95% 置信集均覆盖全扫描区间 → B-D 恐惧参数 k 不可辨识</text>
+
+  <!-- Page number -->
+  <text x="1220" y="690" text-anchor="end" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="11" fill="#94A3B8">10 / 13</text>
+</svg>

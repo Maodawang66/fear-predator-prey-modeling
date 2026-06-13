@@ -2,47 +2,45 @@
   "model": "fear_memory",
   "series": "timeserieslogmeans_WRGP",
   "params": {
-    "r": 0.12677969264714434,
-    "K": 5142.114765747668,
-    "a": 0.2366534466572575,
-    "theta": 0.9964285426751828,
-    "e": 0.5707628521337417,
-    "mu": 0.06505124677098181,
-    "phi": 0.009260919972846145,
+    "r": 0.2823692987616105,
+    "K": 42286.14899544264,
+    "a": 0.25089445025666185,
+    "theta": 5.563756500116918e-05,
+    "e": 0.01349705585127167,
+    "mu": 2.9670705417519514,
+    "phi": 0.0,
     "delta": 1.0,
     "x0": 190.54607179632464,
     "y0": 6.760829753919817,
     "m0": 6.760829753919817
   },
-  "rmse_normalized_prey": 0.2729290085960534,
-  "rmse_normalized_predator": 0.17068942461654868,
-  "rmse_normalized_total": 0.22762372834257974,
-  "rmse_raw_prey": 1607.1251507427705,
-  "rmse_raw_predator": 174.66529206654826,
-  "rmse_raw_total": 1143.1008735896116,
-  "validation_rmse_normalized_prey": 0.1291854449864187,
-  "validation_rmse_normalized_predator": 0.2397668322632549,
-  "validation_rmse_normalized_total": 0.19258376495682966,
-  "validation_rmse_raw_prey": 760.7002964454115,
-  "validation_rmse_raw_predator": 245.35171923634363,
-  "validation_rmse_raw_total": 565.1824515784112,
-  "aic": -246.49079365466747,
-  "aicc": -245.09079365466746,
-  "bic": -229.14943595332002,
+  "rmse_normalized_prey": 0.22765217009879382,
+  "rmse_normalized_predator": 0.18002115883944103,
+  "rmse_normalized_total": 0.2052232055355649,
+  "rmse_raw_prey": 1340.5153599060604,
+  "rmse_raw_predator": 184.21439030266043,
+  "rmse_raw_total": 956.7957911013865,
+  "validation_rmse_normalized_prey": 0.26335302150219037,
+  "validation_rmse_normalized_predator": 0.0035497198218684576,
+  "validation_rmse_normalized_total": 0.18623562286139958,
+  "validation_rmse_raw_prey": 1550.7375583028881,
+  "validation_rmse_raw_predator": 3.6324034182780776,
+  "validation_rmse_raw_total": 1096.5400514996697,
+  "aic": -264.7236469026476,
+  "aicc": -263.3236469026476,
+  "bic": -247.38228920130015,
   "n_parameters": 7,
   "n_train_points": 44,
   "n_validation_points": 12,
   "success": false,
   "optimization_status": "usable_limit",
   "usable_for_comparison": true,
-  "message": "Maximum number of iterations has been exceeded.",
+  "message": "nested baseline candidate selected: STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
   "meta": {
     "nfev": 5355,
-    "objective_value": 4.559515412969883,
-    "termination_reason": "Maximum number of iterations has been exceeded.",
-    "parameter_bound_hits": [
-      "theta"
-    ],
+    "objective_value": 3.7062576399457576,
+    "termination_reason": "nested baseline candidate selected: STOP: TOTAL NO. OF F,G EVALUATIONS EXCEEDS LIMIT",
+    "parameter_bound_hits": [],
     "optimizer_seeds": [
       0,
       1,
@@ -55,7 +53,8 @@
         "success": false,
         "objective_value": 4.575168718212062,
         "nfev": 5355,
-        "termination_reason": "Maximum number of iterations has been exceeded."
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
       },
       {
         "seed": 1,
@@ -63,7 +62,8 @@
         "success": false,
         "objective_value": 4.576793909941962,
         "nfev": 5355,
-        "termination_reason": "Maximum number of iterations has been exceeded."
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": []
       },
       {
         "seed": 2,
@@ -71,7 +71,10 @@
         "success": false,
         "objective_value": 4.559515412969883,
         "nfev": 5355,
-        "termination_reason": "Maximum number of iterations has been exceeded."
+        "termination_reason": "Maximum number of iterations has been exceeded.",
+        "parameter_bound_hits": [
+          "theta"
+        ]
       }
     ],
     "selected_seed": 2,
@@ -81,8 +84,20 @@
       "success": false,
       "objective_value": 4.559515412969883,
       "nfev": 136,
-      "termination_reason": "ABNORMAL: "
+      "termination_reason": "ABNORMAL: ",
+      "parameter_bound_hits": [
+        "theta"
+      ]
     },
+    "optimized_fear_objective": 4.559515412969883,
+    "nested_baseline_candidate_objective": 3.7062576399457576,
+    "nested_baseline_candidate_selected": true,
+    "fear_parameter": "phi",
+    "fear_parameter_bounds": [
+      1e-05,
+      0.2
+    ],
+    "initial_memory_source": "predator_initial",
     "validation_fraction": 0.2,
     "validation_mode": "ordered_holdout_continuous_multistep",
     "train_end_time": 45.0,

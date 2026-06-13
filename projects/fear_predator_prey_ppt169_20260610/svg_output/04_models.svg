@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#FAFBFC"/>
+  <!-- Header -->
+  <rect x="60" y="40" width="4" height="36" fill="#1B3A5C" rx="2"/>
+  <text x="76" y="66" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="32" font-weight="bold" fill="#1B3A5C">模型体系</text>
+  <text x="76" y="88" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#94A3B8">三种核心动力学形式 · 从简单到复杂 · 从经典到高灵活度竞争模型</text>
+  <line x1="60" y1="105" x2="1220" y2="105" stroke="#CBD5E1" stroke-width="1"/>
+
+  <!-- Model 1: Baseline -->
+  <g>
+    <rect x="60" y="125" width="380" height="540" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <rect x="60" y="125" width="380" height="52" rx="8" fill="#1B3A5C"/>
+    <rect x="60" y="157" width="380" height="20" fill="#1B3A5C"/>
+    <text x="250" y="158" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF">Baseline · Holling II</text>
+    <!-- Description -->
+    <text x="85" y="210" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">经典 logistic 增长 + Holling II 功能反应</text>
+    <text x="85" y="238" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">待拟合参数：r, K, a, θ, e, μ（6 个）</text>
+    <!-- Formula PNG -->
+    <image x="80" y="260" width="340" height="133" href="../images/eq_baseline.png" preserveAspectRatio="xMidYMid meet"/>
+    <!-- Key insight -->
+    <rect x="80" y="410" width="340" height="50" rx="6" fill="#F0F3F7"/>
+    <text x="250" y="440" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="13" fill="#1E293B">最简基准 · 无恐惧机制</text>
+  </g>
+
+  <!-- Model 2: Fear-Memory -->
+  <g>
+    <rect x="450" y="125" width="380" height="540" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <rect x="450" y="125" width="380" height="52" rx="8" fill="#2563A0"/>
+    <rect x="450" y="157" width="380" height="20" fill="#2563A0"/>
+    <text x="640" y="158" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF">Fear-Memory · 指数记忆核</text>
+    <text x="475" y="210" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">繁殖抑制 + 捕食压力指数加权累积</text>
+    <text x="475" y="238" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">待拟合参数：r, K, a, θ, e, μ, φ（7 个）</text>
+    <image x="470" y="260" width="340" height="195" href="../images/eq_fear_memory.png" preserveAspectRatio="xMidYMid meet"/>
+    <rect x="470" y="470" width="340" height="50" rx="6" fill="#F0F3F7"/>
+    <text x="640" y="500" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="13" fill="#1E293B">核心模型 · M* = y*/δ · 恐惧记忆状态</text>
+  </g>
+
+  <!-- Model 3: B-D+Fear -->
+  <g>
+    <rect x="840" y="125" width="380" height="540" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <rect x="840" y="125" width="380" height="52" rx="8" fill="#4A90B8"/>
+    <rect x="840" y="157" width="380" height="20" fill="#4A90B8"/>
+    <text x="1030" y="158" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF">B-D + Fear · 高灵活度</text>
+    <text x="865" y="210" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">Beddington-DeAngelis + Wang 恐惧因子</text>
+    <text x="865" y="238" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">待拟合参数：r, d, a, p, q, c, m, k（8 个）</text>
+    <image x="860" y="260" width="340" height="140" href="../images/eq_bda_fear.png" preserveAspectRatio="xMidYMid meet"/>
+    <!-- Fear factor -->
+    <image x="860" y="415" width="340" height="35" href="../images/eq_fear_factor.png" preserveAspectRatio="xMidYMid meet"/>
+    <rect x="860" y="470" width="340" height="50" rx="6" fill="#F0F3F7"/>
+    <text x="1030" y="500" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="13" fill="#1E293B">竞争模型 · k profile 检验可辨识性</text>
+  </g>
+
+  <!-- Page number -->
+  <text x="1220" y="690" text-anchor="end" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="11" fill="#94A3B8">04 / 13</text>
+</svg>

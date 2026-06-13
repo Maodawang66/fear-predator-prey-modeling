@@ -36,6 +36,7 @@ from data.formal_series import load_formal_series
 from data.load_lter_fish import load_lter_fish_pair
 from data.load_peacor import load_peacor_plp
 from src.fit import (
+    adaptive_fear_memory_phi_bound_diagnostic,
     conditional_fear_memory_m0_scan,
     conditional_bda_k_scan,
     fit_bda_fear_to_series,
@@ -43,7 +44,7 @@ from src.fit import (
     profile_fear_memory_m0,
     profile_bda_k,
 )
-from src.parameters import BDAFearParams
+from src.parameters import BDAFearParams, BaselineParams
 
 OUT = ROOT / "results" / "deep_analysis"
 
@@ -802,7 +803,136 @@ def run_memory_profiles(
             "holdout_selection_role",
         ],
     )
+    profile_summary = summarize_memory_profiles(m0_profiles, delta_profiles)
+    _write_csv(
+        profile_summary,
+        out_dir / "memory_profile_identifiability_summary.csv",
+        [
+            "series", "parameter", "grid_lower", "grid_upper",
+            "confidence_set_lower", "confidence_set_upper",
+            "confidence_set_touches_lower", "confidence_set_touches_upper",
+            "profile_train_best_value", "profile_holdout_best_value",
+            "holdout_selection_role",
+        ],
+    )
     return summary
+
+
+def summarize_memory_profiles(
+    m0_profiles: list[dict],
+    delta_profiles: list[dict],
+) -> list[dict]:
+    """Summarize profile width and grid-edge contact without treating holdout choice as validation."""
+    output: list[dict] = []
+    for parameter, rows in (
+        ("m0_over_y0", m0_profiles),
+        ("delta", delta_profiles),
+    ):
+        by_series: dict[str, list[dict]] = {}
+        for row in rows:
+            by_series.setdefault(str(row["series"]), []).append(row)
+        for series, series_rows in sorted(by_series.items()):
+            usable = [
+                row for row in series_rows
+                if row.get("optimization_status") in ("success", "usable_limit")
+                and np.isfinite(float(row.get("profile_rss", float("nan"))))
+            ]
+            if not usable:
+                continue
+            values = [float(row[parameter]) for row in usable]
+            grid_lower, grid_upper = min(values), max(values)
+            inside = [
+                row for row in usable
+                if bool(row.get("inside_confidence_interval", False))
+            ]
+            inside_values = [float(row[parameter]) for row in inside]
+            train_best = min(usable, key=lambda row: float(row["profile_rss"]))
+            holdout_usable = [
+                row for row in usable
+                if np.isfinite(float(row.get("validation_rmse_normalized_total", float("nan"))))
+            ]
+            holdout_best = min(
+                holdout_usable,
+                key=lambda row: float(row["validation_rmse_normalized_total"]),
+                default=None,
+            )
+            output.append({
+                "series": series,
+                "parameter": parameter,
+                "grid_lower": grid_lower,
+                "grid_upper": grid_upper,
+                "confidence_set_lower": min(inside_values) if inside_values else float("nan"),
+                "confidence_set_upper": max(inside_values) if inside_values else float("nan"),
+                "confidence_set_touches_lower": grid_lower in inside_values,
+                "confidence_set_touches_upper": grid_upper in inside_values,
+                "profile_train_best_value": float(train_best[parameter]),
+                "profile_holdout_best_value": (
+                    float(holdout_best[parameter]) if holdout_best else float("nan")
+                ),
+                "holdout_selection_role": "exploratory_not_unbiased_validation",
+            })
+    return output
+
+
+def run_phi_boundary_diagnostics(
+    fit_rows: list[dict],
+    series_by_name: dict,
+    out_dir: Path,
+) -> list[dict]:
+    """Expand phi bounds only for formal fear-memory fits that hit the upper bound."""
+    baseline_rows = {
+        row["series"]: row
+        for row in fit_rows
+        if row.get("model") == "baseline" and _is_usable_fit(row)
+    }
+    rows: list[dict] = []
+    for fear_row in fit_rows:
+        if fear_row.get("model") != "fear_memory" or not _is_usable_fit(fear_row):
+            continue
+        hits = str(fear_row.get("parameter_bound_hits", "")).replace(",", ";").split(";")
+        if "phi" not in {hit.strip() for hit in hits if hit.strip()}:
+            continue
+        phi = _f(fear_row, "phi")
+        if not np.isfinite(phi) or phi < 0.2 * (1.0 - 2e-3):
+            continue
+        name = fear_row["series"]
+        if name not in baseline_rows or name not in series_by_name:
+            continue
+        baseline = BaselineParams(**{
+            parameter: _f(baseline_rows[name], parameter)
+            for parameter in ("r", "K", "a", "theta", "e", "mu")
+        })
+        diagnostic = adaptive_fear_memory_phi_bound_diagnostic(
+            series_by_name[name],
+            baseline,
+            optimizer="global",
+            optimizer_seeds=(0, 1, 2),
+            max_nfev=500,
+            baseline_parameter_bound_hits=tuple(
+                hit.strip()
+                for hit in baseline_rows[name].get("parameter_bound_hits", "").split(";")
+                if hit.strip()
+            ),
+            baseline_candidate_status=baseline_rows[name]["optimization_status"],
+            baseline_candidate_message=baseline_rows[name].get(
+                "termination_reason", "nested baseline candidate"
+            ),
+        )
+        rows.extend({"series": name, **row} for row in diagnostic)
+    _write_csv(
+        rows,
+        out_dir / "phi_boundary_sensitivity.csv",
+        [
+            "series", "phi_upper", "phi", "phi_upper_hit", "boundary_resolved",
+            "boundary_unresolved_at_maximum", "rmse_normalized_total",
+            "validation_rmse_normalized_total", "aicc", "optimization_status",
+            "objective_value", "optimized_fear_objective",
+            "nested_baseline_candidate_objective", "nested_baseline_candidate_selected",
+            "parameter_bound_hits", "r", "K", "a", "theta", "e", "mu", "delta", "m0",
+            "diagnostic_role",
+        ],
+    )
+    return rows
 
 
 def analyze_peacor(out_dir: Path) -> dict | None:
@@ -1300,6 +1430,8 @@ def main() -> None:
         r for r in fit_rows
         if r.get("model") == "fear_memory" and _is_usable_fit(r)
     ]
+    phi_boundary_rows = run_phi_boundary_diagnostics(fit_rows, series_by_name, tier1)
+    print(f"[tier1] phi boundary diagnostics ({len(phi_boundary_rows)} rows) OK")
     memory_summary = run_memory_profiles(
         fear_rows,
         series_by_name,

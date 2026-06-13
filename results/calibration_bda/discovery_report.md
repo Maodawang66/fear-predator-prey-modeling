@@ -1,5 +1,5 @@
 # Auto-discovery report
-generated: 2026-06-11T14:03:01.138742+00:00
+generated: 2026-06-12T08:07:53.567184+00:00
 scanned_valid_csv: 4
 candidates: 12
 

@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#FAFBFC" />
+  
+  <path fill="#1B3A5C" d="M62,40 H62 A2,2 0 0 1 64,42 V74 A2,2 0 0 1 62,76 H62 A2,2 0 0 1 60,74 V42 A2,2 0 0 1 62,40 Z" />
+  <text x="76" y="66" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="32" font-weight="bold" fill="#1B3A5C">核心结果汇总</text>
+  <text x="76" y="88" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#94A3B8">三模型与七模型的定量比较 · 证据边界三联检验</text>
+  <line x1="60" y1="105" x2="1220" y2="105" stroke="#CBD5E1" stroke-width="1" />
+
+  
+  <g>
+    
+    <rect x="60" y="125" width="240" height="48" rx="0" fill="#1B3A5C" />
+    <text x="180" y="155" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">评价指标</text>
+
+    <rect x="300" y="125" width="240" height="48" rx="0" fill="#1B3A5C" />
+    <text x="420" y="155" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">Baseline</text>
+
+    <rect x="540" y="125" width="240" height="48" rx="0" fill="#2563A0" />
+    <text x="660" y="155" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">Fear-Memory</text>
+
+    <rect x="780" y="125" width="240" height="48" rx="0" fill="#4A90B8" />
+    <text x="900" y="155" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">B-D + Fear</text>
+
+    <rect x="1020" y="125" width="200" height="48" rx="0" fill="#1B3A5C" />
+    <text x="1120" y="155" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="17" font-weight="bold" fill="#FFFFFF">含义</text>
+
+    
+    <rect x="60" y="173" width="240" height="52" fill="#F8FAFC" />
+    <text x="180" y="205" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">留后验证单独最优 (3模型)</text>
+
+    <rect x="300" y="173" width="240" height="52" fill="#F8FAFC" />
+    <text x="420" y="204" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#1E293B">3/15</text>
+
+    <rect x="540" y="173" width="240" height="52" fill="#F8FAFC" />
+    <text x="660" y="204" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#1E293B">2/15</text>
+
+    <rect x="780" y="173" width="240" height="52" fill="#F8FAFC" />
+    <text x="900" y="204" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#DC2626">9/15</text>
+
+    <rect x="1020" y="173" width="200" height="52" fill="#F8FAFC" />
+    <text x="1120" y="205" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">B-D 预测最优</text>
+
+    
+    <rect x="60" y="225" width="240" height="52" fill="#F0F3F7" />
+    <text x="180" y="257" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">AICc 最优 (3模型)</text>
+
+    <rect x="300" y="225" width="240" height="52" fill="#F0F3F7" />
+    <text x="420" y="256" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#DC2626">13/15</text>
+
+    <rect x="540" y="225" width="240" height="52" fill="#F0F3F7" />
+    <text x="660" y="256" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#1E293B">2/15</text>
+
+    <rect x="780" y="225" width="240" height="52" fill="#F0F3F7" />
+    <text x="900" y="256" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#1E293B">0/15</text>
+
+    <rect x="1020" y="225" width="200" height="52" fill="#F0F3F7" />
+    <text x="1120" y="257" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">简单模型获复杂度支持</text>
+
+    
+    <rect x="60" y="277" width="240" height="52" fill="#F8FAFC" />
+    <text x="180" y="309" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">留后验证单独最优 (7模型)</text>
+
+    <rect x="300" y="277" width="240" height="52" fill="#F8FAFC" />
+    <text x="420" y="308" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#1E293B">2/15</text>
+
+    <rect x="540" y="277" width="240" height="52" fill="#F8FAFC" />
+    <text x="660" y="308" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#1E293B">2/15</text>
+
+    <rect x="780" y="277" width="240" height="52" fill="#F8FAFC" />
+    <text x="900" y="308" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#DC2626">6/15</text>
+
+    <rect x="1020" y="277" width="200" height="52" fill="#F8FAFC" />
+    <text x="1120" y="309" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">无单一通道普遍胜出</text>
+
+    
+    <rect x="60" y="329" width="240" height="52" fill="#F0F3F7" />
+    <text x="180" y="361" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">k 可辨识性</text>
+
+    <rect x="300" y="329" width="240" height="52" fill="#F0F3F7" />
+    <text x="420" y="360" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" fill="#64748B">—</text>
+
+    <rect x="540" y="329" width="240" height="52" fill="#F0F3F7" />
+    <text x="660" y="360" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" fill="#64748B">—</text>
+
+    <rect x="780" y="329" width="240" height="52" fill="#F0F3F7" />
+    <text x="900" y="360" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="bold" fill="#DC2626">不可辨识</text>
+
+    <rect x="1020" y="329" width="200" height="52" fill="#F0F3F7" />
+    <text x="1120" y="361" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">拟合误差低 ≠ 机制识别</text>
+
+    
+    <rect x="60" y="381" width="240" height="52" fill="#F8FAFC" />
+    <text x="180" y="413" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">等效抑制下共存</text>
+
+    <rect x="300" y="381" width="240" height="52" fill="#F8FAFC" />
+    <text x="420" y="412" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" fill="#22C55E">✓</text>
+
+    <rect x="540" y="381" width="240" height="52" fill="#F8FAFC" />
+    <text x="660" y="412" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" fill="#22C55E">✓ (31/31)</text>
+
+    <rect x="780" y="381" width="240" height="52" fill="#F8FAFC" />
+    <text x="900" y="412" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" fill="#64748B">—</text>
+
+    <rect x="1020" y="381" width="200" height="52" fill="#F8FAFC" />
+    <text x="1120" y="413" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">恐惧不灭绝种群</text>
+
+    
+    <rect x="60" y="433" width="240" height="52" fill="#F0F3F7" />
+    <text x="180" y="465" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#1E293B">机制路径依赖性</text>
+
+    <rect x="300" y="433" width="720" height="52" fill="#F0F3F7" />
+    <text x="660" y="464" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#DC2626">"恐惧增加还是减少种群" 无机制无关的答案</text>
+
+    <rect x="1020" y="433" width="200" height="52" fill="#F0F3F7" />
+    <text x="1120" y="465" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">六通道结论矛盾</text>
+  </g>
+
+  
+  <g>
+    <text x="80" y="530" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" fill="#1E293B">证据边界三联检验框架</text>
+
+    <path fill="#F0F3F7" d="M88,550 H432 A8,8 0 0 1 440,558 V612 A8,8 0 0 1 432,620 H88 A8,8 0 0 1 80,612 V558 A8,8 0 0 1 88,550 Z" />
+    <text x="260" y="578" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" font-weight="bold" fill="#2563A0">复杂性校正</text>
+    <text x="260" y="604" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">AICc / BIC 惩罚额外参数</text>
+
+    <path fill="#F0F3F7" d="M468,550 H812 A8,8 0 0 1 820,558 V612 A8,8 0 0 1 812,620 H468 A8,8 0 0 1 460,612 V558 A8,8 0 0 1 468,550 Z" />
+    <text x="640" y="578" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" font-weight="bold" fill="#2563A0">可辨识性诊断</text>
+    <text x="640" y="604" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">Profile likelihood · 参数触边检测</text>
+
+    <path fill="#F0F3F7" d="M848,550 H1192 A8,8 0 0 1 1200,558 V612 A8,8 0 0 1 1192,620 H848 A8,8 0 0 1 840,612 V558 A8,8 0 0 1 848,550 Z" />
+    <text x="1020" y="578" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" font-weight="bold" fill="#2563A0">通道依赖性审查</text>
+    <text x="1020" y="604" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#64748B">多通道对照 · 文献来源审查</text>
+  </g>
+
+  
+  <text x="1220" y="690" text-anchor="end" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="11" fill="#94A3B8">13 / 13</text>
+</svg>

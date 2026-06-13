@@ -80,7 +80,7 @@ Abrams（2000）指出，适应性行为进入种群动力学方程的具体方�
  \mathrm{AICc}=\mathrm{AIC}+
  \frac{2p(p+1)}{n-p-1}.
 \]
-其中 $p$ 为实际拟合参数数目，$n=2n_{\mathrm{train}}$ 为猎物与捕食者训练残差的总数。该计算将归一化残差近似视为同方差 Gaussian 残差；生态时间序列中的自相关、过程噪声和观测误差未被显式建模，因此 AICc 仅作为当前候选模型集合内的相对比较指标。单次末尾 20\% 留后同样可能对切分点敏感。
+其中 $p$ 为实际拟合参数数目，$n=2n_{\mathrm{train}}$ 为猎物与捕食者训练残差的总数。AIC 中的 $2p$ 是基础复杂度惩罚，AICc 最后一项进一步修正小样本下的乐观偏差；新增参数是否值得由完整的 $\Delta\mathrm{AICc}$ 判断，即拟合误差下降是否足以抵消两部分复杂度惩罚，而不能只看最后一项。该计算将归一化残差近似视为同方差 Gaussian 残差；生态时间序列中的自相关、过程噪声和观测误差未被显式建模，因此 AICc 仅作为当前候选模型集合内的相对比较指标。单次末尾 20\% 留后同样可能对切分点敏感。
 优化状态分为成功、达到迭代上限但结果可用、失败。失败拟合保留用于诊断，但不进入模型胜负统计。
 
 \section{模型与方法}
@@ -135,7 +135,7 @@ ODE 使用 \texttt{solve\_ivp} 的 RK45 积分，并线性插值到均匀网格�
 
 \subsection{数据拟合与证据过滤}
 
-15 条主序列包含哺乳类、鱼类与浮游动物，详见附录 A。正式基础比较逐序列拟合 baseline 与 fear-memory；核心递进比较加入 fear-instant，完整扩展比较再加入 fear-saturating、fear-foraging 与 fear-handling。训练段为前 80\%，验证段为后 20\%；验证预测不是从验证起点重新初始化，而是从整条序列初始状态连续积分。比较顺序为：
+15 条主序列包含哺乳类、鱼类与浮游动物，详见附录 A。正式基础比较逐序列拟合 baseline 与 fear-memory；完整扩展比较再加入 fear-instant、fear-saturating、fear-foraging 与 fear-handling。训练段为前 80\%，验证段为后 20\%；验证预测不是从验证起点重新初始化，而是从整条序列初始状态连续积分。比较顺序为：
 \begin{enumerate}[label=(\arabic*),leftmargin=2em]
  \item 过滤失败拟合；
  \item 比较训练归一化 RMSE；
@@ -144,11 +144,11 @@ ODE 使用 \texttt{solve\_ivp} 的 RK45 积分，并线性插值到均匀网格�
  \item 检查参数触边。
 \end{enumerate}
 
-baseline 逐序列拟合 6 个动力学参数（$r,K,a,\theta,e,\mu$）。五个恐惧候选模型均在相同 Holling II 参数基础上增加 1 个主要恐惧参数，因此各拟合 7 个参数；fear-memory 固定 $\delta=1$，其新增拟合参数为 $\phi$。fear-saturating 的 $h$ 固定为对应序列训练段捕食者中位数；这不同于理论标准化实验中取参考平衡点捕食者密度的设定。初始状态取猎物与捕食者首次同时为正的观测，不作为自由参数；此前导零观测若直接作为 ODE 初值，会使模型陷入 $(0,0)$ 吸收态。该规则仅使 GLERL 删除前 3 条观测并从 $(3.753,0.064)$ 开始，其余正式序列仍从首条观测开始。对 fear-memory 进一步设 $M(0)=y(0)$，使初始记忆与首个可观测捕食压力一致，避免引入弱可辨识的初始记忆状态。固定 $\delta=1$ 提供统一的记忆时间尺度（对应记忆半衰期 $\ln 2\approx 0.69$ 个序列时间单位），防止在短序列中与 $\phi$ 相互补偿导致两个恐惧参数均不可靠。
+baseline 逐序列拟合 6 个动力学参数（$r,K,a,\theta,e,\mu$）。五个 Holling II 恐惧候选模型均在相同核心参数基础上增加 1 个主要恐惧参数，因此各拟合 7 个参数。fear-memory 固定 $\delta=1$，其新增拟合参数为 $\phi$；$\theta$ 则始终作为 Holling II 核心参数自由拟合。fear-saturating 的 $h$ 固定为对应序列训练段捕食者中位数。初始状态取猎物与捕食者首次同时为正的观测，不作为自由参数。对 fear-memory 进一步设 $M(0)=y(0)$，使初始记忆与首个可观测捕食压力一致，避免引入弱可辨识的初始记忆状态。固定 $\delta=1$ 提供统一的记忆时间尺度（对应记忆半衰期 $\ln 2\approx 0.69$ 个序列时间单位），防止在短序列中与 $\phi$ 相互补偿导致两个恐惧参数均不可靠。
 
-优化策略采用固定种子（0, 1, 2）的多起点差分进化，每个种子独立运行至收敛或达上限，选取最低目标函数值的解，再以 L-BFGS-B 进行一次有界局部精修。这一流程在全局探索与局部收敛之间取得平衡，同时通过固定种子确保结果可复现。因各序列时间尺度和观测含义不同，拟合得到的 $e,\mu$ 点估计仅用于本序列的轨迹拟合，不直接解释为跨系统可比较的生态速率。
+优化策略采用固定种子（0, 1, 2）的多起点差分进化，每个种子独立运行至收敛或达上限，选取最低目标函数值的解，再以 L-BFGS-B 进行一次有界局部精修。由于五个 Holling II 恐惧模型在恐惧强度为零时均退化为 baseline，拟合还显式计算“正式 baseline 核心参数+零恐惧强度”候选，并保证最终训练目标不高于该候选；即使零恐惧候选胜出，AICc 仍按 7 个参数惩罚。拟合仅接受在观测与留后积分范围内非负、有限且可计算的轨迹。因各序列时间尺度和观测含义不同，拟合得到的 $e,\mu$ 点估计仅用于本序列的轨迹拟合，不直接解释为跨系统可比较的生态速率。
 
-为检验上述记忆设定是否主导结果，本文还对 $M(0)$ 与 $\delta$ 进行补充 profile。在离散网格上固定目标参数并局部重新优化其余参数，再使用渐近 $\chi^2_1$ 阈值得到近似 95\% profile 集。$M(0)$ 的变化通常可被其余参数补偿，14/15 条序列的近似 95\% profile 集触及 $M(0)/y(0)=5$ 的扫描上界。若在留后段上探索性选择最优 $\delta$，相对固定 $\delta=1$ 的验证 RMSE 改善中位数约为 2.1\%；Windermere 北湖盆与 Isle Royale 的改善较大，因此不能声称 $\delta$ 对所有序列均不重要。完整结果见附录 E。
+为检验上述记忆设定是否主导结果，本文还对 $M(0)$ 与 $\delta$ 进行补充 profile。在离散网格上固定目标参数并局部重新优化其余参数，再使用渐近 $\chi^2_1$ 阈值得到近似 95\% profile 集。全部 15 条序列的 $M(0)/y(0)$ 近似 95\% profile 集均延伸至扫描区间两端；$\delta$ profile 中 14/15 条至少延伸至一个扫描边界。这说明训练数据未能在已扫描范围内给出封闭的可接受区间，参数变化可被其余参数补偿；扫描边界只是网格截断点，不是精确的区间端点，也不表示参数对轨迹没有影响。作为敏感性分析，本文还在同一留后段上比较不同 $\delta$ 候选，并报告其中最小的验证 RMSE；相对固定 $\delta=1$，其改善中位数约为 1.2\%。由于留后段参与了 $\delta$ 的选择，它不再是独立验证集，所得改善可能偏乐观，因此不用于模型胜负统计。完整结果见附录 E。
 
 \section{理论与动力学分析}
 
@@ -182,39 +182,39 @@ $\phi\in[0,0.06]$ 的 31 个扫描情景均未触发灭绝判定。20 个情景�
 
 \subsection{真实数据的预测比较}
 
-模型比较分为三层递进问题：(a) 含恐惧模型是否优于无恐惧 baseline？(b) 恐惧记忆滞后是否提供额外预测能力？(c) 四种替代恐惧通道（觅食抑制、处理时间延长等）是否有某一通道一致最优？
+模型比较分为两层递进问题：(a) fear-memory 是否优于无恐惧 baseline？(b) 五种 Holling II 恐惧通道中是否有某一通道一致最优？
 
-核心比较限定于 baseline、fear-memory 与 fear-instant 三模型，依次比较无恐惧、带记忆繁殖抑制与瞬时繁殖抑制。三者在真实数据拟合中分别优化参数；理论实验中的共同 $\phi$ 校准不用于真实拟合。表\,\ref{tab:wins} 汇总三模型的序列级预测结果。fear-memory 与 fear-instant 各在 6 条序列的留后验证上单独最优，baseline 在 3 条上最优；但 baseline 在 10 条序列上取得最低 AICc。修正零初值后，GLERL 由退化并列变为 fear-instant 留后最优、baseline AICc 最优。fear-memory 与 fear-instant 的逐序列 AICc 差绝对值中位数约为 0.979，未显示任一繁殖抑制结构获得一致支持。因此，不可仅凭个别序列的 AICc 高低宣称"记忆滞后不重要"或"瞬时恐惧更真实"。按研究聚合后，模型胜负分布依然不支持任何通道的普遍优越性（完整研究级胜负见附录 D）。
+表\,\ref{tab:wins} 汇总 baseline 与 fear-memory 的序列级结果：留后验证中 baseline 在 9 条序列上最优，fear-memory 在 6 条上最优；AICc 则在 13 条序列上支持 baseline，在 2 条上支持 fear-memory。留后预测与复杂度校正后的胜负明显分歧，因此不能把预测优势直接解释为恐惧机制获得识别。
 
 \begin{table}[H]
  \centering
  \caption{两种标准下的核心模型胜负汇总（序列级）}
  \label{tab:wins}
- \begin{tabular}{lcccc}
+ \begin{tabular}{lccc}
   \toprule
-  标准 & baseline & fear-memory & fear-instant & 并列\\
+ 标准 & baseline & fear-memory & 并列\\
   \midrule
-  留后验证归一化 RMSE 最优 & 3 & 6 & 6 & 0\\
-  AICc 最优 & 10 & 1 & 4 & 0\\
+ 留后验证归一化 RMSE 最优 & 9 & 6 & 0\\
+ AICc 最优 & 13 & 2 & 0\\
   \bottomrule
  \end{tabular}
 \end{table}
 
-(c) 按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到全部六模型（新增 fear-saturating、fear-foraging、fear-handling）后，90 次拟合均达到 success 或 usable\_limit 状态并进入主比较，其中 43 次为 success，47 次为 usable\_limit。六模型在序列级留后最优分布的离散程度高于三模型，但结论相同：无单一恐惧通道在留后预测和 AICc 上一致胜出。完整六模型胜负表、热力图及研究级聚合分析见附录 D。
+按相同训练段归一化、20\% 连续多步留后和固定种子多起点优化口径扩展到全部六模型后，90 次拟合均达到 success 或 usable\_limit 状态并进入主比较，其中 33 次为 success，57 次为 usable\_limit。五种 Holling II 恐惧通道均执行显式零恐惧候选检查；fear-memory、fear-instant、fear-saturating、fear-foraging 与 fear-handling 分别有 6、7、5、6、3 条序列选择零恐惧候选。零恐惧候选胜出时继承对应 baseline 的优化状态，避免隐藏核心参数的优化不确定性。六模型在序列级留后最优分布高度分散，仍无单一恐惧通道在留后预测和 AICc 上一致胜出。完整六模型胜负表、热力图及研究级聚合分析见附录 D。
 
-为检验胜负是否为微小数值波动所致，进一步计算每条序列的 baseline 与最佳恐惧模型之间的 $\Delta\mathrm{AICc}$。结果表明，6/15 条序列的 $|\Delta\mathrm{AICc}|<2$，胜负在实质上可忽略；仅 3 条序列的 $|\Delta\mathrm{AICc}|>7$（强证据），其中 1 条支持 baseline、2 条支持恐惧模型。其余序列虽可能存在 AICc 最优模型，但证据差异未达到强证据阈值。
+为检验胜负是否为微小数值波动所致，进一步计算每条序列的 baseline 与最佳恐惧模型之间的 $\Delta\mathrm{AICc}$。结果表明，6/15 条序列的 $|\Delta\mathrm{AICc}|<2$，胜负在实质上可忽略；仅 2 条序列的 $|\Delta\mathrm{AICc}|>7$，且均支持恐惧模型。其余序列虽可能存在 AICc 最优模型，但证据差异未达到强证据阈值。
 
-研究级敏感性分析（取研究内序列的指标中位数，将 Andrén 七区、Killifish 三站、Windermere 两湖盆各聚合为 1 个研究级单位，共 6 个研究级比较单位）显示，留后验证最优模型分布为 baseline 2、fear-instant 2、fear-memory 1、fear-handling 1；AICc 最优分布为 baseline 4、fear-memory 1、fear-instant 1。取组内最佳与最差聚合方式时，胜负分布更加分散，但”无单一通道一致胜出”的模式不变。因此，序列非独立性不改变本文的主要定性结论。完整六模型胜负表及研究级聚合结果见附录 D。
+研究级敏感性分析（取研究内序列的指标中位数，将 Andrén 七区、Killifish 三站、Windermere 两湖盆各聚合为 1 个研究级单位，共 6 个研究级比较单位）显示，留后验证最优模型分别为 baseline、fear-memory、fear-instant、fear-foraging 与 fear-handling，其中 fear-instant 在 2 个单位上最优，其余各在 1 个单位上最优；AICc 最优分布为 baseline 4、fear-memory 1、fear-instant 1。胜负模式仍不支持单一通道一致胜出。因此，序列非独立性不改变本文的主要定性结论。完整六模型胜负表及研究级聚合结果见附录 D。
 
-作为优化状态敏感性诊断，若仅保留 success 拟合，Windermere South 没有任何模型可比较，其余 14 条序列中每条保留的候选模型集合也不同。因此 success-only 结果不能形成候选集合一致的六模型胜负统计；其留后赢家仍分散于五种模型，AICc 赢家分散于六种模型，未出现单一通道一致胜出。该诊断同时说明，主胜负计数仍依赖 usable\_limit 解，解释时需保留这一计算不确定性。
+作为优化状态敏感性诊断，若仅保留 success 拟合，Windermere South 没有任何模型可比较，其余 14 条序列中每条保留的候选模型集合也不同。因此 success-only 结果不能形成候选集合一致的六模型胜负统计；赢家仍分散于多种模型，未出现单一通道一致胜出。该诊断同时说明，主胜负计数仍依赖 usable\_limit 解，解释时需保留这一计算不确定性。
 
 Windermere 南北两湖盆的拟合误差在 15 条序列中最高（留后验证 RMSE 最高达 3.04），其原因与狗鱼的刺网移除干预有关——当捕食者被人为压制而猎物先爆发后自然回落时，Holling II 框架的参数估计因未建模的外部干预而畸变。完整案例分析见第\,\ref{sec:discussion}\,节讨论。
 
 \begin{figure}[H]
   \centering
-  \imginclude[width=0.92\textwidth]{seven_model_real_fits/validation_rmse_heatmap_six_model.png}
+  \imginclude[width=0.92\textwidth]{seven_model_real_fits/report_protocol_six_model_validation_heatmap.png}
   \caption{15 条正式序列的六模型连续多步留后验证 RMSE。颜色表示相对该序列最佳可用模型的误差比。}
-  \label{fig:seven-model-heatmap}
+  \label{fig:six-model-heatmap}
 \end{figure}
 
 全部拟合均通过 success 或 usable\_limit 状态进入比较；其中超过半数为 usable\_limit，因此“可比较”仅表示目标值有限且轨迹可计算，不等同于优化器已收敛。
@@ -232,7 +232,7 @@ Windermere 南北两湖盆的拟合误差在 15 条序列中最高（留后验�
   \midrule
   机制识别 & 不同恐惧通道在数值实验中产生不同定性方向；$\Delta\mathrm{AICc}$ 分布提示部分比较（6/15）在实质上不区分模型 & 真实系统中存在与某一特定恐惧通道对应的机制；数据偏好可以直接解释为机制证据\\
   \midrule
-  恐惧强度估计 & fear-memory 的 $\phi$ 在 2/15 条序列中触及搜索边界；全序列 $M(0)$ 与 $\delta$ profile 显示记忆相关参数存在宽可接受范围 & 将 fitted $\phi$ 直接解释为真实恐惧强度；在缺少独立机制观测时跨序列比较恐惧抑制程度\\
+  恐惧强度估计 & fear-memory 的 $\phi$ 在 1/15 条序列中触及正式搜索上界；扩边后虽得到内部解，但验证误差变差；全序列 $M(0)$ 与 $\delta$ profile 显示记忆相关参数存在宽可接受范围 & 将 fitted $\phi$ 直接解释为真实恐惧强度；在缺少独立机制观测时跨序列比较恐惧抑制程度\\
   \midrule
   跨系统比较 & 6 个研究级聚合单位的胜负模式与序列级定性一致；哺乳类、鱼类和浮游动物均存在留后预测改善的个例 & 任一恐惧通道在某一类群中一致胜出；15 个拟合单位可视为 15 个独立生态证据\\
   \bottomrule
@@ -249,17 +249,17 @@ Windermere 南北两湖盆的拟合误差在 15 条序列中最高（留后验�
 \subsection{恐惧记忆参数的可辨识性局限}
 \label{sec:identifiability}
 
-为检验 fear-memory 的恐惧与记忆参数是否被数据可靠识别，本文对 $\phi$、$M(0)$ 和 $\delta$ 进行补充诊断。$\phi$ 的边界敏感性以及 $M(0)$、$\delta$ 的 profile 均覆盖全部 15 条序列；正文展示 3 条具有不同数据特征的代表序列，其余结果汇总于附录 E。
+为检验 fear-memory 的恐惧与记忆参数是否被数据可靠识别，本文对 $\phi$、$M(0)$ 和 $\delta$ 进行补充诊断。$\phi$ 扩边诊断针对正式拟合中触及上界的序列；$M(0)$、$\delta$ 的 profile 覆盖全部 15 条序列。正文展示 3 条具有不同数据特征的代表序列，其余结果汇总于附录 E。
 
 首先进行退化检验：令 $\phi=0$，fear-memory 的 ODE 右端项在 $x,y$ 分量上与 baseline 完全相同。数值验证（容差 $10^{-12}/10^{-14}$）得到两模型轨迹的最大偏差为 $1.48\times 10^{-3}$（相对变量尺度约 $0.007\%$）；该非零偏差来自两个系统维数不同导致的自适应步长差异，方程的 $x,y$ 动力学在结构上相同。
 
-进一步分析各序列拟合所得 $\phi$ 与 baseline--fear-memory 的 $\Delta\mathrm{AICc}$ 关系。AICc 支持 baseline 的 13 条序列中，fitted $\phi$ 的中位数约为 0.00926；fear-memory 获得 AICc 支持的 2 条序列中，中位数约为 0.00196。当前样本未显示模型支持程度与 fitted $\phi$ 之间存在简单的单调关系，因此不能把 AICc 对 baseline 的支持直接等同于 $\phi$ 接近零，也不能把较大的 fitted $\phi$ 解释为更强的机制证据。$\Delta\mathrm{AICc}$ vs fitted $\phi$ 散点图见附录 E。
+进一步分析各序列拟合所得 $\phi$ 与 baseline--fear-memory 的 $\Delta\mathrm{AICc}$ 关系。AICc 支持 baseline 的 13 条序列中，由于 6 条正式拟合选择零恐惧候选，fitted $\phi$ 的中位数约为 $6.0\times10^{-5}$；fear-memory 获得 AICc 支持的 2 条序列中，中位数约为 0.00196。当前样本未显示模型支持程度与 fitted $\phi$ 之间存在简单的单调关系，因此不能把较大的 fitted $\phi$ 解释为更强的机制证据。$\Delta\mathrm{AICc}$ vs fitted $\phi$ 散点图见附录 E。
 
-$\phi$ 在 2/15 条序列的拟合中触及搜索边界。更一般地，单个 fitted $\phi$ 仍可能与其余动力学参数相互补偿，不能仅凭点估计将其解释为"识别到的恐惧强度"。
+$\phi$ 仅在 Andrén-2 的正式拟合中触及上界 0.2。自适应扩边诊断将上界提高到 1.0 后得到内部解 $\phi\approx0.766$，训练 RMSE 从 0.1011 降至 0.0981、AICc 从 $-156.5$ 降至 $-158.7$，但留后 RMSE 从 0.0833 上升至 0.0907。该结果说明原上界限制了训练拟合，却不能证明更大的 $\phi$ 具有更好的预测或生态解释；扩边结果仅作为边界敏感性诊断，不替换正式胜负。
 
 固定 $M(0)=y(0)$ 和 $\delta=1$ 的理由如下：固定 $\delta=1$ 提供统一的记忆时间尺度，避免在短序列中与 $\phi$ 相互补偿；固定 $M(0)=y(0)$ 使初始记忆与首个可观测捕食压力一致，避免引入额外的弱可辨识初始状态。为检验上述设定是否主导结果，本文对全部 15 条序列进行 $M(0)/y(0)$ 与 $\delta$ 的 profile 分析（在每个固定值下重新优化其余参数，而非固定其余参数的条件扫描）。正文展示 Isle Royale、GLERL 与 TP：Isle Royale 为最长序列（38 年），GLERL 代表经前导零观测起点修正后仍呈宽记忆 profile 的浮游动物序列，TP 为 Killifish 研究内 fear-memory 留后验证优于 baseline 的代表。
 
-$M(0)/y(0)$ profile 在 $[0,5]$ 上普遍平坦，14/15 条序列的近似 95\% profile 集触及扫描上界，表明初始记忆的变化通常可由其他动力学参数补偿。触及上界表示可接受范围可能延伸到扫描区间之外，不应解释为精确置信区间端点。
+$M(0)/y(0)$ profile 在 $[0,5]$ 上普遍平坦，全部 15 条序列的近似 95\% profile 集均同时触及扫描上下界，表明初始记忆的变化通常可由其他动力学参数补偿。触及边界表示可接受范围可能延伸到扫描区间之外，不应解释为精确置信区间端点。
 
 \begin{figure}[H]
  \centering
@@ -279,7 +279,7 @@ $M(0)/y(0)$ profile 在 $[0,5]$ 上普遍平坦，14/15 条序列的近似 95\% 
  \label{fig:m0-profile-body}
 \end{figure}
 
-$\delta$ 的 profile 显示，训练最优与留后最优的衰减时间尺度不同——在留后段上探索性选择最优 $\delta$，相对固定 $\delta=1$ 的验证 RMSE 改善中位数约为 2.1\%，但 Windermere 北湖盆与 Isle Royale 的改善较大（分别为 79.5\% 和 57.9\%），因此不能声称 $\delta$ 对所有序列均不重要。
+$\delta$ 的 profile 显示，训练最优与留后最优的衰减时间尺度不同；14/15 条序列的近似 95\% profile 集至少触及一个扫描边界。在留后段上探索性选择最优 $\delta$，相对固定 $\delta=1$ 的验证 RMSE 改善中位数约为 1.2\%，其中 Windermere 北湖盆与 Isle Royale 的改善分别为 79.5\% 和 12.3\%，因此不能声称 $\delta$ 对所有序列均不重要。
 
 \begin{figure}[H]
  \centering
@@ -306,9 +306,9 @@ $\delta$ 的 profile 显示，训练最优与留后最优的衰减时间尺度�
 \subsection{讨论：证据能够支持什么}
 \label{sec:discussion}
 
-本文的理论实验与数据拟合之间存在一种有意义的张力，这与文献中反复出现的方法论问题相呼应。Wang 等（2019）和 Zanette 等（2003）的工作表明恐惧效应在原理上可以改变种群动力学；Preisser 等（2007）和 Peacor \& Werner（2001）的系统综述确认了 NCE 的生态重要性。这些理论模型关心的是\textbf{可能存在什么}——它们证明，一旦恐惧以某种机制进入动力学方程，确实可以产生可观察的种群响应。然而，当参数被校准到真实数据时，问题转变为\textbf{在当前数据中实际被支持的是什么}。本文的六模型比较和全序列参数 profile 正是从这一角度切入：含恐惧模型可在部分序列上改善留后预测，但 AICc 在多数序列上支持较简单的 baseline，且 $M(0)$ 与 $\delta$ 的宽 profile 表明恐惧相关参数可被其他动力学参数补偿。因而，当前诊断不足以支持对真实恐惧强度的可靠估计。这一发现与 Peacor 等（2022）的综述结论在精神上一致：TMIE/NCE 的证据来自实验操作，不能直接等同于从宏观种群时间序列拟合得到的恐惧强度。
+本文的理论实验与数据拟合之间存在一种有意义的张力，这与文献中反复出现的方法论问题相呼应。Wang 等（2019）和 Zanette 等（2003）的工作表明恐惧效应在原理上可以改变种群动力学；Preisser 等（2007）和 Peacor \& Werner（2001）的系统综述确认了 NCE 的生态重要性。这些理论模型关心的是\textbf{可能存在什么}——它们证明，一旦恐惧以某种机制进入动力学方程，确实可以产生可观察的种群响应。然而，当参数被校准到真实数据时，问题转变为\textbf{在当前数据中实际被支持的是什么}。本文的六模型比较和全序列参数 profile 正是从这一角度切入：含恐惧模型可在部分序列上改善留后预测，但 AICc 在多数序列上支持较简单的 baseline，且 $M(0)$ 与 $\delta$ 的宽 profile 表明恐惧相关参数可被其他动力学参数补偿。因而，当前诊断不足以支持对真实恐惧强度的可靠估计。
 
-数值实验支持”机制路径决定定性方向”，数据拟合支持”含恐惧模型能够改善部分序列的留后预测”，但二者都不足以证明真实系统存在相应恐惧机制。这一结论有三项独立的方法论依据。第一，15 条序列中 Andrén 七区、Killifish 三站和 Windermere 两湖盆存在研究内重复，统计独立性有限，不能视为 15 个独立生态证据。第二，AICc 在 baseline--fear-memory 两模型比较中有 13/15 条支持 baseline，在核心三模型和完整六模型比较中 baseline 分别有 10/15 与 8/15 条取得最低 AICc；留后预测优势与复杂度惩罚后的模型选择之间存在分歧。第三，记忆相关参数存在宽 profile，且 Windermere 案例揭示了外部人为干预（刺网移除）对封闭 ODE 假设的违反——当捕食者被人为压制而猎物先爆发后自然回落时，模型会通过参数畸变或额外结构灵活性补偿未建模过程，留后预测完全失效。综合这三点，预测能力与机制识别必须分开解释。
+数值实验支持”机制路径决定定性方向”，数据拟合支持”含恐惧模型能够改善部分序列的留后预测”，但二者都不足以证明真实系统存在相应恐惧机制。这一结论有三项独立的方法论依据。第一，15 条序列中 Andrén 七区、Killifish 三站和 Windermere 两湖盆存在研究内重复，统计独立性有限，不能视为 15 个独立生态证据。第二，AICc 在 baseline--fear-memory 两模型比较中有 13/15 条支持 baseline，在完整六模型比较中 baseline 有 8/15 条取得最低 AICc；留后预测优势与复杂度惩罚后的模型选择之间存在分歧。第三，记忆相关参数存在宽 profile，且 Windermere 案例揭示了外部人为干预（刺网移除）对封闭 ODE 假设的违反。综合这三点，预测能力与机制识别必须分开解释。
 
 记忆参数的补充结果同样需要遵守这一证据边界。固定 $\delta=1$ 的主比较使用预先统一的时间尺度；附录中所谓”留后最优 $\delta$”是在同一留后段上比较多个候选值后得到，只能作为敏感性与假设生成分析，不能再视为无偏留后验证，也不用于重新计算模型胜负。
 
@@ -323,9 +323,9 @@ $\delta$ 的 profile 显示，训练最优与留后最优的衰减时间尺度�
 
 \textbf{理论层面：恐惧效应存在机制路径依赖性。}在当前参考参数与 20\% 标准化基准下，五种 Holling II 恐惧机制均保持共存，但长期种群变化方向明显不同：繁殖抑制路径使捕食者均值下降 16\%--18\%，觅食抑制与处理时间延长则同时提高猎物和捕食者均值。换言之，种群是增加还是减少取决于恐惧通过何种机制进入动力学方程。该结论来自数值实验，证据强度为中等——20\% 是为清晰展示机制差异而人为选择的比较基准，不代表真实系统受恐惧抑制的实际强度，不同过程量之间也不能据此进行严格效应量排序。
 
-\textbf{预测层面：含恐惧模型在部分序列上改善留后预测，但无单一通道一致胜出。}在 15 个拟合单位（序列级）的六模型统一比较中，留后验证最优的模型因序列而异；AICc 标准下 baseline 在 10/15 条序列上最优（三模型口径），扩展至六模型后为 8/15。该结果不支持"添加恐惧一定能改善种群预测"的普遍预期，也不支持"某一种恐惧机制普遍正确"。六个研究级单位的敏感性分析不改变这一结论。证据强度为中等——15 个拟合单位覆盖哺乳类、鱼类和浮游动物，但部分序列来自同一研究设计，统计独立性有限；同时，六模型拟合中 47/90 为 usable\_limit，胜负统计仍包含优化不确定性。
+\textbf{预测层面：含恐惧模型在部分序列上改善留后预测，但无单一通道一致胜出。}在 15 个拟合单位（序列级）的六模型统一比较中，留后验证最优的模型因序列而异；AICc 标准下 baseline 在 baseline--fear-memory 两模型比较中为 13/15，扩展至六模型后为 8/15。该结果不支持"添加恐惧一定改善种群预测"的普遍预期，也不支持"某一种恐惧机制普遍正确"。六个研究级单位的敏感性分析不改变这一结论。证据强度为中等——15 个拟合单位覆盖哺乳类、鱼类和浮游动物，但部分序列来自同一研究设计，统计独立性有限；同时，六模型拟合中 57/90 为 usable\_limit，胜负统计仍包含优化不确定性。
 
-\textbf{机制层面：预测改善不能等同于恐惧机制的识别。}含恐惧模型在某些序列上留后预测更优，但三点限制因素决定了不能将此解释为"数据中存在恐惧效应"的正面证据。第一，AICc 在多数序列上支持不含恐惧的 baseline，与留后预测优势形成分歧。第二，fear-memory 的 $\phi$ 在 2/15 条序列中触及边界，全序列 $M(0)$ 与 $\delta$ profile 显示记忆相关参数存在宽可接受范围——预测改善可能来自结构增加的灵活性，而非恐惧机制的生态真实性。第三，Windermere 序列的案例表明，当数据包含外部人为干预（刺网移除）时，封闭 ODE 模型通过参数畸变补偿未建模过程，拟合误差不能完全归因于模型结构的生态合理性。三种诊断从不同角度共同限定了本文能够提出的机制结论。
+\textbf{机制层面：预测改善不能等同于恐惧机制的识别。}含恐惧模型在某些序列上留后预测更优，但三点限制因素决定了不能将此解释为"数据中存在恐惧效应"的正面证据。第一，AICc 在多数序列上支持不含恐惧的 baseline，与留后预测优势形成分歧；AICc 小样本修正只是在完整复杂度惩罚中增加额外校正，新增参数是否值得必须看完整 $\Delta\mathrm{AICc}$。第二，fear-memory 的 $\phi$ 在 Andrén-2 中触及正式上界，扩边虽改善训练拟合却恶化留后预测；全序列 $M(0)$ 与 $\delta$ profile 显示记忆相关参数存在宽可接受范围。固定 $M(0)$ 与 $\delta$ 是对弱可辨识性的控制，并不意味着它们对轨迹无影响。第三，Windermere 序列的案例表明，当数据包含外部人为干预（刺网移除）时，封闭 ODE 模型通过参数畸变补偿未建模过程。三种诊断从不同角度共同限定了本文能够提出的机制结论。
 
 综合来看，本文的贡献不在于否定或证实恐惧效应的生态重要性，而在于：(1) 展示了五个恐惧通道在 20\% 标准化基准下的定性分歧，这意味着缺乏独立机制证据时，任何单一通道的拟合成功都不应解释为"找到了正确的恐惧机制"；(2) 在对 15 个公开时间序列的统一比较中，没有一个恐惧通道稳定优于不含恐惧的 baseline，说明此类宏观种群数据尚不足以一致区分恐惧通道；(3) 参数 profile 分析表明，即使恐惧模型在预测上有所改善，恐惧强度和记忆尺度仍可能存在宽可接受范围，因此相关点估计需要更审慎的解读。
 
@@ -477,13 +477,13 @@ Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。数值校验中五种机�
  Andrén-2 & base & 0.1031 & 0.0968 & -157.9 & 成功 & 是 & $e$ \\
  Andrén-2 & memory & 0.1011 & 0.0833 & -156.5 & 达限可用 & 是 & $e,\phi$ \\
  Andrén-3 & base & 0.1130 & 0.0755 & -151.0 & 成功 & 是 & $K$ \\
- Andrén-3 & memory & 0.1131 & 0.0734 & -147.9 & 成功 & 是 & $K$ \\
+ Andrén-3 & memory & 0.1131 & 0.0756 & -147.9 & 成功 & 是 & $K$ \\
  Andrén-4 & base & 0.0547 & 0.0652 & -194.3 & 达限可用 & 是 & $K$ \\
- Andrén-4 & memory & 0.0547 & 0.0656 & -191.3 & 成功 & 是 & $K$ \\
+ Andrén-4 & memory & 0.0546 & 0.0653 & -191.3 & 达限可用 & 是 & $K$ \\
  Andrén-5 & base & 0.0618 & 0.0602 & -185.5 & 达限可用 & 是 & $K,e$ \\
- Andrén-5 & memory & 0.0641 & 0.0530 & -179.8 & 达限可用 & 是 & $K,\phi$ \\
+ Andrén-5 & memory & 0.0618 & 0.0603 & -182.4 & 达限可用 & 是 & $K,e$ \\
  Andrén-6 & base & 0.0828 & 0.1810 & -144.0 & 达限可用 & 是 & $K$ \\
- Andrén-6 & memory & 0.0834 & 0.1760 & -140.3 & 成功 & 是 & -- \\
+ Andrén-6 & memory & 0.0830 & 0.1812 & -140.6 & 达限可用 & 是 & $K$ \\
  Andrén-7 & base & 0.1057 & 0.2429 & -109.9 & 成功 & 是 & -- \\
  Andrén-7 & memory & 0.0753 & 0.1916 & -125.2 & 成功 & 是 & $e$ \\
  WRHW & base & 0.1835 & 0.1534 & -319.4 & 成功 & 是 & -- \\
@@ -491,9 +491,9 @@ Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。数值校验中五种机�
  TP & base & 0.1772 & 0.1030 & -319.3 & 达限可用 & 是 & $e$ \\
  TP & memory & 0.1767 & 0.0893 & -317.5 & 成功 & 是 & $e$ \\
  WRGP & base & 0.2052 & 0.1862 & -265.7 & 达限可用 & 是 & -- \\
- WRGP & memory & 0.2276 & 0.1926 & -245.1 & 达限可用 & 是 & $\theta$ \\
+ WRGP & memory & 0.2052 & 0.1862 & -263.3 & 达限可用 & 是 & -- \\
  Isle Royale & base & 0.1461 & 0.2283 & -217.3 & 达限可用 & 是 & -- \\
- Isle Royale & memory & 0.1543 & 0.2812 & -208.1 & 成功 & 是 & -- \\
+ Isle Royale & memory & 0.1461 & 0.2283 & -214.7 & 达限可用 & 是 & -- \\
  Windermere North & base & 0.1655 & 1.5234 & -114.6 & 达限可用 & 是 & $e$ \\
  Windermere North & memory & 0.1607 & 3.0392 & -113.6 & 达限可用 & 是 & -- \\
  Windermere South & base & 0.1405 & 1.1560 & -126.4 & 达限可用 & 是 & $a,e$ \\
@@ -516,10 +516,10 @@ Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。数值校验中五种机�
   GLERL & baseline & baseline\\
   Andrén-1 & fear-memory & baseline\\
   Andrén-2 & fear-memory & baseline\\
-  Andrén-3 & fear-memory & baseline\\
+ Andrén-3 & baseline & baseline\\
   Andrén-4 & baseline & baseline\\
-  Andrén-5 & fear-memory & baseline\\
-  Andrén-6 & fear-memory & baseline\\
+ Andrén-5 & baseline & baseline\\
+ Andrén-6 & baseline & baseline\\
   Andrén-7 & fear-memory & fear-memory\\
   WRHW & baseline & baseline\\
   TP & fear-memory & baseline\\
@@ -529,7 +529,7 @@ Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。数值校验中五种机�
   Windermere South & baseline & baseline\\
   Komi lynx--hare & baseline & fear-memory\\
   \midrule
-  汇总 & base 8；memory 7；并列 0 & base 13；memory 2\\
+ 汇总 & base 9；memory 6；并列 0 & base 13；memory 2\\
   \bottomrule
  \end{tabular}
 \end{table}
@@ -547,16 +547,16 @@ Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。数值校验中五种机�
   \midrule
   GLERL & fear-handling & baseline\\
   Andrén-1 & fear-memory & fear-saturating\\
-  Andrén-2 & fear-memory & fear-instant\\
-  Andrén-3 & fear-memory & baseline\\
-  Andrén-4 & fear-foraging & fear-foraging\\
-  Andrén-5 & fear-memory & baseline\\
-  Andrén-6 & fear-memory & baseline\\
-  Andrén-7 & fear-handling & fear-instant\\
+ Andrén-2 & fear-memory & fear-instant\\
+ Andrén-3 & fear-foraging & baseline\\
+ Andrén-4 & fear-foraging & fear-foraging\\
+ Andrén-5 & baseline & baseline\\
+ Andrén-6 & fear-handling & baseline\\
+ Andrén-7 & fear-handling & fear-instant\\
   WRHW & fear-instant & fear-foraging\\
   TP & fear-handling & baseline\\
-  WRGP & fear-instant & baseline\\
-  Isle Royale & baseline & baseline\\
+ WRGP & fear-memory & baseline\\
+ Isle Royale & fear-memory & baseline\\
   Windermere North & fear-instant & fear-foraging\\
   Windermere South & baseline & baseline\\
   Komi lynx--hare & baseline & fear-memory\\
@@ -564,31 +564,31 @@ Holling 无恐惧正平衡点为 $(20.0225,20.4172)$。数值校验中五种机�
  \end{tabular}
 \end{table}
 
-六模型序列级留后赢家汇总为 baseline 3、fear-memory 5、fear-instant 3、fear-foraging 1、fear-handling 3；AICc 赢家汇总为 baseline 8、fear-memory 1、fear-instant 2、fear-saturating 1、fear-foraging 3。
+六模型序列级留后赢家汇总为 baseline 3、fear-memory 4、fear-instant 2、fear-foraging 2、fear-handling 4；AICc 赢家汇总为 baseline 8、fear-memory 1、fear-instant 2、fear-saturating 1、fear-foraging 3。
 
 \begin{table}[H]
  \centering
  \caption{研究内序列取中位数后的六个研究级单位胜负}
  \label{tab:study-level-winners}
  \small
- \begin{tabular}{lll}
+ \begin{tabular}{p{0.22\textwidth}p{0.34\textwidth}p{0.25\textwidth}}
   \toprule
   研究级单位 & 留后验证最优 & AICc 最优\\
   \midrule
-  Andrén & fear-memory & fear-instant\\
+ Andrén & fear-foraging & fear-instant\\
   Killifish & fear-instant & baseline\\
   Windermere & fear-instant & baseline\\
   GLERL & fear-handling & baseline\\
-  Isle Royale & baseline & baseline\\
+ Isle Royale & fear-memory & baseline\\
   Komi lynx--hare & baseline & fear-memory\\
   \midrule
-  汇总 & base 2；memory 1；instant 2；handling 1
+ 汇总 & base 1；memory 1；instant 2；foraging 1；handling 1
          & base 4；memory 1；instant 1\\
   \bottomrule
  \end{tabular}
 \end{table}
 
-六模型 90 次拟合中，43 次为 success，47 次为 usable\_limit。仅保留 success 时，Windermere South 无模型可比较，其他序列保留的候选集合也不一致；因此 success-only 结果仅用于提示优化不确定性，不作为替代胜负表。
+六模型 90 次拟合中，33 次为 success，57 次为 usable\_limit。零恐惧候选继承对应 baseline 的优化状态，因此该计数不会把未收敛的核心参数拟合重新标记为成功。仅保留 success 时，Windermere South 无模型可比较，其他序列保留的候选集合也不一致；因此 success-only 结果仅用于提示优化不确定性，不作为替代胜负表。
 
 \subsection{不同模型均可能获胜的代表图}
 
@@ -626,15 +626,15 @@ $M(0)$ 和 $\delta$ profile 分析的方法细节与代表图见正文第\,\ref{
   GLERL & 0.2816 & 4.2170 & 0.24 & 0.2801 & 0.5\%\\
   Andrén-1 & 0.0652 & 0.2054 & 4.87 & 0.0580 & 11.0\%\\
   Andrén-2 & 0.0833 & 0.3162 & 3.16 & 0.0738 & 11.5\%\\
-  Andrén-3 & 0.0739 & 1.0000 & 1.00 & 0.0739 & 0.0\%\\
-  Andrén-4 & 0.0655 & 0.0100 & 100.00 & 0.0613 & 6.4\%\\
-  Andrén-5 & 0.0529 & 1.1548 & 0.87 & 0.0524 & 1.0\%\\
-  Andrén-6 & 0.1749 & 0.2054 & 4.87 & 0.1744 & 0.3\%\\
+  Andrén-3 & 0.0748 & 1.0000 & 1.00 & 0.0748 & 0.0\%\\
+  Andrén-4 & 0.0653 & 0.2054 & 4.87 & 0.0647 & 0.9\%\\
+  Andrén-5 & 0.0610 & 0.1334 & 7.50 & 0.0603 & 1.0\%\\
+  Andrén-6 & 0.1821 & 0.0154 & 64.94 & 0.1808 & 0.7\%\\
   Andrén-7 & 0.1912 & 1.0000 & 1.00 & 0.1912 & 0.0\%\\
   WRHW & 0.1536 & 0.2054 & 4.87 & 0.1504 & 2.1\%\\
   TP & 0.0893 & 4.2170 & 0.24 & 0.0832 & 6.8\%\\
-  WRGP & 0.1948 & 0.4870 & 2.05 & 0.1637 & 16.0\%\\
-  Isle Royale & 0.2812 & 0.0562 & 17.78 & 0.1184 & 57.9\%\\
+  WRGP & 0.2050 & 0.2054 & 4.87 & 0.1876 & 8.5\%\\
+  Isle Royale & 0.2288 & 0.0365 & 27.38 & 0.2006 & 12.3\%\\
   Windermere North & 3.1668 & 10.0000 & 0.10 & 0.6490 & 79.5\%\\
   Windermere South & 1.3890 & 0.3162 & 3.16 & 1.3788 & 0.7\%\\
   Komi lynx--hare & 0.6084 & 1.7783 & 0.56 & 0.6012 & 1.2\%\\
@@ -643,7 +643,7 @@ $M(0)$ 和 $\delta$ profile 分析的方法细节与代表图见正文第\,\ref{
 \end{table}
 \end{landscape}
 
-在 15 条序列中，探索性选择其他 $\delta$ 后有 12 条留后 RMSE 数值下降，7 条改善至少 5\%，5 条改善至少 10\%，改善比例中位数为 2.1\%。因此，固定 $\delta=1$ 对总体模型比较结论影响有限，但少数序列可能包含不同记忆时间尺度的预测信号。由于最优 $\delta$ 使用留后段选择，表\,\ref{tab:delta-holdout} 不构成新的无偏验证，也不改变正文的模型胜负统计。
+在 15 条序列中，探索性选择其他 $\delta$ 后有 12 条留后 RMSE 数值下降，6 条改善至少 5\%，4 条改善至少 10\%，改善比例中位数为 1.2\%。因此，固定 $\delta=1$ 对总体模型比较结论影响有限，但少数序列可能包含不同记忆时间尺度的预测信号。由于最优 $\delta$ 使用留后段选择，表\,\ref{tab:delta-holdout} 不构成新的无偏验证，也不改变正文的模型胜负统计。
 
 \subsection{Holling 默认目标与探索性证据}
 

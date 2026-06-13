@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#FAFBFC"/>
+  <!-- Header -->
+  <rect x="60" y="40" width="4" height="36" fill="#1B3A5C" rx="2"/>
+  <text x="76" y="66" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="32" font-weight="bold" fill="#1B3A5C">真实数据拟合协议</text>
+  <text x="76" y="88" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#94A3B8">15 条种群时间序列 · 前 80% 拟合 + 后 20% 连续多步留后验证 · AICc 修正复杂度</text>
+  <line x1="60" y1="105" x2="1220" y2="105" stroke="#CBD5E1" stroke-width="1"/>
+
+  <!-- Left: Data overview -->
+  <g>
+    <text x="80" y="145" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E293B">数据集概览</text>
+
+    <!-- Category cards -->
+    <rect x="80" y="165" width="220" height="80" rx="6" fill="#F0F3F7"/>
+    <text x="190" y="195" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#2563A0">6</text>
+    <text x="190" y="225" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#64748B">哺乳动物系统</text>
+
+    <rect x="320" y="165" width="220" height="80" rx="6" fill="#F0F3F7"/>
+    <text x="430" y="195" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#2563A0">5</text>
+    <text x="430" y="225" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#64748B">鱼类系统</text>
+
+    <rect x="560" y="165" width="220" height="80" rx="6" fill="#F0F3F7"/>
+    <text x="670" y="195" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#2563A0">4</text>
+    <text x="670" y="225" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#64748B">浮游动物系统</text>
+
+    <!-- Series list compact -->
+    <text x="80" y="280" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="bold" fill="#1E293B">代表性序列</text>
+    <g font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#1E293B">
+      <text x="80" y="305">Isle Royale 狼−驼鹿 (1959–2017, 59点)</text>
+      <text x="80" y="328">Andrén 猞猁−狍 七区 (1994–2014, 6–11点)</text>
+      <text x="80" y="351">GLERL M110 贻贝−浮游动物 (1994–2014, 21点)</text>
+      <text x="80" y="374">Baltic 鳕鱼−鲱鱼 (1974–2011, 38点)</text>
+      <text x="80" y="397">Windermere 狗鱼−鲈鱼 两湖盆 (1989–2016, 25–38点)</text>
+      <text x="80" y="420">Mývatn 鳟鱼−摇蚊 (1977–2011, 35点)</text>
+      <text x="80" y="443">各序列长度从 6 到 59 个年度观测点不等</text>
+    </g>
+
+    <!-- Note about replicates -->
+    <rect x="80" y="468" width="700" height="36" rx="6" fill="#FEF3C7"/>
+    <text x="100" y="493" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="13" fill="#92400E">Andrén 七区、Killifish 三站与 Windermere 两湖盆存在研究内重复，15 条序列不能视为 15 个独立生态证据</text>
+  </g>
+
+  <!-- Right: Protocol flow -->
+  <g>
+    <rect x="840" y="135" width="400" height="520" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="1040" y="170" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="bold" fill="#1B3A5C">拟合—验证协议</text>
+
+    <!-- Step 1 -->
+    <rect x="870" y="195" width="340" height="70" rx="6" fill="#F0F3F7"/>
+    <text x="890" y="220" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" font-weight="bold" fill="#2563A0">1. 训练/验证分割</text>
+    <text x="890" y="244" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#1E293B">前 80% 时间点 → 参数拟合</text>
+    <text x="890" y="262" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#1E293B">后 20% 时间点 → 连续多步留后预测</text>
+
+    <!-- Arrow -->
+    <text x="1040" y="290" text-anchor="middle" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="20" fill="#CBD5E1">↓</text>
+
+    <!-- Step 2 -->
+    <rect x="870" y="300" width="340" height="85" rx="6" fill="#F0F3F7"/>
+    <text x="890" y="325" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" font-weight="bold" fill="#2563A0">2. 三模型独立拟合</text>
+    <text x="890" y="349" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#1E293B">· Baseline (6参数, Holling II)</text>
+    <text x="890" y="370" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#1E293B">· Fear-Memory (7参数, +φ, η, δ)</text>
+    <text x="890" y="380" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="12" fill="#94A3B8">M 初值固定为零 · 衰减率 δ = 1</text>
+
+    <!-- Arrow -->
+    <text x="1040" y="410" text-anchor="middle" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="20" fill="#CBD5E1">↓</text>
+
+    <!-- Step 3 -->
+    <rect x="870" y="420" width="340" height="70" rx="6" fill="#F0F3F7"/>
+    <text x="890" y="445" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="15" font-weight="bold" fill="#2563A0">3. 双重评价体系</text>
+    <text x="890" y="469" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#1E293B">归一化 RMSE（留后段预测精度）</text>
+    <text x="890" y="487" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="14" fill="#1E293B">AICc（拟合优度 + 参数惩罚）</text>
+
+    <!-- Arrow -->
+    <text x="1040" y="515" text-anchor="middle" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="20" fill="#CBD5E1">↓</text>
+
+    <!-- Step 4 -->
+    <rect x="870" y="525" width="340" height="60" rx="6" fill="#1B3A5C"/>
+    <text x="1040" y="555" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF">45 次拟合 · 15 序列 × 3 模型</text>
+    <text x="1040" y="578" text-anchor="middle" font-family="'Noto Sans CJK SC', 'Microsoft YaHei', Arial, sans-serif" font-size="13" fill="#CBD5E1">全部 success 或 usable_limit</text>
+  </g>
+
+  <!-- Page number -->
+  <text x="1220" y="690" text-anchor="end" font-family="'Noto Sans CJK SC', Arial, sans-serif" font-size="11" fill="#94A3B8">07 / 13</text>
+</svg>

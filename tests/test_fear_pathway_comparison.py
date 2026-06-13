@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 
@@ -8,6 +9,7 @@ from src.fear_pathway_fit import (
     fit_holling_baseline_to_series,
     fit_holling_fear_pathway_to_series,
 )
+from src.fit import _OptResult
 from src.model import (
     baseline_rhs,
     fear_foraging_rhs,
@@ -65,6 +67,52 @@ class FearPathwayComparisonTests(unittest.TestCase):
             self.assertEqual(result.n_parameters, baseline.n_parameters + 1)
             self.assertEqual(result.meta["validation_mode"], "ordered_holdout_continuous_multistep")
             self.assertIn(result.meta["fear_parameter"], ("phi", "psi"))
+            self.assertLessEqual(
+                result.meta["objective_value"],
+                result.meta["nested_baseline_candidate_objective"] + 1e-8,
+            )
+
+    def test_all_fitted_pathways_fall_back_to_nested_baseline_when_optimizer_is_worse(self):
+        params = BaselineParams(r=0.8, K=30.0, a=0.08, theta=0.03, e=0.7, mu=0.25)
+        t = np.linspace(0.0, 5.0, 12)
+        sol = integrate_rhs(
+            lambda time, state: baseline_rhs(time, state, params),
+            np.array([12.0, 3.0]),
+            t_span=(0.0, 5.0),
+            n_points=501,
+        )
+        series = PredatorPreySeries(
+            "synthetic_baseline",
+            t,
+            np.interp(t, sol.t, sol.y[0]),
+            np.interp(t, sol.t, sol.y[1]),
+        )
+        baseline = fit_holling_baseline_to_series(series, optimizer="local", max_nfev=200)
+        poor = _OptResult(
+            x=np.log([1.0, 15.0, 0.5, 0.5, 0.5, 0.5, 0.1]),
+            success=True,
+            status="success",
+            message="synthetic poor optimizer result",
+            nfev=1,
+            cost=1e6,
+            bound_hit_indices=[],
+        )
+        for pathway in HOLLING_FEAR_PATHWAYS:
+            with self.subTest(pathway=pathway):
+                with patch(
+                    "src.fear_pathway_fit._multiseed_bounded_minimize",
+                    return_value=(poor, {}),
+                ):
+                    result = fit_holling_fear_pathway_to_series(
+                        series,
+                        pathway,
+                        baseline_result=baseline,
+                        optimizer="local",
+                        max_nfev=1,
+                    )
+                self.assertTrue(result.meta["nested_baseline_candidate_selected"])
+                self.assertEqual(result.params[result.meta["fear_parameter"]], 0.0)
+                self.assertEqual(result.n_parameters, 7)
 
 
 if __name__ == "__main__":
