@@ -145,13 +145,26 @@ def plot_mechanism_comparison(
     out: Path,
 ) -> None:
     """Absolute time series split by model scale; not a cross-family comparison."""
-    fig, axes = plt.subplots(2, 2, figsize=(13, 7), sharex="col")
+    bda_ids = (MechanismId.BDA_BASELINE, MechanismId.BDA_FEAR)
+    families = []
+    if any(mid not in bda_ids for mid in solutions):
+        families.append(("Holling II (x, y scale)", lambda mid: mid not in bda_ids))
+    if any(mid in bda_ids for mid in solutions):
+        families.append(("B-D (u, v scale)", lambda mid: mid in bda_ids))
+
+    fig, axes = plt.subplots(
+        2,
+        len(families),
+        figsize=(6.5 * len(families), 7),
+        sharex="col",
+        squeeze=False,
+    )
     for mid, sol in solutions.items():
         lab = labels.get(mid, mid.value)
-        col = 1 if mid in (MechanismId.BDA_BASELINE, MechanismId.BDA_FEAR) else 0
+        col = next(i for i, (_, includes) in enumerate(families) if includes(mid))
         axes[0, col].plot(sol.t, sol.y[0], lw=1.2, label=lab)
         axes[1, col].plot(sol.t, sol.y[1], lw=1.2, label=lab)
-    for col, family in enumerate(("Holling II (x, y scale)", "B-D (u, v scale)")):
+    for col, (family, _) in enumerate(families):
         axes[0, col].set_title(family)
         axes[0, col].set_ylabel("prey density")
         axes[1, col].set_ylabel("predator density")

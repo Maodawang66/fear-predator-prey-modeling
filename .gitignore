@@ -32,6 +32,13 @@ results/
 outputs/
 *.zip
 *.xdv
+!results/
+results/*
+!results/seven_model_real_fits/
+results/seven_model_real_fits/*
+!results/seven_model_real_fits/report_protocol_six_model_metrics.csv
+!results/seven_model_real_fits/report_protocol_six_model_holdout_improvement.csv
+!results/seven_model_real_fits/report_protocol_six_model_holdout_improvement.png
 
 # PPT Master (third-party tool)
 ppt-master/

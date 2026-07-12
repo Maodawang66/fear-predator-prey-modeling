@@ -43,6 +43,29 @@ LABELS = {
     "fear_handling": "Handling-time extension",
     "bda_fear": "B-D + fear",
 }
+SIX_MODEL_ORDER = tuple(model for model in MODEL_ORDER if model != "bda_fear")
+FEAR_MODEL_ORDER = tuple(model for model in SIX_MODEL_ORDER if model != "baseline")
+FEAR_COLORS = {
+    "fear_instant": "#4c78a8",
+    "fear_memory": "#f58518",
+    "fear_saturating": "#54a24b",
+    "fear_foraging": "#e45756",
+    "fear_handling": "#b279a2",
+}
+SERIES_LABELS = {
+    "glerl_m110_zoop_1994-201": "GLERL",
+    **{
+        f"andren_lynx_roedeer_data_{index}": f"Andrén-{index}"
+        for index in range(1, 8)
+    },
+    "timeserieslogmeans_WRHW": "WRHW",
+    "timeserieslogmeans_TP": "TP",
+    "timeserieslogmeans_WRGP": "WRGP",
+    "isle_royale_wolf_moose_pre_2018": "Isle Royale",
+    "windermere_north_pike_perch": "Windermere North",
+    "windermere_south_pike_perch": "Windermere South",
+    "komi_lynx_hare": "Komi lynx--hare",
+}
 
 
 def _formal_rows() -> dict[tuple[str, str], dict]:
@@ -244,6 +267,98 @@ def _plot(
     plt.close(fig)
 
 
+def summarize_six_model_holdout_improvement(rows: list[dict]) -> list[dict]:
+    """Compare each usable baseline with the best usable Holling II fear model."""
+    series_names = list(dict.fromkeys(row["series"] for row in rows))
+    lookup = {
+        (row["series"], row["model"]): row
+        for row in rows
+        if row["model"] in SIX_MODEL_ORDER
+    }
+    summary = []
+    for series in series_names:
+        baseline = lookup.get((series, "baseline"))
+        if not baseline or not baseline["usable_for_comparison"]:
+            continue
+        fear_candidates = [
+            lookup[(series, model)]
+            for model in FEAR_MODEL_ORDER
+            if (series, model) in lookup
+            and lookup[(series, model)]["usable_for_comparison"]
+        ]
+        if not fear_candidates:
+            continue
+        baseline_rmse = float(baseline["validation_rmse"])
+        if baseline_rmse <= 0:
+            raise ValueError(f"{series} baseline validation RMSE must be positive")
+        best_fear = min(
+            fear_candidates,
+            key=lambda row: (
+                float(row["validation_rmse"]),
+                FEAR_MODEL_ORDER.index(row["model"]),
+            ),
+        )
+        best_fear_rmse = float(best_fear["validation_rmse"])
+        absolute_improvement = baseline_rmse - best_fear_rmse
+        summary.append({
+            "series": series,
+            "best_fear_model": best_fear["model"],
+            "baseline_validation_rmse": baseline_rmse,
+            "best_fear_validation_rmse": best_fear_rmse,
+            "absolute_improvement": absolute_improvement,
+            "relative_improvement_percent": 100.0 * absolute_improvement / baseline_rmse,
+        })
+    return summary
+
+
+def holdout_improvement_statistics(rows: list[dict]) -> dict:
+    improvements = np.asarray(
+        [float(row["relative_improvement_percent"]) for row in rows],
+        dtype=float,
+    )
+    if improvements.size == 0:
+        raise ValueError("holdout improvement summary is empty")
+    positive = improvements[improvements > 0]
+    return {
+        "n_series": int(improvements.size),
+        "n_positive": int(np.count_nonzero(improvements > 0)),
+        "n_equal": int(np.count_nonzero(improvements == 0)),
+        "n_at_least_1_percent": int(np.count_nonzero(improvements >= 1)),
+        "n_at_least_5_percent": int(np.count_nonzero(improvements >= 5)),
+        "n_at_least_10_percent": int(np.count_nonzero(improvements >= 10)),
+        "n_positive_below_1_percent": int(np.count_nonzero((improvements > 0) & (improvements < 1))),
+        "median_all_percent": float(np.median(improvements)),
+        "median_positive_percent": float(np.median(positive)) if positive.size else np.nan,
+        "min_percent": float(np.min(improvements)),
+        "max_percent": float(np.max(improvements)),
+    }
+
+
+def _plot_holdout_improvement(rows: list[dict]) -> None:
+    ordered = sorted(rows, key=lambda row: float(row["relative_improvement_percent"]))
+    values = [float(row["relative_improvement_percent"]) for row in ordered]
+    colors = [FEAR_COLORS[row["best_fear_model"]] for row in ordered]
+
+    fig, ax = plt.subplots(figsize=(10.5, 7.5))
+    ax.barh(range(len(ordered)), values, color=colors)
+    ax.axvline(0, color="black", linewidth=1)
+    ax.set_yticks(
+        range(len(ordered)),
+        [SERIES_LABELS.get(row["series"], row["series"]) for row in ordered],
+    )
+    ax.set_xlabel("Best fear model improvement over baseline holdout RMSE (%)")
+    ax.set_title("Six-model holdout improvement relative to baseline")
+    handles = [
+        plt.Rectangle((0, 0), 1, 1, color=FEAR_COLORS[model], label=LABELS[model])
+        for model in FEAR_MODEL_ORDER
+    ]
+    ax.legend(handles=handles, loc="lower right", fontsize=8)
+    ax.grid(axis="x", alpha=0.25)
+    fig.tight_layout()
+    fig.savefig(OUT / "report_protocol_six_model_holdout_improvement.png", dpi=190)
+    plt.close(fig)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", choices=EXTENDED_MODELS)
@@ -306,18 +421,24 @@ def main() -> None:
         ("report_protocol_seven_model_validation_heatmap.png", "validation_rmse_heatmap.png"),
         f"Seven-model 20% continuous multi-step holdout RMSE\n{protocol_suffix}",
     )
-    six_model_order = tuple(model for model in MODEL_ORDER if model != "bda_fear")
-    six_rows = [row for row in rows if row["model"] in six_model_order]
+    six_rows = [row for row in rows if row["model"] in SIX_MODEL_ORDER]
     _write_rows(six_rows, "report_protocol_six_model_metrics.csv")
     _plot(
         six_rows,
-        six_model_order,
+        SIX_MODEL_ORDER,
         (
             "report_protocol_six_model_validation_heatmap.png",
             "validation_rmse_heatmap_six_model.png",
         ),
         f"Six-model 20% continuous multi-step holdout RMSE\n{protocol_suffix}",
     )
+    improvement_rows = summarize_six_model_holdout_improvement(six_rows)
+    _write_rows(
+        improvement_rows,
+        "report_protocol_six_model_holdout_improvement.csv",
+    )
+    _plot_holdout_improvement(improvement_rows)
+    print(f"Six-model holdout improvement: {holdout_improvement_statistics(improvement_rows)}")
 
 
 if __name__ == "__main__":

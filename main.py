@@ -29,7 +29,7 @@ from src.analysis import (
     sensitivity_local,
 )
 from src.model import bd_fear_rhs
-from src.parameters import bda_fear_default, bda_no_fear_default
+from src.parameters import MechanismId, bda_fear_default, bda_no_fear_default
 from src.simulate import integrate_rhs
 from src.literature import mechanism_labels, run_all_mechanisms
 from src.parameters import baseline_default, fear_default, fear_high
@@ -118,8 +118,13 @@ def main() -> None:
         params_by_mechanism=equivalent_params,
     )
     labels = mechanism_labels()
+    holling_sols = {
+        mid: sol
+        for mid, sol in all_sols.items()
+        if mid not in (MechanismId.BDA_BASELINE, MechanismId.BDA_FEAR)
+    }
     plot_mechanism_comparison(
-        all_sols, labels, out_dir / "08_literature_mechanisms_timeseries.png"
+        holling_sols, labels, out_dir / "08_literature_mechanisms_timeseries.png"
     )
     print("[8] 08_literature_mechanisms_timeseries.png")
 
